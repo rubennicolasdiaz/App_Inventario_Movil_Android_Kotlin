@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Se lanza el splash al iniciar la app:
         screenSplash.setKeepOnScreenCondition{true}
 
         almacenamientoInternoFicheros(this)
