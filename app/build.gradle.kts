@@ -47,6 +47,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.google.code.gson:gson:2.8.6")
 

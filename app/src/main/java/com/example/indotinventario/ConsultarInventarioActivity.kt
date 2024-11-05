@@ -198,8 +198,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
             .setTitle("Código")
-            .setMessage("El código de barras escaneado es:")
-            .setMessage("$codigoBarras")
+            .setMessage("El código de barras escaneado es: $codigoBarras")
             .setPositiveButton(android.R.string.ok, null)
             .show()
     }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.indotinventario.databinding.ActivityMainBinding
 import java.io.File
 
@@ -15,11 +16,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Animación de Inicio de la Aplicación:
+        val screenSplash = installSplashScreen()
+
         super.onCreate(savedInstanceState)
 
         // Implementación de View Binding:
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        screenSplash.setKeepOnScreenCondition{true}
 
         almacenamientoInternoFicheros(this)
         cargarVista()
