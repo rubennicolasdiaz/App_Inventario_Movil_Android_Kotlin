@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MenuActivity">
+
+    <Button
+        android:id="@+id/buttonConsultar"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#03A9F4"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/menu_consultar_inventario"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buttonActualizar"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/NaranjaRuano"
+        android:text="@string/menu_actualizar_inventario"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buttonConfiguracion"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#8BC34A"
+        android:lineSpacingExtra="36sp"
+        android:text="@string/menu_configuracion"
+        android:textSize="18sp" />
+
+</LinearLayout>

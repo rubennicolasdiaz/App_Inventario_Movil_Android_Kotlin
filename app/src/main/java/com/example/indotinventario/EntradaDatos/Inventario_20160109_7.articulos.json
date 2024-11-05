@@ -1,0 +1,2924 @@
+﻿[
+  {
+    "IdArticulo": "0330",
+    "IdCombinacion": " ",
+    "Descripcion": "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "033024",
+    "IdCombinacion": " ",
+    "Descripcion": "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9 SSD Pro",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "033025",
+    "IdCombinacion": " ",
+    "Descripcion": "SERVIDOR HP COMPAQ PROLIANT ML30 Gen10 SSD Pro",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "03330",
+    "IdCombinacion": " ",
+    "Descripcion": "SERVIDOR HP DL380 RACK DOBLE PROCESADOR",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "0700",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR  CENTURION INTEL I3 PRO",
+    "StockReal": -21.0
+  },
+  {
+    "IdArticulo": "0701",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR  CENTURION INTEL I3 PRO",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "0702",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR  CENTURION INTEL I3 PRO",
+    "StockReal": 19.0
+  },
+  {
+    "IdArticulo": "0800",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR CENTURION INTEL I5 PRO",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "0802",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR  CENTURION INTEL I5 PRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "0850659",
+    "IdCombinacion": " ",
+    "Descripcion": "PROGRAMA ELGESTOR SQL CUADRO DE MANDOS",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "09002",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR INTEL I7 PRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "12060092",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJA REGISTRADORA ALFANUMERICA CASIO CE 6100",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "1256822004",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA ETIQUETAS Zebra G-SERIES GK420t ",
+    "StockReal": -4.0
+  },
+  {
+    "IdArticulo": "15892223",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR DE VIDEO HDMI-M A DVI-H",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "172253351",
+    "IdCombinacion": " ",
+    "Descripcion": "LATIGUILLO RJ45 CAT.5E 1M LATIGUILLO RJ45 CAT.5E 1M",
+    "StockReal": 18.0
+  },
+  {
+    "IdArticulo": "172253352",
+    "IdCombinacion": " ",
+    "Descripcion": "LATIGUILLO RJ45 CAT5.E 2 M LATIGUILLO RJ45 CAT5.E 2 M",
+    "StockReal": 31.0
+  },
+  {
+    "IdArticulo": "172253353",
+    "IdCombinacion": " ",
+    "Descripcion": "LATIGUILLO RJ45 CAT5.E 3 M LATIGUILLO RJ45 CAT5.E 3 M",
+    "StockReal": 29.0
+  },
+  {
+    "IdArticulo": "1811000069",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA COLOR HP OFFICEJET PRO 8210",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "18120001008",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER XEROX TK-130 KYOCERA FS 1028/1128/1300/1350/D/DN ",
+    "StockReal": 11.0
+  },
+  {
+    "IdArticulo": "181200031",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA NEGRO HP 901 HP OFFICEJET J4580/4660/4680",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "18130037",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER FOTOCOPIADORA KYOCERA FS3830n /3820N",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "1829556321",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER TK-1140 KYOCERA FS1035/1135/M2035/M2535",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "20668",
+    "IdCombinacion": " ",
+    "Descripcion": "LOGITECH B100 BLACK",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "22264",
+    "IdCombinacion": " ",
+    "Descripcion": "CUOTA POWER BI ",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "23390",
+    "IdCombinacion": " ",
+    "Descripcion": "TELEVISION LED SAMSUNG UE55TU7005 55\" CRYSSTAL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "40020702",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER BROTHER TN 2010",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "50010008",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS REGISTRADORA 70 x 65",
+    "StockReal": 16.0
+  },
+  {
+    "IdArticulo": "50010011",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS CALCULADORA Y TPV 70 x 65 2HOJAS",
+    "StockReal": 79.0
+  },
+  {
+    "IdArticulo": "500100112",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS PAPEL HP 914 mm x 30,5 m 120 g/m²  Q1413A",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "50010012",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS PARA TPV 76 X 65",
+    "StockReal": 80.0
+  },
+  {
+    "IdArticulo": "50010014",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLO TPV 75 X 65",
+    "StockReal": 72.0
+  },
+  {
+    "IdArticulo": "50010018",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLO TPV 76 X 65 2 HOJAS",
+    "StockReal": 54.0
+  },
+  {
+    "IdArticulo": "50020001",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS REGISTRADORA 38 x 70",
+    "StockReal": 10.0
+  },
+  {
+    "IdArticulo": "50020010",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS REGISTRADORA 57 x 65 2H",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "50022001",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS TERMICO 57x55 BLANCO",
+    "StockReal": 121.0
+  },
+  {
+    "IdArticulo": "500220011",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS  TERMICO 57 x 80 BLANCO (60)",
+    "StockReal": 10.0
+  },
+  {
+    "IdArticulo": "50022004",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS TERMICO 80 X 55",
+    "StockReal": 398.0
+  },
+  {
+    "IdArticulo": "50022005",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLO TERMICO 80 X 80",
+    "StockReal": 16.0
+  },
+  {
+    "IdArticulo": "51010010",
+    "IdCombinacion": " ",
+    "Descripcion": "PAPEL FOTOCOPIADORA FOLIO 80 GR ALTA CALIDAD",
+    "StockReal": 133.0
+  },
+  {
+    "IdArticulo": "52021511",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR IMPRESORA KYOCERA 1028/1128MFP",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "52021537",
+    "IdCombinacion": " ",
+    "Descripcion": "MULTIFUNCION HP OFFICEJETPRO 6230",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "5205001450",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER TK-18 XEROX PARA KYOCERA FS 1018/1118/1020D",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "5205001545",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER IMPRESORA LASER OKI C310/C330/C352/C510/C530  MAGENTA",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "5205001618",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA COLOR HP 22 XL HP DESKJET 3920/3940/F370/PSC1410",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "520500210",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER TK-330 XEROX COMPATIBLE FS 4000DN ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "520500211",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER TK-350 KYOCERA FS 3920 ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "520501071",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER OKI C310/C330/C352/C510/C530-Cian",
+    "StockReal": -5.0
+  },
+  {
+    "IdArticulo": "520501173",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR IMPRESORA LASER OKI B410, B430, B440, MB470 Aprox 25k ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "52050200150",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER IMPRESORA LASER OKI B410, B430d, B440,mb460,mb480 Negro 3,5k ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "5205020683",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER OKI C310/C330/C352/C510/C530- Yellow",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "56020009",
+    "IdCombinacion": " ",
+    "Descripcion": "DVD-RW VERBATIM DVD-RW 4.7GB",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "5605000613",
+    "IdCombinacion": " ",
+    "Descripcion": "DVD-RW VERBATIM ",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "5605001160",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA  HP 301 XL NEGRO",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "5605001161",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA  HP 301 XL COLOR",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "56050013",
+    "IdCombinacion": " ",
+    "Descripcion": "PACK 4 PILAS ALCALINA  LR03 AAA",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "600500022",
+    "IdCombinacion": " ",
+    "Descripcion": "PILA LITIO 3V 2032",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "650341133321",
+    "IdCombinacion": " ",
+    "Descripcion": "PAPEL ORIGINAL LOGIC NOMINA (Q) 8\" SOBRE",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "66002000",
+    "IdCombinacion": " ",
+    "Descripcion": "500 UNIDADES OKI TARJETA DE VISITA",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "70021393",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA MATRICIAL ERC 27 PURPURA COMPATIBLE",
+    "StockReal": 17.0
+  },
+  {
+    "IdArticulo": "701500112",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA ORIGINAL EPSON ERC 38 SRP 270/275 SAMSUNG ERC270/275",
+    "StockReal": 20.0
+  },
+  {
+    "IdArticulo": "70150012",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA REGISTRADORA EPSON ERC-38/30/34 TM 210 TICKET NEGRA",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "70250063",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA OLIVETTI ECR 2450 VIOLETA",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "703000025",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA HP OFFICEJET J4580 901XL NEGRO",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "70300011",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA EPSON TMC-100 SJIC9P NEGRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "752800160",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA COLOR HP 28 C8728A HP 3320/3325/3420/3650/3550",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "752800250",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA  HP MULTIFUNCION NEGRO HP 21XL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "75421120411",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER BROTHER TN2220 NEGRO 2600 PÁGINAS HL-2240/ HL-2240D/ HL-2250DN/ HL-2270DW/ MFC-7360N",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "758233004",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR OKI TAMBOR CYAN ES2232a4 / ES2632a4 / ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "7582339001",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR OKI TAMBOR MAGENTA ES2232a4 / ES2632a4 / ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "7582339002",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR OKI  TAMBOR NEGRO ES2232a4 / ES2632a4 / ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "758963322",
+    "IdCombinacion": " ",
+    "Descripcion": "ANTIVIRUS KASPERKY LICENCIA DE RENOVACION 3PC´S",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "785020528",
+    "IdCombinacion": " ",
+    "Descripcion": "BATERIA PDA STANDAR HONEYWELL HD-6100",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "800081895",
+    "IdCombinacion": " ",
+    "Descripcion": "DLINK SWITCH SWITCH DGS-1008D/E 10/100/1000",
+    "StockReal": 7.0
+  },
+  {
+    "IdArticulo": "800100175",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 500 GB SATA III INTERNO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800100500",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 500GB 2.5\" SATA INTERNO NOTEBOOK",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80010114",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE DUPLICADOR CORRIENTE \"Y\"",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80010116",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE CORRIENTE CB-3",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80010122",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE AUDIO PROLONGADOR STEREO Minijack 3,5\" M-M",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "8001020104",
+    "IdCombinacion": " ",
+    "Descripcion": "HUB SWICTH TPLINK 8P TL-SG1008D 10/100/1000",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "800102024",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR USB A SERIE RS232",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "80010205",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE PROLONGADOR USB AMPLIFICADO 5 METROS",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "800102051",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA PCI 1 puerto PARALELO  puertos SERIE",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "800102098",
+    "IdCombinacion": " ",
+    "Descripcion": "SWICTH USB 2 PUESTOS PC A 1 PERIFERICO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80010213",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR CABLE DVI-M a HDMI-M 2M",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80010219",
+    "IdCombinacion": " ",
+    "Descripcion": "SOPORTE DISCO DURO EXTRAIBLE PARA INSTALACION DE CARCASAS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80010240",
+    "IdCombinacion": " ",
+    "Descripcion": "CHASIS DE 2,5\" CAJA PORTABLE SATA HD USB 2.0",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800102844",
+    "IdCombinacion": " ",
+    "Descripcion": "DISIPADOR  INTEL SOCKET 775 ATX",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80010304",
+    "IdCombinacion": " ",
+    "Descripcion": "VENTILADOR DISIPADOR 40 mm",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "8001031225",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 2 TB SATA  64mb ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800103279",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 500 GB 2,5\" SATA 5400rpm 8MB INTERNO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800103424",
+    "IdCombinacion": " ",
+    "Descripcion": "FLASH DRIVE USB 16 GB USB 3.0",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "800103462",
+    "IdCombinacion": " ",
+    "Descripcion": "VENTILADOR DISIPADOR 80 mm",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800103466",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA MEMORIA 16 GB MICRO USB + ADAPTADOR SD",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800103468",
+    "IdCombinacion": " ",
+    "Descripcion": "VENTILADOR DISIPADOR 12x12 CAJA ATX",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "800103516",
+    "IdCombinacion": " ",
+    "Descripcion": "CHASIS DISCO DURO SATA CAJA EXTERNA METALIC USB-RJ45 3,5\"",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800103528",
+    "IdCombinacion": " ",
+    "Descripcion": "CHASIS PARA DISCO DURO Caja Externa HD 2,5\" USB SATA",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "800103560",
+    "IdCombinacion": " ",
+    "Descripcion": "FUENTE ALIMENTACION 500W POWER 12CM",
+    "StockReal": 14.0
+  },
+  {
+    "IdArticulo": "8001035677",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO EXTERNO 1 TB HD USB 3.0 - 2,5\"",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "800104146",
+    "IdCombinacion": " ",
+    "Descripcion": "CARGADOR BATERIA PORTATILES UNIVERSAL 15V-20V AUTO 90W/100W",
+    "StockReal": 8.0
+  },
+  {
+    "IdArticulo": "800105",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE ADAPTADOR CORRIENTE PARA SATA 1C-2SATA",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800105538",
+    "IdCombinacion": " ",
+    "Descripcion": "PLACA BASE ASROCK G41C-GS",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "8001062551",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA 1 GB PC3-10600 DDR3 a 1333 MHz",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800106278",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA 2 GB SODIM DDR3",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800106289",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA RAM 1 GB DDR 400 MHz",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800106296",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA HP 512 MB DDRII 533MHZ (PV560T)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80011215",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR USB A 2 PUERTOS PS2 PARA KVM ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "8001201014",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER IMPRESORA LASER TK-310 XEROX KYOCERA FS 2000D/DN/3900DN/4000DN",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "800120547",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR LED 24\" SAMSUNG S24D330H NEGRO",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80020392",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA ELGESTOR SQL EXPORTACION INDOT CONTABILIDAD",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80020444",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER OKI B401/441/MB451 NEGRO 2500 copias",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80020523",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA OFFICE 365 BUSINESS PREMIUM - SUSCRIPCIÓN ANUAL",
+    "StockReal": 26.0
+  },
+  {
+    "IdArticulo": "80020594",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA LASER COLOR OKI ES5432DN",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80020635",
+    "IdCombinacion": " ",
+    "Descripcion": "TECLADO+RATON CABLE LOGITECH MK120 USB",
+    "StockReal": 8.0
+  },
+  {
+    "IdArticulo": "80020678",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR CONECTOR DVI-M A (1 x VGA-H + 1 x DVI-H)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80020752",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO EXTERNO 2TB HD USB 3.0 - 2,5\"",
+    "StockReal": -6.0
+  },
+  {
+    "IdArticulo": "80020780",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE USB A MICRO USB 1,8 M LM PR",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80020816",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR DK-170 KYOCERA FS 1035/1135/FS1370",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80020888",
+    "IdCombinacion": " ",
+    "Descripcion": "FUSOR IMPRESORA KYOCERA FS-1028MFP",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80020909",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA DE MEMORIA 32GB Class 10 - microSDHC",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800209299",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA HP 951XL MAGENTA",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80020964",
+    "IdCombinacion": " ",
+    "Descripcion": "SWICTH TPLINK TL-SF1008P 10/100",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021046",
+    "IdCombinacion": " ",
+    "Descripcion": "TEC SENSOR HARNESS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021081",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA 2 GB KINGSTON DDR3 PC1333 Mhz",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80021083",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR GRAFICO CONECTOR DVI-M A HDMI-H",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80021089",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 4TB - INTERNO 3.5\" - SATA-600 - búfer: 64 MB",
+    "StockReal": -4.0
+  },
+  {
+    "IdArticulo": "80021101",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR GRAFICO CONECTOR HDMI-M A VGA-H",
+    "StockReal": 17.0
+  },
+  {
+    "IdArticulo": "80021125",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO SSD 240GB",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80021207",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 2TB NAS WD 64MB BUFFER",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021251",
+    "IdCombinacion": " ",
+    "Descripcion": "FLASH DRIVE 64 GB USB 3.0",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021264",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO TOSHIBA 1TB CANVIO EXTERNO ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021271",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJA CONEXIONES VGA - RCA - MINIJACK-USB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021276",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 2TB TOSHIBA CANVIO USB 3.0",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021332",
+    "IdCombinacion": " ",
+    "Descripcion": "TORRE MICRO-ATX 500W L-LINK BOLD NEGRA",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021349",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA AMARILLO BROTHER LC1240Y",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021379",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 1TB 2,5\" USB 3.0",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "80021383",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 1TB 3\"5 SATA",
+    "StockReal": 7.0
+  },
+  {
+    "IdArticulo": "80021410",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA MATRICIAL EPSON LQ 350",
+    "StockReal": 30.0
+  },
+  {
+    "IdArticulo": "80021463",
+    "IdCombinacion": " ",
+    "Descripcion": "PUNTO DE ACCESO WIFI TP-LINK TL-WA901ND",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021480",
+    "IdCombinacion": " ",
+    "Descripcion": "BRACKET HP PUERTO PARARELO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021534",
+    "IdCombinacion": " ",
+    "Descripcion": "SWITCH TPLINK 24 PTOS GIGABIT 10/100/1000 TL-SG1024DE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021544",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR TFT 22\" PHILIPS 223V5LSB2",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021567",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA  BROTHER J752DW",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021633",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA OFFICE 365 PERSONAL PC/MAC - SUSCRIPCIÓN ANUAL",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80021651",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO EXTERNO 2TB HD USB 3.0 - 3,5\"",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "80021658",
+    "IdCombinacion": " ",
+    "Descripcion": "RIBBON MIXTO GODEX 58 X 110",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021665",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA INDOT TPV",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80021708",
+    "IdCombinacion": " ",
+    "Descripcion": "VMWARE VSPHERE 6 ESSENTIALS + 1 AÑO ACTUALIZACION PARA HP",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80021817",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA NAS SYNOLOGY DS416 NAS 8TB (4x2TB)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021825",
+    "IdCombinacion": " ",
+    "Descripcion": "AMPLIFICADOR DE SEÑAL TPLINK WIRELESS TL-WA854RE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021894",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER TK-3130 KYOCERA FS 4200DN",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80021895",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETAS DE PROXIMIDAD PARA RFID",
+    "StockReal": 25.0
+  },
+  {
+    "IdArticulo": "80021913",
+    "IdCombinacion": " ",
+    "Descripcion": "RIBBON MIXTO GODEX 57 X 74",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80021928",
+    "IdCombinacion": " ",
+    "Descripcion": "ETIQUETAS TERMICAS 100x150",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "80021983",
+    "IdCombinacion": " ",
+    "Descripcion": "S. O. WINDOWS 10 PROFESIONAL OEM-64 Bits",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022058",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO HD 2.5\" SSD 480GB SATA3",
+    "StockReal": 11.0
+  },
+  {
+    "IdArticulo": "80022065",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA 4 GB KINGSTON DDR4 PC2133 Mhz",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022066",
+    "IdCombinacion": " ",
+    "Descripcion": "MULTIFUNCION BROTHER MFC MFC-J880DW",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022067",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA BROTHER NEGRO LC223BKBP XL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022068",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA BROTHER LC223CBP CIAN XL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022069",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA BROTHER LC223MBP MAGENTA XL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022070",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA BROTHER LC223YBP AMARILLO XL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022075",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL NORTON SECURITY PREMIUM - Hasta 10 Dispositivos",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80022134",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA 4 GB KINGSTON DDR3 PC1333",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022138",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 146 GB SAS HPE ENTERPRISE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022142",
+    "IdCombinacion": " ",
+    "Descripcion": "FUSOR IMPRESORA KYOCERA FS 1035/1135/M2035/M2535",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022147",
+    "IdCombinacion": " ",
+    "Descripcion": "FUENTE ALIMENTACION SFX 450W POWER",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022190",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA NAS SYNOLOGY DS216J NAS 2TB (2x1TB)",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022212",
+    "IdCombinacion": " ",
+    "Descripcion": "CARGADOR PARA MOVIL SAMSUNG",
+    "StockReal": -25.0
+  },
+  {
+    "IdArticulo": "80022233",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA NAS ALMACENAMIENTO PROFESIONAL 4TB (2x2TB)",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022244",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA LASER COLOR OKI C532dn",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022296",
+    "IdCombinacion": " ",
+    "Descripcion": "RELOJ CONTROL PRESENCIA BIO-400",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022358",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA NAS SYNOLOGY DS216SE NAS 4TB (2x2TB)",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022368",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA GESCLINIC CLINICAS DENTALES",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "80022372",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA LASER COLOR OKI C612N /A4",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022373",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA NEGRO HP 302XL",
+    "StockReal": -4.0
+  },
+  {
+    "IdArticulo": "80022391",
+    "IdCombinacion": " ",
+    "Descripcion": "HUB SWICTH TPLINK 5P TL-SG1005D 10/100/1000",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022404",
+    "IdCombinacion": " ",
+    "Descripcion": "MICROSOFT WINDOWS SERVER 2016 STANDAR",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022408",
+    "IdCombinacion": " ",
+    "Descripcion": "TELÉFONO XIAOMI REDMI 4X",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022463",
+    "IdCombinacion": " ",
+    "Descripcion": "PLACA BASE MSI 1151 H110M PRO-VHL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022472",
+    "IdCombinacion": " ",
+    "Descripcion": "SAI 1500VA SALICRU SPS 1500 SOHO+ 4XSCHUKO INTERAC",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022484",
+    "IdCombinacion": " ",
+    "Descripcion": "BATERIA ESTANDAR INTERMEC CK3R",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022488",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER NEGRO  OKI MC563/MC573/C532/C542",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022502",
+    "IdCombinacion": " ",
+    "Descripcion": "LOGITECH WIRELESS COMBO MK345 TECLADO + RATON",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "80022511",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR AOC PRO-LINE E2275PWJ",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "80022512",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER TK-340 XEROX FS 2020DN",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022528",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO TINTA BROTHER PACK",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022529",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER XEROX IMPRESORA LASER OKI B6200/B6300",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022543",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER CYAN OKI MC563/MC573/C532/C542",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "80022544",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER MAGENTA OKI MC563/MC573/C532/C542",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022545",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER AMARILLO OKI MC563/MC573/C532/C542",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022563",
+    "IdCombinacion": " ",
+    "Descripcion": "PROGRAMA CALCULADORA TRANSFERENCIA WEB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022569",
+    "IdCombinacion": " ",
+    "Descripcion": "RATON OPTICO LOGITECH M171 WIRELESS NEGRO",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022597",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA GESCLINIC CLINICAS",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80022610",
+    "IdCombinacion": " ",
+    "Descripcion": "ROLLOS TERMICO 80 X 60",
+    "StockReal": -320.0
+  },
+  {
+    "IdArticulo": "80022621",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE MINI DISPLAYPORT A VGA",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022645",
+    "IdCombinacion": " ",
+    "Descripcion": "PACK CARTUCHO DE TINTA  HP 301 XL NEGRO (2UNIDADES)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022655",
+    "IdCombinacion": " ",
+    "Descripcion": "MEMORIA RAM 8GB DDR4 2133MHZ",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022662",
+    "IdCombinacion": " ",
+    "Descripcion": "MOVIL SAMSUNG GALAXY S9 PLUS G965 DS",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022663",
+    "IdCombinacion": " ",
+    "Descripcion": "ANTIVIRUS 1 AÑO PANDA INTERNET SECURITY 5 DISPOSITIVOS",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "80022664",
+    "IdCombinacion": " ",
+    "Descripcion": "UBIQUITI AP-LR UNIFI",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022679",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO 250GB SSD 2.5\" SATA3",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022684",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA NAS ALMACENAMIENTO PROFESIONAL 8TB (2x4TB)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022693",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER ORIGINAL (CC364X) HP LASERJET P4014/P4015/P4515",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022694",
+    "IdCombinacion": " ",
+    "Descripcion": "MOVIL XIAOMI REDMI 5 NEGRO",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022700",
+    "IdCombinacion": " ",
+    "Descripcion": "OKI CINTURON ARRASTRE PAPEL C822/C831/C841/ C831DM/853/",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022735",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR PORTATIL LENOVO V110-80TL0113SP V15-IIL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022757",
+    "IdCombinacion": " ",
+    "Descripcion": "MICROSOFT SURFACE DOCK",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022762",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR AOC E2460SH NEGRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022763",
+    "IdCombinacion": " ",
+    "Descripcion": "PANDA ANTIVIRUS DOME ESSENTIAL",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "80022779",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA CAL USUARIO SERVER STANDAR 2019 OPEN",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "80022780",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA MICROSOFT TERMINAL SERVER 2019  POR USUARIO",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80022788",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO SSD 1TB",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "80022790",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR ORIGINAL BROTHER ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022792",
+    "IdCombinacion": " ",
+    "Descripcion": "CONTROL PRESENCIA UFACE 401-EM",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80022793",
+    "IdCombinacion": " ",
+    "Descripcion": "SWITCH DLINK 24 PTOS 10/100/1000",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022796",
+    "IdCombinacion": " ",
+    "Descripcion": "ROUTER D-LINK AC750",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022797",
+    "IdCombinacion": " ",
+    "Descripcion": "MICROSOFT WINDOWS SERVER 2018 STANDAR",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022798",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR PORTATIL LENOVO V130-81HN00FASP NEGRO",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022833",
+    "IdCombinacion": " ",
+    "Descripcion": "FUNDA Y ACCESORIOS GOPRO HERO 7",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022834",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR LED ASUS 22\" VS228HE NEGRO",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022835",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR ASUS 21,5\" VP228DE",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80022842",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER IMPRESORA LASER MAGENTA OKI C332/MC363",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022857",
+    "IdCombinacion": " ",
+    "Descripcion": "TABLET APPLE IPAD PRO WI-FI 9,7\" 512GB Wifi SPACE GREY",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022859",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR ALL IN ONE HP PRO 400G4",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022864",
+    "IdCombinacion": " ",
+    "Descripcion": "SERVIDOR DE RED PARA ESCANERS FUJITSU SILEX DS-510",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022866",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR GRAFICO CONECTOR USB 3.0 A VGA",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022885",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR PORTATIL HP PROBOOK 450 G5",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022886",
+    "IdCombinacion": " ",
+    "Descripcion": "BATERIA 30mAh 3,4",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "80022908",
+    "IdCombinacion": " ",
+    "Descripcion": "SOFTWARE SYMPHONY STARTER",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80022911",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA GRAFICA GT 710 2GB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022919",
+    "IdCombinacion": " ",
+    "Descripcion": "PORTATIL LENOVO V130-15IKB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022955",
+    "IdCombinacion": " ",
+    "Descripcion": "RELOJ CONTROL PRESENCIA US10C-FP-EM",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022964",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER IMPRESORA LASER AMARILLO OKI C332/MC363",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022968",
+    "IdCombinacion": " ",
+    "Descripcion": "MICROSOFT WINDOWS SERVER 2019 STANDAR ROK",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022969",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA CAL USUARIO SERVER STANDAR ROK 2019 PACK 5",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022979",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER SAMSUNG MLT-D305L",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80022981",
+    "IdCombinacion": " ",
+    "Descripcion": "PACK CARTUCHOS TINTA BROTHER MFCJ5330,MFCJ6530DW ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022985",
+    "IdCombinacion": " ",
+    "Descripcion": "POWER SUPPLY DC/DC CONVERTER",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80022988",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE USB 3.0 (A) A USB (B) 3M NEGRO",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80022990",
+    "IdCombinacion": " ",
+    "Descripcion": "SMARTWATCH BRIGMTON BT2",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023024",
+    "IdCombinacion": " ",
+    "Descripcion": "DIGITALIZADORA DE FIRMAS GAMMA EPAD 5\"",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023028",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA GRAFICA GTX 1660TI STORM 6GB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023035",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA CITIZEN PORTATIL 4\" CMP-40L WIFI, USB, SERIE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023036",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA COLGAR IMPRESORA CITIZEN PORTATIL CMP-40L",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023045",
+    "IdCombinacion": " ",
+    "Descripcion": "KIT SISTEMA CONTROL DE PRESENCIA ANVIZ CP2PRO",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023047",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR AOC LED 24\" AOC 24B1H FHD",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "80023048",
+    "IdCombinacion": " ",
+    "Descripcion": "PORTATIL LENOVO THINKBOOK 15-IIL I5-1035G1",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80023090",
+    "IdCombinacion": " ",
+    "Descripcion": "TABLET 8\" TALIUS ZAPHYR WIN 10 8003W",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023101",
+    "IdCombinacion": " ",
+    "Descripcion": "ROUTER MIKROTIK RB2011L-RM",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023103",
+    "IdCombinacion": " ",
+    "Descripcion": "CORTAFUEGOS MIKROTIK RB2011IL-RM",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023120",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER ORIGINAL HP CF259XC",
+    "StockReal": -15.0
+  },
+  {
+    "IdArticulo": "80023126",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR 23,5\" SAMSUNG LS24F354 FHU",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023127",
+    "IdCombinacion": " ",
+    "Descripcion": "WEBCAM CONCEPTRONIC HD 1080P",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023135",
+    "IdCombinacion": " ",
+    "Descripcion": "MODEM USB DLINK 4G",
+    "StockReal": -8.0
+  },
+  {
+    "IdArticulo": "80023136",
+    "IdCombinacion": " ",
+    "Descripcion": "PORTATIL LENOVO THINKPAD E590",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80023140",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER NEGRO ORIGINAL HP CF410XC",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023145",
+    "IdCombinacion": " ",
+    "Descripcion": "CONTROL PRESENCIA UFACE 402-EM",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023146",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA GRAFICA GTX 1050TI",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023149",
+    "IdCombinacion": " ",
+    "Descripcion": "FPT 2100",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023152",
+    "IdCombinacion": " ",
+    "Descripcion": "ALTAVOZ PORTATIL BRIMGTON BAP750",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023157",
+    "IdCombinacion": " ",
+    "Descripcion": "PLATEN TOSHOBA ASSY BSX4T",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80023159",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR AOC M2470SWH",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80023163",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA HP LASER JET PRO M404DN",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80023178",
+    "IdCombinacion": " ",
+    "Descripcion": "MULTIFUNCION HP PRO M428DW",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023199",
+    "IdCombinacion": " ",
+    "Descripcion": "PORTATIL HP 250 G7 i3/8GB/SSD256/WH",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023218",
+    "IdCombinacion": " ",
+    "Descripcion": "CAMARA IP WIRELESS XIAOMI MI HOME SECURITY 360º",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023219",
+    "IdCombinacion": " ",
+    "Descripcion": "SAI SALICRU SPS 500 ONE 2XSCHUKO INTERACT",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023220",
+    "IdCombinacion": " ",
+    "Descripcion": "MEM MICRO SD 64GB GOODRAM M1AA CL10 UHS-I+ADAPT",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023226",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR HDMI/ VGA + Audio",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80023228",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA TICKETS EPSON TM-T20II - USB-RED NEGRA",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80023232",
+    "IdCombinacion": " ",
+    "Descripcion": "FUSOR KIT ORIGINAL HP LASERJET M501/M506/M527",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "800232445",
+    "IdCombinacion": " ",
+    "Descripcion": "TV DLED 43\" HISENSE H43B7100 SMART TELEVISIÓN 4K UHD",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023249",
+    "IdCombinacion": " ",
+    "Descripcion": "CONECTOR RED ROSETA RJ45 HEMBRA CAT6",
+    "StockReal": -13.0
+  },
+  {
+    "IdArticulo": "80023251",
+    "IdCombinacion": " ",
+    "Descripcion": "MARCO DOBLE PARA EMPOTRAR RJ45",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023252",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJA PARA EMPOTRAR RJ45 DOBLE",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023255",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJA DE SUPERFICIE 1xRJ45 CAT6 UTP Blanca",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023258",
+    "IdCombinacion": " ",
+    "Descripcion": "TELEVISIÓN LED 43\" SAMSUNG UE43RU6025 SMART 4K UHD",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80023264",
+    "IdCombinacion": " ",
+    "Descripcion": "CARGADOR USB MOVIL TECH ONE TECH TRIPLE DE PARED USB NEGRO",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "80023283",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR TFT PHILIPS V-LINE 22\"  223V5LHSB2",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023287",
+    "IdCombinacion": " ",
+    "Descripcion": "Webcam 1080P Full HD con Micrófono Estéreo",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023300",
+    "IdCombinacion": " ",
+    "Descripcion": "PUNTO DE ACCESO UBIQUITI NETWORKS UAP-AC-LR DUAL BAND POE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023316",
+    "IdCombinacion": " ",
+    "Descripcion": "REGLETA BASE 3 TOMAS 1,5 metros",
+    "StockReal": -11.0
+  },
+  {
+    "IdArticulo": "80023317",
+    "IdCombinacion": " ",
+    "Descripcion": "REGLETA BASE 5 TOMAS 1,5 metros",
+    "StockReal": -4.0
+  },
+  {
+    "IdArticulo": "80023325",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHOS TINTA BROTHER LC3219XLBK",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80023339",
+    "IdCombinacion": " ",
+    "Descripcion": "ORDENADOR PORTATIL HP 250 G7 10ºGEN",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "80023342",
+    "IdCombinacion": " ",
+    "Descripcion": "ROUTER WIFI AC1200 TP-LINK",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023352",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER ORIGINAL HP ALTA CAPACIDAD",
+    "StockReal": 15.0
+  },
+  {
+    "IdArticulo": "80023364",
+    "IdCombinacion": " ",
+    "Descripcion": "WEBCAM PHASAK CAM 37 1080P",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023366",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR ASUS 23,6\" VP247HAE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80023387",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER ORIGINAL OKI  ES7460/7470/7480",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "80023391",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO DE TINTA PACK CANON PG545/CL546",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80024124",
+    "IdCombinacion": " ",
+    "Descripcion": "PAPEL OFICINA PAQ.500 H. ALTAMIRA A-4 80GR.BLANCO",
+    "StockReal": -7.0
+  },
+  {
+    "IdArticulo": "800250225",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA TERMICA TPV BIXOLON SRP-350-PLUS USB NEGRA",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "8002552434",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJA PARA EMPOTRAR RJ45 INDIDUAL",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "800400112",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJON COLOR NEGRO TPV 41x41x90 ELECTRICO",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "80040012",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJON PORTAMONEDAS MANUAL 41x41x90",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80050015720",
+    "IdCombinacion": " ",
+    "Descripcion": "REGRABADORA DVD NEGRA LG ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800500506",
+    "IdCombinacion": " ",
+    "Descripcion": "RATÓN LOGITECH MOUSE M100 NEGRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800520562",
+    "IdCombinacion": " ",
+    "Descripcion": "OKI - kit de tambor - cián ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800520919",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER OKI C311/C331/C511/C531-Negro 7.000 pág.",
+    "StockReal": 8.0
+  },
+  {
+    "IdArticulo": "800523245",
+    "IdCombinacion": " ",
+    "Descripcion": "SOPORTE BRAZO VESA TV 37\"-70\" ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800523558",
+    "IdCombinacion": " ",
+    "Descripcion": "CANALETA DE SUELO PASACABLES REFORZADA 1 M",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "8005322702",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR LED 24¨SAMSUNG S24D330H NEGRO",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "8005602132",
+    "IdCombinacion": " ",
+    "Descripcion": "LECTOR DE TARJETAS B-MOVE LECTOR DE TARJETAS Y DNI",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "8008001921",
+    "IdCombinacion": " ",
+    "Descripcion": "S.O. MICROSOFT WINDOWS SERVER FOUNDATION 2012 R2",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "800800555",
+    "IdCombinacion": " ",
+    "Descripcion": "SOPORTE PARED EXTENSIBLE BRAZO PARA TV- LCD DE 17\" A 32\"",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80081073",
+    "IdCombinacion": " ",
+    "Descripcion": "ESCANER FUJITSU GESTION DOCUMENTAL FI7030",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "8008110105",
+    "IdCombinacion": " ",
+    "Descripcion": "LECTOR MEMORIAS MULTITARJETA  USB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "800811010511",
+    "IdCombinacion": " ",
+    "Descripcion": "INTERNO USB 2.0 LECTOR MEMORIA NEGRO 7 EN 1",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80081101060",
+    "IdCombinacion": " ",
+    "Descripcion": "INTERNO USB  NEGRO  LECTOR TARJETAS ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80081135",
+    "IdCombinacion": " ",
+    "Descripcion": "PACK 8 PILAS AAA ALKALINE BLISTER",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "81120792",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER CANON I-SENSYS NEGRO F/4410/4430/4450/4550D/4570DN/4580DN",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "845022111",
+    "IdCombinacion": " ",
+    "Descripcion": "RECEPTOR WIFI TP-LINK TL-WN823N",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "85021010",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA SQL SERVER 2019 ISV FACTORIA DE SOFTWARE",
+    "StockReal": -6.0
+  },
+  {
+    "IdArticulo": "85021012",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA SQL 2019 POR USUARIO ISV FACTORIA DE SOFTWARE",
+    "StockReal": -33.0
+  },
+  {
+    "IdArticulo": "85021937",
+    "IdCombinacion": " ",
+    "Descripcion": "S.O. WINDOWS 10 HOME 64BITS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "85022140",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO CYAN Epson 18XL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "85130120334",
+    "IdCombinacion": " ",
+    "Descripcion": "StarTech.com Mini USB to USB B Adapter",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "85213020333",
+    "IdCombinacion": " ",
+    "Descripcion": "StarTech.com High Speed HDMI Cable with Ethernet",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "85231020342",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER OKI C9655 MAGENTA",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "856220446",
+    "IdCombinacion": " ",
+    "Descripcion": "ESCANER BROTHER ADS-2200",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "8702000316",
+    "IdCombinacion": " ",
+    "Descripcion": "ANTIVIRUS NORTON SECURITY 2.0 5 PC´S",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "87020005132",
+    "IdCombinacion": " ",
+    "Descripcion": "ANTIVIRUS PANDA GLOBAL PROTECTION ILIMITADO",
+    "StockReal": 14.0
+  },
+  {
+    "IdArticulo": "87021812",
+    "IdCombinacion": " ",
+    "Descripcion": "KIT DE ACTUALIZACIÓN S.O. WINDOWS 10 PROFESIONAL 32-64 BITS LEG",
+    "StockReal": -5.0
+  },
+  {
+    "IdArticulo": "87021843",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA OFFICE 2019 HOME&STUDENT 1PC PKC",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "87021852",
+    "IdCombinacion": " ",
+    "Descripcion": "ANTIVIRUS NORTON SECURITY DELUXE",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "87022805",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA OFFICE 2019 HOGAR&EMPRESA PC LOCAL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "8750022094",
+    "IdCombinacion": " ",
+    "Descripcion": "OKI EXECUTIVE TONER ES4131/ES4161MFP/ES4191MFP ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "876022089",
+    "IdCombinacion": " ",
+    "Descripcion": "HP Officejet Pro 6970 All-in-One | ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "876022104",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA GRAFICA GT 710",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "881401246",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR OKI B411/412/B432/B512/MB472 Aprox 25k",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "883000198",
+    "IdCombinacion": " ",
+    "Descripcion": "ETIQUETAS Z-SELECT 2000T ZEBRA ",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "8880020379",
+    "IdCombinacion": " ",
+    "Descripcion": "LOGITECH WIRELESS COMBO MK330 TECLADO + RATON",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "890022043",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA DE MEMORIA 128 GB",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "89022120",
+    "IdCombinacion": " ",
+    "Descripcion": "SAI 700VA SALICRU SPS 700 HOME ",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "892654270",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR LED 22\" AOC E2270SWN VGA NEGRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "89520533",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR HD BAHIA INTERNA HD 2,5A HD 3,5",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "8954220378",
+    "IdCombinacion": " ",
+    "Descripcion": "StarTech.com 1 Port PCI Express",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900100242",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR GRAFICO CONECTOR DVI-M A VGA-H",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90010028",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR CABLE FUENTE 2x4PIN - 1x6PIN",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "90010040",
+    "IdCombinacion": " ",
+    "Descripcion": "MALETIN PORTATIL + RATON 15,6\" BOLSA PROFESIONAL ",
+    "StockReal": 7.0
+  },
+  {
+    "IdArticulo": "90010110",
+    "IdCombinacion": " ",
+    "Descripcion": "KIT LIMPIEZA SPRAY SOPLAPOLVO 400ML",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90020580",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA DE RED PCI 10/100/1000 TPLINK",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90020581",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA DE RED PCI-E 10/100/1000 TPLINK",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "9003000123",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA ALIMENTACION EATON ELLIPSE 650",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900300021",
+    "IdCombinacion": " ",
+    "Descripcion": "SISTEMA ALIMENTACION SALICRU 900VA/480w 2 X SCHUKO INTERACTIVO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "9005000072",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE CARGADOR USB-MICROUSB 1,8M",
+    "StockReal": -5.0
+  },
+  {
+    "IdArticulo": "9005000073",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE  DISCO DURO IDE AT 40",
+    "StockReal": 19.0
+  },
+  {
+    "IdArticulo": "9005000102",
+    "IdCombinacion": " ",
+    "Descripcion": "RATON LOGITECH WIRELESS M185",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "900500011",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE DISPOSITIVO DIGITAL USB - 4 PIN",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900500015",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE DISPOSITIVO DIGITAL USB - 5 PIN",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050002",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE IMPRESORA  PARALELO 5 METROS",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "900500023",
+    "IdCombinacion": " ",
+    "Descripcion": "CONECTOR RED ADAPTADOR RJ45 HEMBRA + HEMBRA",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "9005000664",
+    "IdCombinacion": " ",
+    "Descripcion": "DIGITALIZADORA DE FIRMAS EVOLIS SIG100 PRO 4\" LCD",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "900500073",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE CORRIENTE CPU STANDARD 5m",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "9005000789",
+    "IdCombinacion": " ",
+    "Descripcion": "NOTEBOOK  LOCK CABLE BLOQUEO SEGURIDAD PORTATIL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "9005000790",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE BLOQUEO SEGURIDAD NOTEBOOK KCP1",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "90050008",
+    "IdCombinacion": " ",
+    "Descripcion": "CONMUTADOR MANUAL 4 (CPU) A UN MONITOR,TECLADO,RATON",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050014",
+    "IdCombinacion": " ",
+    "Descripcion": "MONITOR VGA 1,8 METROS CABLE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "9005001565",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE VGA MACHO/MACHO 1.5 / 2 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900500158",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE VIDEO PROLONGADOR VGA MACHO/HEMBRA 5 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050016",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE IMPRESORA PARALELO 3 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900500178",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE MONITOR VGA 3M M/H  M/M",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "9005002261",
+    "IdCombinacion": " ",
+    "Descripcion": "RELOJ DE CONTROL DE PRESENCIA EP300 ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050023",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE USB A-A 2 METROS",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "900500231",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE USB A-A 3 METROS",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "9005002345",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE PROLONGADOR USB 2.0 5 METROS",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "9005002351",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE AUDIO MULTIMEDIA 1 STEREO A RCA AUDIO/VIDEO",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "900500236",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE PROLONGADOR USB 2 METROS",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "9005002361",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE USB 1,8 / 2 metros CABLE USB IMPRESORA/ESCANER ",
+    "StockReal": 13.0
+  },
+  {
+    "IdArticulo": "9005002363",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE USB 2.0 CABLE USB 3 METROS IMPRESORA",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "9005002369",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE 2 x HDMI macho CABLE HDMI 2 metros ",
+    "StockReal": 17.0
+  },
+  {
+    "IdArticulo": "9005002374",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE 2 x HDMI macho CABLE HDMI 3 metros ",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "9005002378",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE 2 x HDMI macho CABLE HDMI 5 metros ",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "9005002382",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE ELECTRICO flexible 1 x 2.5  h05v-k/h07v-k  AZUL",
+    "StockReal": -8.0
+  },
+  {
+    "IdArticulo": "900500240",
+    "IdCombinacion": " ",
+    "Descripcion": "FLASH DRIVE 64 GB USB 2.0/3.0/3.1",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050085",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE SERIE 25M/25H  2 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050124",
+    "IdCombinacion": " ",
+    "Descripcion": "PACH PANEL AMP 24 BOCAS RJ45",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "90050130",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE VIDEO PROLONGADOR  VGA MACHO/MACHO 10 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90050131",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE VIDEO PROLONGADOR  VGA MACHO/HEMBRA 10 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900503153",
+    "IdCombinacion": " ",
+    "Descripcion": "25M/25M  5 METROS CABLE CONMUTA. IMPRES",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900503195",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE OCTOPUS MACHO-MACHO KVM 3 metros 1 MONITOR/TECL/RATON ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900503299",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE OCTOPUS  KVM VGA M/f, 2,5 METROS",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "900504129",
+    "IdCombinacion": " ",
+    "Descripcion": "DUPLICADOR MAG RJ45",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90051026",
+    "IdCombinacion": " ",
+    "Descripcion": "PROLONGADOR 3 METROS MANGUERA 2X1",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "900600025",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA RED 10/100/1000 RJ45 Low Profile PCI",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900600101",
+    "IdCombinacion": " ",
+    "Descripcion": "SWITCH SOBREMESA 8P GIGABIT TPLINK Switch™ SG1008 10/100/1000",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "9006001212",
+    "IdCombinacion": " ",
+    "Descripcion": "TARJETA RED PCI EDIMAX10/100 ",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "900600127",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR CABLE USB A RJ45 RED",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90060015",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE ADAPTADOR IDE ATA 3,5\" a IDE ATA 2,5\"",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90060018",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE SCSI SCSI 320   4disp  c/trm",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900600256",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 CAT 6 LATIGUILLO 10 METROS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "9006010105",
+    "IdCombinacion": " ",
+    "Descripcion": "CONECTOR UTP RJ45 8HILOS 100 MB",
+    "StockReal": 56.0
+  },
+  {
+    "IdArticulo": "900601102",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 LATIGUILLO 3 METROS",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "9006011022",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 LATIGUILLO 3 METROS",
+    "StockReal": 9.0
+  },
+  {
+    "IdArticulo": "900601105",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 LATIGUILLO 0.30  METROS FTP",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90060115",
+    "IdCombinacion": " ",
+    "Descripcion": "CONECTOR TELEFONICO RJ11",
+    "StockReal": 50.0
+  },
+  {
+    "IdArticulo": "900601153",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE TELEFONICO RJ11 ",
+    "StockReal": -10.0
+  },
+  {
+    "IdArticulo": "90060116",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 LATIGUILLO 2 METROS",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "9006011691",
+    "IdCombinacion": " ",
+    "Descripcion": "FINALIZADOR CANALETA  40 X 25   ",
+    "StockReal": -10.0
+  },
+  {
+    "IdArticulo": "90060117",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 LATIGUILLO 5 METROS",
+    "StockReal": 24.0
+  },
+  {
+    "IdArticulo": "9006011701",
+    "IdCombinacion": " ",
+    "Descripcion": "BASE RJ45 HEMBRA A LA PARED",
+    "StockReal": -4.0
+  },
+  {
+    "IdArticulo": "900601174",
+    "IdCombinacion": " ",
+    "Descripcion": "BASE ENCHUFE CANALETA PARA INSTALACION 1 TOMA",
+    "StockReal": -7.0
+  },
+  {
+    "IdArticulo": "900601176",
+    "IdCombinacion": " ",
+    "Descripcion": "CANALETA PARA CABLE RED 20 x 12 mm",
+    "StockReal": -12.0
+  },
+  {
+    "IdArticulo": "90060119",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RED NIVEL 5 RJ45 FTP RIGIDO 100MBS",
+    "StockReal": 785.0
+  },
+  {
+    "IdArticulo": "90060120",
+    "IdCombinacion": " ",
+    "Descripcion": "BOBINA CABLE RED NIVEL 5E RJ45 FTP  305 Metros",
+    "StockReal": 156.0
+  },
+  {
+    "IdArticulo": "900601201",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE 0.50 M SATA PARA DISPOSITIVOS ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90060121",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RED NIVEL 5 E RJ45 SFTP RIGIDO 100MBS/APANTALLADO",
+    "StockReal": -45.0
+  },
+  {
+    "IdArticulo": "90060128",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE RJ45 LATIGUILLO 10 METROS",
+    "StockReal": 9.0
+  },
+  {
+    "IdArticulo": "90060129",
+    "IdCombinacion": " ",
+    "Descripcion": "LATIGUILLO CABLE RJ45 1 METRO",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "90060308",
+    "IdCombinacion": " ",
+    "Descripcion": "CABLE AUDIO PROLONGADOR JACK 3,5\" M-H 5 MTS",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "900608121",
+    "IdCombinacion": " ",
+    "Descripcion": "HUB SWITCH TPLINK 5 PTOS SG1005D 10/100/1000 RJ45",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "90700008",
+    "IdCombinacion": " ",
+    "Descripcion": "MODEM FAX EXTERNO USB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "952020543",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR UNICO C310/C330 / C510 / C530 / MC351 / MC361 / MC561",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "980652311",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA FAX BROTHER IMPRESION PACK 2 - T104/T106",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "9856220594",
+    "IdCombinacion": " ",
+    "Descripcion": "StarTech.com Mini USB 2.0 Cable",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CM0850659",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL SQL CUADRO DE MANDOS",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "CM500242512",
+    "IdCombinacion": " ",
+    "Descripcion": "ERP RUANO CLOUD PRESENCIA 25 USUARIOS - ANUAL",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "CM800100111",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA OFFICE STANDARD SERVER RUANO CLOUD ",
+    "StockReal": -6.0
+  },
+  {
+    "IdArticulo": "CM80021429",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL LICENCIA SOFTWARE iGES PREVENTA 1 USUARIO",
+    "StockReal": -6.0
+  },
+  {
+    "IdArticulo": "CM80021669",
+    "IdCombinacion": " ",
+    "Descripcion": "CONTRATO DE MANTENIMIENTO ANUAL  INDOT TPV",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "CM80021735",
+    "IdCombinacion": " ",
+    "Descripcion": "LICENCIA OFFICE 365 UNIVERSITY PC LOCAL - SUSCRIPCIÓN 4 AÑOS",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "CM80021790",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO OKI ES9431DN MONOCROMO COPIA ENTORNO GRÁFICO 15%",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CM80021791",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO OKI ES9431DN COLOR COPIA ENTORNO GRÁFICO 15%",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CM80021811",
+    "IdCombinacion": " ",
+    "Descripcion": "SUSCRIPCIÓN ANUAL NETGEAR UTM150W WEB THREAT MANAGEMENT 1 AÑO ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CM80022268",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL PROGRAMA INSPIRED PRO",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "CM80022487",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL PLATAFORMA CERTIFICADOS DIGITALES",
+    "StockReal": -5.0
+  },
+  {
+    "IdArticulo": "CM80022518",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO LICENCIA OFFICE 365 EMPRESA PAGO MENSUAL 1 USER",
+    "StockReal": 120.0
+  },
+  {
+    "IdArticulo": "CM80022519",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO LICENCIA OFFICE 365 ESSENTIALS EMPRESA PAGO MENSUAL 1 USER",
+    "StockReal": 183.0
+  },
+  {
+    "IdArticulo": "CM80022524",
+    "IdCombinacion": " ",
+    "Descripcion": "CONTRATO MANTENIMIENTO HP E60055DN",
+    "StockReal": -45855.0
+  },
+  {
+    "IdArticulo": "CM80022563",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO PROGRAMA CALCULADORA TRANSFERENCIA WEB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CM80022597",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO LICENCIA GESCLINIC CLINICAS",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "CM80022983",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO LICENCIA ESET ENDPOINT PROTECTION ADVANCED",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CM80022996",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO LICENCIA ESET ENDPOINT PROTECTION ADVANCED 6U",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "CM80023023",
+    "IdCombinacion": " ",
+    "Descripcion": "CERTIFICADO RAPID SSL STANDAR - PAGO ANUAL",
+    "StockReal": -2.0
+  },
+  {
+    "IdArticulo": "CM80023239",
+    "IdCombinacion": " ",
+    "Descripcion": "PANDA ANTIVIRUS DOME ADVANCED 5 User",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "CM80023357",
+    "IdCombinacion": " ",
+    "Descripcion": "SERVICIO ANUAL WEB CERTIFICADO SEGURIDAD RUANO SLL ESTANDAR 1 DOMINIO",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "CM800622704",
+    "IdCombinacion": " ",
+    "Descripcion": "NORTON SECURITY STANDARD 1 USUARIO",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "CM8702000420",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANTIVIRUS PANDA ENDPOINT OFFICE PROTECTION (1 año)",
+    "StockReal": 52.0
+  },
+  {
+    "IdArticulo": "CMCAT7",
+    "IdCombinacion": " ",
+    "Descripcion": "CONTRATO MANTENIMIENTO RUANO TIENDA CLOUD",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "CMHOSTFTP",
+    "IdCombinacion": " ",
+    "Descripcion": "HOSTING ALOJAMIENTO PROFESIONAL LINUX FTP 5GB",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CMLOPD11",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL LOPD 9 A 11 TRABAJADORES",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "CMLOPD8",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO ANUAL LOPD 6 A 8 TRABAJADORES",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CMVPS13",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO MENSUAL SERVIDOR VPS 1 a 2 Ususarios",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CMVPS15",
+    "IdCombinacion": " ",
+    "Descripcion": "MANTENIMIENTO MENSUAL SERVIDOR VPS 15 Ususarios",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "COMISION GRENKE",
+    "IdCombinacion": " ",
+    "Descripcion": "COMISION COMERCIAL GRENKE",
+    "StockReal": -1.0
+  },
+  {
+    "IdArticulo": "G10023193",
+    "IdCombinacion": " ",
+    "Descripcion": "MICROSOFT",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "G607000402",
+    "IdCombinacion": " ",
+    "Descripcion": "GASTO RED.ES INTERNET",
+    "StockReal": 30.0
+  },
+  {
+    "IdArticulo": "LPIHDDRED11",
+    "IdCombinacion": " ",
+    "Descripcion": "CANON LPI TABLET",
+    "StockReal": 9.0
+  },
+  {
+    "IdArticulo": "R8820722",
+    "IdCombinacion": " ",
+    "Descripcion": "BATERIA 12V/AH SAI",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "R99010032",
+    "IdCombinacion": " ",
+    "Descripcion": "BATERIA 12V/7A SAI",
+    "StockReal": 19.0
+  },
+  {
+    "IdArticulo": "RED CAT15",
+    "IdCombinacion": " ",
+    "Descripcion": "ABONO PROYECTO REDES",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "SBACKUP1000",
+    "IdCombinacion": " ",
+    "Descripcion": "ACRONIS CLOUD BACKUP BAS 1TB/MENSUAL 30D",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "SHBACKUP300P",
+    "IdCombinacion": " ",
+    "Descripcion": "ACRONIS CLOUD BACKUP HÍBRIDO POR DISPOSITIVO – 1 PC/300GB",
+    "StockReal": -3.0
+  },
+  {
+    "IdArticulo": "800103424",
+    "IdCombinacion": " ",
+    "Descripcion": "FLASH DRIVE USB 16 GB USB 3.0",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "12060092",
+    "IdCombinacion": " ",
+    "Descripcion": "CAJA REGISTRADORA ALFANUMERICA CASIO CE 6100",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "1812220066",
+    "IdCombinacion": " ",
+    "Descripcion": "KIT DE MANTENIMIENTO KYOCERA-MITA KIT MANTENIMIENTO LASER COLOR",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "52050112",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR IMPRESORA LASER OKI 8P/8W/6W/OKIFAX 4500/OKIOFFICE84/86",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "520501171",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER IMPRESORA LASER OKI B4400/4600 3K",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "520502111",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTURON DE ARRASTRE OKI C5600/5700/5800/5900/5950/5500 mfp",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "5205021910",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR LASER 30000 PAG OKI C9600/9800 CYAN",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "520502197",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR LASER 30000 PAG OKI C9600/9800 AMARILLO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "57101114",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO MAGNETO OPTICO HP DISCO REESCRIBIBLE 2,6 GB",
+    "StockReal": 18.0
+  },
+  {
+    "IdArticulo": "65030069",
+    "IdCombinacion": " ",
+    "Descripcion": "PAPEL CONTINUO S.S. NUEVA NOMINA 240X8'5\"3H MONITOR",
+    "StockReal": 4000.0
+  },
+  {
+    "IdArticulo": "70040011",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA CORRECTORA CARBON OLYMPIA LIFT-OFF gr143",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "70150002",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA REGISTRADORA EPSON ERC 27 GR.653 NEGRO",
+    "StockReal": 16.0
+  },
+  {
+    "IdArticulo": "70200006",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA RELOJ DE CONTROL PHUC ER2100/2200",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "70250011",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA COMPATIBLE OKI FB 320/ML/390/182",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "70250037",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA EPSON LQ 800 G633-635",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "70250039",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL (7754) EPSON LQ 1000/1050/1070/1170",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "70250047",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL EPSON LX300/800-FX850/870/880",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "70250048",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL EPSON LQ 670/680/2500/2550",
+    "StockReal": 5.0
+  },
+  {
+    "IdArticulo": "70250061",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL EPSON DFX 5000/8000 (8766)",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "702500661",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA REGISTRADORA EPSON ERC 18 VIOLETA",
+    "StockReal": 9.0
+  },
+  {
+    "IdArticulo": "7025007301",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA COMPATIBLE STAR SP 200/201/212",
+    "StockReal": 9.0
+  },
+  {
+    "IdArticulo": "70250104",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA FUJITSU DL 1100/700S/G659",
+    "StockReal": 6.0
+  },
+  {
+    "IdArticulo": "70250132",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL OKI ML 520/21 OLYMPIA NP 500",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "702501323",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL OKI ML 1120 / 1190",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "70250135",
+    "IdCombinacion": " ",
+    "Descripcion": "CINTA IMPRESORA ORIGINAL OKI 590/591",
+    "StockReal": 14.0
+  },
+  {
+    "IdArticulo": "703000178",
+    "IdCombinacion": " ",
+    "Descripcion": "CARTUCHO COLOR EPSON T029  STYLUS C60",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80010559",
+    "IdCombinacion": " ",
+    "Descripcion": "DISCO DURO HP 250 GB 3G SATA II",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021104",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA BROTHER HL 3150CDW ",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80021608",
+    "IdCombinacion": " ",
+    "Descripcion": "TONER LASER OLIVETTI 1800, 1800MF, 2200, 2200MF",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "80040006",
+    "IdCombinacion": " ",
+    "Descripcion": "VISOR DISPLAY TPV",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "881401246",
+    "IdCombinacion": " ",
+    "Descripcion": "TAMBOR OKI B411/412/B432/B512/MB472 Aprox 25k",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "88300024",
+    "IdCombinacion": " ",
+    "Descripcion": "IMPRESORA TERMICA DIRECTA TEC BSV4D",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "900500597",
+    "IdCombinacion": " ",
+    "Descripcion": "ADAPTADOR MANUAL KVM-4M 1 MONITOR+TECL+RATON A 4 CPU´S",
+    "StockReal": 1.0
+  }
+]
