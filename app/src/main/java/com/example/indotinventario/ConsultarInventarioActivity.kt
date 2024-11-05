@@ -161,7 +161,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     //---ESCANER------------------------------------------------------------------------------------
 
     private fun escanear() {
-        val intent = Intent(this, ActivityEscanear::class.java)
+        val intent = Intent(this, EscanearActivity::class.java)
         startActivityForResult(intent, CODIGO_INTENT_ESCANEAR)
     }
 

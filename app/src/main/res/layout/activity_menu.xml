@@ -29,13 +29,13 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/buttonConfiguracion"
+        android:id="@+id/buttonEscanear"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="#8BC34A"
         android:lineSpacingExtra="36sp"
-        android:text="@string/menu_configuracion"
+        android:text="ESCANEAR"
         android:textSize="18sp" />
 
 </LinearLayout>

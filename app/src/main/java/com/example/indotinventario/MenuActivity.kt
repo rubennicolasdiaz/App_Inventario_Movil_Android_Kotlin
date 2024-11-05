@@ -34,8 +34,8 @@ class MenuActivity : AppCompatActivity() {
             pasarAActualizarInventarioActivity()
         }
 
-        binding.buttonConfiguracion.setOnClickListener {
-            pasarAConfiguracionActivity()
+        binding.buttonEscanear.setOnClickListener {
+            pasarAEscanearActivity()
         }
     }
 
@@ -69,8 +69,8 @@ class MenuActivity : AppCompatActivity() {
         startActivity(Intent(this, ActualizarInventarioActivity::class.java))
     }
 
-    private fun pasarAConfiguracionActivity() {
+    private fun pasarAEscanearActivity() {
 
-
+        startActivity(Intent(this, EscanearActivity::class.java))
     }
 }
