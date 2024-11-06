@@ -13,10 +13,10 @@ class MenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Implementación de View Binding:
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
 
         cargarVista()
     }
@@ -34,9 +34,7 @@ class MenuActivity : AppCompatActivity() {
             pasarAActualizarInventarioActivity()
         }
 
-        binding.buttonEscanear.setOnClickListener {
-            pasarAEscanearActivity()
-        }
+
     }
 
 
@@ -57,20 +55,11 @@ class MenuActivity : AppCompatActivity() {
         }
     }
 
-    private fun pasarAListadoInventarioActivity() {
-        startActivity(Intent(this, ListadoInventarioActivity::class.java))
-    }
-
     private fun pasarAConsultarInventarioActivity() {
         startActivity(Intent(this, ConsultarInventarioActivity::class.java))
     }
 
     private fun pasarAActualizarInventarioActivity() {
         startActivity(Intent(this, ActualizarInventarioActivity::class.java))
-    }
-
-    private fun pasarAEscanearActivity() {
-
-        startActivity(Intent(this, EscanearActivity::class.java))
     }
 }

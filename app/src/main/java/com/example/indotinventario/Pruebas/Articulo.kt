@@ -1,6 +1,6 @@
 package com.example.indotinventario.Pruebas
 
-class Articulo (
+data class Articulo (
 
     var idArticulo: String,
     var idCombinacion:String,

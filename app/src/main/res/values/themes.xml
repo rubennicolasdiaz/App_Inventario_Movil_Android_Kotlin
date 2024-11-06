@@ -6,10 +6,11 @@
     </style>
 
     <style name="Theme.AppStarting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/NaranjaRuano</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo_ruano</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="windowSplashScreenAnimationDuration">700</item>
         <item name="postSplashScreenTheme">@style/Theme.IndotInventario</item>
+
     </style>
 
 </resources>

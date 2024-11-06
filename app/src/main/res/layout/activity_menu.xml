@@ -28,14 +28,4 @@
         android:text="@string/menu_actualizar_inventario"
         android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/buttonEscanear"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#8BC34A"
-        android:lineSpacingExtra="36sp"
-        android:text="ESCANEAR"
-        android:textSize="18sp" />
-
 </LinearLayout>
