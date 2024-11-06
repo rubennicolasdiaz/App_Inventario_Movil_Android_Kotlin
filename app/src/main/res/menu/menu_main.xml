@@ -5,15 +5,6 @@
         android:id="@+id/idInicio"
         android:title="@string/menu_inicio" />
     <item
-        android:id="@+id/idConsultarInventario"
-        android:title="@string/menu_consultar_inventario" />
-    <item
-        android:id="@+id/idActualizarInventario"
-        android:title="@string/menu_actualizar_inventario" />
-    <item
-        android:id="@+id/idConfiguracion"
-        android:title="@string/menu_configuracion" />
-    <item
         android:id="@+id/idSalir"
         android:title="@string/menu_salir" />
 </menu>

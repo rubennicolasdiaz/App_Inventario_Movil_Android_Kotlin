@@ -29,20 +29,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-       <activity
-            android:name=".ListadoInventarioActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ModificarPartidaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ModificarNumeroDeSerieActivity"
-            android:exported="false" />
         <activity
             android:name=".ConsultarInventarioActivity"
             android:exported="false" />
         <activity
-            android:name=".ActualizarInventarioActivity"
+            android:name=".InsertarArticuloActivity"
             android:exported="false" />
         <activity
             android:name=".EscanearActivity"
@@ -56,6 +47,7 @@
             android:theme="@style/Theme.AppStarting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

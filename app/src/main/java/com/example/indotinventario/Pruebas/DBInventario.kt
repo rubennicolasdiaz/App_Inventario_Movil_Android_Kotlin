@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class InventarioBD (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "inventario.db"
@@ -50,7 +50,7 @@ class InventarioBD (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             );
         """.trimIndent()
 
-        val createPartidasTable = """
+        /* val createPartidasTable = """
             CREATE TABLE $TABLE_PARTIDAS (
                 $COLUMN_ID_PARTIDA INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_ID_ARTICULO TEXT,
@@ -63,16 +63,18 @@ class InventarioBD (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             );
         """.trimIndent()
 
+         */
+
         db.execSQL(createArticulosTable)
         db.execSQL(createCodigosBarrasTable)
-        db.execSQL(createPartidasTable)
+        // db.execSQL(createPartidasTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ARTICULOS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CODIGOS_BARRAS")
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_PARTIDAS")
-        onCreate(db)
+        /* db.execSQL("DROP TABLE IF EXISTS $TABLE_PARTIDAS")
+        onCreate(db) */
     }
 
     // CRUD para Artículos
@@ -151,7 +153,12 @@ class InventarioBD (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
+
     // CRUD para Partidas
+
+    /*
+
+
     fun insertarPartida(idArticulo: String, codigoBarras: String, fechaCaducidad: String, numeroSerie: String?, stock: Int) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -183,5 +190,5 @@ class InventarioBD (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         val db = this.writableDatabase
         db.delete(TABLE_PARTIDAS, "$COLUMN_ID_PARTIDA = ?", arrayOf(idPartida.toString()))
         db.close()
-    }
+    } */
 }

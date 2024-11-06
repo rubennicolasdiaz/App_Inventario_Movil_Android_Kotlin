@@ -8,6 +8,8 @@ import com.example.indotinventario.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // Instancia de la clase DBInventario
+    private lateinit var dbInventario: DBInventario
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,13 +27,16 @@ class MainActivity : AppCompatActivity() {
 
         // Se cargan los componentes gráficos de la vista:
         cargarVista()
+
+        // Se inicializa la base de datos:
+        crearDB()
     }
 
     // Se inicializan los elementos de la vista:
     private fun cargarVista() {
 
         binding.etUsuario
-        binding.etContrasena
+        binding.etPassword
 
         binding.buttonLogin.setOnClickListener {
             comprobarLogin()
@@ -54,13 +59,18 @@ class MainActivity : AppCompatActivity() {
         val con = ConsultaWS(etUsuario.text.toString().trim(), etContraseña.text.toString().trim())
 
         if (con.verCosas(etUsuario, etContraseña)) {
-            crearCarpetas()
-            crearJSON()
-            startActivity(Intent(applicationContext, MenuActivity::class.java))
+
+            pasarAMenuActivity()
+
         } else {
             Toast.makeText(this, R.string.error_login, Toast.LENGTH_SHORT).show()
         }
         */
+    }
+
+    // Inicializar la base de datos
+    private fun crearDB(){
+        dbInventario = DBInventario(this)
     }
 
 

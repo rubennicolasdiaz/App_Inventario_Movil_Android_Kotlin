@@ -14,6 +14,7 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     private lateinit var escanerZXing: ZXingScannerView
 
     override fun onCreate(state: Bundle?) {
+
         super.onCreate(state)
         escanerZXing = ZXingScannerView(this)
 
@@ -47,6 +48,10 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         finish()
     }
 
+
+    /*
+
+
     // MENÚ 3 PUNTITOS:
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_escanear, menu)
@@ -61,5 +66,5 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    } */
 }

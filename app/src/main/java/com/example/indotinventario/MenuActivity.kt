@@ -24,20 +24,15 @@ class MenuActivity : AppCompatActivity() {
     // Inicializar elementos gráficos:
     private fun cargarVista() {
 
-
         binding.buttonConsultar.setOnClickListener {
             pasarAConsultarInventarioActivity()
-            // pasarAListadoInventarioActivity()
+
         }
 
-        binding.buttonActualizar.setOnClickListener {
-            pasarAActualizarInventarioActivity()
+        binding.buttonAgregar.setOnClickListener {
+            pasarAInsertarArticuloActivity()
         }
-
-
     }
-
-
 
     // MENÚ 3 PUNTITOS
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,7 +54,7 @@ class MenuActivity : AppCompatActivity() {
         startActivity(Intent(this, ConsultarInventarioActivity::class.java))
     }
 
-    private fun pasarAActualizarInventarioActivity() {
-        startActivity(Intent(this, ActualizarInventarioActivity::class.java))
+    private fun pasarAInsertarArticuloActivity() {
+        startActivity(Intent(this, InsertarArticuloActivity::class.java))
     }
 }

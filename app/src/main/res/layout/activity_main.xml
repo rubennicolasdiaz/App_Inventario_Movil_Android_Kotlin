@@ -22,13 +22,12 @@
         app:srcCompat="@drawable/icono_indot1" />
 
     <EditText
-        android:id="@+id/etContrasena"
+        android:id="@+id/etPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/contraseña"
+        android:hint="@string/password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
@@ -50,9 +49,9 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/etContrasena"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etContrasena" />
+        app:layout_constraintStart_toStartOf="@+id/etPassword" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -74,7 +73,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="@color/NaranjaRuano"
-        android:text="@string/menu_salir"
+        android:text="@string/salir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
