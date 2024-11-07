@@ -14,21 +14,14 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         // Tabla Articulos
         private const val TABLE_ARTICULOS = "Articulos"
-        private const val COLUMN_ID_ARTICULO = "IdArticulo"
-        private const val COLUMN_DESCRIPCION = "Descripcion"
-        private const val COLUMN_STOCK_REAL = "StockReal"
-        private const val COLUMN_ID_COMBINACION = "IdCombinacion"
+        const val COLUMN_ID_ARTICULO = "IdArticulo"
+        const val COLUMN_DESCRIPCION = "Descripcion"
+        const val COLUMN_STOCK_REAL = "StockReal"
+        const val COLUMN_ID_COMBINACION = "IdCombinacion"
 
         // Tabla CodigosBarras
         private const val TABLE_CODIGOS_BARRAS = "CodigosBarras"
         private const val COLUMN_CODIGO_BARRAS = "CodigoBarras"
-
-        // Tabla Partidas
-        private const val TABLE_PARTIDAS = "Partidas"
-        private const val COLUMN_ID_PARTIDA = "IdPartida"
-        private const val COLUMN_FECHA_CADUCIDAD = "FechaCaducidad"
-        private const val COLUMN_NUMERO_SERIE = "NumeroSerie"
-        private const val COLUMN_STOCK = "Stock"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -50,31 +43,17 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             );
         """.trimIndent()
 
-        /* val createPartidasTable = """
-            CREATE TABLE $TABLE_PARTIDAS (
-                $COLUMN_ID_PARTIDA INTEGER PRIMARY KEY AUTOINCREMENT,
-                $COLUMN_ID_ARTICULO TEXT,
-                $COLUMN_CODIGO_BARRAS TEXT,
-                $COLUMN_FECHA_CADUCIDAD DATE,
-                $COLUMN_NUMERO_SERIE TEXT,
-                $COLUMN_STOCK INTEGER NOT NULL,
-                FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO),
-                FOREIGN KEY($COLUMN_CODIGO_BARRAS) REFERENCES $TABLE_CODIGOS_BARRAS($COLUMN_CODIGO_BARRAS)
-            );
-        """.trimIndent()
 
-         */
 
         db.execSQL(createArticulosTable)
         db.execSQL(createCodigosBarrasTable)
-        // db.execSQL(createPartidasTable)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ARTICULOS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CODIGOS_BARRAS")
-        /* db.execSQL("DROP TABLE IF EXISTS $TABLE_PARTIDAS")
-        onCreate(db) */
+
     }
 
     // CRUD para Artículos
@@ -91,6 +70,7 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     fun obtenerArticulo(idArticulo: String): Cursor {
+
         val db = this.readableDatabase
         return db.query(
             TABLE_ARTICULOS, null, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo),
@@ -133,6 +113,7 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     fun obtenerCodigoBarras(codigoBarras: String): Cursor {
+
         val db = this.readableDatabase
         return db.query(
             TABLE_CODIGOS_BARRAS, null, "$COLUMN_CODIGO_BARRAS = ?", arrayOf(codigoBarras),
@@ -152,43 +133,4 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         db.delete(TABLE_CODIGOS_BARRAS, "$COLUMN_CODIGO_BARRAS = ?", arrayOf(codigoBarras))
         db.close()
     }
-
-
-    // CRUD para Partidas
-
-    /*
-
-
-    fun insertarPartida(idArticulo: String, codigoBarras: String, fechaCaducidad: String, numeroSerie: String?, stock: Int) {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put(COLUMN_ID_ARTICULO, idArticulo)
-            put(COLUMN_CODIGO_BARRAS, codigoBarras)
-            put(COLUMN_FECHA_CADUCIDAD, fechaCaducidad)
-            put(COLUMN_NUMERO_SERIE, numeroSerie)
-            put(COLUMN_STOCK, stock)
-        }
-        db.insert(TABLE_PARTIDAS, null, values)
-        db.close()
-    }
-
-    fun obtenerPartidasPorArticulo(idArticulo: String): Cursor {
-        val db = this.readableDatabase
-        return db.rawQuery(
-            "SELECT * FROM $TABLE_PARTIDAS WHERE $COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo)
-        )
-    }
-
-    fun obtenerPartidasPorCodigoBarras(codigoBarras: String): Cursor {
-        val db = this.readableDatabase
-        return db.rawQuery(
-            "SELECT * FROM $TABLE_PARTIDAS WHERE $COLUMN_CODIGO_BARRAS = ?", arrayOf(codigoBarras)
-        )
-    }
-
-    fun eliminarPartida(idPartida: Int) {
-        val db = this.writableDatabase
-        db.delete(TABLE_PARTIDAS, "$COLUMN_ID_PARTIDA = ?", arrayOf(idPartida.toString()))
-        db.close()
-    } */
 }

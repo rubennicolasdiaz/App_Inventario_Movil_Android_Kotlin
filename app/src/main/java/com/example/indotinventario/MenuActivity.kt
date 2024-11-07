@@ -29,12 +29,9 @@ class MenuActivity : AppCompatActivity() {
 
         }
 
-        binding.buttonAgregar.setOnClickListener {
-            pasarAInsertarArticuloActivity()
-        }
     }
 
-    // MENÚ 3 PUNTITOS
+    // Menú:
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_solo_salir, menu)
         return true
@@ -52,9 +49,5 @@ class MenuActivity : AppCompatActivity() {
 
     private fun pasarAConsultarInventarioActivity() {
         startActivity(Intent(this, ConsultarInventarioActivity::class.java))
-    }
-
-    private fun pasarAInsertarArticuloActivity() {
-        startActivity(Intent(this, InsertarArticuloActivity::class.java))
     }
 }

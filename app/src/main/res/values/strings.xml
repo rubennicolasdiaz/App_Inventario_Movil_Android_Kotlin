@@ -19,6 +19,7 @@
     <string name="menu_inicio">"Inicio"</string>
     <string name="menu_salir">"Salir de la Aplicación"</string>
     <string name="menu_consultar_inventario">Consultar Inventario</string>
+    <string name="volver">Volver</string>
 
 
 </resources>

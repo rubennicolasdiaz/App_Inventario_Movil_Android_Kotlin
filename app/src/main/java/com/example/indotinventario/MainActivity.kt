@@ -28,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         // Se cargan los componentes gráficos de la vista:
         cargarVista()
 
-        // Se inicializa la base de datos:
-        crearDB()
+
+
+
     }
 
     // Se inicializan los elementos de la vista:
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         binding.buttonSalir.setOnClickListener {
             cerrarAplicacion()
         }
+
+
     }
 
     // Login:
@@ -68,14 +71,13 @@ class MainActivity : AppCompatActivity() {
         */
     }
 
-    // Inicializar la base de datos
-    private fun crearDB(){
-        dbInventario = DBInventario(this)
-    }
+
+
 
 
     private fun pasarAMenuActivity() {
         startActivity(Intent(this, MenuActivity::class.java))
+        finish()
     }
 
     private fun cerrarAplicacion() {

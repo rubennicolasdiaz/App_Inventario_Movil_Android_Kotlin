@@ -49,22 +49,19 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     }
 
 
-    /*
-
-
-    // MENÚ 3 PUNTITOS:
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_escanear, menu)
+    // Menú:
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_volver, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.idVolver -> {
+            R.id.Volver -> {
                 finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    } */
+    }
 }

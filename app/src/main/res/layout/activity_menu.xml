@@ -19,12 +19,4 @@
         android:textAllCaps="true"
         android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/buttonAgregar"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:backgroundTint="@color/NaranjaRuano"
-        android:text="@string/agregar_articulo"
-        android:textSize="18sp" />
-
 </LinearLayout>
