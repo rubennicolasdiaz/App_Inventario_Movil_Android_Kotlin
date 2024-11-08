@@ -87,25 +87,11 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
         // Se inicializa base de datos:
         inicializarDB()
-
-
-
-
-
-
-
     }
 
     private fun cargarVista() {
 
-        codigoBarras = binding.etCodigo.text.toString()
-        articulo = binding.tvIdArticulo.text.toString()
-        combinacion = binding.tvIdCombinacion.text.toString()
-        unidadesContadas = binding.etUnidades.text.toString()
-        partida = binding.tvPartida.text.toString()
-        fechaCaducidad = binding.tvFechaCaducidad.text.toString()
-        numeroSerie = binding.tvNumeroSerie.text.toString()
-        descripcion = binding.etDescripcion.text.toString()
+        binding.tvUnidades2.setText("0")
 
         binding.buttonEscanear.setOnClickListener {
             if (!permisoCamaraConcedido) {
@@ -132,7 +118,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     }
 
     private fun disminuirUnidades() {
-        val currentValue = binding.etUnidades.text.toString()
+
+        val currentValue = binding.tvUnidades2.text.toString()
 
         // Verificar si el texto es un número válido
         val unidades = if (currentValue.isNotEmpty()) {
@@ -145,11 +132,11 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         val newValue = if (unidades > 0) unidades - 1 else 0
 
         // Actualizar el EditText con el nuevo valor
-        binding.etUnidades.setText(newValue.toString())
+        binding.tvUnidades2.setText(newValue.toString())
     }
 
     private fun incrementarUnidades() {
-        val currentValue = binding.etUnidades.text.toString()
+        val currentValue = binding.tvUnidades2.text.toString()
 
         // Verificar si el texto es un número válido
         val unidades = if (currentValue.isNotEmpty()) {
@@ -162,7 +149,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         val newValue = unidades + 1
 
         // Actualizar el EditText con el nuevo valor
-        binding.etUnidades.setText(newValue.toString())
+        binding.tvUnidades2.setText(newValue.toString())
     }
 
 
@@ -180,8 +167,9 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             data?.getStringExtra("codigo")?.let { codigo ->
 
                 var codigoArticulo: String = codigo
-                binding.etCodigo.setText(codigo)
+                //binding.etCodigo.setText(codigo)
 
+                binding.tvCodigo2.setText(codigoArticulo) // Código de barras
 
                 buscarArticulo(codigoArticulo)
 
@@ -219,11 +207,14 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                         val stockReal = articuloCursor.getInt(stockRealIndex)
 
                         // Asignamos los valores a los EditText en la interfaz de usuario
-                        binding.etCodigo.setText(codigoBarras) // Código de barras
-                        binding.etIdArticulo.setText(idArticulo) // ID del artículo
-                        binding.etCombinacion.setText(idCombinacion) // Combinación (puede ser nulo)
-                        binding.etDescripcion.setText(descripcion) // Descripción del artículo
-                        binding.etUnidades.setText(stockReal.toString()) // Stock real
+
+
+                        binding.tvCodigo2.setText(codigoBarras) // Código de barras
+                        binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
+                        binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
+                        binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (puede ser nulo)
+                        binding.tvUnidades2.setText(stockReal.toString()) // Stock real
+
                     } else {
                         // Si no se encuentran las columnas de descripción o stock real, mostramos un error
                         Toast.makeText(this, "Datos del artículo incompletos.", Toast.LENGTH_LONG).show()
@@ -252,9 +243,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         private fun inicializarDB(){
             dbInventario = DBInventario(this)
 
-
-
-            // Inserción de artículos
+        // Inserción de artículos
             dbInventario.insertarArticulo("0330", "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9", 1, "COMB01")
             dbInventario.insertarArticulo("033024", "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9 SSD Pro", 1, "COMB02")
             dbInventario.insertarArticulo("0701", "ORDENADOR CENTURION INTEL I3 PRO", 2, "COMB06")
@@ -296,14 +285,14 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     private fun limpiarCampos(){
 
-        binding.etCodigo.setText("")
-        binding.etDescripcion.setText("")
-        binding.etIdArticulo.setText("")
-        binding.etCombinacion.setText("")
-        binding.etPartida.setText("")
-        binding.etDate.setText("")
-        binding.etNumeroSerie.setText("")
-        binding.etUnidades.setText("")
+        binding.tvCodigo2.setText("")
+        binding.tvDescripcion2.setText("")
+        binding.tvIdArticulo2.setText("")
+        binding.tvIdCombinacion2.setText("")
+        binding.tvPartida2.setText("")
+        binding.tvFecha2.setText("")
+        binding.tvNumero2.setText("")
+        binding.tvUnidades2.setText("")
     }
 
 
