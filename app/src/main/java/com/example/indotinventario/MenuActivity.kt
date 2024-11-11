@@ -26,7 +26,10 @@ class MenuActivity : AppCompatActivity() {
 
         binding.buttonConsultar.setOnClickListener {
             pasarAConsultarInventarioActivity()
+        }
 
+        binding.buttonAgregar.setOnClickListener {
+            pasarAAgregarArticuloActivity()
         }
 
     }
@@ -49,5 +52,9 @@ class MenuActivity : AppCompatActivity() {
 
     private fun pasarAConsultarInventarioActivity() {
         startActivity(Intent(this, ConsultarInventarioActivity::class.java))
+    }
+
+    private fun pasarAAgregarArticuloActivity() {
+        startActivity(Intent(this, AgregarArticuloActivity::class.java))
     }
 }

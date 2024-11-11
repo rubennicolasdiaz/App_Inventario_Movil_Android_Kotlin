@@ -24,47 +24,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
 
-    // Variables que almacenan los datos de la vista:
-    private lateinit var unidadesContadas: String
-    private lateinit var codigoBarras: String
-    private lateinit var articulo: String
-    private lateinit var combinacion: String
-    private lateinit var partida: String
-    private lateinit var fechaCaducidad: String
-    private lateinit var numeroSerie: String
-    private lateinit var descripcion: String
-
-    // Variables donde se almacenarán los datos:
-    private val array = ArrayList<String>()
-    private val listaDescripcion = ArrayList<String>()
-    private val listaDescripcionEnMinuscula = ArrayList<String>()
-    private val listaIdArticulo = ArrayList<String>()
-    private val listaIdCombinacion = ArrayList<String>()
-    private val listaPartida = ArrayList<String>()
-    private val listaFechaCaducidad = ArrayList<String>()
-    private val listaNumeroSerie = ArrayList<String>()
-    private val controlNumeroSerie = ArrayList<String>()
-    private val controlPartida = ArrayList<String>()
-    private val listaUnidadesContadas = ArrayList<String>()
-    private val controlCodigoBarras = ArrayList<String>()
-    private val controlUnidadesContadas = ArrayList<String>()
-
-    private var dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    private var date: Date? = null
-
-// Initial data flags
-    private var datosIniciales = true
-    private var datosNSerieModificados = false
-    private var datosPartidaModificados = false
-    private var datosUnidadesDespuesModificar = false
-    private var nombreArchivo: String? = null
-    private var auxiliarCargarDatos = ""
-    private var tablaPreparadaConJSON: String? = null
-    private var fechaActual: String? = null
-
-    private var codigo: Int = 0
-
-    // Permissions variables
+    // Constantes y variables para permisos de cámara:
     companion object {
         const val CODIGO_INTENT_ESCANEAR = 3
         const val CODIGO_PERMISOS_CAMARA = 1
@@ -91,6 +51,9 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     private fun cargarVista() {
 
+        val dateActual = obtenerFechaActual()
+
+        binding.etDate.setText(dateActual)
         binding.tvUnidades2.setText("0")
 
         binding.buttonEscanear.setOnClickListener {
@@ -114,6 +77,12 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
         binding.buttonDisminuir.setOnClickListener {
             disminuirUnidades()
+        }
+
+        binding.buttonGuardar.setOnClickListener {
+
+            actualizarStock()
+            limpiarCampos()
         }
     }
 
@@ -241,43 +210,43 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     // Inicializar la base de datos
         private fun inicializarDB(){
-            dbInventario = DBInventario(this)
 
-        // Inserción de artículos
-            dbInventario.insertarArticulo("0330", "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9", 1, "COMB01")
-            dbInventario.insertarArticulo("033024", "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9 SSD Pro", 1, "COMB02")
-            dbInventario.insertarArticulo("0701", "ORDENADOR CENTURION INTEL I3 PRO", 2, "COMB06")
-            dbInventario.insertarArticulo("0702", "ORDENADOR CENTURION INTEL I3 PRO", 19, "COMB07")
-            dbInventario.insertarArticulo("0800", "ORDENADOR CENTURION INTEL I5 PRO", 2, "COMB08")
-            dbInventario.insertarArticulo("0802", "ORDENADOR CENTURION INTEL I5 PRO", 1, "COMB09")
-            dbInventario.insertarArticulo("09002", "ORDENADOR INTEL I7 PRO", 1, "COMB11")
-            dbInventario.insertarArticulo("15892223", "ADAPTADOR DE VIDEO HDMI-M A DVI-H", 1, "COMB14")
-            dbInventario.insertarArticulo("172253351", "LATIGUILLO RJ45 CAT.5E 1M LATIGUILLO RJ45 CAT.5E 1M", 18, "COMB15")
-            dbInventario.insertarArticulo("172253352", "LATIGUILLO RJ45 CAT5.E 2 M LATIGUILLO RJ45 CAT5.E 2 M", 31, "COMB16")
-            dbInventario.insertarArticulo("172253353", "LATIGUILLO RJ45 CAT5.E 3 M LATIGUILLO RJ45 CAT5.E 3 M", 29, "COMB17")
-            dbInventario.insertarArticulo("1811000069", "IMPRESORA COLOR HP OFFICEJET PRO 8210", 1, "COMB18")
-            dbInventario.insertarArticulo("18120001008", "TONER XEROX TK-130 KYOCERA FS 1028/1128/1300/1350/D/DN", 11, "COMB19")
-            dbInventario.insertarArticulo("181200031", "CARTUCHO TINTA NEGRO HP 901 HP OFFICEJET J4580/4660/4680", 1, "COMB20")
-            dbInventario.insertarArticulo("18130037", "TONER FOTOCOPIADORA KYOCERA FS3830n /3820N", 1, "COMB21")
-            dbInventario.insertarArticulo("1829556321", "TONER TK-1140 KYOCERA FS1035/1135/M2035/M2535", 2, "COMB22")
-            dbInventario.insertarArticulo("20668", "LOGITECH B100 BLACK", 6, "COMB23")
-            dbInventario.insertarArticulo("22264", "CUOTA POWER BI", 3, "COMB24")
-            dbInventario.insertarArticulo("23390", "TELEVISION LED SAMSUNG UE55TU7005 55\" CRYSSTAL", 2, "COMB25")
-            dbInventario.insertarArticulo("40020702", "TONER LASER BROTHER TN 2010", 1, "COMB26")
+        dbInventario = DBInventario(this)
+    }
 
-    // Inserción de códigos de barras
-            dbInventario.insertarCodigoBarras("0000000330", "0330", "COMB01")
-            dbInventario.insertarCodigoBarras("000000033024", "033024", "COMB02")
-            dbInventario.insertarCodigoBarras("000000033025", "033025", "COMB03")
-            dbInventario.insertarCodigoBarras("00000003330", "03330", "COMB04")
-            dbInventario.insertarCodigoBarras("0000000700", "0700", "COMB05")
-            dbInventario.insertarCodigoBarras("0000000701", "0701", "COMB06")
-            dbInventario.insertarCodigoBarras("0000000702", "0702", "COMB07")
-            dbInventario.insertarCodigoBarras("0000000800", "0800", "COMB08")
-            dbInventario.insertarCodigoBarras("0000000802", "0802", "COMB09")
-            dbInventario.insertarCodigoBarras("0000000850659", "0850659", "COMB10")
-            dbInventario.insertarCodigoBarras("00000009002", "09002", "COMB11")
+    // Actualizar número de Stock:
+    private fun actualizarStock(){
+
+        val idArticulo:String = binding.tvIdArticulo2.text.toString()
+
+
+        // Obtener el valor del TextView como String
+        val unidadesStockString = binding.tvUnidades2.text.toString()
+
+// Convertirlo a Int de forma segura (en caso de que no sea un número válido)
+        val unidadesStock: Int = unidadesStockString.toInt()
+
+// Si es válido, puedes usarlo. Si no, unidadesStock será null, y puedes manejar ese caso.
+        if (unidadesStock != null) {
+            // Código para actualizar el stock
+            println("El stock es: $unidadesStock")
+        } else {
+            // Manejar el caso en que la conversión falla
+            println("Error: el valor ingresado no es un número válido.")
         }
+
+        if(!idArticulo.isNullOrEmpty()){
+
+            dbInventario.actualizarStock(idArticulo, unidadesStock)
+        }else{
+
+            Toast.makeText(this, "No se puede actualizar el stock de un artículo no registrado",
+            Toast.LENGTH_SHORT).show()
+        }
+
+
+    }
+
 
 
 
@@ -290,7 +259,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         binding.tvIdArticulo2.setText("")
         binding.tvIdCombinacion2.setText("")
         binding.tvPartida2.setText("")
-        binding.tvFecha2.setText("")
+        binding.etDate.setText("")
         binding.tvNumero2.setText("")
         binding.tvUnidades2.setText("")
     }
@@ -331,10 +300,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         Toast.makeText(this, "Permiso de la cámara denegado", Toast.LENGTH_SHORT).show()
     }
 
-    private fun modificarUnidades(){
-
-
-    }
 
 
 
@@ -342,12 +307,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
 
-    private fun crearFechaActual() {
 
-        dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
-        date = Date()
-        fechaActual = dateFormat.format(date)
-    }
+
 
     // Menú:
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -359,14 +320,23 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         return when (item.itemId) {
 
             R.id.idInicio -> {
+
+                dbInventario.close()
                 finish()
                 true
             }
             R.id.idSalir -> {
+                dbInventario.close()
                 finishAffinity()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun obtenerFechaActual(): String {
+        val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()) // Definir el formato de fecha
+        val fechaActual = Date() // Obtener la fecha y hora actual
+        return formatoFecha.format(fechaActual) // Formatear la fecha en el formato deseado y devolverla como String
     }
 }

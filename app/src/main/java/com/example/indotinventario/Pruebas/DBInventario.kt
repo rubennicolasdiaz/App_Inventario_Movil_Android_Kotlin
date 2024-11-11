@@ -128,6 +128,17 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         )
     }
 
+    fun actualizarStock(idArticulo: String, stockReal: Int) {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+
+            put(COLUMN_STOCK_REAL, stockReal)
+
+        }
+        db.update(TABLE_ARTICULOS, values, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
+        db.close()
+    }
+
     fun eliminarCodigoBarras(codigoBarras: String) {
         val db = this.writableDatabase
         db.delete(TABLE_CODIGOS_BARRAS, "$COLUMN_CODIGO_BARRAS = ?", arrayOf(codigoBarras))
