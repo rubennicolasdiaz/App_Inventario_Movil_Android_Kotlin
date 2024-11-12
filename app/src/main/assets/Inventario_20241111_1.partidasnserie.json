@@ -1,0 +1,404 @@
+﻿[
+  {
+    "IdArticulo": "BH9BJ22SSH",
+    "Partida": "202203065001",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FCOM110B00",
+    "Partida": "7780302073",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FD26X",
+    "Partida": "J220081211241",
+    "FCaducidad": "25/05/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FD26X",
+    "Partida": "KC2B22",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FD26X",
+    "Partida": "KH1K21",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FD26X",
+    "Partida": "KH1KK21",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FD26X",
+    "Partida": "KI1B09",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FD31X",
+    "Partida": "KT2K15",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL1",
+    "Partida": "6440246951",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "11561052763",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "11563273763",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "11564292513",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "11564351823",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "6560249973",
+    "FCaducidad": "15/01/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "836403-3",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL2R",
+    "Partida": "845303-3",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "Partida": "8055044",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "Partida": "8062142",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "Partida": "8083143",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "Partida": "808314-3",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "Partida": "808414-3",
+    "FCaducidad": "25/05/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "Partida": "824304 2",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "11882112723",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "11883112623",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "11891123533",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "11893283623",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "11893283723",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "11895113533",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "143413",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "143423",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "144413",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "247424",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "6880102153",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "6880628073",
+    "FCaducidad": "25/05/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "FL5",
+    "Partida": "KB0G13",
+    "FCaducidad": "02/02/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L380P",
+    "Partida": "128433",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L380P",
+    "Partida": "141434",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "Partida": "043433",
+    "FCaducidad": "11/03/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "Partida": "117413",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "Partida": "142414",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "Partida": "150414",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "Partida": "243423",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "Partida": "247412",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "L4B85P",
+    "Partida": "942424",
+    "FCaducidad": "25/01/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "QSL3680",
+    "Partida": "839417*3",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "QSL3B640",
+    "Partida": "0523",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "QSL3B640",
+    "Partida": "0622",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SAX140",
+    "Partida": "KA0K30",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SAX140",
+    "Partida": "KA1C30",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SAX140",
+    "Partida": "KA1F01",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SAX140",
+    "Partida": "KA1L14",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SAX140",
+    "Partida": "KA3C02",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SAX140",
+    "Partida": "KA3CO2",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "07003945",
+    "FCaducidad": "25/05/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "07003950",
+    "FCaducidad": "25/05/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "07003951",
+    "FCaducidad": "25/05/2021",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "5T37001",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "KA0I02",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "KA2E15",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SBX180",
+    "Partida": "KA2K29",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SCX220",
+    "Partida": "KA0G08",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SCX220",
+    "Partida": "KA0G0B",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SCX220",
+    "Partida": "KA0IA6",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SCX220",
+    "Partida": "KA0L08",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SCX220",
+    "Partida": "KA0L09",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SCX220",
+    "Partida": "KA2G30",
+    "FCaducidad": "",
+    "NSerie": null
+  },
+  {
+    "IdArticulo": "SL3R",
+    "Partida": "1221",
+    "FCaducidad": "",
+    "NSerie": null
+  }
+]

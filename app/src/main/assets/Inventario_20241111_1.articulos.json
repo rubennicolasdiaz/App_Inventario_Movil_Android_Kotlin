@@ -1,0 +1,1628 @@
+﻿[
+  {
+    "IdArticulo": "006660020",
+    "IdCombinacion": " ",
+    "Descripcion": "666N/20-Ll Dinamométricas De Resorte",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "0101020832",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina de Diagnosis FCAR F7S-G TURISMO/VEHICULO INDUSTRIAL",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "0101021395",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina de Diagnosis FCAR F8S-W Plus",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "010102X0840",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion turismo, vehículo comercial y vehículo industrial 12 meses.",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "014980480",
+    "IdCombinacion": " ",
+    "Descripcion": "1498/12-Arrancador Auto 12V Portátil",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "106000062",
+    "IdCombinacion": " ",
+    "Descripcion": "Cargador 22 kw con Cable 4G LCD MID",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "33431050",
+    "IdCombinacion": " ",
+    "Descripcion": "Mini llave de impacto 1/2\" 678Nm 109mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "4EB1700",
+    "IdCombinacion": " ",
+    "Descripcion": "Elevador 2 columnas CON Base en H 3.2 Tn",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "4RA0519",
+    "IdCombinacion": " ",
+    "Descripcion": "Desmontadora Profesional Automática 23\"",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ABASE",
+    "IdCombinacion": " ",
+    "Descripcion": "Carro de Calibracion Base Caja Grande de Madera",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ABEN2",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Mercedes-Benz CSC0601/19",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACAJ",
+    "IdCombinacion": " ",
+    "Descripcion": "Caja con Paneles de Calibracion pequeños",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACT908IM2",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 2 Años Maxisys 908 IM",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTMS906PRO2",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 2 Años Maxisys MS906 BT PRO",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "ACTMS9081",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 1 Año Maxisys MS908",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "ACTMS908PRO1",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 1 Año Maxisys MS908PRO",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTMS908PRO2",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 2 Años Maxisys MS908PRO",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTMS908PRO3",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 3 Años Maxisys MS908PRO",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTMS9091",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 1 Año Maxisys MS909",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "ACTMS9092",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 2 Años Maxisys MS909",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "ACTMS9191",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 1 Año Maxisys MS919",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTMS9192",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 2 Años Maxisys MS919",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTULTRA",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 1 Año Maxisys MSULTRA",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ACTULTRA2",
+    "IdCombinacion": " ",
+    "Descripcion": "Actualizacion 2 Años Maxisys MSULTRA",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AGARRAS",
+    "IdCombinacion": " ",
+    "Descripcion": "Garras para Rueda",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AIW34210",
+    "IdCombinacion": " ",
+    "Descripcion": "Pistola Impacto 1/4\"",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMA151",
+    "IdCombinacion": " ",
+    "Descripcion": "Sistema ADAS MA600 CSC1500/1",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMA152",
+    "IdCombinacion": " ",
+    "Descripcion": "Sistema ADAS MA600 CSC1500/2",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMA600SOP",
+    "IdCombinacion": " ",
+    "Descripcion": "Soporte Anclaje Radares MA600",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMACAJ",
+    "IdCombinacion": " ",
+    "Descripcion": "Caja de Paneles de Calibración ADAS MA600",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMAPAN",
+    "IdCombinacion": " ",
+    "Descripcion": "Paneles de Calibración Grandes ADAS MA600",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMAZ1",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Mazda CSC601/12",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMAZ2",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Mazda CSC601/13",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AMIT",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Mitsubishi CSC0601/22",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ANIS",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Nissan CSC0601/04",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "APALFA",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Fiat/Alfa CSC601/10",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "APANEL",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Calibracion VW CSC0601/01",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "APB112",
+    "IdCombinacion": " ",
+    "Descripcion": "Smart Key para MaxiSys IM APB112",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "APBENZ",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Enrollable Mercedes-Benz CSC0601/02",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "APHYU",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Enrollable Hyundai/Kia CSC0601/07",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "APSUB",
+    "IdCombinacion": " ",
+    "Descripcion": "Panel Enrollable Subaru CSC0601/14",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "AREF",
+    "IdCombinacion": " ",
+    "Descripcion": "Reflector CSC0602/01",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASL3101610",
+    "IdCombinacion": " ",
+    "Descripcion": "Esmeriladora Combinada GU 20 B 600W",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASL3140020",
+    "IdCombinacion": " ",
+    "Descripcion": "Afilador de Brocas GQ-D13",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASL3184140",
+    "IdCombinacion": " ",
+    "Descripcion": "Sierra de cinta Portatil SQ-V12",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASL350150",
+    "IdCombinacion": " ",
+    "Descripcion": "Esmeriladora MW QSM150 Optimum 450 W",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASL458801525",
+    "IdCombinacion": " ",
+    "Descripcion": "Compresor SILENT 24 sin Aceite 24 Litros",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "ASL7001140",
+    "IdCombinacion": " ",
+    "Descripcion": "Aspirador Industrial WETCAT 137R",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASL807546",
+    "IdCombinacion": " ",
+    "Descripcion": "Cargador Alpine 20 BOOST",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "ASL829342",
+    "IdCombinacion": " ",
+    "Descripcion": "Cargador Electonico Multifuncion DOCTOR START 630 230V 12-24V",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ASOP",
+    "IdCombinacion": " ",
+    "Descripcion": "Soporte de Calibracion para paneles Pequeños",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ATRAV",
+    "IdCombinacion": " ",
+    "Descripcion": "Travesaño para Calibracion Caja larga de Madera",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BH23015C",
+    "IdCombinacion": " ",
+    "Descripcion": "Gato Hidraulico Neumatico 30/15 Toneladas",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BH9BJ22SSH",
+    "IdCombinacion": " ",
+    "Descripcion": "Gato neumatico 2 niveles",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0600828203",
+    "IdCombinacion": " ",
+    "Descripcion": "Cortabordes Art 25 GSE Bosch",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "BOS0600855003",
+    "IdCombinacion": " ",
+    "Descripcion": "Tijera Poda Ciso 3,6 V 14 mm",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "BOS060114E500",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro Percutor GSB 16 RE",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS060117B401",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro Percutor GSB 20-2 Acc+Maletin",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601217100",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro Percutor GSB 13 RE",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "BOS060137B101",
+    "IdCombinacion": " ",
+    "Descripcion": "Lijadora Gex 125-150 Ave Bosch",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS060137B202",
+    "IdCombinacion": " ",
+    "Descripcion": "Lijadora Gex 40-150 Bosch",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601388106",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora Bosch GWS 7-115 720W 115 mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601394003",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora 115 mm GWS 700 11.000 RPM 700W",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601396008",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora Bosch GWS 880 Professional 880W 115 mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601396009",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora 115 mm GWS-880 11.000 RPM 880W Incluye Disco de Diamante",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS060139600A",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora Bosch GWS 880 Professional 880W 125 mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601441300",
+    "IdCombinacion": " ",
+    "Descripcion": "Atornillador GSR 6-25 Te",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS060157A000",
+    "IdCombinacion": " ",
+    "Descripcion": "Sierra circular GKS 85",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS060158F002",
+    "IdCombinacion": " ",
+    "Descripcion": "Sierra Calar Gst 90 Be Bosch",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS06017B7000",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWX 14-125 X-LOCK profesional",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601824800",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora angular GWS-1400",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601828800",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora 125 mm GWS-1000 11.000 RPM 880W",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601850103",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWS 20-230 H 2000W 6500 Rpm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601850M03",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWS 22-230 JH 2200W 6500 Rpm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0601851G13",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWS 21-180 Jhv",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS06018C1105",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWS 22-230 P 2200W 230 mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS06018C1300",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWS 22-230 J 2200W 230 mm",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS06018C1301",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora GWS 22-230 J 2200W + DISCO DE DIAMANTE",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS060197B100",
+    "IdCombinacion": " ",
+    "Descripcion": "Aspirador GAS 20 L SFC",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0603341000",
+    "IdCombinacion": " ",
+    "Descripcion": "Ventaro PSM 1400 A Bosch",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "BOS0603400901",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora Bosch PWS600 + Maletin",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "BOS0603401803",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora PWS-115+Disco Diamante+Maletin",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "BOS0611234374",
+    "IdCombinacion": " ",
+    "Descripcion": "Martillo Perforador Gbh 2Profi Bosch",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS0615990J5A",
+    "IdCombinacion": " ",
+    "Descripcion": "Atornillador Bosch GSB 14,4-2 Li 2 X 1.5 Ah",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0615990K41",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro-Atornillador Bosch GSB 18V-21 2 X 2.0 Ah - Bolsa de transporte",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BOS0615990K45",
+    "IdCombinacion": " ",
+    "Descripcion": "Atornillador Bosch GSB 18-2-Li + 2 X1,5 Bolsa",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS0615990K7J",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro GSB 18V-28 Professional Dynamic 2 Baterias + Cargador + 1 Procore",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS4059952548739",
+    "IdCombinacion": " ",
+    "Descripcion": "Atornillador bateria presion 1/4\" set 25pzs + maletin",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BOS6082942361",
+    "IdCombinacion": " ",
+    "Descripcion": "Martillo Percusion GSH-11E Bosch",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "BPR821",
+    "IdCombinacion": " ",
+    "Descripcion": "Carraca 1/2 con embrague",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BT506",
+    "IdCombinacion": " ",
+    "Descripcion": "Comprobador de baterias para MAXISYS",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "BT608",
+    "IdCombinacion": " ",
+    "Descripcion": "MaxiBAS BT608 Comprobador de Baterías Inteligente",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CF12701607",
+    "IdCombinacion": " ",
+    "Descripcion": "Amoladora Angular 230mm 2200w GA9020R Makita",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CF12728252",
+    "IdCombinacion": " ",
+    "Descripcion": "Sierra circular 190mm 1050w",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CF12740631",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro percutor reversible 13mm 680W HP1641K1X MAKITA",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CF12750725",
+    "IdCombinacion": " ",
+    "Descripcion": "Taladro atornillador bateria DF347DWE 14.4v",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CF16007606",
+    "IdCombinacion": " ",
+    "Descripcion": "Compresor 2HP con Aceite 10 Bares 50 Litros MONTECARLO L20",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CF16007622",
+    "IdCombinacion": " ",
+    "Descripcion": "Compresor 3HP Con Correas 10 Bares 100 Litros A29B-100 CM3",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CF16007650",
+    "IdCombinacion": " ",
+    "Descripcion": "Compresor 2HP con Aceite 8 Bares 24 Litros RC2/24CM2",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CF17021022",
+    "IdCombinacion": " ",
+    "Descripcion": "Grupo Soldar INVERTER LIGERO+M CEVIK 160A/45% EVOLUTION",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CONSULTAUTEL1A",
+    "IdCombinacion": " ",
+    "Descripcion": "Consultoria Call Center Autel",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "CONSULTAUTEL3M",
+    "IdCombinacion": " ",
+    "Descripcion": "Consultoria Call Center Autel",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "CONSULTAUTEL6M",
+    "IdCombinacion": " ",
+    "Descripcion": "Consultoria Call Center Autel",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "DD101",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Taladradora 18V 5Ah  (sin cargador y batería)",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "DG585",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Amoladora angular 20V (sin cargador y batería)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "DH18262A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Taladradora de percusión mandril auto ajustable 20V - 2,6Ah",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "DRS101",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Sierra de sable 18V 5Ah (sin cargador y batería)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "DS808BT",
+    "IdCombinacion": " ",
+    "Descripcion": "Equipo de Diagnosis DS 808BT",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "DW1840",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\" 20V 5Ah (sin cargador y batería)",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "DW18502A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\"  18V - 5.0Ah",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "DW401",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\" 813Nm 18V 5Ah (sin cargador y batería)",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "DW401A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\" 813Nm 18V 5Ah - con cargador y 2 baterías",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "DW404A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\" 900Nm 18V 5Ah - con cargador y 2 baterías",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "DW601",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 3/4\" 1900Nm 18V 5Ah (sin cargador y batería)",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "DW601A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 3/4\" 1900Nm 18V 5Ah - con cargador y 2 baterías",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "EQT206",
+    "IdCombinacion": " ",
+    "Descripcion": "Detector de Fugas por Humo",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "EQT3000",
+    "IdCombinacion": " ",
+    "Descripcion": "Analizador 4 Gases Gasolina",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "EQT3420",
+    "IdCombinacion": " ",
+    "Descripcion": "Opacímetro Diesel Bluetooth EQUIPATALLER",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "EQTADAPTBLUETH",
+    "IdCombinacion": " ",
+    "Descripcion": "Comunicación Bluetooth para Analizador de Gasolina y Opaciometro",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "F0152900AB",
+    "IdCombinacion": " ",
+    "Descripcion": "Multi Cutter Bateria 2900 Ab",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "FCA1",
+    "IdCombinacion": " ",
+    "Descripcion": "Licencia anual FCA AUTEL",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "FCFD305",
+    "IdCombinacion": " ",
+    "Descripcion": "Alineadora direccion 3D FD305",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FCOM110B00",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria 12V 110 Ah 760A +D Sin Talón",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FD26X",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 700 EN +I ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FD26X",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 700 EN +I ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FD26X",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 700 EN +I ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FD26X",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 700 EN +I ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FD26X",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 700 EN +I ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FD31X",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 100Ah 770 EN +I 4X4",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "FELAT1800K",
+    "IdCombinacion": " ",
+    "Descripcion": "Atornillador Neumatico AT-1800K",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "FELAT800",
+    "IdCombinacion": " ",
+    "Descripcion": "Atornillador Neumatico AT-800K",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "FERVI0305",
+    "IdCombinacion": " ",
+    "Descripcion": "Cabina Limpiadora con Sistema de Calefaccion con Garrafa 25 lts DETERGENTE",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL1",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 44Ah 380 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL2R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 62Ah 540 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 740 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 740 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 740 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 740 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 740 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL3SR",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 740 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 10.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 4.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "FL5",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 95Ah 760 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GBOX2",
+    "IdCombinacion": " ",
+    "Descripcion": "Gbox 2 para MaxiSys IM",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS013841",
+    "IdCombinacion": " ",
+    "Descripcion": "Cortadora PLASMA CUTTER 70 CT TRI - antorcha incluida",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS024526",
+    "IdCombinacion": " ",
+    "Descripcion": "Cargador Automático BATIUM 15.24",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS026179",
+    "IdCombinacion": " ",
+    "Descripcion": "Booster GYSPACK 750 12V",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "GYS026490",
+    "IdCombinacion": " ",
+    "Descripcion": "Cargador Arrancador STARTIUM 680E-12/24V",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS029071",
+    "IdCombinacion": " ",
+    "Descripcion": "Estabilizador Corriente GYS Flash 100 Am 100.12 2,5 Mts de Cable",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS029606",
+    "IdCombinacion": " ",
+    "Descripcion": "Estabilizador Corriente GYS Flash Vertical 100 Am 102.12 5 Mts de Cable",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS029958",
+    "IdCombinacion": " ",
+    "Descripcion": "Soldador INVERTER MMA GYSMI 80 P",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "GYS029972",
+    "IdCombinacion": " ",
+    "Descripcion": "Soldador INVERTER MMA GYSMI 130 P",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "GYS030077",
+    "IdCombinacion": " ",
+    "Descripcion": "Soldador INVERTER MMA GYSMI 160 P",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "GYS035799",
+    "IdCombinacion": " ",
+    "Descripcion": "Spotcar PROLINER PRO 230 acero",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS055599",
+    "IdCombinacion": " ",
+    "Descripcion": "Inductor POWERDUCTION 50LG",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS063945",
+    "IdCombinacion": " ",
+    "Descripcion": "Equipo de soldadura PROTIG 201 AC/DC FV - con accesorios",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS069589",
+    "IdCombinacion": " ",
+    "Descripcion": "Energy Station FP",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "GYS077379",
+    "IdCombinacion": " ",
+    "Descripcion": "Escuadra de tiro AIRFIX DRAW ALIGNER",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "HAYNESBASIC",
+    "IdCombinacion": " ",
+    "Descripcion": "Licencia Haynes-PRO BASIC ONLINE 1 AÑO",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "IA800",
+    "IdCombinacion": " ",
+    "Descripcion": "Kit Alineacion Inteligente IA800 CSC0500/06",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "IKEY3BL",
+    "IdCombinacion": " ",
+    "Descripcion": "Llave Inteligente Smart Key 3 botnones CL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "IKEY4CL",
+    "IdCombinacion": " ",
+    "Descripcion": "Llave Inteligente Smart Key 4 botnones CL",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "IPASDO15047",
+    "IdCombinacion": " ",
+    "Descripcion": "Aspirador GS 2/62 FM",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "IRMM21160",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina de Soldar Inverter 160 Amp",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "IRMM21200",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina de Soldar Inverter 200 Amp",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "ITS600",
+    "IdCombinacion": " ",
+    "Descripcion": "Codificador Valvulas TPMS con VCI WIRELESS",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "JBM54040",
+    "IdCombinacion": " ",
+    "Descripcion": "Comprobador de Baterias con Impresora ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "K11519300",
+    "IdCombinacion": " ",
+    "Descripcion": "Hidrolimpiadora HD 7/17M Trifasica",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "K15209300",
+    "IdCombinacion": " ",
+    "Descripcion": "Hidrolimpiadora HD 5/15C ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "K16455030",
+    "IdCombinacion": " ",
+    "Descripcion": "Bomba Sumergible de Agua Sucia SP5 Dirt ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "KM100",
+    "IdCombinacion": " ",
+    "Descripcion": "Generador de Llaves Universal MaxiIM KM100",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "L380P",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria TITANIUM 80Ah 730EN +D FIAMM",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "L380P",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria TITANIUM 80Ah 730EN +D FIAMM",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería TITANIUM 12V 75Ah 730 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería TITANIUM 12V 75Ah 730 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería TITANIUM 12V 75Ah 730 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería TITANIUM 12V 75Ah 730 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería TITANIUM 12V 75Ah 730 EN +D ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "L3B75P",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería TITANIUM 12V 75Ah 730 EN +D ",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "L4B85P",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria FIAMM 12V 85Ah 760 EN +D",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MAXIFLASHPRO",
+    "IdCombinacion": " ",
+    "Descripcion": "Cabezal VCI PRO J2534",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MaxiSysMini",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina Diagnosis MaxiSys Mini",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MP408",
+    "IdCombinacion": " ",
+    "Descripcion": "Osciloscopio (Interfaz) 4 Canales Autel",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MS906BT",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina Diagnosis MS906 BT",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MS906PRO",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina Diagnosis MS906PRO - ACCESO A REMOTE EXPERT - 2 AÑOS ACTUALIZACION INCLUIDO",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MS908IM",
+    "IdCombinacion": " ",
+    "Descripcion": "Maxisys IM Diagnosis y Llaves con PROGRAMADOR LLAVES XP-401",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MS908PRO",
+    "IdCombinacion": " ",
+    "Descripcion": "Maxisys 908S Pro con Cabezal J2534",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MS909",
+    "IdCombinacion": " ",
+    "Descripcion": "Maquina Diagnosis Maxisys MS909 - 2 AÑOS ACTUALIZACION INCLUIDOS",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "MS919",
+    "IdCombinacion": " ",
+    "Descripcion": "Maxisys 919 Con Diagnostico Inteligente y Osciloscopio ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MSELITE",
+    "IdCombinacion": " ",
+    "Descripcion": "Maxisys Elite con Cabezal J2534",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "MSULTRA",
+    "IdCombinacion": " ",
+    "Descripcion": "Maxisys MS ULTRA con Diagnostico Inteligente y Osciloscopio - 2 AÑOS ACTUALIZACIONES",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "N7TN801NUA",
+    "IdCombinacion": " ",
+    "Descripcion": "Compresor Piston NB7/7,5 FT/500 ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC4233A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\" doble martillos 1152Nm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC4238A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1/2\" 542Nm doble martillos",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC4255QA",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto composite 1/2\" doble martillos - 1627Nm",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "NC4650",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Mini llave de impacto 1/2\" 900Nm Jumbo Hammer",
+    "StockReal": 3.0
+  },
+  {
+    "IdArticulo": "NC4650MA",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - NC4650 + Juego de 6 mini vasos MA42006M",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC6201",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 3/4\" composite 1966Nm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC6236",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 3/4\" 1627Nm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC6256Q",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 3/4\"  1627Nm silenciosa",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "NC8266P",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1\" doble martillo 3118Nm  5.9KG pasador corto",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC8266S6",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de impacto 1\" doble martillo 3118Nm  5.9KG pasador largo",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NC83438",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Llave de Impacto 1\" 2441Nm pasador largo",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NE251",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Mini carraca neumática 1/4\" 30Nm",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "NE421",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Carraca neumática 1/2\" 68 Nm Mighty-Seven",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "NE4901",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Carraca neumática 1/2\" 68Nm anti retorno",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "PA301",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Remachadora neumática con aspiración 1042Nm capacidad 4.8mm",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "P-IW-12C",
+    "IdCombinacion": " ",
+    "Descripcion": "Pistola impacto 1/2 1200Nm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "PMFD505",
+    "IdCombinacion": " ",
+    "Descripcion": "Puesta en marcha alineadora FD-505 FCAR",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "PRA2492066",
+    "IdCombinacion": " ",
+    "Descripcion": "Extractor de Gases 249206 Praxair",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "QA0215A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Cofre amoladora recta MIGHTY-SEVEN - 15 Pzas",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "QA111A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Amoladora con pinza 3 y 6mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "QA211A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Amoladora recta con pinza altas Prestaciones 1/4\" -3& 6 - L190mm",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "QA412",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Micro amoladora 3mm Mighty-Seven",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "QA611A",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Amoladora angular 6mm 0.3CV",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "QB54602",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Lijadora Orbital 150mm",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "QSL3680",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM QS SMF 12 V 80 Ah 680A +D",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "QSL3B640",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM QS SMF 12 V 75 Ah 640A +D",
+    "StockReal": 10.0
+  },
+  {
+    "IdArticulo": "QSL3B640",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM QS SMF 12 V 75 Ah 640A +D",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "REACT",
+    "IdCombinacion": " ",
+    "Descripcion": "Recuperacion de Licencia de Equipos Autel",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "REN20",
+    "IdCombinacion": " ",
+    "Descripcion": "Licencia 20 RENAULT AUTEL",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAM160500",
+    "IdCombinacion": " ",
+    "Descripcion": "Pistola de Engrasar Electrica con Estuche y bateria Li-On 2Ah",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAM195000",
+    "IdCombinacion": " ",
+    "Descripcion": "Manómetro Neumático 12 Bar Michelin Homologado con Certificado",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "SAM404100",
+    "IdCombinacion": " ",
+    "Descripcion": "Bomba Neumática de Pistón para Grasa PumpMaster 3 -55:1",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SATEQUIP3M",
+    "IdCombinacion": " ",
+    "Descripcion": "Servicio Tecnico con telediagnosis SOLO LLAVES - 3 meses sin cargo",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAX140",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 140Ah 900 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAX140",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 140Ah 900 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAX140",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 140Ah 900 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAX140",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 140Ah 900 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAX140",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 140Ah 900 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SAX140",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 140Ah 900 EN +I",
+    "StockReal": 2.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SBX180",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 180Ah 1050 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SCX220",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 220Ah 1150 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SCX220",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 220Ah 1150 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SCX220",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 220Ah 1150 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SCX220",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 220Ah 1150 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SCX220",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 220Ah 1150 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SCX220",
+    "IdCombinacion": " ",
+    "Descripcion": "Bateria PREMIUM 12V 220Ah 1150 EN +I",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SL3R",
+    "IdCombinacion": " ",
+    "Descripcion": "Batería PREMIUM 12V 80Ah 680 EN +D SMF VISOR CARGA MASTER POWER PLUS START ",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "SN1288",
+    "IdCombinacion": " ",
+    "Descripcion": "M7 - Limpia superficies con agujas (12) 3mm 1.3KG 4000 TR/Mn",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "TBE200",
+    "IdCombinacion": " ",
+    "Descripcion": "Comprobador laser neumaticos y discos de freno AUTEL",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "TRA9356001200",
+    "IdCombinacion": " ",
+    "Descripcion": "Limpiadora de Tapicerias y aspirador CVC 150 XH",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "TS508",
+    "IdCombinacion": " ",
+    "Descripcion": "Codificador Valvulas TPMS TS-508",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "TS508+20",
+    "IdCombinacion": " ",
+    "Descripcion": "Codificador Valvulas TPMS TS-508 Con 20 Valvulas",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "TS508WF",
+    "IdCombinacion": " ",
+    "Descripcion": "Codificador Valvulas TPMS TS-508 con Wi-Fi",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "U09420012",
+    "IdCombinacion": " ",
+    "Descripcion": "Pistola impacto utra compacta 1/2 942 PC3",
+    "StockReal": 1.0
+  },
+  {
+    "IdArticulo": "U09430001",
+    "IdCombinacion": " ",
+    "Descripcion": "Pistola Impacto 1/2\" USAG 1898 Nm 2,2 Kg LED 943 PC1 Aleacion de Magnesio",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "VCIMS909",
+    "IdCombinacion": " ",
+    "Descripcion": "Cabezal VCI MS909",
+    "StockReal": 0.0
+  },
+  {
+    "IdArticulo": "WU3302",
+    "IdCombinacion": " ",
+    "Descripcion": "Martillo Sds-Plus 3F.710W2.7J Port.E",
+    "StockReal": 0.0
+  }
+]

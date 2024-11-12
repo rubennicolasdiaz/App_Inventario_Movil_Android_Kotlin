@@ -4,7 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.indotinventario.Pruebas.Articulo
+import com.example.indotinventario.Pruebas.CodigoBarras
+import com.example.indotinventario.Pruebas.Partida
 import com.example.indotinventario.databinding.ActivityMainBinding
+import android.util.Log
+import org.json.JSONArray
+import java.io.InputStream
+import java.nio.charset.StandardCharsets
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,9 +35,15 @@ class MainActivity : AppCompatActivity() {
         // Se cargan los componentes gráficos de la vista:
         cargarVista()
 
+        // Se inicializa la DB:
         inicializarDB()
 
+        // Se cargan los ficheros Json de la carpeta Assets y se pasan a la DB:
+        loadJsonArticulos()
 
+        loadJsonCodigosBarras()
+
+        loadJsonPartidas()
     }
 
     // Se inicializan los elementos de la vista:
@@ -46,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         binding.buttonSalir.setOnClickListener {
             cerrarAplicacion()
         }
-
-
     }
 
     // Login:
@@ -77,6 +88,8 @@ class MainActivity : AppCompatActivity() {
         dbInventario = DBInventario(this)
 
 
+
+        /*
         // Inserción de artículos
         dbInventario.insertarArticulo("0330", "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9", 1, "COMB01")
         dbInventario.insertarArticulo("033024", "SERVIDOR HP COMPAQ PROLIANT ML30 Gen9 SSD Pro", 1, "COMB02")
@@ -110,12 +123,8 @@ class MainActivity : AppCompatActivity() {
         dbInventario.insertarCodigoBarras("0000000800", "0800", "COMB08")
         dbInventario.insertarCodigoBarras("0000000802", "0802", "COMB09")
         dbInventario.insertarCodigoBarras("0000000850659", "0850659", "COMB10")
-        dbInventario.insertarCodigoBarras("00000009002", "09002", "COMB11")
+        dbInventario.insertarCodigoBarras("00000009002", "09002", "COMB11") */
     }
-
-
-
-
 
     private fun pasarAMenuActivity() {
         startActivity(Intent(this, MenuActivity::class.java))
@@ -125,5 +134,133 @@ class MainActivity : AppCompatActivity() {
 
     private fun cerrarAplicacion() {
         finishAffinity()
+    }
+
+    // Cargar fichero Json del directorio de Assets:
+
+   fun loadJsonArticulos() {
+
+       try {
+            // Obtener el InputStream del archivo de artículos en assets
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.articulos.json")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            // Convertir el byte array a String
+            val json = String(buffer, StandardCharsets.UTF_8)
+
+            // Parsear el JSON
+            val jsonArray = JSONArray(json)
+            val max = jsonArray.length()
+
+
+
+            // Iterar sobre cada objeto del array JSON
+            for (i in 0 until max) {
+                val jsonObject = jsonArray.getJSONObject(i)
+
+                // Extraer los valores de cada objeto JSON
+                val idArticulo = jsonObject.getString("IdArticulo")
+                val idCombinacion = jsonObject.getString("IdCombinacion")
+                val descripcion = jsonObject.getString("Descripcion")
+                val stockReal = jsonObject.getDouble("StockReal")
+
+                dbInventario.insertarArticulo(idArticulo, idCombinacion, stockReal, descripcion)
+
+
+            Log.i("Insertado artículo a DB", "Artículo ${i+1}")
+                // Imprimir los valores por log
+                // Log.i("Lectura de artículos", "Artículo ${i+1}: idArticulo  $idArticulo  IdCombinacion  $idCombinacion  descripcion $descripcion Unidades Stock   $stockReal")
+            }
+
+        } catch (e: Exception) {
+            Log.e("TAG", "loadJson: error ${e.message}")
+        }
+   }
+
+    fun loadJsonCodigosBarras() {
+
+        try {
+            // Obtener el InputStream del archivo de artículos en assets
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.cbarras.json")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            // Convertir el byte array a String
+            val json = String(buffer, StandardCharsets.UTF_8)
+
+            // Parsear el JSON
+            val jsonArray = JSONArray(json)
+            val max = jsonArray.length()
+
+
+
+            // Iterar sobre cada objeto del array JSON
+            for (i in 0 until max) {
+                val jsonObject = jsonArray.getJSONObject(i)
+
+                // Extraer los valores de cada objeto JSON
+                val codigoBarras = jsonObject.getString("CodigoBarras")
+                val idArticulo = jsonObject.getString("IdArticulo")
+                val idCombinacion = jsonObject.getString("IdCombinacion")
+
+                dbInventario.insertarCodigoBarras(codigoBarras, idArticulo, idCombinacion)
+
+
+                Log.i("Insertado código barras a DB", "Código Barras ${i+1}")
+
+                // Imprimir los valores por log
+                //Log.i("Lectura de códigos de barras", "Código ${i+1}: códigoBarras: $codigoBarras  idArticulo  $idArticulo  IdCombinacion  $idCombinacion")
+            }
+
+        } catch (e: Exception) {
+            Log.e("TAG", "loadJson: error ${e.message}")
+        }
+    }
+
+    fun loadJsonPartidas() {
+
+        try {
+            // Obtener el InputStream del archivo de artículos en assets
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.partidasnserie.json")
+            val size = inputStream.available()
+            val buffer = ByteArray(size)
+            inputStream.read(buffer)
+            inputStream.close()
+
+            // Convertir el byte array a String
+            val json = String(buffer, StandardCharsets.UTF_8)
+
+            // Parsear el JSON
+            val jsonArray = JSONArray(json)
+            val max = jsonArray.length()
+
+            // Iterar sobre cada objeto del array JSON
+            for (i in 0 until max) {
+                val jsonObject = jsonArray.getJSONObject(i)
+
+                // Extraer los valores de cada objeto JSON
+                val idArticulo = jsonObject.getString("IdArticulo")
+                val partida = jsonObject.getString("Partida")
+                val fechaCaducidad = jsonObject.getString("FCaducidad")
+                val numeroSerie = jsonObject.getString("NSerie")
+
+            dbInventario.insertarPartida(idArticulo, partida, fechaCaducidad, numeroSerie)
+
+
+                Log.i("Insertada partida a DB", "Partida ${i+1}")
+
+
+            // Imprimir los valores por log
+            //    Log.i("Lectura de partidas", "Partida: ${i+1}: IdArtículo: $idArticulo  Partida: $partida    Fecha Caducidad: $fechaCaducidad  Número Serie: $numeroSerie")
+            }
+
+        } catch (e: Exception) {
+            Log.e("TAG", "loadJson: error ${e.message}")
+        }
     }
 }

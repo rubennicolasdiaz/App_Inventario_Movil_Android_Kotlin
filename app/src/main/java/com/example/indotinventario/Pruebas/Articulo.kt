@@ -1,9 +1,11 @@
 package com.example.indotinventario.Pruebas
 
-data class Articulo (
+import java.io.Serializable
 
+data class Articulo(
     var idArticulo: String,
-    var idCombinacion:String,
-    var descripcion:String,
+    var idCombinacion: String,
+    var descripcion: String,
     var stockReal: Int
-)
+) : Serializable
+

@@ -51,10 +51,10 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     private fun cargarVista() {
 
-        val dateActual = obtenerFechaActual()
+        // val dateActual = obtenerFechaActual()
 
-        binding.etDate.setText(dateActual)
-        binding.tvUnidades2.setText("0")
+
+        // binding.tvUnidades2.setText("0")
 
         binding.buttonEscanear.setOnClickListener {
             if (!permisoCamaraConcedido) {
@@ -141,70 +141,117 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 binding.tvCodigo2.setText(codigoArticulo) // Código de barras
 
                 buscarArticulo(codigoArticulo)
-
             }
         }
     }
 
     private fun buscarArticulo(codigoBarras: String) {
+
+
+        ////////////////TABLA CÓDIGOS BARRAS:
         // Obtener el cursor con los datos del código de barras
-        val cursor: Cursor? = dbInventario.obtenerCodigoBarras(codigoBarras)
+        val codigoBarrasCursor: Cursor = dbInventario.obtenerCodigoBarras(codigoBarras) // El cursor sólo es de la tabla códigos barras
 
-        // Verificamos si el cursor tiene resultados
-        if (cursor != null && cursor.moveToFirst()) {
-            // Obtener los valores del cursor para el código de barras
-            val idArticuloIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-            val idCombinacionIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+        // Verificamos si el cursor tiene resultados (si el código de barras existe en la base de datos):
+        if (codigoBarrasCursor.moveToFirst()) {
 
-            // Verificamos si las columnas existen
-            if (idArticuloIndex != -1 && idCombinacionIndex != -1) {
-                val idArticulo = cursor.getString(idArticuloIndex)
-                val idCombinacion = cursor.getString(idCombinacionIndex)
+            // Se saca eñ índice de las columnas IdArtículo e IdCombinación de la tabla de Códigos de Barras:
 
-                // Ahora obtenemos los detalles del artículo usando el idArticulo
-                val articuloCursor: Cursor? = dbInventario.obtenerArticulo(idArticulo)
+            val idArticuloIndex = codigoBarrasCursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val idCombinacionIndex = codigoBarrasCursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
 
-                // Verificamos si se encuentra el artículo
-                if (articuloCursor != null && articuloCursor.moveToFirst()) {
-                    val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                    val stockRealIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
+            // Se sacan los valores de las columnas asociados al código de barras:
+            val idArticulo = codigoBarrasCursor.getString(idArticuloIndex)
+            val idCombinacion = codigoBarrasCursor.getString(idCombinacionIndex)
 
-                    // Verificamos si las columnas existen en el cursor de artículo
-                    if (descripcionIndex != -1 && stockRealIndex != -1) {
-                        // Obtener los detalles del artículo
-                        val descripcion = articuloCursor.getString(descripcionIndex)
-                        val stockReal = articuloCursor.getInt(stockRealIndex)
+            // Se establece el cursor para buscar en la tabla de Artículos:
+            val idArticuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
 
-                        // Asignamos los valores a los EditText en la interfaz de usuario
+            val descripcionIndex = idArticuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+            val stockIndex = idArticuloCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
+            val descripcion = idArticuloCursor.getString(descripcionIndex)
+            val stock = idArticuloCursor.getString(stockIndex)
 
-                        binding.tvCodigo2.setText(codigoBarras) // Código de barras
-                        binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
-                        binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
-                        binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (puede ser nulo)
-                        binding.tvUnidades2.setText(stockReal.toString()) // Stock real
+            // Se establece el cursor para buscar en la tabla de Partidas:
+            val partidaCursor: Cursor = dbInventario.obtenerPartidaPorArticulo(idArticulo)
 
-                    } else {
-                        // Si no se encuentran las columnas de descripción o stock real, mostramos un error
-                        Toast.makeText(this, "Datos del artículo incompletos.", Toast.LENGTH_LONG).show()
-                    }
+            val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+            val fechaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+            val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
 
-                    // Cerramos el cursor de artículo
-                    articuloCursor.close()
-                } else {
-                    // Si no se encuentra el artículo, mostramos un mensaje
-                    Toast.makeText(this, "Artículo no encontrado.", Toast.LENGTH_LONG).show()
-                }
-            } else {
-                // Si no se encuentran las columnas necesarias en el cursor de código de barras, mostramos un error
-                Toast.makeText(this, "Datos del código de barras incompletos.", Toast.LENGTH_LONG).show()
+            val partida = partidaCursor.getString(partidaIndex)
+            val fecha = partidaCursor.getString(fechaIndex)
+            val numeroSerie = partidaCursor.getString(numeroSerieIndex)
+
+            // Para pintar en pantalla el código de barras:
+            if(!codigoBarras.isNullOrEmpty()){
+                binding.tvCodigo2.setText(codigoBarras)
+            }else{
+                binding.tvCodigo2.setText("")
             }
 
-            // Cerramos el cursor de código de barras
-            cursor.close()
+
+            // Para pintar en pantalla la descripción:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvDescripcion2.setText(codigoBarras)
+            }else{
+                binding.tvDescripcion2.setText("")
+            }
+
+
+
+            // Para pintar en pantalla el Id de Artículo:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvIdArticulo2.setText(idArticulo)
+            }else{
+                binding.tvIdArticulo2.setText("")
+            }
+
+
+
+            // Para pintar en pantalla el Id de combinación:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvIdCombinacion2.setText(idCombinacion)
+            }else{
+                binding.tvIdCombinacion2.setText("")
+            }
+
+
+            // Para pintar en pantalla el la partida:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvPartida2.setText(partida)
+            }else{
+                binding.tvPartida2.setText("")
+            }
+
+
+            // Para pintar en pantalla el la fecha de caducidad:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvFecha2.setText(fecha)
+            }else{
+                binding.tvFecha2.setText("")
+            }
+
+
+            // Para pintar en pantalla el número de serie:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvNumero2.setText(numeroSerie)
+            }else{
+                binding.tvNumero2.setText("")
+            }
+
+
+            // Para pintar en pantalla el número de unidades en Stock:
+            if(!descripcion.isNullOrEmpty()){
+                binding.tvUnidades2.setText(stock)
+            }else{
+                binding.tvUnidades2.setText("")
+            }
+
         } else {
             // Si no se encuentra el código de barras, mostramos un mensaje
-            Toast.makeText(this, "Código de barras no encontrado.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Código de barras no encontrado en la base de datos", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -247,11 +294,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
-
     private fun limpiarCampos(){
 
         binding.tvCodigo2.setText("")
@@ -259,12 +301,10 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         binding.tvIdArticulo2.setText("")
         binding.tvIdCombinacion2.setText("")
         binding.tvPartida2.setText("")
-        binding.etDate.setText("")
+        binding.tvFecha2.setText("")
         binding.tvNumero2.setText("")
         binding.tvUnidades2.setText("")
     }
-
-
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -301,15 +341,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-
-
-
-
-
     // Menú:
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -335,6 +366,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     }
 
     private fun obtenerFechaActual(): String {
+
         val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()) // Definir el formato de fecha
         val fechaActual = Date() // Obtener la fecha y hora actual
         return formatoFecha.format(fechaActual) // Formatear la fecha en el formato deseado y devolverla como String

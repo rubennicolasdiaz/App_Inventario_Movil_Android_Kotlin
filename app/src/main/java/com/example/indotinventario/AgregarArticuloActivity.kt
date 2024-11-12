@@ -142,6 +142,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
     }
 
     private fun incrementarUnidades() {
+
         val currentValue = binding.tvUnidades2.text.toString()
 
         // Verificar si el texto es un número válido
@@ -236,6 +237,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
         val unidades: Int = unidadesTexto.toIntOrNull() ?: 0  // Convierte a Int, o 0 si no es un número válido
 
 
+        val unidadesDouble: Double = unidades.toDouble()
         var codigoArticulo = binding.tvCodigo2.text.toString() // Se almacena el código de barras en variable
 
 
@@ -243,7 +245,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
         if(!codigoArticulo.isNullOrEmpty()){
 
             // Inserción de artículos
-            dbInventario.insertarArticulo(binding.etIdArticulo.text.toString(), binding.etDescripcion.text.toString(), unidades, binding.etIdCombinacion.text.toString())
+            dbInventario.insertarArticulo(binding.etIdArticulo.text.toString(), binding.etDescripcion.text.toString(), unidadesDouble, binding.etIdCombinacion.text.toString())
 
 
             // Inserción de códigos de barras
