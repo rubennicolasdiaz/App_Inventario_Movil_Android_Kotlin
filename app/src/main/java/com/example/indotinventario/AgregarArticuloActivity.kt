@@ -119,7 +119,8 @@ class AgregarArticuloActivity : AppCompatActivity() {
 
     private fun onDateSelected(day:Int, month:Int,year:Int){
 
-        binding.etDate.setText("$day-$month-$year")
+        var mes = month + 1
+        binding.etDate.setText("$day-$mes -$year")
     }
 
     private fun disminuirUnidades() {
