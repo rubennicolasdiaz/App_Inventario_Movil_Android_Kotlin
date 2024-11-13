@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.indotinventario.databinding.ActivityMainBinding
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
@@ -35,12 +38,16 @@ class MainActivity : AppCompatActivity() {
         // Se inicializa la DB:
         inicializarDB()
 
-        // Se cargan los ficheros Json de la carpeta Assets y se pasan a la DB:
-        loadJsonArticulos()
+        lifecycleScope.launch(Dispatchers.IO){
+            // Se cargan los ficheros Json de la carpeta Assets y se pasan a la DB:
+            loadJsonArticulos()
 
-        loadJsonCodigosBarras()
+            loadJsonCodigosBarras()
 
-        loadJsonPartidas()
+            loadJsonPartidas()
+
+        }
+
     }
 
     // Se inicializan los elementos de la vista:
@@ -107,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
     // Cargar fichero Json del directorio de Assets:
 
-   fun loadJsonArticulos() {
+   private suspend fun loadJsonArticulos() {
 
        try {
             // Obtener el InputStream del archivo de artículos en assets
@@ -149,7 +156,7 @@ class MainActivity : AppCompatActivity() {
         }
    }
 
-    fun loadJsonCodigosBarras() {
+    private suspend fun loadJsonCodigosBarras() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
@@ -191,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun loadJsonPartidas() {
+    private suspend fun loadJsonPartidas() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
@@ -218,8 +225,7 @@ class MainActivity : AppCompatActivity() {
                 val fechaCaducidad = jsonObject.getString("FCaducidad")
                 val numeroSerie = jsonObject.getString("NSerie")
 
-            dbInventario.insertarPartida(idArticulo, partida, fechaCaducidad, numeroSerie)
-
+            dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
 
                 Log.i("Insertada partida a DB", "Partida ${i+1}")
 

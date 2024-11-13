@@ -51,6 +51,11 @@ dependencies {
 
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.google.code.gson:gson:2.8.6")
+    // Corrutinas:
+    implementation("androidx.activity:activity-ktx:1.7.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
+
 
     // Solo añade estas líneas si tienes los JAR correctos en libs
     implementation(files("libs/jtds-1.3.1.jar"))

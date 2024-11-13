@@ -232,36 +232,43 @@ class AgregarArticuloActivity : AppCompatActivity() {
 
     private fun insertarArticulo(){
 
-        // Extraer el número entero de tvUnidades2 y almacenarlo en una variable de tipo Int
-        val unidadesTexto = binding.tvUnidades2.text.toString()  // Obtiene el texto
-        val unidades: Int = unidadesTexto.toIntOrNull() ?: 0  // Convierte a Int, o 0 si no es un número válido
+        try {
+
+            // Extraer el número entero de tvUnidades2 y almacenarlo en una variable de tipo Int
+            val unidadesTexto = binding.tvUnidades2.text.toString()  // Obtiene el texto
+            val unidades: Int = unidadesTexto.toIntOrNull() ?: 0  // Convierte a Int, o 0 si no es un número válido
 
 
-        val unidadesDouble: Double = unidades.toDouble()
-        var codigoArticulo = binding.tvCodigo2.text.toString() // Se almacena el código de barras en variable
+            val unidadesDouble: Double = unidades.toDouble()
+            var codigoArticulo = binding.tvCodigo2.text.toString() // Se almacena el código de barras en variable
 
 
 
-        if(!codigoArticulo.isNullOrEmpty()){
+            if(!codigoArticulo.isNullOrEmpty()){
 
-            // Inserción de artículos
-            dbInventario.insertarArticulo(binding.etIdArticulo.text.toString(), binding.etDescripcion.text.toString(), unidadesDouble, binding.etIdCombinacion.text.toString())
+                // Inserción de artículos
+                dbInventario.insertarArticulo(binding.etIdArticulo.text.toString(), binding.etDescripcion.text.toString(), unidadesDouble, binding.etIdCombinacion.text.toString())
 
 
-            // Inserción de códigos de barras
-            dbInventario.insertarCodigoBarras(codigoArticulo, binding.etIdArticulo.text.toString(), binding.etIdCombinacion.text.toString())
+                // Inserción de códigos de barras
+                dbInventario.insertarCodigoBarras(codigoArticulo, binding.etIdArticulo.text.toString(), binding.etIdCombinacion.text.toString())
 
-            // Inserción de partida
-            dbInventario.insertarPartida(binding.etIdArticulo.text.toString(), binding.etPartida.text.toString(),
-                binding.etDate.text.toString(), binding.etNumero.text.toString())
+                // Inserción de partida
+                dbInventario.insertarPartida(binding.etIdArticulo.text.toString(), binding.etPartida.text.toString(),
+                    binding.etDate.text.toString(), binding.etNumero.text.toString())
 
-            limpiarCampos()
+                limpiarCampos()
 
-            Toast.makeText(this, "Artículo añadido a la base de datos",
-                Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Artículo añadido a la base de datos",
+                    Toast.LENGTH_SHORT).show()
 
-        }else{
-            Toast.makeText(this, "No se puede añadir un nuevo artículo sin código de barras",
+            }else{
+                Toast.makeText(this, "No se puede añadir un nuevo artículo sin código de barras",
+                    Toast.LENGTH_SHORT).show()
+            }
+
+        }catch(e:Exception){
+            Toast.makeText(this, "Error: ${e.message}",
                 Toast.LENGTH_SHORT).show()
         }
     }

@@ -129,7 +129,7 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     // En la tabla partidas sale: IdArticulo, Partida, Fecha Caducidad y número de serie
 
-    fun insertarPartida(idArticulo: String, partida: String, fechaCaducidad: String?, numeroSerie: String?) {
+    fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie: String?) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
 
@@ -142,20 +142,14 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun obtenerPartidas(partida: String): Cursor {
 
-        val db = this.readableDatabase
-        return db.query(
-            TABLE_PARTIDAS, null, "$COLUMN_PARTIDA = ?", arrayOf(partida),
-            null, null, null
-        )
-    }
 
     fun obtenerPartidaPorIdArticulo(idArticulo: String): Cursor {
 
         val db = this.readableDatabase
-        return db.rawQuery(
-            "SELECT * FROM $TABLE_PARTIDAS WHERE $COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo)
+        return db.query(
+            TABLE_PARTIDAS, null, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo),
+            null, null, null
         )
     }
 

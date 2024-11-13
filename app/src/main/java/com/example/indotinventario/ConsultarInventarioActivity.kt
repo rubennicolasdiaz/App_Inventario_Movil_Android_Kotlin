@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -151,72 +152,95 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     }
 
     private fun buscarArticulo(codigoBarras: String) {
-        // Obtener el cursor con los datos del código de barras
-        val cursor: Cursor? = dbInventario.obtenerCodigoBarras(codigoBarras)
 
-        // Verificamos si el cursor tiene resultados
-        if (cursor != null && cursor.moveToFirst()) {
-            // Obtener los valores del cursor para el código de barras
-            val idArticuloIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-            val idCombinacionIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+        try{
+            // Obtener el cursor con los datos del código de barras
+            val cursor: Cursor = dbInventario.obtenerCodigoBarras(codigoBarras)
 
-            // Verificamos si las columnas existen
-            if (idArticuloIndex != -1 && idCombinacionIndex != -1) {
-                val idArticulo = cursor.getString(idArticuloIndex)
-                val idCombinacion = cursor.getString(idCombinacionIndex)
+            // Verificamos si el cursor tiene resultados
+            if (cursor.moveToFirst()) {
+                // Obtener los valores del cursor para el código de barras
+                val idArticuloIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+                val idCombinacionIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+
+
+                    val idArticulo = cursor.getString(idArticuloIndex)
+                    val idCombinacion = cursor.getString(idCombinacionIndex)
+
+                // Cerramos el cursor de código de barras
+                cursor.close()
+
+                binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
+                binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (puede ser nulo)
+
 
                 // Ahora obtenemos los detalles del artículo usando el idArticulo
-                val articuloCursor: Cursor? = dbInventario.obtenerArticulo(idArticulo)
+                val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
 
-                // Verificamos si se encuentra el artículo
-                if (articuloCursor != null && articuloCursor.moveToFirst()) {
+                if(articuloCursor.moveToFirst()){
+
+                    // Verificamos si se encuentra el artículo
+
                     val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
                     val stockRealIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
-                    // Verificamos si las columnas existen en el cursor de artículo
-                    if (descripcionIndex != -1 && stockRealIndex != -1) {
-                        // Obtener los detalles del artículo
-                        val descripcion = articuloCursor.getString(descripcionIndex)
-                        val stockReal = articuloCursor.getInt(stockRealIndex)
-
-                        // Asignamos los valores a los EditText en la interfaz de usuario
-
-
-                        binding.tvCodigo2.setText(codigoBarras) // Código de barras
-                        binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
-                        binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
-                        binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (puede ser nulo)
-                        binding.tvUnidades2.setText(stockReal.toString()) // Stock real
-
-
-
-                        Log.i("Comprobacion cursores", "cursorCodigosBarras tamaño: ${cursor.count}")
-                        Log.i("Comprobacion cursores", "cursorArticulos tamaño: ${articuloCursor.count}")
-                        Log.i("Descripcion", "Descripcion: ${articuloCursor}")
-                        Log.i("Descripcion", "Descripcion: $articuloCursor")
-
-
-                    } else {
-                        // Si no se encuentran las columnas de descripción o stock real, mostramos un error
-                        Toast.makeText(this, "Datos del artículo incompletos.", Toast.LENGTH_LONG).show()
-                    }
+                    // Obtener los detalles del artículo
+                    val descripcion = articuloCursor.getString(descripcionIndex)
+                    val stockReal = articuloCursor.getInt(stockRealIndex)
 
                     // Cerramos el cursor de artículo
                     articuloCursor.close()
-                } else {
-                    // Si no se encuentra el artículo, mostramos un mensaje
-                    Toast.makeText(this, "Artículo no encontrado.", Toast.LENGTH_LONG).show()
-                }
-            } else {
-                // Si no se encuentran las columnas necesarias en el cursor de código de barras, mostramos un error
-                Toast.makeText(this, "Datos del código de barras incompletos.", Toast.LENGTH_LONG).show()
-            }
 
-            // Cerramos el cursor de código de barras
-            cursor.close()
-        } else {
-            // Si no se encuentra el código de barras, mostramos un mensaje
-            Toast.makeText(this, "Código de barras no encontrado.", Toast.LENGTH_LONG).show()
+                    // Asignamos los valores a los EditText en la interfaz de usuario
+                    binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
+                    binding.tvUnidades2.setText(stockReal.toString()) // Stock real
+
+
+                    // Ahora obtenemos los detalles de la partida usando el idArticulo
+                    val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
+
+                    Log.i("Fallo Cursor Partida", "${partidaCursor.columnCount}")
+                    Log.i("Fallo Cursor Partida", "${partidaCursor.count}")
+                    Log.i("Fallo Cursor Partida", "${partidaCursor.columnNames}")
+                    Log.i("Fallo Cursor Partida", "${partidaCursor.position}")
+                    Log.i("Fallo Cursor Partida", "${partidaCursor.javaClass}")
+
+
+                    // Recorremos todas las filas de partida asociadas al idArticulo
+                    if(partidaCursor.moveToFirst()) {
+                        Log.i("Fallo Cursor Partida", "eSTe Id Articulo tiene partida")
+
+
+
+
+
+
+                    }else{
+
+                        val idPartidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+                        val fechaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+                        val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
+
+                        // Obtenemos los valores de cada fila
+                        val partida = partidaCursor.getString(idPartidaIndex)
+                        val fecha = partidaCursor.getString(fechaIndex)
+                        val numeroSerie = partidaCursor.getString(numeroSerieIndex)
+                    }
+                }
+
+
+
+
+
+
+
+            } else {
+                // Si no se encuentra el código de barras, mostramos un mensaje
+                Toast.makeText(this, "Código de barras no encontrado.", Toast.LENGTH_LONG).show()
+            }
+        }catch(e:Exception){
+            Toast.makeText(this, e.message,
+                Toast.LENGTH_LONG).show()
         }
     }
 
@@ -232,35 +256,40 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     // Actualizar número de Stock:
     private fun actualizarStock(){
 
-        val idArticulo:String = binding.tvIdArticulo2.text.toString()
+        try{
+            val idArticulo:String = binding.tvIdArticulo2.text.toString()
 
 
-        // Obtener el valor del TextView como String
-        val unidadesStockString = binding.tvUnidades2.text.toString()
+            // Obtener el valor del TextView como String
+            val unidadesStockString = binding.tvUnidades2.text.toString()
 
-        // Convertirlo a Int de forma segura (en caso de que no sea un número válido)
-        val unidadesStock: Int = unidadesStockString.toInt()
+            // Convertirlo a Int de forma segura (en caso de que no sea un número válido)
+            val unidadesStock: Int = unidadesStockString.toInt()
 
-        val codigoBarras = binding.tvCodigo2.text.toString()
+            val codigoBarras = binding.tvCodigo2.text.toString()
 
-        if(codigoBarras.isEmpty()){
+            if(codigoBarras.isEmpty()){
 
-            Toast.makeText(this, "No hay código de barras registrado",
+                Toast.makeText(this, "No hay código de barras registrado",
+                    Toast.LENGTH_SHORT).show()
+
+            }else if(idArticulo.isEmpty()){
+
+                Toast.makeText(this, "No se puede actualizar el stock de un artículo no registrado",
+                    Toast.LENGTH_SHORT).show()
+
+            }else if(unidadesStockString.isEmpty()){
+
+                Toast.makeText(this, "No se puede actualizar un stock vacío",
+                    Toast.LENGTH_SHORT).show()
+
+            }else{
+
+                dbInventario.actualizarStock(idArticulo, unidadesStock)
+            }
+        }catch(e:Exception){
+            Toast.makeText(this, "No hay ningún artículo para guardar",
                 Toast.LENGTH_SHORT).show()
-
-        }else if(idArticulo.isEmpty()){
-
-            Toast.makeText(this, "No se puede actualizar el stock de un artículo no registrado",
-                Toast.LENGTH_SHORT).show()
-
-        }else if(unidadesStockString.isEmpty()){
-
-            Toast.makeText(this, "No se puede actualizar un stock vacío",
-                Toast.LENGTH_SHORT).show()
-
-        }else{
-
-            dbInventario.actualizarStock(idArticulo, unidadesStock)
         }
     }
 
