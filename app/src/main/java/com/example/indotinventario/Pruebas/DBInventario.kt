@@ -19,13 +19,13 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         const val COLUMN_ID_COMBINACION = "IdCombinacion"
         const val COLUMN_DESCRIPCION = "Descripcion"
         const val COLUMN_STOCK_REAL = "StockReal"
-        // En la tabla de artículos están IdArticulo, IdCombinacion, Descripcion y StockReal"
+
 
         // Tabla CodigosBarras
         private const val TABLE_CODIGOS_BARRAS = "CodigosBarras"
 
         private const val COLUMN_CODIGO_BARRAS = "CodigoBarras"
-        // En la tabla de códigos de barras están: Código Barras, IdArticulo e IdCombinacion
+
 
         // Tabla Partidas
         private const val TABLE_PARTIDAS = "Partidas"
@@ -33,10 +33,11 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         const val COLUMN_PARTIDA = "Partida"
         const val COLUMN_FECHA_CADUCIDAD = "FechaCaducidad"
         const val COLUMN_NUMERO_SERIE = "NumeroSerie"
-        // En la tabla partidas sale: IdArticulo, Partida, Fecha Caducidad y número de serie
+
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+
         val createArticulosTable = """
             CREATE TABLE $TABLE_ARTICULOS (
                 $COLUMN_ID_ARTICULO TEXT PRIMARY KEY,
@@ -150,7 +151,7 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         )
     }
 
-    fun obtenerPartidaPorArticulo(idArticulo: String): Cursor {
+    fun obtenerPartidaPorIdArticulo(idArticulo: String): Cursor {
 
         val db = this.readableDatabase
         return db.rawQuery(
@@ -176,6 +177,12 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         }
         db.insert(TABLE_CODIGOS_BARRAS, null, values)
         db.close()
+    }
+
+    fun obtenerTodosCodigosdeBarras(): Cursor {
+
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_CODIGOS_BARRAS", null)
     }
 
     fun obtenerCodigoBarras(codigoBarras: String): Cursor {

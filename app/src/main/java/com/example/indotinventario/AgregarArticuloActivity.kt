@@ -45,7 +45,6 @@ class AgregarArticuloActivity : AppCompatActivity() {
 
         // Se inicializa base de datos:
         inicializarDB()
-
     }
 
 
@@ -81,7 +80,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
         }
 
 
-        binding.tvUnidades2.setText("0")
+
 
         binding.buttonEscanear.setOnClickListener {
             if (!permisoCamaraConcedido) {
@@ -168,6 +167,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
         binding.etPartida.setText("")
         binding.etNumero.setText("")
         binding.tvUnidades2.setText("")
+        binding.etDate.setText("")
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -250,6 +250,16 @@ class AgregarArticuloActivity : AppCompatActivity() {
 
             // Inserción de códigos de barras
             dbInventario.insertarCodigoBarras(codigoArticulo, binding.etIdArticulo.text.toString(), binding.etIdCombinacion.text.toString())
+
+            // Inserción de partida
+            dbInventario.insertarPartida(binding.etIdArticulo.text.toString(), binding.etPartida.text.toString(),
+                binding.etDate.text.toString(), binding.etNumero.text.toString())
+
+            limpiarCampos()
+
+            Toast.makeText(this, "Artículo añadido a la base de datos",
+                Toast.LENGTH_SHORT).show()
+
         }else{
             Toast.makeText(this, "No se puede añadir un nuevo artículo sin código de barras",
                 Toast.LENGTH_SHORT).show()
