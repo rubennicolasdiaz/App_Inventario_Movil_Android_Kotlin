@@ -20,17 +20,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Se define el splash de inicio de la app
-        val screenSplash = installSplashScreen()
+
+        // Dormimos el hilo principal 2 segundos para que se vea el screen y se ejecute la corrutina
+        // para leer los Json y pasar los datos a SQLite:
+        Thread.sleep(2000)
+        setTheme(R.style.AppTheme)
+
 
         super.onCreate(savedInstanceState)
 
         // Implementación de View Binding:
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Implementación del splash de inicio de la app:
-        screenSplash.setKeepOnScreenCondition{false}
 
         // Se cargan los componentes gráficos de la vista:
         cargarVista()
@@ -45,9 +46,7 @@ class MainActivity : AppCompatActivity() {
             loadJsonCodigosBarras()
 
             loadJsonPartidas()
-
         }
-
     }
 
     // Se inicializan los elementos de la vista:

@@ -52,8 +52,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
         // PRUEBAS///////////
-        binding.tvCodigo2.setText("0 601 388 106")
-        buscarArticulo("0 601 388 106")
+        binding.tvCodigo2.setText("2000000074047")
+        buscarArticulo("2000000074047")
     }
 
     private fun cargarVista() {
@@ -210,33 +210,29 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     if(partidaCursor.moveToFirst()) {
                         Log.i("Fallo Cursor Partida", "eSTe Id Articulo tiene partida")
 
-
-
-
-
-
-                    }else{
-
-                        val idPartidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
-                        val fechaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+                        val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+                        val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
                         val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
 
-                        // Obtenemos los valores de cada fila
-                        val partida = partidaCursor.getString(idPartidaIndex)
-                        val fecha = partidaCursor.getString(fechaIndex)
+                        // Obtener los detalles de la partida:
+                        val partida = partidaCursor.getString(partidaIndex)
+                        val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
                         val numeroSerie = partidaCursor.getString(numeroSerieIndex)
+
+                        binding.tvPartida2.setText(partida)
+                        binding.tvFecha2.setText(fechaCaducidad)
+
+                        if(!numeroSerie.isNullOrEmpty()){
+                            binding.tvNumero2.setText(numeroSerie)
+                        }else{
+
+                            binding.tvNumero2.setText("")
+                        }
                     }
                 }
-
-
-
-
-
-
-
             } else {
                 // Si no se encuentra el código de barras, mostramos un mensaje
-                Toast.makeText(this, "Código de barras no encontrado.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Código de barras no encontrado", Toast.LENGTH_LONG).show()
             }
         }catch(e:Exception){
             Toast.makeText(this, e.message,
@@ -249,8 +245,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         private fun inicializarDB(){
 
         dbInventario = DBInventario(this)
-
-        dbInventario
     }
 
     // Actualizar número de Stock:

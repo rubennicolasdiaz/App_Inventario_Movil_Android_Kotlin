@@ -39,13 +39,15 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     override fun onCreate(db: SQLiteDatabase) {
 
         val createArticulosTable = """
-            CREATE TABLE $TABLE_ARTICULOS (
-                $COLUMN_ID_ARTICULO TEXT PRIMARY KEY,
-                $COLUMN_DESCRIPCION TEXT NOT NULL,
-                $COLUMN_STOCK_REAL DOUBLE NOT NULL,
-                $COLUMN_ID_COMBINACION TEXT
-            );
-        """.trimIndent()
+    CREATE TABLE $TABLE_ARTICULOS (
+        $COLUMN_ID_ARTICULO TEXT NOT NULL,
+        $COLUMN_DESCRIPCION TEXT NOT NULL,
+        $COLUMN_STOCK_REAL DOUBLE NOT NULL,
+        $COLUMN_ID_COMBINACION TEXT NOT NULL,
+        PRIMARY KEY ($COLUMN_ID_ARTICULO, $COLUMN_ID_COMBINACION)
+    );
+""".trimIndent()
+
 
         val createCodigosBarrasTable = """
             CREATE TABLE $TABLE_CODIGOS_BARRAS (
