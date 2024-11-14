@@ -8,6 +8,13 @@
     android:background="@color/white"
     tools:context=".ConsultarInventarioActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.40" />
+
  <androidx.constraintlayout.widget.Guideline
      android:id="@+id/guidelineCenter"
      android:layout_width="wrap_content"
@@ -170,16 +177,16 @@
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.07" />
 
-    <TextView
-        android:id="@+id/tvPartida2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/spinnerPartida"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
         android:textColor="@color/azul_marino"
-        android:textSize="22sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.7" />
@@ -211,7 +218,7 @@
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.7"  />
 
-<TextView
+    <TextView
         android:id="@+id/tvNumero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -334,6 +341,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.99"
         app:layout_constraintHorizontal_bias="0.5" />
+
 
 
 

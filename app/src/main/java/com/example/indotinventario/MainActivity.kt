@@ -1,9 +1,9 @@
 package com.example.indotinventario
 
 import android.content.Intent
+import android.database.Cursor
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.indotinventario.databinding.ActivityMainBinding
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     // Cargar fichero Json del directorio de Assets:
 
-   private suspend fun loadJsonArticulos() {
+    private suspend fun loadJsonArticulos() {
 
        try {
             // Obtener el InputStream del archivo de artículos en assets
@@ -227,13 +227,40 @@ class MainActivity : AppCompatActivity() {
             dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
 
                 Log.i("Insertada partida a DB", "Partida ${i+1}")
-
-
-            // Imprimir los valores por log
-            //    Log.i("Lectura de partidas", "Partida: ${i+1}: IdArtículo: $idArticulo  Partida: $partida    Fecha Caducidad: $fechaCaducidad  Número Serie: $numeroSerie")
             }
 
         } catch (e: Exception) {
+            Log.e("TAG", "loadJson: error ${e.message}")
+        }
+    }
+
+
+    private suspend fun saveJsonArticulos() {
+
+        try{
+            // Se crea el cursor para obtener todos los artículos de esa tabla de la DB:
+            val todosArticulos: Cursor
+            todosArticulos = dbInventario.obtenerTodosArticulos()
+
+            // De ese cursor con todos los artículos se extraen los elementos de cada fila
+            val idArticuloIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val descripcionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+            val stockIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
+            val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+
+            val idArticulo = todosArticulos.getString(idArticuloIndex)
+            val descripcion = todosArticulos.getString(descripcionIndex)
+            val stock = todosArticulos.getString(stockIndex)
+            val idCombinacion = todosArticulos.getString(idCombinacionIndex)
+
+
+            // Iterar sobre cada elemento del cursor de todos los artículos:
+            for (i in 0 until todosArticulos.count) {
+
+
+            }
+
+        }catch(e:Exception){
             Log.e("TAG", "loadJson: error ${e.message}")
         }
     }

@@ -5,18 +5,22 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ConsultarInventarioActivity : AppCompatActivity() {
 
@@ -37,6 +41,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         // Implementación de View Binding:
         binding = ActivityConsultarInventarioBinding.inflate(layoutInflater)
@@ -52,8 +57,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
         // PRUEBAS///////////
-        binding.tvCodigo2.setText("2000000074047")
-        buscarArticulo("2000000074047")
+        binding.tvCodigo2.setText("2000000068718")
+        buscarArticulo("2000000068718")
     }
 
     private fun cargarVista() {
@@ -141,11 +146,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 var codigoArticulo: String = codigoBarras
 
                 binding.tvCodigo2.setText(codigoArticulo) // Código de barras
-
-
-
-
-
                 buscarArticulo(codigoArticulo)
             }
         }
@@ -158,7 +158,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             val cursor: Cursor = dbInventario.obtenerCodigoBarras(codigoBarras)
 
             // Verificamos si el cursor tiene resultados
-            if (cursor.moveToFirst()) {
+            if (cursor.moveToFirst() || cursor.moveToNext()) {
                 // Obtener los valores del cursor para el código de barras
                 val idArticuloIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
                 val idCombinacionIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
@@ -177,7 +177,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 // Ahora obtenemos los detalles del artículo usando el idArticulo
                 val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
 
-                if(articuloCursor.moveToFirst()){
+                if(articuloCursor.moveToFirst() || articuloCursor.moveToNext()){
 
                     // Verificamos si se encuentra el artículo
 
@@ -199,34 +199,59 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     // Ahora obtenemos los detalles de la partida usando el idArticulo
                     val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
 
-                    Log.i("Fallo Cursor Partida", "${partidaCursor.columnCount}")
-                    Log.i("Fallo Cursor Partida", "${partidaCursor.count}")
-                    Log.i("Fallo Cursor Partida", "${partidaCursor.columnNames}")
-                    Log.i("Fallo Cursor Partida", "${partidaCursor.position}")
-                    Log.i("Fallo Cursor Partida", "${partidaCursor.javaClass}")
+                    val arrayPartidas:ArrayList<String>
+                    arrayPartidas = ArrayList()
 
+                    val arrayFechas:ArrayList<String>
+                    arrayFechas = ArrayList()
+
+                    val arrayNumerosSerie:ArrayList<String>
+                    arrayNumerosSerie = ArrayList()
 
                     // Recorremos todas las filas de partida asociadas al idArticulo
-                    if(partidaCursor.moveToFirst()) {
-                        Log.i("Fallo Cursor Partida", "eSTe Id Articulo tiene partida")
+                    if(partidaCursor.moveToFirst() || partidaCursor.moveToNext()) {
 
-                        val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
-                        val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
-                        val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
+                        do{
 
-                        // Obtener los detalles de la partida:
-                        val partida = partidaCursor.getString(partidaIndex)
-                        val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
-                        val numeroSerie = partidaCursor.getString(numeroSerieIndex)
+                            val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+                            val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+                            val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
 
-                        binding.tvPartida2.setText(partida)
-                        binding.tvFecha2.setText(fechaCaducidad)
+                            // Obtener los detalles de la partida:
 
-                        if(!numeroSerie.isNullOrEmpty()){
-                            binding.tvNumero2.setText(numeroSerie)
-                        }else{
+                            val partida = partidaCursor.getString(partidaIndex)
+                            val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
+                            val numeroSerie = partidaCursor.getString(numeroSerieIndex)
 
-                            binding.tvNumero2.setText("")
+                            arrayPartidas.add(partida)
+                            arrayFechas.add(fechaCaducidad)
+                            arrayNumerosSerie.add(numeroSerie)
+
+                        }while(partidaCursor.moveToNext())
+
+                        // Cerramos el cursor
+                        partidaCursor.close()
+
+
+                        val items = listOf(*arrayPartidas.toTypedArray())
+                        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+
+
+
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+                        binding.spinnerPartida.adapter = adapter
+
+                        binding.spinnerPartida.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
+
+                                binding.tvFecha2.setText(arrayFechas[position])
+                                binding.tvNumero2.setText(arrayNumerosSerie[position])
+
+                            }
+                            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                            }
                         }
                     }
                 }
@@ -293,7 +318,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         binding.tvDescripcion2.setText("")
         binding.tvIdArticulo2.setText("")
         binding.tvIdCombinacion2.setText("")
-        binding.tvPartida2.setText("")
+        binding.spinnerPartida.adapter.isEmpty
         binding.tvFecha2.setText("")
         binding.tvNumero2.setText("")
         binding.tvUnidades2.setText("")
