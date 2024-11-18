@@ -24,7 +24,7 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         // Tabla CodigosBarras
         private const val TABLE_CODIGOS_BARRAS = "CodigosBarras"
 
-        private const val COLUMN_CODIGO_BARRAS = "CodigoBarras"
+        const val COLUMN_CODIGO_BARRAS = "CodigoBarras"
 
 
         // Tabla Partidas
@@ -85,13 +85,13 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // CRUD para Artículos
-    fun insertarArticulo(idArticulo: String, descripcion: String, stockReal: Double, idCombinacion: String?) {
+    fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String, stockReal: Double) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_ID_ARTICULO, idArticulo)
+            put(COLUMN_ID_COMBINACION, idCombinacion)
             put(COLUMN_DESCRIPCION, descripcion)
             put(COLUMN_STOCK_REAL, stockReal)
-            put(COLUMN_ID_COMBINACION, idCombinacion)
         }
         db.insert(TABLE_ARTICULOS, null, values)
         db.close()
@@ -133,7 +133,7 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     // En la tabla partidas sale: IdArticulo, Partida, Fecha Caducidad y número de serie
 
-    fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie: String?) {
+    fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie:String?) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
 
@@ -205,7 +205,7 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         )
     }
 
-    fun actualizarStock(idArticulo: String, stockReal: Int) {
+    fun actualizarStock(idArticulo: String, stockReal: Double) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
 

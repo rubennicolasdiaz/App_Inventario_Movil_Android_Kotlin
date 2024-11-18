@@ -143,8 +143,7 @@ class MainActivity : AppCompatActivity() {
                 val descripcion = jsonObject.getString("Descripcion")
                 val stockReal = jsonObject.getDouble("StockReal")
 
-                dbInventario.insertarArticulo(idArticulo, descripcion, stockReal, idCombinacion)
-
+                dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion, stockReal)
 
             Log.i("Insertado artículo a DB", "Artículo ${i+1}")
                 // Imprimir los valores por log

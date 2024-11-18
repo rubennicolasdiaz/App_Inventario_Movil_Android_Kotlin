@@ -15,12 +15,14 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
@@ -71,8 +73,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
         // PRUEBAS///////////
-        binding.tvCodigo2.setText("2000000068688")
-        buscarArticulo("2000000068688")
+        //binding.tvCodigo2.setText("2000000068688")
+        //buscarArticulo("2000000068688")
     }
 
     private fun cargarVista() {
@@ -148,24 +150,23 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
     //ESCÁNER:
-
-    private fun escanear() {
-        val intent = Intent(this, EscanearActivity::class.java)
-        startActivityForResult(intent, CODIGO_INTENT_ESCANEAR)
-    }
-
-    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CODIGO_INTENT_ESCANEAR && resultCode == Activity.RESULT_OK) {
-            data?.getStringExtra("codigo")?.let { codigoBarras ->
-
-                var codigoArticulo: String = codigoBarras
-
-                binding.tvCodigo2.setText(codigoArticulo) // Código de barras
+    // Declara el launcher para iniciar la actividad y manejar el resultado
+    private val escanearLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        // Verifica si el resultado fue exitoso y que el requestCode coincide
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.getStringExtra("codigo")?.let { codigoBarras ->
+                // Aquí manejas el código de barras como antes
+                val codigoArticulo: String = codigoBarras
+                binding.tvCodigo2.text = codigoArticulo // Código de barras
                 buscarArticulo(codigoArticulo)
             }
         }
+    }
+
+    // Método para iniciar la actividad de escaneo
+    private fun escanear() {
+        val intent = Intent(this, EscanearActivity::class.java)
+        escanearLauncher.launch(intent)
     }
 
     private fun buscarArticulo(codigoBarras: String) {
@@ -308,6 +309,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             // Convertirlo a Int de forma segura (en caso de que no sea un número válido)
             val unidadesStock: Int = unidadesStockString.toInt()
 
+            var unidadesStockDouble:Double
+
             val codigoBarras = binding.tvCodigo2.text.toString()
 
             if(codigoBarras.isEmpty()){
@@ -327,7 +330,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             }else{
 
-                dbInventario.actualizarStock(idArticulo, unidadesStock)
+                unidadesStockDouble = unidadesStock.toDouble()
+                dbInventario.actualizarStock(idArticulo, unidadesStockDouble)
             }
 
 
@@ -420,14 +424,19 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             R.id.idSalir -> {
                 dbInventario.close()
 
+
+                // Se llama a corrutina para salvar los datos de la DB a ficheros Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    saveJsonArticulos(this@ConsultarInventarioActivity)
-                    saveJsonCodigosBarras(this@ConsultarInventarioActivity)
-                    saveJsonPartidas(this@ConsultarInventarioActivity)
+                    // Se llama a la función async y al método await para que no se ejecute el
+                    // siguiente código hasta que finalice la tarea anterior:
+                    async{saveJsonArticulos(this@ConsultarInventarioActivity)}.await()
+                    async{saveJsonCodigosBarras(this@ConsultarInventarioActivity)}.await()
+                    async{saveJsonPartidas(this@ConsultarInventarioActivity)}.await()
+
+                    finishAffinity()
                 }
 
-                finishAffinity()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -436,9 +445,16 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     private fun obtenerFechaActual(): String {
 
-        val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()) // Definir el formato de fecha
+        val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val fechaActual = Date() // Obtener la fecha y hora actual
         return formatoFecha.format(fechaActual) // Formatear la fecha en el formato deseado y devolverla como String
+    }
+
+    private fun obtenerHoraActual(): String {
+        // Definir el formato para la hora
+        val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val horaActual = Date() // Obtener la fecha y hora actual
+        return formatoHora.format(horaActual) // Formatear la hora y devolverla como String
     }
 
     private suspend fun saveJsonArticulos(context: Context) {
@@ -451,23 +467,34 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             // Indices de las columnas del cursor
             val idArticuloIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
             val descripcionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
             val stockIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
-            val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+
+
+            // Redondear el valor de stock a un decimal (manteniendo el tipo Double)
+            var stockDouble:Double
 
             // Iterar sobre cada fila del cursor
             while (todosArticulos.moveToNext()) {
                 val idArticulo = todosArticulos.getString(idArticuloIndex)
+                val idCombinacion = todosArticulos.getString(idCombinacionIndex)
                 val descripcion = todosArticulos.getString(descripcionIndex)
                 val stock = todosArticulos.getString(stockIndex)
-                val idCombinacion = todosArticulos.getString(idCombinacionIndex)
+
 
                 // Crear un objeto JSON para cada artículo
                 val articuloJson = JSONObject()
                 articuloJson.put("IdArticulo", idArticulo)
                 articuloJson.put("IdCombinacion", idCombinacion)
                 articuloJson.put("Descripcion", descripcion)
-                articuloJson.put("StockReal", stock)
+
+                stockDouble = stock.toDouble()
+
+
+
+                // Añadir el valor como un Double al JSON
+                articuloJson.put("StockReal", stockDouble)
 
                 // Añadir el objeto JSON al array
                 articulosJsonArray.put(articuloJson)
@@ -476,9 +503,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             dbInventario.close()
 
             // Crear el nombre del archivo con la fecha actual
-            val dateFormat = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
-            val fechaActual = dateFormat.format(Date())
-            val fileName = "Inventario_${fechaActual}.articulos.json"
+
+            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.articulos.json"
 
             // Guardar el archivo JSON en el almacenamiento externo
             val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
@@ -510,7 +536,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             val codigosJsonArray = JSONArray()
 
             // Indices de las columnas del cursor
-            val codigoIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+            val codigoIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
             val idArticuloIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
             val idCombinacionIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
 
@@ -535,9 +561,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             dbInventario.close()
 
             // Crear el nombre del archivo con la fecha actual
-            val dateFormat = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
-            val fechaActual = dateFormat.format(Date())
-            val fileName = "Inventario_${fechaActual}.codigos.json"
+
+            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.codigos.json"
 
             // Guardar el archivo JSON en el almacenamiento externo
             val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
@@ -569,15 +594,15 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             val partidasJsonArray = JSONArray()
 
             // Indices de las columnas del cursor
-            val idPartidaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_PARTIDA)
             val idArticuloIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val idPartidaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_PARTIDA)
             val idFechaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
             val idNumeroSerieIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
 
             // Iterar sobre cada fila del cursor
             while (todasPartidas.moveToNext()) {
-                val idPartida = todasPartidas.getString(idPartidaIndex)
                 val idArticulo = todasPartidas.getString(idArticuloIndex)
+                val idPartida = todasPartidas.getString(idPartidaIndex)
                 val idFecha = todasPartidas.getString(idFechaIndex)
                 val idNumeroSerie = todasPartidas.getString(idNumeroSerieIndex)
 
@@ -586,7 +611,13 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 partidaJson.put("IdArticulo", idArticulo)
                 partidaJson.put("Partida", idPartida)
                 partidaJson.put("FCaducidad", idFecha)
-                partidaJson.put("NSerie", idNumeroSerie)
+
+                // Verificar si idNumeroSerie es nulo antes de agregarlo
+                if (idNumeroSerie.isEmpty()) {
+                    partidaJson.put("NSerie", idNumeroSerie)
+                } else {
+                    partidaJson.put("NSerie", JSONObject.NULL)
+                }
 
                 // Añadir el objeto JSON al array
                 partidasJsonArray.put(partidaJson)
@@ -595,10 +626,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             // Se cierra la conexión a la DB:
             dbInventario.close()
 
-            // Crear el nombre del archivo con la fecha actual
-            val dateFormat = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
-            val fechaActual = dateFormat.format(Date())
-            val fileName = "Inventario_${fechaActual}.partidas.json"
+
+            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.partidas.json"
 
             // Guardar el archivo JSON en el almacenamiento externo
             val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
