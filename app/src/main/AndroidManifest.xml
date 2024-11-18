@@ -30,9 +30,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AgregarArticuloActivity"
-            android:exported="false" />
-        <activity
             android:name=".ConsultarInventarioActivity"
             android:exported="false" />
         <activity

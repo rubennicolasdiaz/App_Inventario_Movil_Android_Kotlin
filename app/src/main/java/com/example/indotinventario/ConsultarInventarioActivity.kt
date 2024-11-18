@@ -47,8 +47,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     // Constantes y variables para permisos de cámara:
 
-        val CODIGO_INTENT_ESCANEAR = 3
-        val CODIGO_PERMISOS_CAMARA = 1
+    private val CODIGO_INTENT_ESCANEAR = 3
+    private val CODIGO_PERMISOS_CAMARA = 1
 
 
     private var permisoCamaraConcedido = false
@@ -71,8 +71,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
         // PRUEBAS///////////
-        //binding.tvCodigo2.setText("2000000068688")
-        //buscarArticulo("2000000068688")
+        binding.tvCodigo2.setText("2000000068688")
+        buscarArticulo("2000000068688")
     }
 
     private fun cargarVista() {
@@ -147,7 +147,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     }
 
 
-    //---ESCANER------------------------------------------------------------------------------------
+    //ESCÁNER:
 
     private fun escanear() {
         val intent = Intent(this, EscanearActivity::class.java)
@@ -423,6 +423,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.IO){
 
                     saveJsonArticulos(this@ConsultarInventarioActivity)
+                    saveJsonCodigosBarras(this@ConsultarInventarioActivity)
+                    saveJsonPartidas(this@ConsultarInventarioActivity)
                 }
 
                 finishAffinity()
@@ -485,6 +487,126 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 try {
                     val outputStream = FileOutputStream(file)
                     outputStream.write(articulosJsonArray.toString().toByteArray())
+                    outputStream.close()
+                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
+                } catch (e: IOException) {
+                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                }
+            } else {
+                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
+            }
+
+        } catch (e: Exception) {
+            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
+        }
+    }
+
+    private suspend fun saveJsonCodigosBarras(context: Context) {
+        try {
+            // Se crea el cursor para obtener todos los códigos de barras de la base de datos
+            val todosCodigos: Cursor = dbInventario.obtenerTodosCodigosdeBarras()
+
+            // Crear un array JSON que contendrá todos los códigos de barras
+            val codigosJsonArray = JSONArray()
+
+            // Indices de las columnas del cursor
+            val codigoIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+            val idArticuloIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val idCombinacionIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+
+
+            // Iterar sobre cada fila del cursor
+            while (todosCodigos.moveToNext()) {
+                val codigo = todosCodigos.getString(codigoIndex)
+                val idArticulo = todosCodigos.getString(idArticuloIndex)
+                val idCombinacion = todosCodigos.getString(idCombinacionIndex)
+
+                // Crear un objeto JSON para cada código de barras
+                val codigoJson = JSONObject()
+                codigoJson.put("CodigoBarras", codigo)
+                codigoJson.put("IdArticulo", idArticulo)
+                codigoJson.put("IdCombinacion", idCombinacion)
+
+                // Añadir el objeto JSON al array
+                codigosJsonArray.put(codigoJson)
+            }
+
+            // Se cierra la conexión a la DB:
+            dbInventario.close()
+
+            // Crear el nombre del archivo con la fecha actual
+            val dateFormat = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
+            val fechaActual = dateFormat.format(Date())
+            val fileName = "Inventario_${fechaActual}.codigos.json"
+
+            // Guardar el archivo JSON en el almacenamiento externo
+            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            if (externalStorageDir != null) {
+                val file = File(externalStorageDir, fileName)
+                try {
+                    val outputStream = FileOutputStream(file)
+                    outputStream.write(codigosJsonArray.toString().toByteArray())
+                    outputStream.close()
+                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
+                } catch (e: IOException) {
+                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                }
+            } else {
+                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
+            }
+
+        } catch (e: Exception) {
+            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
+        }
+    }
+
+    private suspend fun saveJsonPartidas(context: Context) {
+        try {
+            // Se crea el cursor para obtener todas las partidas de la base de datos
+            val todasPartidas: Cursor = dbInventario.obtenerTodasPartidas()
+
+            // Crear un array JSON que contendrá todas las partidas
+            val partidasJsonArray = JSONArray()
+
+            // Indices de las columnas del cursor
+            val idPartidaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+            val idArticuloIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val idFechaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+            val idNumeroSerieIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
+
+            // Iterar sobre cada fila del cursor
+            while (todasPartidas.moveToNext()) {
+                val idPartida = todasPartidas.getString(idPartidaIndex)
+                val idArticulo = todasPartidas.getString(idArticuloIndex)
+                val idFecha = todasPartidas.getString(idFechaIndex)
+                val idNumeroSerie = todasPartidas.getString(idNumeroSerieIndex)
+
+                // Crear un objeto JSON para cada partida
+                val partidaJson = JSONObject()
+                partidaJson.put("IdArticulo", idArticulo)
+                partidaJson.put("Partida", idPartida)
+                partidaJson.put("FCaducidad", idFecha)
+                partidaJson.put("NSerie", idNumeroSerie)
+
+                // Añadir el objeto JSON al array
+                partidasJsonArray.put(partidaJson)
+            }
+
+            // Se cierra la conexión a la DB:
+            dbInventario.close()
+
+            // Crear el nombre del archivo con la fecha actual
+            val dateFormat = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
+            val fechaActual = dateFormat.format(Date())
+            val fileName = "Inventario_${fechaActual}.partidas.json"
+
+            // Guardar el archivo JSON en el almacenamiento externo
+            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            if (externalStorageDir != null) {
+                val file = File(externalStorageDir, fileName)
+                try {
+                    val outputStream = FileOutputStream(file)
+                    outputStream.write(partidasJsonArray.toString().toByteArray())
                     outputStream.close()
                     Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
                 } catch (e: IOException) {

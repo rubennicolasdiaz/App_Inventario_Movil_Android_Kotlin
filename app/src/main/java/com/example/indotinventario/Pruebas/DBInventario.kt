@@ -146,6 +146,12 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.close()
     }
 
+    fun obtenerTodasPartidas(): Cursor {
+
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_PARTIDAS", null)
+    }
+
 
 
     fun obtenerPartidaPorIdArticulo(idArticulo: String): Cursor {
