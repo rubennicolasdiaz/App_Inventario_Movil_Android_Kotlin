@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inicializarDB() {
+
         dbInventario = DBInventario(this)
 
         // Obtener la base de datos en modo escritura
@@ -230,37 +231,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         } catch (e: Exception) {
-            Log.e("TAG", "loadJson: error ${e.message}")
-        }
-    }
-
-
-    private suspend fun saveJsonArticulos() {
-
-        try{
-            // Se crea el cursor para obtener todos los artículos de esa tabla de la DB:
-            val todosArticulos: Cursor
-            todosArticulos = dbInventario.obtenerTodosArticulos()
-
-            // De ese cursor con todos los artículos se extraen los elementos de cada fila
-            val idArticuloIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-            val descripcionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-            val stockIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
-            val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
-
-            val idArticulo = todosArticulos.getString(idArticuloIndex)
-            val descripcion = todosArticulos.getString(descripcionIndex)
-            val stock = todosArticulos.getString(stockIndex)
-            val idCombinacion = todosArticulos.getString(idCombinacionIndex)
-
-
-            // Iterar sobre cada elemento del cursor de todos los artículos:
-            for (i in 0 until todosArticulos.count) {
-
-
-            }
-
-        }catch(e:Exception){
             Log.e("TAG", "loadJson: error ${e.message}")
         }
     }

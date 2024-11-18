@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "inventario.db"
@@ -50,13 +50,15 @@ class DBInventario (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
 
         val createCodigosBarrasTable = """
-            CREATE TABLE $TABLE_CODIGOS_BARRAS (
-                $COLUMN_CODIGO_BARRAS TEXT PRIMARY KEY,
-                $COLUMN_ID_ARTICULO TEXT,
-                $COLUMN_ID_COMBINACION TEXT,
-                FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO)
-            );
-        """.trimIndent()
+    CREATE TABLE $TABLE_CODIGOS_BARRAS (
+        $COLUMN_CODIGO_BARRAS TEXT PRIMARY KEY,
+        $COLUMN_ID_ARTICULO TEXT,
+        $COLUMN_ID_COMBINACION TEXT,
+        FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO),
+        FOREIGN KEY($COLUMN_ID_COMBINACION) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_COMBINACION)
+    );
+""".trimIndent()
+
 
         val createPartidasTable = """
             CREATE TABLE $TABLE_PARTIDAS (

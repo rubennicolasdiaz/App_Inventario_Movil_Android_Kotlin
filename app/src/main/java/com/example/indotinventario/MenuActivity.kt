@@ -34,21 +34,7 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_solo_salir, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.idSalir -> {
-                finishAffinity()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     private fun pasarAConsultarInventarioActivity() {
         startActivity(Intent(this, ConsultarInventarioActivity::class.java))

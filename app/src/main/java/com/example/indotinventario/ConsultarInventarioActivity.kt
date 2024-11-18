@@ -2,22 +2,31 @@ package com.example.indotinventario
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -30,17 +39,22 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
 
+    private var arrayPartidas:ArrayList<String> = ArrayList()
+    private var arrayFechas:ArrayList<String> = ArrayList()
+    private var arrayNumerosSerie:ArrayList<String> = ArrayList()
+
+    private lateinit var adapter:ArrayAdapter<Any>
+
     // Constantes y variables para permisos de cámara:
-    companion object {
-        const val CODIGO_INTENT_ESCANEAR = 3
-        const val CODIGO_PERMISOS_CAMARA = 1
-    }
+
+        val CODIGO_INTENT_ESCANEAR = 3
+        val CODIGO_PERMISOS_CAMARA = 1
+
 
     private var permisoCamaraConcedido = false
     private var permisoSolicitadoDesdeBoton = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
         super.onCreate(savedInstanceState)
         // Implementación de View Binding:
@@ -57,8 +71,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
         // PRUEBAS///////////
-        binding.tvCodigo2.setText("2000000068718")
-        buscarArticulo("2000000068718")
+        //binding.tvCodigo2.setText("2000000068688")
+        //buscarArticulo("2000000068688")
     }
 
     private fun cargarVista() {
@@ -71,6 +85,9 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 verificarYPedirPermisosDeCamara()
                 return@setOnClickListener
             }
+
+            // Limpiar campos antes de escanear para que se borre el Spinner de Partidas
+            limpiarCampos()
             escanear()
         }
 
@@ -171,7 +188,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 cursor.close()
 
                 binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
-                binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (puede ser nulo)
+                binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (suele venir vacío)
 
 
                 // Ahora obtenemos los detalles del artículo usando el idArticulo
@@ -199,14 +216,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     // Ahora obtenemos los detalles de la partida usando el idArticulo
                     val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
 
-                    val arrayPartidas:ArrayList<String>
-                    arrayPartidas = ArrayList()
-
-                    val arrayFechas:ArrayList<String>
-                    arrayFechas = ArrayList()
-
-                    val arrayNumerosSerie:ArrayList<String>
-                    arrayNumerosSerie = ArrayList()
 
                     // Recorremos todas las filas de partida asociadas al idArticulo
                     if(partidaCursor.moveToFirst() || partidaCursor.moveToNext()) {
@@ -234,7 +243,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
 
                         val items = listOf(*arrayPartidas.toTypedArray())
-                        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+                        adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
 
 
 
@@ -243,10 +252,24 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                         binding.spinnerPartida.adapter = adapter
 
                         binding.spinnerPartida.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
 
-                                binding.tvFecha2.setText(arrayFechas[position])
-                                binding.tvNumero2.setText(arrayNumerosSerie[position])
+                                if (position >= 0 && position < arrayPartidas.size){
+
+                                    binding.tvFecha2.setText(arrayFechas[position])
+
+                                    if(arrayNumerosSerie[position].equals("null")){
+
+                                        binding.tvNumero2.setText("")
+                                    }else{
+                                        binding.tvNumero2.setText(arrayNumerosSerie[position])
+                                    }
+                                }else {
+                                    Toast.makeText(this@ConsultarInventarioActivity, "No hay ningún elemento disponible",
+                                        Toast.LENGTH_SHORT).show()
+                                }
 
                             }
                             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -306,23 +329,44 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
                 dbInventario.actualizarStock(idArticulo, unidadesStock)
             }
+
+
+
         }catch(e:Exception){
             Toast.makeText(this, "No hay ningún artículo para guardar",
                 Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun limpiarCampos(){
+    private fun limpiarCampos() {
 
-        binding.tvCodigo2.setText("")
-        binding.tvDescripcion2.setText("")
-        binding.tvIdArticulo2.setText("")
-        binding.tvIdCombinacion2.setText("")
-        binding.spinnerPartida.adapter.isEmpty
-        binding.tvFecha2.setText("")
-        binding.tvNumero2.setText("")
-        binding.tvUnidades2.setText("")
-    }
+
+        try{
+            //Vaciamos los arrays para volver a dejarlos a 0 para la siguiente búsqueda
+            arrayPartidas.clear()
+            arrayFechas.clear()
+            arrayNumerosSerie.clear()
+
+            //Se establece un adaptador vacío para limpiar las filas del spinner
+            val emptyAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listOf(""))
+            emptyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            emptyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            binding.spinnerPartida.adapter = emptyAdapter
+
+            //Se setean los campos de la vista con cadenas vacías
+
+            binding.tvFecha2.setText("")
+            binding.tvNumero2.setText("")
+            binding.tvCodigo2.setText("")
+            binding.tvDescripcion2.setText("")
+            binding.tvIdArticulo2.setText("")
+            binding.tvIdCombinacion2.setText("")
+            binding.tvUnidades2.setText("")
+
+            }catch(e:Exception){
+                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -358,7 +402,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         Toast.makeText(this, "Permiso de la cámara denegado", Toast.LENGTH_SHORT).show()
     }
 
-
     // Menú:
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -376,6 +419,12 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             }
             R.id.idSalir -> {
                 dbInventario.close()
+
+                lifecycleScope.launch(Dispatchers.IO){
+
+                    saveJsonArticulos(this@ConsultarInventarioActivity)
+                }
+
                 finishAffinity()
                 true
             }
@@ -389,4 +438,66 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         val fechaActual = Date() // Obtener la fecha y hora actual
         return formatoFecha.format(fechaActual) // Formatear la fecha en el formato deseado y devolverla como String
     }
+
+    private suspend fun saveJsonArticulos(context: Context) {
+        try {
+            // Se crea el cursor para obtener todos los artículos de la base de datos
+            val todosArticulos: Cursor = dbInventario.obtenerTodosArticulos()
+
+            // Crear un array JSON que contendrá todos los artículos
+            val articulosJsonArray = JSONArray()
+
+            // Indices de las columnas del cursor
+            val idArticuloIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+            val descripcionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+            val stockIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
+            val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+
+            // Iterar sobre cada fila del cursor
+            while (todosArticulos.moveToNext()) {
+                val idArticulo = todosArticulos.getString(idArticuloIndex)
+                val descripcion = todosArticulos.getString(descripcionIndex)
+                val stock = todosArticulos.getString(stockIndex)
+                val idCombinacion = todosArticulos.getString(idCombinacionIndex)
+
+                // Crear un objeto JSON para cada artículo
+                val articuloJson = JSONObject()
+                articuloJson.put("IdArticulo", idArticulo)
+                articuloJson.put("IdCombinacion", idCombinacion)
+                articuloJson.put("Descripcion", descripcion)
+                articuloJson.put("StockReal", stock)
+
+                // Añadir el objeto JSON al array
+                articulosJsonArray.put(articuloJson)
+            }
+
+            dbInventario.close()
+
+            // Crear el nombre del archivo con la fecha actual
+            val dateFormat = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
+            val fechaActual = dateFormat.format(Date())
+            val fileName = "Inventario_${fechaActual}.articulos.json"
+
+            // Guardar el archivo JSON en el almacenamiento externo
+            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            if (externalStorageDir != null) {
+                val file = File(externalStorageDir, fileName)
+                try {
+                    val outputStream = FileOutputStream(file)
+                    outputStream.write(articulosJsonArray.toString().toByteArray())
+                    outputStream.close()
+                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
+                } catch (e: IOException) {
+                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                }
+            } else {
+                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
+            }
+
+        } catch (e: Exception) {
+            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
+        }
+    }
 }
+
+

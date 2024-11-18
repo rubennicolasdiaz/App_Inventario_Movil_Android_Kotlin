@@ -23,10 +23,8 @@ class AgregarArticuloActivity : AppCompatActivity() {
     private lateinit var dbInventario: DBInventario
 
     // Constantes y variables para permisos de cámara:
-    companion object {
-        const val CODIGO_INTENT_ESCANEAR = 3
-        const val CODIGO_PERMISOS_CAMARA = 1
-    }
+    val CODIGO_INTENT_ESCANEAR = 3
+    val CODIGO_PERMISOS_CAMARA = 1
 
     private var permisoCamaraConcedido = false
     private var permisoSolicitadoDesdeBoton = false
@@ -173,7 +171,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            ConsultarInventarioActivity.CODIGO_PERMISOS_CAMARA -> {
+            CODIGO_PERMISOS_CAMARA -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Scan directly if requested from the button
                     if (permisoSolicitadoDesdeBoton) {
@@ -196,7 +194,7 @@ class AgregarArticuloActivity : AppCompatActivity() {
         } else {
             // Request permissions
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),
-                ConsultarInventarioActivity.CODIGO_PERMISOS_CAMARA
+                CODIGO_PERMISOS_CAMARA
             )
         }
     }
@@ -210,13 +208,13 @@ class AgregarArticuloActivity : AppCompatActivity() {
 
     private fun escanear() {
         val intent = Intent(this, EscanearActivity::class.java)
-        startActivityForResult(intent, ConsultarInventarioActivity.CODIGO_INTENT_ESCANEAR)
+        startActivityForResult(intent, CODIGO_INTENT_ESCANEAR)
     }
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ConsultarInventarioActivity.CODIGO_INTENT_ESCANEAR && resultCode == Activity.RESULT_OK) {
+        if (requestCode == CODIGO_INTENT_ESCANEAR && resultCode == Activity.RESULT_OK) {
             data?.getStringExtra("codigo")?.let { codigo ->
 
                 var codigoArticulo: String = codigo
