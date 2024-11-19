@@ -30,6 +30,7 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         // Tabla Partidas
         private const val TABLE_PARTIDAS = "Partidas"
 
+        const val COLUMN_ID_PARTIDA = "IdPartida"
         const val COLUMN_PARTIDA = "Partida"
         const val COLUMN_FECHA_CADUCIDAD = "FechaCaducidad"
         const val COLUMN_NUMERO_SERIE = "NumeroSerie"
@@ -61,15 +62,15 @@ class DBInventario(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
 
         val createPartidasTable = """
-            CREATE TABLE $TABLE_PARTIDAS (
-                $COLUMN_PARTIDA TEXT PRIMARY KEY,
-                $COLUMN_ID_ARTICULO TEXT,
-                $COLUMN_FECHA_CADUCIDAD TEXT,
-                $COLUMN_NUMERO_SERIE TEXT,
-                
-                FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO)
-            );
-        """.trimIndent()
+    CREATE TABLE $TABLE_PARTIDAS (
+        $COLUMN_ID_PARTIDA INT, AUTO_INCREMENT PRIMARY KEY,
+        $COLUMN_PARTIDA TEXT,
+        $COLUMN_ID_ARTICULO TEXT,
+        $COLUMN_FECHA_CADUCIDAD TEXT,
+        $COLUMN_NUMERO_SERIE TEXT,
+        FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO)
+    );
+""".trimIndent()
 
         db.execSQL(createArticulosTable)
         db.execSQL(createCodigosBarrasTable)
