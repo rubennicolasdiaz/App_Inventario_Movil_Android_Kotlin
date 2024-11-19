@@ -42,9 +42,11 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
 
+    // Arrays para el Spinner de Partida y los campos relacionados:
     private var arrayPartidas:ArrayList<String> = ArrayList()
     private var arrayFechas:ArrayList<String> = ArrayList()
     private var arrayNumerosSerie:ArrayList<String> = ArrayList()
+    private var arrayStock:ArrayList<Double> = ArrayList()
 
     private lateinit var adapter:ArrayAdapter<Any>
 
@@ -99,6 +101,10 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             limpiarCampos()
         }
 
+        binding.buttonBuscar.setOnClickListener {
+            buscarArticulo(binding.etCodigo.text.toString())
+        }
+
         binding.buttonIncrementar.setOnClickListener {
             incrementarUnidades()
         }
@@ -116,7 +122,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     private fun disminuirUnidades() {
 
-        val currentValue = binding.tvUnidades2.text.toString()
+        val currentValue = binding.etUnidades.text.toString()
 
         // Verificar si el texto es un número válido
         val unidades = if (currentValue.isNotEmpty()) {
@@ -129,11 +135,11 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         val newValue = if (unidades > 0) unidades - 1 else 0
 
         // Actualizar el EditText con el nuevo valor
-        binding.tvUnidades2.setText(newValue.toString())
+        binding.etUnidades.setText(newValue.toString())
     }
 
     private fun incrementarUnidades() {
-        val currentValue = binding.tvUnidades2.text.toString()
+        val currentValue = binding.etUnidades.text.toString()
 
         // Verificar si el texto es un número válido
         val unidades = if (currentValue.isNotEmpty()) {
@@ -146,7 +152,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         val newValue = unidades + 1
 
         // Actualizar el EditText con el nuevo valor
-        binding.tvUnidades2.setText(newValue.toString())
+        binding.etUnidades.setText(newValue.toString())
     }
 
 
@@ -156,10 +162,11 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         // Verifica si el resultado fue exitoso y que el requestCode coincide
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getStringExtra("codigo")?.let { codigoBarras ->
-                // Aquí manejas el código de barras como antes
-                val codigoArticulo: String = codigoBarras
-                binding.tvCodigo2.text = codigoArticulo // Código de barras
-                buscarArticulo(codigoArticulo)
+
+                val codigoString:String = codigoBarras
+
+                binding.etCodigo.setText(codigoString)
+                buscarArticulo(codigoString)
             }
         }
     }
@@ -189,31 +196,27 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 // Cerramos el cursor de código de barras
                 cursor.close()
 
-                binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
-                binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (suele venir vacío)
+                binding.etIdArticulo.setText(idArticulo) // ID del artículo
+                binding.etIdCombinacion.setText(idCombinacion) // Combinación (suele venir vacío)
 
 
                 // Ahora obtenemos los detalles del artículo usando el idArticulo
-                val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
+                val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo, idCombinacion)
 
                 if(articuloCursor.moveToFirst() || articuloCursor.moveToNext()){
 
                     // Verificamos si se encuentra el artículo
 
                     val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                    val stockRealIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
                     // Obtener los detalles del artículo
                     val descripcion = articuloCursor.getString(descripcionIndex)
-                    val stockReal = articuloCursor.getInt(stockRealIndex)
 
                     // Cerramos el cursor de artículo
                     articuloCursor.close()
 
                     // Asignamos los valores a los EditText en la interfaz de usuario
-                    binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
-                    binding.tvUnidades2.setText(stockReal.toString()) // Stock real
-
+                    binding.etDescripcion.setText(descripcion) // Descripción del artículo
 
                     // Ahora obtenemos los detalles de la partida usando el idArticulo
                     val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
@@ -227,16 +230,19 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                             val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
                             val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
                             val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
+                            val stockIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
                             // Obtener los detalles de la partida:
 
                             val partida = partidaCursor.getString(partidaIndex)
                             val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
                             val numeroSerie = partidaCursor.getString(numeroSerieIndex)
+                            val stock = partidaCursor.getDouble(stockIndex)
 
                             arrayPartidas.add(partida)
                             arrayFechas.add(fechaCaducidad)
                             arrayNumerosSerie.add(numeroSerie)
+                            arrayStock.add(stock)
 
                         }while(partidaCursor.moveToNext())
 
@@ -260,14 +266,16 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
                                 if (position >= 0 && position < arrayPartidas.size){
 
-                                    binding.tvFecha2.setText(arrayFechas[position])
+                                    binding.etFecha.setText(arrayFechas[position])
 
                                     if(arrayNumerosSerie[position].equals("null")){
 
-                                        binding.tvNumero2.setText("")
+                                        binding.etNumero.setText("")
                                     }else{
-                                        binding.tvNumero2.setText(arrayNumerosSerie[position])
+                                        binding.etNumero.setText(arrayNumerosSerie[position])
                                     }
+
+                                    binding.etUnidades.setText(arrayStock[position].toString())
                                 }else {
                                     Toast.makeText(this@ConsultarInventarioActivity, "No hay ningún elemento disponible",
                                         Toast.LENGTH_SHORT).show()
@@ -294,25 +302,25 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     // Inicializar la base de datos
         private fun inicializarDB(){
 
-        dbInventario = DBInventario(this)
+        dbInventario = DBInventario.getInstance(this)
     }
 
     // Actualizar número de Stock:
     private fun actualizarStock(){
 
         try{
-            val idArticulo:String = binding.tvIdArticulo2.text.toString()
+            val idArticulo:String = binding.etIdArticulo.text.toString()
 
 
             // Obtener el valor del TextView como String
-            val unidadesStockString = binding.tvUnidades2.text.toString()
+            val unidadesStockString = binding.etUnidades.text.toString()
 
             // Convertirlo a Int de forma segura (en caso de que no sea un número válido)
             val unidadesStock: Int = unidadesStockString.toInt()
 
             var unidadesStockDouble:Double
 
-            val codigoBarras = binding.tvCodigo2.text.toString()
+            val codigoBarras = binding.etCodigo.text.toString()
 
             if(codigoBarras.isEmpty()){
 
@@ -360,13 +368,13 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             //Se setean los campos de la vista con cadenas vacías
 
-            binding.tvFecha2.setText("")
-            binding.tvNumero2.setText("")
-            binding.tvCodigo2.setText("")
-            binding.tvDescripcion2.setText("")
-            binding.tvIdArticulo2.setText("")
-            binding.tvIdCombinacion2.setText("")
-            binding.tvUnidades2.setText("")
+            binding.etFecha.setText("")
+            binding.etNumero.setText("")
+            binding.etCodigo.setText("")
+            binding.etDescripcion.setText("")
+            binding.etIdArticulo.setText("")
+            binding.etIdCombinacion.setText("")
+            binding.etUnidades.setText("")
 
             }catch(e:Exception){
                 Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -432,8 +440,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     // Se llama a la función async y al método await para que no se ejecute el
                     // siguiente código hasta que finalice la tarea anterior:
                     async{saveJsonArticulos(this@ConsultarInventarioActivity)}.await()
-                    async{saveJsonCodigosBarras(this@ConsultarInventarioActivity)}.await()
-                    async{saveJsonPartidas(this@ConsultarInventarioActivity)}.await()
+                    // async{saveJsonCodigosBarras(this@ConsultarInventarioActivity)}.await()
+                    // async{saveJsonPartidas(this@ConsultarInventarioActivity)}.await()
 
                     finishAffinity()
                 }
@@ -505,7 +513,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             // Crear el nombre del archivo con la fecha actual
 
-            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.articulos.json"
+            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.inventario.json"
 
             // Guardar el archivo JSON en el almacenamiento externo
             val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
@@ -528,7 +536,18 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun saveJsonCodigosBarras(context: Context) {
+
+
+
+
+
+
+
+
+
+
+
+    /* private suspend fun saveJsonCodigosBarras(context: Context) {
         try {
             // Se crea el cursor para obtener todos los códigos de barras de la base de datos
             val todosCodigos: Cursor = dbInventario.obtenerTodosCodigosdeBarras()
@@ -649,7 +668,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("TAG", "Error al cargar los artículos: ${e.message}")
         }
-    }
+    } */
 }
 
 

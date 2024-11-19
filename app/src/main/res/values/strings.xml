@@ -20,6 +20,9 @@
     <string name="menu_salir">"Salir y guardar cambios"</string>
     <string name="menu_consultar_inventario">Consultar Inventario</string>
     <string name="volver">Volver</string>
+    <string name="configuracion">CONFIGURACIÓN</string>
+    <string name="buscar">BUSCAR CÓDIGO BARRAS</string>
+
 
 
 </resources>

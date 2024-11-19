@@ -22,15 +22,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAgregar"/>
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfiguracion"/>
 
     <Button
-        android:id="@+id/buttonAgregar"
+        android:id="@+id/buttonConfiguracion"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/NaranjaRuano"
         android:lineSpacingExtra="10sp"
-        android:text="AÑADIR ARTÍCULO"
+        android:text="@string/configuracion"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="18sp"

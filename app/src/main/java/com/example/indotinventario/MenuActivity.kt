@@ -30,6 +30,4 @@ class MenuActivity : AppCompatActivity() {
     private fun pasarAConsultarInventarioActivity() {
         startActivity(Intent(this, ConsultarInventarioActivity::class.java))
     }
-
-
 }
