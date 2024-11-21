@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.indotinventario.Pruebas.Articulo
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -42,11 +43,15 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
 
-    // Arrays para el Spinner de Partida y los campos relacionados:
+    // ArrayList para poder buscar por descripción de artículo:
+    private var arrayArticulos: ArrayList<Articulo> = ArrayList()
+
+
+    // ArrayLists para almacenar los valores asociados a las partidas:
     private var arrayPartidas:ArrayList<String> = ArrayList()
     private var arrayFechas:ArrayList<String> = ArrayList()
     private var arrayNumerosSerie:ArrayList<String> = ArrayList()
-    private var arrayStock:ArrayList<Double> = ArrayList()
+
 
     private lateinit var adapter:ArrayAdapter<Any>
 
@@ -61,23 +66,28 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        super.onCreate(savedInstanceState)
-        // Implementación de View Binding:
-        binding = ActivityConsultarInventarioBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        cargarVista()
+    super.onCreate(savedInstanceState)
+    // Implementación de View Binding:
+    binding = ActivityConsultarInventarioBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 
-        // Se verifican los permisos de cámara
-        verificarYPedirPermisosDeCamara()
+    cargarVista()
 
-        // Se inicializa base de datos:
-        inicializarDB()
+    // Se verifican los permisos de cámara
+    verificarYPedirPermisosDeCamara()
+
+    // Se inicializa base de datos:
+    inicializarDB()
+
+    // Se rellena el Array de Artículos al inicio de la Activity
+    rellenarArrayArticulos()
 
 
-        // PRUEBAS///////////
-        //binding.tvCodigo2.setText("2000000068688")
-        //buscarArticulo("2000000068688")
+    // PRUEBAS///////////
+    binding.etCodigo.setText("2000000068688")
+    buscarArticulo("2000000068688")
+
     }
 
     private fun cargarVista() {
@@ -101,10 +111,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             limpiarCampos()
         }
 
-        binding.buttonBuscar.setOnClickListener {
-            buscarArticulo(binding.etCodigo.text.toString())
-        }
-
         binding.buttonIncrementar.setOnClickListener {
             incrementarUnidades()
         }
@@ -118,6 +124,17 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             actualizarStock()
             limpiarCampos()
         }
+
+        binding.buttonBuscar.setOnClickListener {
+            buscarporCodigoBarras()
+        }
+    }
+
+    private fun buscarporCodigoBarras() {
+
+
+        val codigoArticulo = binding.etCodigo.text.toString()
+        buscarArticulo(codigoArticulo)
     }
 
     private fun disminuirUnidades() {
@@ -162,11 +179,10 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         // Verifica si el resultado fue exitoso y que el requestCode coincide
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getStringExtra("codigo")?.let { codigoBarras ->
-
-                val codigoString:String = codigoBarras
-
-                binding.etCodigo.setText(codigoString)
-                buscarArticulo(codigoString)
+                // Aquí manejas el código de barras como antes
+                val codigoArticulo: String = codigoBarras
+                binding.etCodigo.setText(codigoArticulo)
+                buscarArticulo(codigoArticulo)
             }
         }
     }
@@ -190,33 +206,37 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 val idCombinacionIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
 
 
-                    val idArticulo = cursor.getString(idArticuloIndex)
-                    val idCombinacion = cursor.getString(idCombinacionIndex)
+                val idArticulo = cursor.getString(idArticuloIndex)
+                val idCombinacion = cursor.getString(idCombinacionIndex)
 
                 // Cerramos el cursor de código de barras
                 cursor.close()
 
-                binding.etIdArticulo.setText(idArticulo) // ID del artículo
-                binding.etIdCombinacion.setText(idCombinacion) // Combinación (suele venir vacío)
+                binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
+                binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (suele venir vacío)
 
 
                 // Ahora obtenemos los detalles del artículo usando el idArticulo
-                val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo, idCombinacion)
+                val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
 
                 if(articuloCursor.moveToFirst() || articuloCursor.moveToNext()){
 
                     // Verificamos si se encuentra el artículo
 
                     val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+                    val stockRealIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
                     // Obtener los detalles del artículo
                     val descripcion = articuloCursor.getString(descripcionIndex)
+                    val stockReal = articuloCursor.getInt(stockRealIndex)
 
                     // Cerramos el cursor de artículo
                     articuloCursor.close()
 
                     // Asignamos los valores a los EditText en la interfaz de usuario
                     binding.etDescripcion.setText(descripcion) // Descripción del artículo
+                    binding.etUnidades.setText(stockReal.toString()) // Stock real
+
 
                     // Ahora obtenemos los detalles de la partida usando el idArticulo
                     val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
@@ -230,19 +250,16 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                             val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
                             val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
                             val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
-                            val stockIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
                             // Obtener los detalles de la partida:
 
                             val partida = partidaCursor.getString(partidaIndex)
                             val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
                             val numeroSerie = partidaCursor.getString(numeroSerieIndex)
-                            val stock = partidaCursor.getDouble(stockIndex)
 
                             arrayPartidas.add(partida)
                             arrayFechas.add(fechaCaducidad)
                             arrayNumerosSerie.add(numeroSerie)
-                            arrayStock.add(stock)
 
                         }while(partidaCursor.moveToNext())
 
@@ -266,16 +283,14 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
                                 if (position >= 0 && position < arrayPartidas.size){
 
-                                    binding.etFecha.setText(arrayFechas[position])
+                                    binding.tvFecha2.setText(arrayFechas[position])
 
                                     if(arrayNumerosSerie[position].equals("null")){
 
-                                        binding.etNumero.setText("")
+                                        binding.tvNumero2.setText("")
                                     }else{
-                                        binding.etNumero.setText(arrayNumerosSerie[position])
+                                        binding.tvNumero2.setText(arrayNumerosSerie[position])
                                     }
-
-                                    binding.etUnidades.setText(arrayStock[position].toString())
                                 }else {
                                     Toast.makeText(this@ConsultarInventarioActivity, "No hay ningún elemento disponible",
                                         Toast.LENGTH_SHORT).show()
@@ -298,9 +313,60 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         }
     }
 
+    private fun buscarPorDescripcion(descripcion: String) {
+        try {
+
+            var codigoBarrasCursor: Cursor? = null
+            var codigoBarrasIndex:Int
+            var codigoBarras:String = ""
+            var idArticulo = ""
+            var indice = 0
+            var encontrado = false
+
+            for (i in 0 until arrayArticulos.size) {
+                if (arrayArticulos[i].descripcion.contains(descripcion, ignoreCase = true)) {
+                    binding.etDescripcion.setText("")
+
+
+                    //binding.etDescripcion.setText(arrayArticulos[i].descripcion)
+
+                    indice = i
+                    encontrado = true
+
+                    idArticulo = arrayArticulos.get(i).idArticulo
+
+                    codigoBarrasCursor = dbInventario.obtenerCodigoBarrasPorArticulo(idArticulo)
+                    if(codigoBarrasCursor.moveToFirst()){
+                        codigoBarrasIndex = codigoBarrasCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
+
+                        codigoBarras = codigoBarrasCursor.getString(codigoBarrasIndex)
+                    }
+
+
+
+                    break
+                }
+            }
+
+            if (!encontrado) {
+                Toast.makeText(this, "El artículo buscado no contiene dicha descripción"
+                , Toast.LENGTH_SHORT).show()
+            }else{
+
+                buscarArticulo(codigoBarras)
+
+                Log.i("Articulos creados", "El índice del articulo es: $indice")
+                Log.i("Articulos creados", "El cursor del código de barras es: ${codigoBarras.toString()}")
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+
 
     // Inicializar la base de datos
-        private fun inicializarDB(){
+    private fun inicializarDB(){
 
         dbInventario = DBInventario.getInstance(this)
     }
@@ -309,7 +375,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
     private fun actualizarStock(){
 
         try{
-            val idArticulo:String = binding.etIdArticulo.text.toString()
+            val idArticulo:String = binding.tvIdArticulo2.text.toString()
 
 
             // Obtener el valor del TextView como String
@@ -368,18 +434,18 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             //Se setean los campos de la vista con cadenas vacías
 
-            binding.etFecha.setText("")
-            binding.etNumero.setText("")
+            binding.tvFecha2.setText("")
+            binding.tvNumero2.setText("")
             binding.etCodigo.setText("")
             binding.etDescripcion.setText("")
-            binding.etIdArticulo.setText("")
-            binding.etIdCombinacion.setText("")
+            binding.tvIdArticulo2.setText("")
+            binding.tvIdCombinacion2.setText("")
             binding.etUnidades.setText("")
 
-            }catch(e:Exception){
-                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+        }catch(e:Exception){
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
         }
+    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -430,6 +496,20 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 finish()
                 true
             }
+
+            R.id.idBuscarCodigoBarras -> {
+
+                buscarporCodigoBarras()
+                true
+            }
+
+            R.id.idBuscarDescripcion -> {
+
+                buscarPorDescripcion(binding.etDescripcion.text.toString())
+                true
+            }
+
+
             R.id.idSalir -> {
                 dbInventario.close()
 
@@ -440,8 +520,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     // Se llama a la función async y al método await para que no se ejecute el
                     // siguiente código hasta que finalice la tarea anterior:
                     async{saveJsonArticulos(this@ConsultarInventarioActivity)}.await()
-                    // async{saveJsonCodigosBarras(this@ConsultarInventarioActivity)}.await()
-                    // async{saveJsonPartidas(this@ConsultarInventarioActivity)}.await()
+                    async{saveJsonCodigosBarras(this@ConsultarInventarioActivity)}.await()
+                    async{saveJsonPartidas(this@ConsultarInventarioActivity)}.await()
 
                     finishAffinity()
                 }
@@ -513,7 +593,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             // Crear el nombre del archivo con la fecha actual
 
-            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.inventario.json"
+            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.articulos.json"
 
             // Guardar el archivo JSON en el almacenamiento externo
             val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
@@ -536,18 +616,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    /* private suspend fun saveJsonCodigosBarras(context: Context) {
+    private suspend fun saveJsonCodigosBarras(context: Context) {
         try {
             // Se crea el cursor para obtener todos los códigos de barras de la base de datos
             val todosCodigos: Cursor = dbInventario.obtenerTodosCodigosdeBarras()
@@ -613,6 +682,9 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             // Crear un array JSON que contendrá todas las partidas
             val partidasJsonArray = JSONArray()
 
+
+
+
             // Indices de las columnas del cursor
             val idArticuloIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
             val idPartidaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_PARTIDA)
@@ -668,7 +740,45 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("TAG", "Error al cargar los artículos: ${e.message}")
         }
-    } */
+    }
+
+    private fun rellenarArrayArticulos() {
+        try {
+            val cursorArticulos: Cursor = dbInventario.obtenerTodosArticulos()
+
+            // Verificar si el cursor tiene registros
+            if (cursorArticulos.moveToFirst()) {
+
+                do {
+                    // Obtener los índices de las columnas
+                    val idArticuloIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+                    val idCombinacionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+                    val descripcionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+                    val stockIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
+
+                    // Obtener los valores del artículo
+                    val idArticulo = cursorArticulos.getString(idArticuloIndex)
+                    val idCombinacion = cursorArticulos.getString(idCombinacionIndex)
+                    val descripcion = cursorArticulos.getString(descripcionIndex)
+                    val stock = cursorArticulos.getDouble(stockIndex)
+
+                    // Crear la instancia de la clase Articulo
+                    val articulo = Articulo(idArticulo, idCombinacion, descripcion, stock)
+
+                    // Agregar la instancia de Articulo a la lista
+                    arrayArticulos.add(articulo)
+
+                } while (cursorArticulos.moveToNext()) // Avanzar al siguiente registro
+
+            } else {
+                Toast.makeText(this, "No hay artículos en la base de datos", Toast.LENGTH_SHORT).show()
+            }
+
+        } catch (e: Exception) {
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
 }
 
 

@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     // Instancia de la clase DBInventario
     private lateinit var dbInventario: DBInventario
-    // Binding para la vista:
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         // para leer los Json y pasar los datos a SQLite:
         Thread.sleep(2000)
         setTheme(R.style.AppTheme)
+
 
         super.onCreate(savedInstanceState)
 
@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
             loadJsonCodigosBarras()
 
             loadJsonPartidas()
-
-            rellenarTablaInventario()
         }
     }
 
@@ -97,7 +95,6 @@ class MainActivity : AppCompatActivity() {
         db.execSQL("DROP TABLE IF EXISTS Articulos")
         db.execSQL("DROP TABLE IF EXISTS CodigosBarras")
         db.execSQL("DROP TABLE IF EXISTS Partidas")
-        db.execSQL("DROP TABLE IF EXISTS Inventario")
 
         // Volver a crear las tablas
         dbInventario.onCreate(db)
@@ -114,11 +111,13 @@ class MainActivity : AppCompatActivity() {
         finishAffinity()
     }
 
-    private fun loadJsonArticulos() {
+    // Cargar fichero Json del directorio de Assets:
+
+    private suspend fun loadJsonArticulos() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241111_1.articulos 1.json")
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.articulos.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -143,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                 val descripcion = jsonObject.getString("Descripcion")
                 val stockReal = jsonObject.getDouble("StockReal")
 
-                dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion)
+                dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion, stockReal)
 
                 Log.i("Insertado artículo a DB", "Artículo ${i+1}")
                 // Imprimir los valores por log
@@ -155,11 +154,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadJsonCodigosBarras() {
+    private suspend fun loadJsonCodigosBarras() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241111_1.cbarras 1.json")
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.cbarras.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -197,11 +196,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadJsonPartidas() {
+    private suspend fun loadJsonPartidas() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241111_1.partidasnserie 1.json")
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.partidasnserie.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -224,8 +223,7 @@ class MainActivity : AppCompatActivity() {
                 val fechaCaducidad = jsonObject.getString("FCaducidad")
                 val numeroSerie = jsonObject.getString("NSerie")
 
-                dbInventario.insertarPartida(partida, idArticulo, idCombinacion, fechaCaducidad,
-                    numeroSerie, stockReal)
+                dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
 
                 Log.i("Insertada partida a DB", "Partida ${i+1}")
             }
@@ -233,31 +231,5 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("TAG", "loadJson: error ${e.message}")
         }
-    }
-
-    private fun rellenarTablaInventario(){
-
-       try {
-
-           // Iterar sobre cada objeto del array JSON
-           for (i in 0 until dbInventario.obtenerTodasPartidas().count) {
-
-               dbInventario.insertarPartida(partida, idArticulo, idCombinacion, fechaCaducidad,
-                   numeroSerie, stockReal)
-
-               Log.i("Insertada partida a DB", "Partida ${i+1}")
-           }
-
-
-            dbInventario.insertarInventario(idArticulo, idCombinacion, descripcion, stockReal, partida,
-                fechaCaducidad, numeroSerie, codigoBarras)
-
-
-        } catch (e: Exception) {
-            Log.e("TAG", "loadJson: error ${e.message}")
-        }
-
-        val numeroTotalInventario = dbInventario.obtenerTodoInventario().count
-        Log.i("TAG", "Número total de unidades de la tabla inventario es: $numeroTotalInventario")
     }
 }

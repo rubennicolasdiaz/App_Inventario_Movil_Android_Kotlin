@@ -138,8 +138,8 @@
         app:layout_constraintVertical_bias="0.3"
         app:layout_constraintHorizontal_bias="0.08" />
 
-    <EditText
-        android:id="@+id/etIdArticulo"
+    <TextView
+        android:id="@+id/tvIdArticulo2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/azul_marino"
@@ -166,8 +166,8 @@
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0.08" />
 
-    <EditText
-        android:id="@+id/etIdCombinacion"
+    <TextView
+        android:id="@+id/tvIdCombinacion2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/azul_marino"
@@ -222,8 +222,8 @@
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.08" />
 
-    <EditText
-        android:id="@+id/etFecha"
+    <TextView
+        android:id="@+id/tvFecha2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -249,8 +249,8 @@
         app:layout_constraintVertical_bias="0.7"
         app:layout_constraintHorizontal_bias="0.08" />
 
-    <EditText
-        android:id="@+id/etNumero"
+    <TextView
+        android:id="@+id/tvNumero2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/azul_marino"

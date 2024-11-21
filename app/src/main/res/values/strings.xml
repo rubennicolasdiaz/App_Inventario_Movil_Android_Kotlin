@@ -22,6 +22,9 @@
     <string name="volver">Volver</string>
     <string name="configuracion">CONFIGURACIÓN</string>
     <string name="buscar">BUSCAR CÓDIGO BARRAS</string>
+    <string name="buscar_codigo">Buscar por código de barras</string>
+    <string name="buscar_descripcion">Buscar por descripción</string>
+
 
 
 
