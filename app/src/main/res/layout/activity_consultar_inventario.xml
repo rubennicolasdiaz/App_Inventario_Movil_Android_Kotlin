@@ -282,14 +282,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/azul_marino"
-        android:textSize="22sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonIncrementar"
         app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8"
-        app:layout_constraintHorizontal_bias="0.55"/>
+        app:layout_constraintHorizontal_bias="0.57"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonIncrementar"

@@ -25,8 +25,6 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private lateinit var adapter: ArticuloAdapter
     private val llmanager = LinearLayoutManager(this)
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -98,42 +96,22 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private fun buscarArticuloDescripcion(articulo:Articulo) {
 
         try{
-
             var codigoBarras: String = ""
-            var idCombinacion:String = ""
             var idArticulo = articulo.idArticulo
-            var descripcion = ""
-            var partida = ""
-            var fechaCaducidad = ""
-            var numeroSerie = ""
+
 
             val cursorCodigosBarras = dbInventario.obtenerCodigoBarrasPorArticulo(articulo.idArticulo)
-            val cursorArticulo = dbInventario.obtenerArticulo(articulo.idArticulo)
 
             if(cursorCodigosBarras.moveToFirst()){
 
                 do{
                     val codigoBarrasIndex = cursorCodigosBarras.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
-                    val idCombinacionIndex = cursorCodigosBarras.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
-
                     codigoBarras = cursorCodigosBarras.getString(codigoBarrasIndex)
-                    idCombinacion = cursorCodigosBarras.getString(idCombinacionIndex)
 
                 }while(cursorCodigosBarras.moveToNext())
             }
-
-            /// BUSCAR DESCRIPCIÓN Y HACER un cursor de partidas por si hubiera:
-
-
-
-
-            // Se cierra el cursor de la base de datos
             cursorCodigosBarras.close()
-
-
-            buscarPorCodigoBarras(codigoBarras, idCombinacion, idArticulo)
-
-
+            buscarPorCodigoBarras(codigoBarras, idArticulo)
         }catch(e:Exception){
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -148,7 +126,6 @@ class BuscarDescripcionActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-
 
             R.id.idInicio -> {
 
@@ -181,12 +158,11 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         }
     }
 
-    private fun buscarPorCodigoBarras(codigoBarras:String, idCombinacion:String, idArticulo:String){
+    private fun buscarPorCodigoBarras(codigoBarras:String, idArticulo:String){
 
         // Crear el Bundle y agregar el valor de codigoBarras
         val bundle = Bundle()
         bundle.putString("codigoBarras", codigoBarras)
-        bundle.putString("idCombinacion", idCombinacion)
         bundle.putString("idArticulo", idArticulo)
 
         // Crear el Intent para pasar a la siguiente actividad
@@ -195,6 +171,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
 
         // Iniciar la siguiente actividad y terminar la actual
         startActivity(intent)
+        dbInventario.close()
         finish()
     }
 }

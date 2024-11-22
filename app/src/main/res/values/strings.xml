@@ -9,7 +9,7 @@
     <string name="partida">"Partida:"</string>
     <string name="fecha_caducidad">"Fecha Caducidad:"</string>
     <string name="numero_serie">"Número de Serie:"</string>
-    <string name="unidades">"Unidades Contadas:"</string>
+    <string name="unidades">"Unidades:"</string>
     <string name="guardar">"Guardar Artículo"</string>
     <string name="escanear">"Escanear Código Barras"</string>
     <string name="password">"Contraseña"</string>
@@ -26,7 +26,6 @@
     <string name="buscar_descripcion">BUSCAR ARTÍCULO POR DESCRIPCIÓN</string>
     <string name="historial">HISTORIAL BÚSQUEDA</string>
     <string name="selecionar">Seleccionar Artículo</string>
-
-
-
+    <string name="escriba">Escriba la descripción del artículo</string>
+    <string name="introduzca">Introduzca código de barras</string>
 </resources>

@@ -131,8 +131,6 @@ class MainActivity : AppCompatActivity() {
             val jsonArray = JSONArray(json)
             val max = jsonArray.length()
 
-
-
             // Iterar sobre cada objeto del array JSON
             for (i in 0 until max) {
                 val jsonObject = jsonArray.getJSONObject(i)

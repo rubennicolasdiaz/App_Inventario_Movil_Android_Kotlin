@@ -58,7 +58,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     // Constantes y variables para permisos de cámara:
 
-    private val CODIGO_INTENT_ESCANEAR = 3
     private val CODIGO_PERMISOS_CAMARA = 1
 
 
@@ -73,12 +72,8 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     binding = ActivityConsultarInventarioBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    cargarVista()
-
-    // Se inicializa base de datos:
+        cargarVista()
         inicializarDB()
-
-        // Se verifican los permisos de cámara
         verificarYPedirPermisosDeCamara()
 
         // Se rellena el Array de Artículos al inicio de la Activity
@@ -86,33 +81,23 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
         //Comprobar el Bundle de la activity de Buscar por Descripción
         comprobarBundleDescripcion()
-
-
-    // PRUEBAS///////////
-    //binding.etCodigo.setText("2000000068688")
-    //buscarArticulo("2000000068688")
-
     }
 
     private fun comprobarBundleDescripcion() {
         try{
 
-            // Recibir el Bundle con el valor de "codigoBarras"
             val bundle = intent.extras
             val codigoBarras = bundle?.getString("codigoBarras")
-            val idCombinacion = bundle?.getString("idCombinacion")
             val idArticulo = bundle?.getString("idArticulo")
 
             // Si el valor no es nulo ni vacío, lo asignamos al EditText
             if (!codigoBarras.isNullOrEmpty()) {
                 binding.etCodigo.setText(codigoBarras)
-                binding.tvIdCombinacion2.setText(idCombinacion)
                 binding.tvIdArticulo2.setText(idArticulo)
 
                 buscarArticulo(codigoBarras)
             }else{
 
-                binding.tvIdCombinacion2.setText(idCombinacion)
                 binding.tvIdArticulo2.setText(idArticulo)
             }
 
@@ -152,7 +137,8 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
         binding.buttonGuardar.setOnClickListener {
 
-            var codigoBarras = binding.etCodigo.text.toString()
+            try{
+                /* var codigoBarras = binding.etCodigo.text.toString()
 
 
             var descripcion = binding.tvDescripcion2.text.toString()
@@ -166,7 +152,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             var unidadesContadas = binding.etUnidades.text.toString().toDouble()
 
 
-            /*
+
 
             if(codigoBarras.isEmpty() || idCombinacion.isEmpty() || partida.isEmpty()
                 || fechaCaducidad.isEmpty() || numeroSerie.isEmpty()){
@@ -183,6 +169,14 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             */
 
 
+
+            }catch(e:Exception){
+
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            }
+
+
+
             limpiarCampos()
         }
 
@@ -194,7 +188,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
 
     private fun buscarporCodigoBarras() {
-
 
         val codigoArticulo = binding.etCodigo.text.toString()
         buscarArticulo(codigoArticulo)
@@ -254,6 +247,109 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun escanear() {
         val intent = Intent(this, EscanearActivity::class.java)
         escanearLauncher.launch(intent)
+    }
+
+    private fun buscarArticuloPorIdArticulo(idArticulo: String) {
+
+        try {
+            // Ahora obtenemos los detalles del artículo usando el idArticulo
+            val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
+
+            if (articuloCursor.moveToFirst() || articuloCursor.moveToNext()) {
+
+                val idCombinacionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+                val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+
+                val idCombinacion = articuloCursor.getString(idCombinacionIndex)
+                val descripcion = articuloCursor.getString(descripcionIndex)
+
+                // Cerramos el cursor de artículo
+                articuloCursor.close()
+
+                binding.tvIdCombinacion2.setText(idCombinacion)
+                binding.tvDescripcion2.setText(descripcion)
+
+            }else{
+
+                Toast.makeText(this, "No se obtuvo ningún resultado", Toast.LENGTH_SHORT).show()
+            }
+
+        }catch(e:Exception){
+
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun buscarPartidaPorIdArticulo(idArticulo: String) {
+
+        try{
+
+            val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
+
+            if(partidaCursor.moveToFirst() || partidaCursor.moveToNext()) {
+
+                do{
+
+                    val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+                    val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+                    val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
+
+                    // Obtener los detalles de la partida:
+
+                    val partida = partidaCursor.getString(partidaIndex)
+                    val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
+                    val numeroSerie = partidaCursor.getString(numeroSerieIndex)
+
+                    arrayPartidas.add(partida)
+                    arrayFechas.add(fechaCaducidad)
+                    arrayNumerosSerie.add(numeroSerie)
+
+                }while(partidaCursor.moveToNext())
+
+                // Cerramos el cursor
+                partidaCursor.close()
+
+
+                val items = listOf(*arrayPartidas.toTypedArray())
+                adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+
+
+
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+                binding.spinnerPartida.adapter = adapter
+
+                binding.spinnerPartida.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+
+                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
+
+                        if (position >= 0 && position < arrayPartidas.size){
+
+                            binding.tvFecha2.setText(arrayFechas[position])
+
+                            if(arrayNumerosSerie[position].equals("null")){
+
+                                binding.tvNumero2.setText("")
+                            }else{
+                                binding.tvNumero2.setText(arrayNumerosSerie[position])
+                            }
+                        }else {
+                            Toast.makeText(this@BuscarCodigoBarrasActivity, "No hay ningún elemento disponible",
+                                Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                    }
+                }
+            }
+
+        }catch(e:Exception){
+            Toast.makeText(this, e.message,Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun buscarArticulo(codigoBarras: String) {
@@ -372,56 +468,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
-    private fun buscarPorDescripcion(descripcion: String) {
-        try {
-
-            var codigoBarrasCursor: Cursor? = null
-            var codigoBarrasIndex:Int
-            var codigoBarras:String = ""
-            var idArticulo = ""
-            var indice = 0
-            var encontrado = false
-
-            for (i in 0 until arrayArticulos.size) {
-                if (arrayArticulos[i].descripcion.contains(descripcion, ignoreCase = true)) {
-                    binding.tvDescripcion2.setText("")
-
-
-                    //binding.etDescripcion.setText(arrayArticulos[i].descripcion)
-
-                    indice = i
-                    encontrado = true
-
-                    idArticulo = arrayArticulos.get(i).idArticulo
-
-                    codigoBarrasCursor = dbInventario.obtenerCodigoBarrasPorArticulo(idArticulo)
-                    if(codigoBarrasCursor.moveToFirst()){
-                        codigoBarrasIndex = codigoBarrasCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
-
-                        codigoBarras = codigoBarrasCursor.getString(codigoBarrasIndex)
-                    }
-
-
-
-                    break
-                }
-            }
-
-            if (!encontrado) {
-                Toast.makeText(this, "El artículo buscado no contiene dicha descripción"
-                , Toast.LENGTH_SHORT).show()
-            }else{
-
-                buscarArticulo(codigoBarras)
-
-                Log.i("Articulos creados", "El índice del articulo es: $indice")
-                Log.i("Articulos creados", "El cursor del código de barras es: ${codigoBarras.toString()}")
-            }
-        } catch (e: Exception) {
-            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
-        }
-    }
-
     // Inicializar la base de datos
     private fun inicializarDB(){
 
@@ -512,18 +558,14 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 dbInventario.close()
 
 
-                // Se llama a corrutina para salvar los datos de la DB a ficheros Json en almacenamiento externo:
+                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
                     // Se llama a la función async y al método await para que no se ejecute el
                     // siguiente código hasta que finalice la tarea anterior:
-                    async{saveJsonArticulos(this@BuscarCodigoBarrasActivity)}.await()
-                    async{saveJsonCodigosBarras(this@BuscarCodigoBarrasActivity)}.await()
-                    async{saveJsonPartidas(this@BuscarCodigoBarrasActivity)}.await()
-
-                    finishAffinity()
+                    async{saveJsonInventario(this@BuscarCodigoBarrasActivity)}.await()
+                    finishAffinity() // Finaliza la app.
                 }
-
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -542,197 +584,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
         val horaActual = Date() // Obtener la fecha y hora actual
         return formatoHora.format(horaActual) // Formatear la hora y devolverla como String
-    }
-
-    private suspend fun saveJsonArticulos(context: Context) {
-        try {
-            // Se crea el cursor para obtener todos los artículos de la base de datos
-            val todosArticulos: Cursor = dbInventario.obtenerTodosArticulos()
-
-            // Crear un array JSON que contendrá todos los artículos
-            val articulosJsonArray = JSONArray()
-
-            // Indices de las columnas del cursor
-            val idArticuloIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-            val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
-            val descripcionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-
-            // Redondear el valor de stock a un decimal (manteniendo el tipo Double)
-            var stockDouble:Double
-
-            // Iterar sobre cada fila del cursor
-            while (todosArticulos.moveToNext()) {
-                val idArticulo = todosArticulos.getString(idArticuloIndex)
-                val idCombinacion = todosArticulos.getString(idCombinacionIndex)
-                val descripcion = todosArticulos.getString(descripcionIndex)
-
-                // Crear un objeto JSON para cada artículo
-                val articuloJson = JSONObject()
-                articuloJson.put("IdArticulo", idArticulo)
-                articuloJson.put("IdCombinacion", idCombinacion)
-                articuloJson.put("Descripcion", descripcion)
-
-
-
-
-                // Añadir el valor como un Double al JSON
-                //articuloJson.put("StockReal", stockDouble)
-
-                // Añadir el objeto JSON al array
-                articulosJsonArray.put(articuloJson)
-            }
-
-            dbInventario.close()
-
-            // Crear el nombre del archivo con la fecha actual
-
-            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.articulos.json"
-
-            // Guardar el archivo JSON en el almacenamiento externo
-            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            if (externalStorageDir != null) {
-                val file = File(externalStorageDir, fileName)
-                try {
-                    val outputStream = FileOutputStream(file)
-                    outputStream.write(articulosJsonArray.toString().toByteArray())
-                    outputStream.close()
-                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
-                } catch (e: IOException) {
-                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
-                }
-            } else {
-                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
-            }
-
-        } catch (e: Exception) {
-            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
-        }
-    }
-
-    private suspend fun saveJsonCodigosBarras(context: Context) {
-        try {
-            // Se crea el cursor para obtener todos los códigos de barras de la base de datos
-            val todosCodigos: Cursor = dbInventario.obtenerTodosCodigosdeBarras()
-
-            // Crear un array JSON que contendrá todos los códigos de barras
-            val codigosJsonArray = JSONArray()
-
-            // Indices de las columnas del cursor
-            val codigoIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
-            val idArticuloIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-            val idCombinacionIndex = todosCodigos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
-
-
-            // Iterar sobre cada fila del cursor
-            while (todosCodigos.moveToNext()) {
-                val codigo = todosCodigos.getString(codigoIndex)
-                val idArticulo = todosCodigos.getString(idArticuloIndex)
-                val idCombinacion = todosCodigos.getString(idCombinacionIndex)
-
-                // Crear un objeto JSON para cada código de barras
-                val codigoJson = JSONObject()
-                codigoJson.put("CodigoBarras", codigo)
-                codigoJson.put("IdArticulo", idArticulo)
-                codigoJson.put("IdCombinacion", idCombinacion)
-
-                // Añadir el objeto JSON al array
-                codigosJsonArray.put(codigoJson)
-            }
-
-            // Se cierra la conexión a la DB:
-            dbInventario.close()
-
-            // Crear el nombre del archivo con la fecha actual
-
-            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.codigos.json"
-
-            // Guardar el archivo JSON en el almacenamiento externo
-            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            if (externalStorageDir != null) {
-                val file = File(externalStorageDir, fileName)
-                try {
-                    val outputStream = FileOutputStream(file)
-                    outputStream.write(codigosJsonArray.toString().toByteArray())
-                    outputStream.close()
-                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
-                } catch (e: IOException) {
-                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
-                }
-            } else {
-                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
-            }
-
-        } catch (e: Exception) {
-            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
-        }
-    }
-
-    private suspend fun saveJsonPartidas(context: Context) {
-        try {
-            // Se crea el cursor para obtener todas las partidas de la base de datos
-            val todasPartidas: Cursor = dbInventario.obtenerTodasPartidas()
-
-            // Crear un array JSON que contendrá todas las partidas
-            val partidasJsonArray = JSONArray()
-
-
-
-
-            // Indices de las columnas del cursor
-            val idArticuloIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-            val idPartidaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_PARTIDA)
-            val idFechaIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
-            val idNumeroSerieIndex = todasPartidas.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
-
-            // Iterar sobre cada fila del cursor
-            while (todasPartidas.moveToNext()) {
-                val idArticulo = todasPartidas.getString(idArticuloIndex)
-                val idPartida = todasPartidas.getString(idPartidaIndex)
-                val idFecha = todasPartidas.getString(idFechaIndex)
-                val idNumeroSerie = todasPartidas.getString(idNumeroSerieIndex)
-
-                // Crear un objeto JSON para cada partida
-                val partidaJson = JSONObject()
-                partidaJson.put("IdArticulo", idArticulo)
-                partidaJson.put("Partida", idPartida)
-                partidaJson.put("FCaducidad", idFecha)
-
-                // Verificar si idNumeroSerie es nulo antes de agregarlo
-                if (idNumeroSerie.isEmpty()) {
-                    partidaJson.put("NSerie", idNumeroSerie)
-                } else {
-                    partidaJson.put("NSerie", JSONObject.NULL)
-                }
-
-                // Añadir el objeto JSON al array
-                partidasJsonArray.put(partidaJson)
-            }
-
-            // Se cierra la conexión a la DB:
-            dbInventario.close()
-
-
-            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.partidas.json"
-
-            // Guardar el archivo JSON en el almacenamiento externo
-            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            if (externalStorageDir != null) {
-                val file = File(externalStorageDir, fileName)
-                try {
-                    val outputStream = FileOutputStream(file)
-                    outputStream.write(partidasJsonArray.toString().toByteArray())
-                    outputStream.close()
-                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
-                } catch (e: IOException) {
-                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
-                }
-            } else {
-                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
-            }
-
-        } catch (e: Exception) {
-            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
-        }
     }
 
     private fun rellenarArrayArticulos() {
@@ -798,11 +649,96 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                         numeroSerie, unidadesContadas)
                 }
             }
-
-
         }catch(e:Exception){
 
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun saveJsonInventario(context: Context) {
+
+        try {
+            // Se crea el cursor para obtener todos los ítems de la tabla inventario:
+            val todosItemsCursor: Cursor = dbInventario.obtenerTodosItemInventario()
+
+            // Crear un array JSON que contendrá todas los ítems del inventario:
+            val itemsInventarioJsonArray = JSONArray()
+
+            val itemJson = JSONObject()
+
+                // Indices de las columnas del cursor
+                val codigoBarrasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
+                val descripcionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
+                val idArticuloIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+                val idCombinacionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
+                val partidaIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
+                val fechaCaducidadIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
+                val numeroSerieIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
+                val unidadesContadasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_UNIDADES_CONTADAS)
+
+                // Iterar sobre cada fila del cursor
+                do{
+                    val codigoBarras = todosItemsCursor.getString(codigoBarrasIndex)
+                    val descripcion = todosItemsCursor.getString(descripcionIndex)
+                    val idArticulo = todosItemsCursor.getString(idArticuloIndex)
+                    val idCombinacion = todosItemsCursor.getString(idCombinacionIndex)
+                    val partida = todosItemsCursor.getString(partidaIndex)
+                    val fechaCaducidad = todosItemsCursor.getString(fechaCaducidadIndex)
+                    val numeroSerie = todosItemsCursor.getString(numeroSerieIndex)
+                    val unidadesContadas = todosItemsCursor.getDouble(unidadesContadasIndex)
+
+                    if(codigoBarras.isNullOrEmpty() || descripcion.isNullOrEmpty() || idArticulo.isNullOrEmpty()
+                        || idCombinacion.isNullOrEmpty() || partida.isNullOrEmpty() || fechaCaducidad.isNullOrEmpty()
+                        || numeroSerie.isNullOrEmpty()){
+
+                        itemJson.put("codigoBarras", JSONObject.NULL)
+                        itemJson.put("descripcion", JSONObject.NULL)
+                        itemJson.put("idArticulo", JSONObject.NULL)
+                        itemJson.put("idCombinacion", JSONObject.NULL)
+                        itemJson.put("partida", JSONObject.NULL)
+                        itemJson.put("fechaCaducidad", JSONObject.NULL)
+                        itemJson.put("numeroSerie", JSONObject.NULL)
+                        itemJson.put("unidadesContadas", 0)
+
+                    }else{
+
+                        itemJson.put("codigoBarras", codigoBarras)
+                        itemJson.put("descripcion", descripcion)
+                        itemJson.put("idArticulo", idArticulo)
+                        itemJson.put("idCombinacion", idCombinacion)
+                        itemJson.put("partida", partida)
+                        itemJson.put("fechaCaducidad", fechaCaducidad)
+                        itemJson.put("numeroSerie", numeroSerie)
+                        itemJson.put("unidadesContadas", unidadesContadas)
+                    }
+
+                    // Añadir el objeto JSON al array
+                    itemsInventarioJsonArray.put(itemJson)
+
+                }while(todosItemsCursor.moveToNext())
+
+                // Se cierra la conexión a la DB:
+                dbInventario.close()
+
+            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.items.json"
+
+            // Guardar el archivo JSON en el almacenamiento externo
+            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            if (externalStorageDir != null) {
+                val file = File(externalStorageDir, fileName)
+                try {
+                    val outputStream = FileOutputStream(file)
+                    outputStream.write(itemsInventarioJsonArray.toString().toByteArray())
+                    outputStream.close()
+                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
+                } catch (e: IOException) {
+                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                }
+            } else {
+                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
+            }
+        } catch (e: Exception) {
+            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
         }
     }
 }
