@@ -17,7 +17,7 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         const val COLUMN_ID_ARTICULO = "IdArticulo"
         const val COLUMN_ID_COMBINACION = "IdCombinacion"
         const val COLUMN_DESCRIPCION = "Descripcion"
-        const val COLUMN_STOCK_REAL = "StockReal"
+
 
         // Tabla CodigosBarras
         private const val TABLE_CODIGOS_BARRAS = "CodigosBarras"
@@ -25,9 +25,16 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
 
         // Tabla Partidas
         private const val TABLE_PARTIDAS = "Partidas"
+        private const val COLUMN_ID_PARTIDA = "IdPartida"
         const val COLUMN_PARTIDA = "Partida"
         const val COLUMN_FECHA_CADUCIDAD = "FechaCaducidad"
         const val COLUMN_NUMERO_SERIE = "NumeroSerie"
+
+        // Tabla Inventario
+        private const val TABLE_INVENTARIO = "Inventario"
+        const val COLUMN_ID_INVENTARIO = "IdInventario"
+        const val COLUMN_UNIDADES_CONTADAS = "UnidadesContadas"
+
 
         // Instancia Singleton
         @Volatile
@@ -47,7 +54,6 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
     CREATE TABLE $TABLE_ARTICULOS (
         $COLUMN_ID_ARTICULO TEXT NOT NULL,
         $COLUMN_DESCRIPCION TEXT NOT NULL,
-        $COLUMN_STOCK_REAL DOUBLE NOT NULL,
         $COLUMN_ID_COMBINACION TEXT NOT NULL,
         PRIMARY KEY ($COLUMN_ID_ARTICULO, $COLUMN_ID_COMBINACION)
     );
@@ -67,17 +73,39 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
 
         val createPartidasTable = """
     CREATE TABLE $TABLE_PARTIDAS (
+        $COLUMN_ID_PARTIDA INTEGER PRIMARY KEY AUTOINCREMENT,
         $COLUMN_PARTIDA TEXT,
         $COLUMN_ID_ARTICULO TEXT,
         $COLUMN_FECHA_CADUCIDAD TEXT,
         $COLUMN_NUMERO_SERIE TEXT,
+        
         FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO)
+    );
+""".trimIndent()
+
+        val createInventarioTable = """
+    CREATE TABLE $TABLE_INVENTARIO (
+        $COLUMN_ID_INVENTARIO INTEGER PRIMARY KEY AUTOINCREMENT,
+        $COLUMN_CODIGO_BARRAS TEXT,
+        $COLUMN_DESCRIPCION TEXT NOT NULL,
+        $COLUMN_ID_ARTICULO TEXT NOT NULL,
+        $COLUMN_ID_COMBINACION TEXT,
+        $COLUMN_PARTIDA TEXT,
+        $COLUMN_FECHA_CADUCIDAD TEXT,
+        $COLUMN_NUMERO_SERIE TEXT,
+        $COLUMN_UNIDADES_CONTADAS DOUBLE NOT NULL,
+        
+        FOREIGN KEY($COLUMN_CODIGO_BARRAS) REFERENCES $TABLE_CODIGOS_BARRAS($COLUMN_CODIGO_BARRAS),
+        FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO),
+        FOREIGN KEY($COLUMN_ID_COMBINACION) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_COMBINACION),
+        FOREIGN KEY($COLUMN_PARTIDA) REFERENCES $TABLE_PARTIDAS($COLUMN_PARTIDA)
     );
 """.trimIndent()
 
         db.execSQL(createArticulosTable)
         db.execSQL(createCodigosBarrasTable)
         db.execSQL(createPartidasTable)
+        db.execSQL(createInventarioTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -85,17 +113,17 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ARTICULOS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_CODIGOS_BARRAS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_PARTIDAS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_INVENTARIO")
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // CRUD para Artículos
-    fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String, stockReal: Double) {
+    fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_ID_ARTICULO, idArticulo)
             put(COLUMN_ID_COMBINACION, idCombinacion)
             put(COLUMN_DESCRIPCION, descripcion)
-            put(COLUMN_STOCK_REAL, stockReal)
         }
         db.insert(TABLE_ARTICULOS, null, values)
         db.close()
@@ -115,29 +143,10 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         return db.rawQuery("SELECT * FROM $TABLE_ARTICULOS", null)
     }
 
-    fun actualizarArticulo(idArticulo: String, descripcion: String, stockReal: Int, idCombinacion: String?) {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put(COLUMN_DESCRIPCION, descripcion)
-            put(COLUMN_STOCK_REAL, stockReal)
-            put(COLUMN_ID_COMBINACION, idCombinacion)
-        }
-        db.update(TABLE_ARTICULOS, values, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
-        db.close()
-    }
-
-    fun eliminarArticulo(idArticulo: String) {
-        val db = this.writableDatabase
-        db.delete(TABLE_ARTICULOS, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
-        db.close()
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // CRUD para Partidas
 
-    // En la tabla partidas sale: IdArticulo, Partida, Fecha Caducidad y número de serie
-
-    fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie:String?) {
+   fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie:String?) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
 
@@ -165,13 +174,6 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
             TABLE_PARTIDAS, null, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo),
             null, null, null
         )
-    }
-
-    fun eliminarPartida(partida: String) {
-
-        val db = this.writableDatabase
-        db.delete(TABLE_PARTIDAS, "$COLUMN_PARTIDA = ?", arrayOf(partida))
-        db.close()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -209,20 +211,41 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         )
     }
 
-    fun actualizarStock(idArticulo: String, stockReal: Double) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // CRUD para Inventario
+    fun insertarItemInventario(codigoBarras:String, descripcion:String, idArticulo:String,
+                               idCombinacion:String, partida:String, fechaCaducidad:String,
+                               numeroSerie:String, unidadesContadas:Double) {
+
         val db = this.writableDatabase
         val values = ContentValues().apply {
 
-            put(COLUMN_STOCK_REAL, stockReal)
-
+            put(COLUMN_CODIGO_BARRAS, codigoBarras)
+            put(COLUMN_DESCRIPCION, descripcion)
+            put(COLUMN_ID_ARTICULO, idArticulo)
+            put(COLUMN_ID_COMBINACION, idCombinacion)
+            put(COLUMN_PARTIDA, partida)
+            put(COLUMN_FECHA_CADUCIDAD, fechaCaducidad)
+            put(COLUMN_NUMERO_SERIE, numeroSerie)
+            put(COLUMN_UNIDADES_CONTADAS, unidadesContadas)
         }
-        db.update(TABLE_ARTICULOS, values, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
+
+        db.insert(TABLE_INVENTARIO, null, values)
         db.close()
     }
 
-    fun eliminarCodigoBarras(codigoBarras: String) {
-        val db = this.writableDatabase
-        db.delete(TABLE_CODIGOS_BARRAS, "$COLUMN_CODIGO_BARRAS = ?", arrayOf(codigoBarras))
-        db.close()
+    fun obtenerItemInventario(idArticulo: String): Cursor {
+
+        val db = this.readableDatabase
+        return db.query(
+            TABLE_INVENTARIO, null, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo),
+            null, null, null
+        )
+    }
+
+    fun obtenerTodosItemInventario(): Cursor {
+
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_INVENTARIO", null)
     }
 }

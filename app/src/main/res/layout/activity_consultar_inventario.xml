@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ConsultarInventarioActivity">
+    tools:context=".BuscarCodigoBarrasActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -107,8 +107,8 @@
         app:layout_constraintVertical_bias="0.2"
        app:layout_constraintHorizontal_bias="0.1"/>
 
- <EditText
-     android:id="@+id/etDescripcion"
+ <TextView
+     android:id="@+id/tvDescripcion2"
      android:layout_width="0dp"
      android:layout_height="wrap_content"
      android:textColor="@color/azul_marino"

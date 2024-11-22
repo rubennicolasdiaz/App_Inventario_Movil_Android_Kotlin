@@ -9,7 +9,7 @@
     <string name="partida">"Partida:"</string>
     <string name="fecha_caducidad">"Fecha Caducidad:"</string>
     <string name="numero_serie">"Número de Serie:"</string>
-    <string name="unidades">"Unidades en Stock:"</string>
+    <string name="unidades">"Unidades Contadas:"</string>
     <string name="guardar">"Guardar Artículo"</string>
     <string name="escanear">"Escanear Código Barras"</string>
     <string name="password">"Contraseña"</string>
@@ -18,13 +18,14 @@
     <string name="salir">"SALIR"</string>
     <string name="menu_inicio">"Inicio"</string>
     <string name="menu_salir">"Salir y guardar cambios"</string>
-    <string name="menu_consultar_inventario">Consultar Inventario</string>
+    <string name="menu_consultar_inventario">BUSCAR ARTÍCULO POR CÓDIGO BARRAS</string>
     <string name="volver">Volver</string>
     <string name="configuracion">CONFIGURACIÓN</string>
     <string name="buscar">BUSCAR CÓDIGO BARRAS</string>
     <string name="buscar_codigo">Buscar por código de barras</string>
-    <string name="buscar_descripcion">Buscar por descripción</string>
-
+    <string name="buscar_descripcion">BUSCAR ARTÍCULO POR DESCRIPCIÓN</string>
+    <string name="historial">HISTORIAL BÚSQUEDA</string>
+    <string name="selecionar">Seleccionar Artículo</string>
 
 
 

@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         db.execSQL("DROP TABLE IF EXISTS Articulos")
         db.execSQL("DROP TABLE IF EXISTS CodigosBarras")
         db.execSQL("DROP TABLE IF EXISTS Partidas")
+        db.execSQL("DROP TABLE IF EXISTS Inventario")
 
         // Volver a crear las tablas
         dbInventario.onCreate(db)
@@ -140,13 +141,10 @@ class MainActivity : AppCompatActivity() {
                 val idArticulo = jsonObject.getString("IdArticulo")
                 val idCombinacion = jsonObject.getString("IdCombinacion")
                 val descripcion = jsonObject.getString("Descripcion")
-                val stockReal = jsonObject.getDouble("StockReal")
 
-                dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion, stockReal)
+                dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion)
 
                 Log.i("Insertado artículo a DB", "Artículo ${i+1}")
-                // Imprimir los valores por log
-                // Log.i("Lectura de artículos", "Artículo ${i+1}: idArticulo  $idArticulo  IdCombinacion  $idCombinacion  descripcion $descripcion Unidades Stock   $stockReal")
             }
 
         } catch (e: Exception) {

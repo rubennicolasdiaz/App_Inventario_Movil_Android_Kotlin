@@ -4,15 +4,6 @@
     <item
         android:id="@+id/idInicio"
         android:title="@string/menu_inicio" />
-
-    <item
-        android:id="@+id/idBuscarCodigoBarras"
-        android:title="@string/buscar_codigo" />
-
-    <item
-        android:id="@+id/idBuscarDescripcion"
-        android:title="@string/buscar_descripcion" />
-
     <item
         android:id="@+id/idSalir"
         android:title="@string/menu_salir" />

@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.Pruebas
 
 import android.app.DatePickerDialog
 import android.app.Dialog

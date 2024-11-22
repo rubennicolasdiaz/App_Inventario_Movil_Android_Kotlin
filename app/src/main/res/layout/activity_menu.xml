@@ -9,7 +9,7 @@
     tools:context=".MenuActivity">
 
     <Button
-        android:id="@+id/buttonConsultar"
+        android:id="@+id/buttonBuscarCodigo"
         android:layout_width="300dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/colorAccent"
@@ -22,13 +22,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonConfiguracion"/>
+        app:layout_constraintBottom_toTopOf="@+id/buttonBuscarDescripcion"/>
+
+    <Button
+        android:id="@+id/buttonBuscarDescripcion"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/NaranjaRuano"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/buscar_descripcion"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfiguracion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarCodigo" />
 
     <Button
         android:id="@+id/buttonConfiguracion"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:backgroundTint="@color/NaranjaRuano"
+        android:backgroundTint="@color/colorAccent"
         android:lineSpacingExtra="10sp"
         android:text="@string/configuracion"
         android:textAlignment="center"
@@ -38,6 +54,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonConsultar" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarDescripcion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

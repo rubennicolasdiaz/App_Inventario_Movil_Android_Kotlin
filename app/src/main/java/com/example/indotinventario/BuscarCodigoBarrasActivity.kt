@@ -19,6 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isEmpty
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.Pruebas.Articulo
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
@@ -35,7 +36,7 @@ import java.util.Date
 import java.util.Locale
 import kotlin.collections.ArrayList
 
-class ConsultarInventarioActivity : AppCompatActivity() {
+class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     // Se crea el binding para la vista:
     private lateinit var binding:ActivityConsultarInventarioBinding
@@ -74,20 +75,50 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     cargarVista()
 
-    // Se verifican los permisos de cámara
-    verificarYPedirPermisosDeCamara()
-
     // Se inicializa base de datos:
-    inicializarDB()
+        inicializarDB()
 
-    // Se rellena el Array de Artículos al inicio de la Activity
-    rellenarArrayArticulos()
+        // Se verifican los permisos de cámara
+        verificarYPedirPermisosDeCamara()
+
+        // Se rellena el Array de Artículos al inicio de la Activity
+        rellenarArrayArticulos()
+
+        //Comprobar el Bundle de la activity de Buscar por Descripción
+        comprobarBundleDescripcion()
 
 
     // PRUEBAS///////////
-    binding.etCodigo.setText("2000000068688")
-    buscarArticulo("2000000068688")
+    //binding.etCodigo.setText("2000000068688")
+    //buscarArticulo("2000000068688")
 
+    }
+
+    private fun comprobarBundleDescripcion() {
+        try{
+
+            // Recibir el Bundle con el valor de "codigoBarras"
+            val bundle = intent.extras
+            val codigoBarras = bundle?.getString("codigoBarras")
+            val idCombinacion = bundle?.getString("idCombinacion")
+            val idArticulo = bundle?.getString("idArticulo")
+
+            // Si el valor no es nulo ni vacío, lo asignamos al EditText
+            if (!codigoBarras.isNullOrEmpty()) {
+                binding.etCodigo.setText(codigoBarras)
+                binding.tvIdCombinacion2.setText(idCombinacion)
+                binding.tvIdArticulo2.setText(idArticulo)
+
+                buscarArticulo(codigoBarras)
+            }else{
+
+                binding.tvIdCombinacion2.setText(idCombinacion)
+                binding.tvIdArticulo2.setText(idArticulo)
+            }
+
+        }catch(e:Exception){
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun cargarVista() {
@@ -121,7 +152,37 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
         binding.buttonGuardar.setOnClickListener {
 
-            actualizarStock()
+            var codigoBarras = binding.etCodigo.text.toString()
+
+
+            var descripcion = binding.tvDescripcion2.text.toString()
+            var idArticulo = binding.tvIdArticulo2.text.toString()
+            var idCombinacion = binding.tvIdCombinacion2.text.toString()
+
+            var partida = binding.spinnerPartida.isEmpty()
+
+            var fechaCaducidad = binding.tvFecha2.text.toString()
+            var numeroSerie = binding.tvNumero2.text.toString()
+            var unidadesContadas = binding.etUnidades.text.toString().toDouble()
+
+
+            /*
+
+            if(codigoBarras.isEmpty() || idCombinacion.isEmpty() || partida.isEmpty()
+                || fechaCaducidad.isEmpty() || numeroSerie.isEmpty()){
+
+                codigoBarras = null.toString()
+
+            }
+
+            insertarItemInventario(codigoBarras, descripcion, idArticulo, idCombinacion,
+                partida, fechaCaducidad, numeroSerie, unidadesContadas)
+
+
+
+            */
+
+
             limpiarCampos()
         }
 
@@ -129,6 +190,8 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             buscarporCodigoBarras()
         }
     }
+
+
 
     private fun buscarporCodigoBarras() {
 
@@ -224,19 +287,15 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     // Verificamos si se encuentra el artículo
 
                     val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                    val stockRealIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
 
                     // Obtener los detalles del artículo
                     val descripcion = articuloCursor.getString(descripcionIndex)
-                    val stockReal = articuloCursor.getInt(stockRealIndex)
 
                     // Cerramos el cursor de artículo
                     articuloCursor.close()
 
                     // Asignamos los valores a los EditText en la interfaz de usuario
-                    binding.etDescripcion.setText(descripcion) // Descripción del artículo
-                    binding.etUnidades.setText(stockReal.toString()) // Stock real
-
+                    binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
 
                     // Ahora obtenemos los detalles de la partida usando el idArticulo
                     val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
@@ -292,7 +351,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                                         binding.tvNumero2.setText(arrayNumerosSerie[position])
                                     }
                                 }else {
-                                    Toast.makeText(this@ConsultarInventarioActivity, "No hay ningún elemento disponible",
+                                    Toast.makeText(this@BuscarCodigoBarrasActivity, "No hay ningún elemento disponible",
                                         Toast.LENGTH_SHORT).show()
                                 }
 
@@ -325,7 +384,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
             for (i in 0 until arrayArticulos.size) {
                 if (arrayArticulos[i].descripcion.contains(descripcion, ignoreCase = true)) {
-                    binding.etDescripcion.setText("")
+                    binding.tvDescripcion2.setText("")
 
 
                     //binding.etDescripcion.setText(arrayArticulos[i].descripcion)
@@ -363,62 +422,13 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         }
     }
 
-
-
     // Inicializar la base de datos
     private fun inicializarDB(){
 
         dbInventario = DBInventario.getInstance(this)
     }
 
-    // Actualizar número de Stock:
-    private fun actualizarStock(){
-
-        try{
-            val idArticulo:String = binding.tvIdArticulo2.text.toString()
-
-
-            // Obtener el valor del TextView como String
-            val unidadesStockString = binding.etUnidades.text.toString()
-
-            // Convertirlo a Int de forma segura (en caso de que no sea un número válido)
-            val unidadesStock: Int = unidadesStockString.toInt()
-
-            var unidadesStockDouble:Double
-
-            val codigoBarras = binding.etCodigo.text.toString()
-
-            if(codigoBarras.isEmpty()){
-
-                Toast.makeText(this, "No hay código de barras registrado",
-                    Toast.LENGTH_SHORT).show()
-
-            }else if(idArticulo.isEmpty()){
-
-                Toast.makeText(this, "No se puede actualizar el stock de un artículo no registrado",
-                    Toast.LENGTH_SHORT).show()
-
-            }else if(unidadesStockString.isEmpty()){
-
-                Toast.makeText(this, "No se puede actualizar un stock vacío",
-                    Toast.LENGTH_SHORT).show()
-
-            }else{
-
-                unidadesStockDouble = unidadesStock.toDouble()
-                dbInventario.actualizarStock(idArticulo, unidadesStockDouble)
-            }
-
-
-
-        }catch(e:Exception){
-            Toast.makeText(this, "No hay ningún artículo para guardar",
-                Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun limpiarCampos() {
-
 
         try{
             //Vaciamos los arrays para volver a dejarlos a 0 para la siguiente búsqueda
@@ -437,7 +447,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             binding.tvFecha2.setText("")
             binding.tvNumero2.setText("")
             binding.etCodigo.setText("")
-            binding.etDescripcion.setText("")
+            binding.tvDescripcion2.setText("")
             binding.tvIdArticulo2.setText("")
             binding.tvIdCombinacion2.setText("")
             binding.etUnidades.setText("")
@@ -483,6 +493,7 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
     // Menú:
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
@@ -497,19 +508,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.idBuscarCodigoBarras -> {
-
-                buscarporCodigoBarras()
-                true
-            }
-
-            R.id.idBuscarDescripcion -> {
-
-                buscarPorDescripcion(binding.etDescripcion.text.toString())
-                true
-            }
-
-
             R.id.idSalir -> {
                 dbInventario.close()
 
@@ -519,9 +517,9 @@ class ConsultarInventarioActivity : AppCompatActivity() {
 
                     // Se llama a la función async y al método await para que no se ejecute el
                     // siguiente código hasta que finalice la tarea anterior:
-                    async{saveJsonArticulos(this@ConsultarInventarioActivity)}.await()
-                    async{saveJsonCodigosBarras(this@ConsultarInventarioActivity)}.await()
-                    async{saveJsonPartidas(this@ConsultarInventarioActivity)}.await()
+                    async{saveJsonArticulos(this@BuscarCodigoBarrasActivity)}.await()
+                    async{saveJsonCodigosBarras(this@BuscarCodigoBarrasActivity)}.await()
+                    async{saveJsonPartidas(this@BuscarCodigoBarrasActivity)}.await()
 
                     finishAffinity()
                 }
@@ -558,8 +556,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
             val idArticuloIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
             val idCombinacionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
             val descripcionIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-            val stockIndex = todosArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
-
 
             // Redondear el valor de stock a un decimal (manteniendo el tipo Double)
             var stockDouble:Double
@@ -569,8 +565,6 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 val idArticulo = todosArticulos.getString(idArticuloIndex)
                 val idCombinacion = todosArticulos.getString(idCombinacionIndex)
                 val descripcion = todosArticulos.getString(descripcionIndex)
-                val stock = todosArticulos.getString(stockIndex)
-
 
                 // Crear un objeto JSON para cada artículo
                 val articuloJson = JSONObject()
@@ -578,12 +572,11 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                 articuloJson.put("IdCombinacion", idCombinacion)
                 articuloJson.put("Descripcion", descripcion)
 
-                stockDouble = stock.toDouble()
 
 
 
                 // Añadir el valor como un Double al JSON
-                articuloJson.put("StockReal", stockDouble)
+                //articuloJson.put("StockReal", stockDouble)
 
                 // Añadir el objeto JSON al array
                 articulosJsonArray.put(articuloJson)
@@ -754,16 +747,13 @@ class ConsultarInventarioActivity : AppCompatActivity() {
                     val idArticuloIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
                     val idCombinacionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
                     val descripcionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                    val stockIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_STOCK_REAL)
-
-                    // Obtener los valores del artículo
+                                        // Obtener los valores del artículo
                     val idArticulo = cursorArticulos.getString(idArticuloIndex)
                     val idCombinacion = cursorArticulos.getString(idCombinacionIndex)
                     val descripcion = cursorArticulos.getString(descripcionIndex)
-                    val stock = cursorArticulos.getDouble(stockIndex)
 
                     // Crear la instancia de la clase Articulo
-                    val articulo = Articulo(idArticulo, idCombinacion, descripcion, stock)
+                    val articulo = Articulo(idArticulo, idCombinacion, descripcion)
 
                     // Agregar la instancia de Articulo a la lista
                     arrayArticulos.add(articulo)
@@ -779,6 +769,42 @@ class ConsultarInventarioActivity : AppCompatActivity() {
         }
     }
 
+    private fun insertarItemInventario(codigoBarras:String, descripcion:String, idArticulo:String,
+                                       idCombinacion:String, partida:String, fechaCaducidad:String,
+                                       numeroSerie:String, unidadesContadas:Double) {
+
+        try{
+
+
+            if(descripcion.isNullOrEmpty() || idArticulo.isNullOrEmpty() || unidadesContadas < 0){
+
+                Toast.makeText(this, "Sin IdArtículo o descripción", Toast.LENGTH_SHORT).show()
+            }
+
+            val cursorInventario = dbInventario.obtenerItemInventario(idArticulo)
+
+            if(cursorInventario.moveToFirst()){
+
+                val idArticuloInventarioIndex = cursorInventario.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
+                val idArticuloInventario = cursorInventario.getString(idArticuloInventarioIndex)
+
+                if(idArticuloInventario == idArticulo){
+
+                    Toast.makeText(this, "Este artículo ya ha sido registrado en el inventario", Toast.LENGTH_SHORT).show()
+                }else{
+
+                    dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
+                        idCombinacion, partida, fechaCaducidad,
+                        numeroSerie, unidadesContadas)
+                }
+            }
+
+
+        }catch(e:Exception){
+
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
 }
 
 
