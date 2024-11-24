@@ -19,7 +19,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isEmpty
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.Pruebas.Articulo
 import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
@@ -84,7 +83,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     }
 
     private fun comprobarBundleDescripcion() {
-        try{
+
 
             val bundle = intent.extras
             val codigoBarras = bundle?.getString("codigoBarras")
@@ -93,17 +92,17 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             // Si el valor no es nulo ni vacío, lo asignamos al EditText
             if (!codigoBarras.isNullOrEmpty()) {
                 binding.etCodigo.setText(codigoBarras)
-                binding.tvIdArticulo2.setText(idArticulo)
+                binding.tvIdArticulo2.text = idArticulo
 
-                buscarArticulo(codigoBarras)
+                buscarArticuloPorCodigoBarras(codigoBarras)
             }else{
 
-                binding.tvIdArticulo2.setText(idArticulo)
+                if(!idArticulo.isNullOrEmpty()) {
+                    binding.tvIdArticulo2.text = idArticulo
+                    buscarArticuloPorIdArticulo(idArticulo)
+                    buscarPartidaPorIdArticulo(idArticulo)
+                }
             }
-
-        }catch(e:Exception){
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun cargarVista() {
@@ -116,7 +115,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 verificarYPedirPermisosDeCamara()
                 return@setOnClickListener
             }
-
             // Limpiar campos antes de escanear para que se borre el Spinner de Partidas
             limpiarCampos()
             escanear()
@@ -135,62 +133,22 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             disminuirUnidades()
         }
 
-        binding.buttonGuardar.setOnClickListener {
 
-            try{
-                /* var codigoBarras = binding.etCodigo.text.toString()
-
-
-            var descripcion = binding.tvDescripcion2.text.toString()
-            var idArticulo = binding.tvIdArticulo2.text.toString()
-            var idCombinacion = binding.tvIdCombinacion2.text.toString()
-
-            var partida = binding.spinnerPartida.isEmpty()
-
-            var fechaCaducidad = binding.tvFecha2.text.toString()
-            var numeroSerie = binding.tvNumero2.text.toString()
-            var unidadesContadas = binding.etUnidades.text.toString().toDouble()
-
-
-
-
-            if(codigoBarras.isEmpty() || idCombinacion.isEmpty() || partida.isEmpty()
-                || fechaCaducidad.isEmpty() || numeroSerie.isEmpty()){
-
-                codigoBarras = null.toString()
-
-            }
-
-            insertarItemInventario(codigoBarras, descripcion, idArticulo, idCombinacion,
-                partida, fechaCaducidad, numeroSerie, unidadesContadas)
-
-
-
-            */
-
-
-
-            }catch(e:Exception){
-
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-            }
-
-
-
-            limpiarCampos()
-        }
 
         binding.buttonBuscar.setOnClickListener {
             buscarporCodigoBarras()
         }
+
+        binding.buttonGuardar.setOnClickListener {
+            insertarItemInventario()
+            limpiarCampos()
+        }
     }
-
-
 
     private fun buscarporCodigoBarras() {
 
         val codigoArticulo = binding.etCodigo.text.toString()
-        buscarArticulo(codigoArticulo)
+        buscarArticuloPorCodigoBarras(codigoArticulo)
     }
 
     private fun disminuirUnidades() {
@@ -238,7 +196,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 // Aquí manejas el código de barras como antes
                 val codigoArticulo: String = codigoBarras
                 binding.etCodigo.setText(codigoArticulo)
-                buscarArticulo(codigoArticulo)
+                buscarArticuloPorCodigoBarras(codigoArticulo)
             }
         }
     }
@@ -249,11 +207,12 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         escanearLauncher.launch(intent)
     }
 
-    private fun buscarArticuloPorIdArticulo(idArticulo: String) {
+    private fun buscarArticuloPorIdArticulo(idArticulo: String?) {
 
         try {
             // Ahora obtenemos los detalles del artículo usando el idArticulo
-            val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
+
+            val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo!!)
 
             if (articuloCursor.moveToFirst() || articuloCursor.moveToNext()) {
 
@@ -280,11 +239,11 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
-    private fun buscarPartidaPorIdArticulo(idArticulo: String) {
+    private fun buscarPartidaPorIdArticulo(idArticulo: String?) {
 
         try{
 
-            val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
+            val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo!!)
 
             if(partidaCursor.moveToFirst() || partidaCursor.moveToNext()) {
 
@@ -352,7 +311,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     }
 
-    private fun buscarArticulo(codigoBarras: String) {
+    private fun buscarArticuloPorCodigoBarras(codigoBarras: String) {
 
         try{
             // Obtener el cursor con los datos del código de barras
@@ -620,37 +579,23 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
-    private fun insertarItemInventario(codigoBarras:String, descripcion:String, idArticulo:String,
-                                       idCombinacion:String, partida:String, fechaCaducidad:String,
-                                       numeroSerie:String, unidadesContadas:Double) {
-
+    private fun insertarItemInventario() {
         try{
 
+            val codigoBarras = binding.etCodigo.text.toString()
+            val descripcion = binding.tvDescripcion2.text.toString()
+            val idArticulo = binding.tvIdArticulo2.text.toString()
+            val idCombinacion = binding.tvIdCombinacion2.text.toString()
+            val fechaCaducidad = binding.tvFecha2.text.toString()
+            val numeroSerie = binding.tvNumero2.text.toString()
+            val unidadesContadas: Double = binding.etUnidades.text.toString().toDouble()
 
-            if(descripcion.isNullOrEmpty() || idArticulo.isNullOrEmpty() || unidadesContadas < 0){
+            val partida = binding.spinnerPartida.selectedItem?.toString() ?: ""
 
-                Toast.makeText(this, "Sin IdArtículo o descripción", Toast.LENGTH_SHORT).show()
-            }
-
-            val cursorInventario = dbInventario.obtenerItemInventario(idArticulo)
-
-            if(cursorInventario.moveToFirst()){
-
-                val idArticuloInventarioIndex = cursorInventario.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-                val idArticuloInventario = cursorInventario.getString(idArticuloInventarioIndex)
-
-                if(idArticuloInventario == idArticulo){
-
-                    Toast.makeText(this, "Este artículo ya ha sido registrado en el inventario", Toast.LENGTH_SHORT).show()
-                }else{
-
-                    dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
-                        idCombinacion, partida, fechaCaducidad,
-                        numeroSerie, unidadesContadas)
-                }
-            }
+            dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
+                    idCombinacion, partida, fechaCaducidad,
+                    numeroSerie, unidadesContadas)
         }catch(e:Exception){
-
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
     }
@@ -664,8 +609,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             // Crear un array JSON que contendrá todas los ítems del inventario:
             val itemsInventarioJsonArray = JSONArray()
 
-            val itemJson = JSONObject()
-
+            if (todosItemsCursor.moveToFirst()) {
                 // Indices de las columnas del cursor
                 val codigoBarrasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
                 val descripcionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
@@ -677,7 +621,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 val unidadesContadasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_UNIDADES_CONTADAS)
 
                 // Iterar sobre cada fila del cursor
-                do{
+                do {
+                    // Crear un nuevo JSONObject en cada iteración
+                    val itemJson = JSONObject()
+
                     val codigoBarras = todosItemsCursor.getString(codigoBarrasIndex)
                     val descripcion = todosItemsCursor.getString(descripcionIndex)
                     val idArticulo = todosItemsCursor.getString(idArticuloIndex)
@@ -687,38 +634,25 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     val numeroSerie = todosItemsCursor.getString(numeroSerieIndex)
                     val unidadesContadas = todosItemsCursor.getDouble(unidadesContadasIndex)
 
-                    if(codigoBarras.isNullOrEmpty() || descripcion.isNullOrEmpty() || idArticulo.isNullOrEmpty()
-                        || idCombinacion.isNullOrEmpty() || partida.isNullOrEmpty() || fechaCaducidad.isNullOrEmpty()
-                        || numeroSerie.isNullOrEmpty()){
-
-                        itemJson.put("codigoBarras", JSONObject.NULL)
-                        itemJson.put("descripcion", JSONObject.NULL)
-                        itemJson.put("idArticulo", JSONObject.NULL)
-                        itemJson.put("idCombinacion", JSONObject.NULL)
-                        itemJson.put("partida", JSONObject.NULL)
-                        itemJson.put("fechaCaducidad", JSONObject.NULL)
-                        itemJson.put("numeroSerie", JSONObject.NULL)
-                        itemJson.put("unidadesContadas", 0)
-
-                    }else{
-
-                        itemJson.put("codigoBarras", codigoBarras)
-                        itemJson.put("descripcion", descripcion)
-                        itemJson.put("idArticulo", idArticulo)
-                        itemJson.put("idCombinacion", idCombinacion)
-                        itemJson.put("partida", partida)
-                        itemJson.put("fechaCaducidad", fechaCaducidad)
-                        itemJson.put("numeroSerie", numeroSerie)
-                        itemJson.put("unidadesContadas", unidadesContadas)
-                    }
+                    itemJson.put("codigoBarras", codigoBarras)
+                    itemJson.put("descripcion", descripcion)
+                    itemJson.put("idArticulo", idArticulo)
+                    itemJson.put("idCombinacion", idCombinacion)
+                    itemJson.put("partida", partida)
+                    itemJson.put("fechaCaducidad", fechaCaducidad)
+                    itemJson.put("numeroSerie", numeroSerie)
+                    itemJson.put("unidadesContadas", unidadesContadas)
 
                     // Añadir el objeto JSON al array
                     itemsInventarioJsonArray.put(itemJson)
 
-                }while(todosItemsCursor.moveToNext())
+                } while (todosItemsCursor.moveToNext())
+            } else {
+                Log.i("Json Inventario", "No se encontró ningún elemento de inventario")
+            }
 
-                // Se cierra la conexión a la DB:
-                dbInventario.close()
+            // Se cierra la conexión a la DB:
+            dbInventario.close()
 
             val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.items.json"
 
@@ -741,6 +675,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             Log.e("TAG", "Error al cargar los artículos: ${e.message}")
         }
     }
+
 }
 
 

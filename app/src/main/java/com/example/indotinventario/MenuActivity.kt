@@ -21,11 +21,6 @@ class MenuActivity : AppCompatActivity() {
         cargarVista()
     }
 
-
-
-
-
-
     private fun cargarVista() {
 
         binding.buttonBuscarCodigo.setOnClickListener {

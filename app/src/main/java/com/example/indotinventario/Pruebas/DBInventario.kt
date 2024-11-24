@@ -32,7 +32,6 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
 
         // Tabla Inventario
         private const val TABLE_INVENTARIO = "Inventario"
-        const val COLUMN_ID_INVENTARIO = "IdInventario"
         const val COLUMN_UNIDADES_CONTADAS = "UnidadesContadas"
 
 
@@ -85,22 +84,18 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
 
         val createInventarioTable = """
     CREATE TABLE $TABLE_INVENTARIO (
-        $COLUMN_ID_INVENTARIO INTEGER PRIMARY KEY AUTOINCREMENT,
         $COLUMN_CODIGO_BARRAS TEXT,
         $COLUMN_DESCRIPCION TEXT NOT NULL,
-        $COLUMN_ID_ARTICULO TEXT NOT NULL,
+        $COLUMN_ID_ARTICULO TEXT,
         $COLUMN_ID_COMBINACION TEXT,
         $COLUMN_PARTIDA TEXT,
         $COLUMN_FECHA_CADUCIDAD TEXT,
         $COLUMN_NUMERO_SERIE TEXT,
         $COLUMN_UNIDADES_CONTADAS DOUBLE NOT NULL,
         
-        FOREIGN KEY($COLUMN_CODIGO_BARRAS) REFERENCES $TABLE_CODIGOS_BARRAS($COLUMN_CODIGO_BARRAS),
-        FOREIGN KEY($COLUMN_ID_ARTICULO) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_ARTICULO),
-        FOREIGN KEY($COLUMN_ID_COMBINACION) REFERENCES $TABLE_ARTICULOS($COLUMN_ID_COMBINACION),
-        FOREIGN KEY($COLUMN_PARTIDA) REFERENCES $TABLE_PARTIDAS($COLUMN_PARTIDA)
-    );
+        PRIMARY KEY($COLUMN_ID_ARTICULO, $COLUMN_ID_COMBINACION, $COLUMN_PARTIDA));
 """.trimIndent()
+
 
         db.execSQL(createArticulosTable)
         db.execSQL(createCodigosBarrasTable)
