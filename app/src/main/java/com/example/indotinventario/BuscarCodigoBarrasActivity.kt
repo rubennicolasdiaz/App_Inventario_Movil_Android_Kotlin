@@ -21,7 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.Pruebas.Articulo
-import com.example.indotinventario.databinding.ActivityConsultarInventarioBinding
+import com.example.indotinventario.databinding.ActivityBuscarCodigoBarrasBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -38,8 +38,7 @@ import kotlin.collections.ArrayList
 class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     // Se crea el binding para la vista:
-    private lateinit var binding:ActivityConsultarInventarioBinding
-
+    private lateinit var binding:ActivityBuscarCodigoBarrasBinding
     // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
 
@@ -68,7 +67,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     super.onCreate(savedInstanceState)
     // Implementación de View Binding:
-    binding = ActivityConsultarInventarioBinding.inflate(layoutInflater)
+    binding = ActivityBuscarCodigoBarrasBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
         cargarVista()
@@ -580,8 +579,8 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     }
 
     private fun insertarItemInventario() {
-        try{
 
+        try{
             val codigoBarras = binding.etCodigo.text.toString()
             val descripcion = binding.tvDescripcion2.text.toString()
             val idArticulo = binding.tvIdArticulo2.text.toString()
@@ -592,11 +591,20 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
             val partida = binding.spinnerPartida.selectedItem?.toString() ?: ""
 
-            dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
+            if(descripcion.isEmpty() && idArticulo.isEmpty()){
+
+                Toast.makeText(this, "Algunos de los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
+            }else if(unidadesContadas < 0){
+
+                Toast.makeText(this, "Algunos de los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
+            }else{
+
+                dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
                     idCombinacion, partida, fechaCaducidad,
                     numeroSerie, unidadesContadas)
+            }
         }catch(e:Exception){
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Algunos de los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -675,7 +683,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             Log.e("TAG", "Error al cargar los artículos: ${e.message}")
         }
     }
-
 }
 
 

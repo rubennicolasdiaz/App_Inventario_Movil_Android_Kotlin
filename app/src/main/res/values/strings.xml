@@ -24,8 +24,9 @@
     <string name="buscar">BUSCAR CÓDIGO BARRAS</string>
     <string name="buscar_codigo">Buscar por código de barras</string>
     <string name="buscar_descripcion">BUSCAR ARTÍCULO POR DESCRIPCIÓN</string>
-    <string name="historial">HISTORIAL BÚSQUEDA</string>
+    <string name="historial">HISTORIAL DE BÚSQUEDAS</string>
     <string name="selecionar">Seleccionar Artículo</string>
     <string name="escriba">Escriba la descripción del artículo</string>
     <string name="introduzca">Introduzca código de barras</string>
+    <string name="seleccionar_item">Seleccionar Item Inventario</string>
 </resources>

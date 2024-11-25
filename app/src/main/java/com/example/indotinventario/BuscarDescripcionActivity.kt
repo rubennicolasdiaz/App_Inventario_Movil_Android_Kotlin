@@ -10,13 +10,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.indotinventario.Pruebas.Articulo
 import com.example.indotinventario.adapter.ArticuloAdapter
-import com.example.indotinventario.databinding.ActivityRecyclerViewBinding
+import com.example.indotinventario.databinding.ActivityBuscarDescripcionBinding
 
 class BuscarDescripcionActivity : AppCompatActivity() {
 
     // Instancia de la clase DB Inventario
     private lateinit var dbInventario: DBInventario
-    private lateinit var binding: ActivityRecyclerViewBinding
+    private lateinit var binding: ActivityBuscarDescripcionBinding
 
     private lateinit var listaArticulos: ArrayList<Articulo>
     private lateinit var articuloMutableList: MutableList<Articulo>
@@ -29,7 +29,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Implementación de View Binding:
-        binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
+        binding = ActivityBuscarDescripcionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         inicializarDB()

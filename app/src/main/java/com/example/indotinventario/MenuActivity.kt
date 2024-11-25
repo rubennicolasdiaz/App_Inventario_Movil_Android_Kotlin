@@ -30,6 +30,10 @@ class MenuActivity : AppCompatActivity() {
         binding.buttonBuscarDescripcion.setOnClickListener {
             pasarABuscarDescripcionActivity()
         }
+
+        binding.buttonHistorial.setOnClickListener {
+            pasarAHistorialActivity()
+        }
     }
 
     private fun pasarABuscarCodigoBarrasActivity() {
@@ -39,6 +43,11 @@ class MenuActivity : AppCompatActivity() {
     private fun pasarABuscarDescripcionActivity() {
         moveTaskToBack(true)
         startActivity(Intent(this, BuscarDescripcionActivity::class.java))
+    }
+
+    private fun pasarAHistorialActivity() {
+        moveTaskToBack(true)
+        startActivity(Intent(this, HistorialActivity::class.java))
     }
 
     // Menú:

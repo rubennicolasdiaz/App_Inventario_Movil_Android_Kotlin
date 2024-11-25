@@ -62,6 +62,7 @@ dependencies {
 
 
     implementation("me.dm7.barcodescanner:zxing:1.9.8")
+    implementation(libs.filament.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
