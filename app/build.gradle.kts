@@ -55,7 +55,9 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.7.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
 
-
+    // Navegación para bottom bar:
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
 
     // Solo añade estas líneas si tienes los JAR correctos en libs
     implementation(files("libs/jtds-1.3.1.jar"))

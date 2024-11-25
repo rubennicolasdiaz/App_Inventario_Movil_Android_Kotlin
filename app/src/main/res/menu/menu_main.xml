@@ -3,8 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/idInicio"
-        android:title="@string/menu_inicio" />
+        android:title="@string/menu_inicio"
+        android:icon="@drawable/icon_inicio" />
+
+    <item
+        android:id="@+id/idOpciones"
+        android:title="@string/opciones"
+        android:icon="@drawable/icon_opciones"/>
+
     <item
         android:id="@+id/idSalir"
-        android:title="@string/menu_salir" />
+        android:title="@string/menu_salir"
+        android:icon="@drawable/icon_salir"/>
 </menu>
