@@ -51,9 +51,25 @@
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonBuscarDescripcion" />
+
+    <Button
+        android:id="@+id/buttonGuardar"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/NaranjaRuano"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/salir_guardar"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHistorial" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

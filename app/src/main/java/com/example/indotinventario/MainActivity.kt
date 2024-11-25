@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241119_1.articulos 1.json")
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.articulos.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241119_1.cbarras 1.json")
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.cbarras.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241119_1.partidasnserie 1.json")
+            val inputStream: InputStream = assets.open("Inventario_20241111_1.partidasnserie.json")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)

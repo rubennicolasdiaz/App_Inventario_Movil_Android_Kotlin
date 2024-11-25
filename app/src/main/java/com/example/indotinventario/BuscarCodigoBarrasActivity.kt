@@ -2,13 +2,10 @@ package com.example.indotinventario
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,18 +18,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.Pruebas.Articulo
+import com.example.indotinventario.Pruebas.SaveJsonFile
 import com.example.indotinventario.databinding.ActivityBuscarCodigoBarrasBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import kotlin.collections.ArrayList
 
 class BuscarCodigoBarrasActivity : AppCompatActivity() {
@@ -270,8 +260,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                 val items = listOf(*arrayPartidas.toTypedArray())
                 adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-
-
 
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
 
@@ -521,27 +509,13 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                     // Se llama a la función async y al método await para que no se ejecute el
                     // siguiente código hasta que finalice la tarea anterior:
-                    async{saveJsonInventario(this@BuscarCodigoBarrasActivity)}.await()
+                    async{ SaveJsonFile.saveJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario)}.await()
                     finishAffinity() // Finaliza la app.
                 }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun obtenerFechaActual(): String {
-
-        val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val fechaActual = Date() // Obtener la fecha y hora actual
-        return formatoFecha.format(fechaActual) // Formatear la fecha en el formato deseado y devolverla como String
-    }
-
-    private fun obtenerHoraActual(): String {
-        // Definir el formato para la hora
-        val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val horaActual = Date() // Obtener la fecha y hora actual
-        return formatoHora.format(horaActual) // Formatear la hora y devolverla como String
     }
 
     private fun rellenarArrayArticulos() {
@@ -608,7 +582,9 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveJsonInventario(context: Context) {
+
+
+    /* private fun saveJsonInventario(context: Context) {
 
         try {
             // Se crea el cursor para obtener todos los ítems de la tabla inventario:
@@ -682,7 +658,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("TAG", "Error al cargar los artículos: ${e.message}")
         }
-    }
+    } */
 }
 
 

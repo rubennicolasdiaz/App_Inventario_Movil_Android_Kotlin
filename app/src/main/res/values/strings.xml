@@ -29,4 +29,5 @@
     <string name="escriba">Escriba la descripción del artículo</string>
     <string name="introduzca">Introduzca código de barras</string>
     <string name="seleccionar_item">Seleccionar Item Inventario</string>
+    <string name="salir_guardar">SALIR Y GUARDAR CAMBIOS</string>
 </resources>

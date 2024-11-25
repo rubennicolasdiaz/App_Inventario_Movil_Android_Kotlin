@@ -5,10 +5,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.indotinventario.Pruebas.InventarioItem
+import com.example.indotinventario.Pruebas.SaveJsonFile
 import com.example.indotinventario.adapter.ItemAdapter
 import com.example.indotinventario.databinding.ActivityHistorialBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class HistorialActivity : AppCompatActivity() {
 
@@ -64,23 +69,17 @@ class HistorialActivity : AppCompatActivity() {
             }
 
             R.id.idSalir -> {
+                dbInventario.close()
 
 
-                /* dbInventario.close()
+                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
+                lifecycleScope.launch(Dispatchers.IO){
 
-
-                 // Se llama a corrutina para salvar los datos de la DB a ficheros Json en almacenamiento externo:
-                 lifecycleScope.launch(Dispatchers.IO){
-
-                     // Se llama a la función async y al método await para que no se ejecute el
-                     // siguiente código hasta que finalice la tarea anterior:
-                     async{saveJsonArticulos(this@BuscarCodigoBarrasActivity)}.await()
-                     async{saveJsonCodigosBarras(this@BuscarCodigoBarrasActivity)}.await()
-                     async{saveJsonPartidas(this@BuscarCodigoBarrasActivity)}.await()
-
-                     finishAffinity()
-                 } */
-
+                    // Se llama a la función async y al método await para que no se ejecute el
+                    // siguiente código hasta que finalice la tarea anterior:
+                    async{ SaveJsonFile.saveJsonInventario(this@HistorialActivity, dbInventario)}.await()
+                    finishAffinity() // Finaliza la app.
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

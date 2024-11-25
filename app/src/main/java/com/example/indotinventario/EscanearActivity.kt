@@ -57,7 +57,7 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.Volver -> {
+            R.id.idVolver -> {
                 finish()
                 true
             }
