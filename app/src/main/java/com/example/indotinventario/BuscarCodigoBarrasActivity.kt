@@ -2,6 +2,8 @@ package com.example.indotinventario
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -35,12 +37,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     // ArrayList para poder buscar por descripción de artículo:
     private var arrayArticulos: ArrayList<Articulo> = ArrayList()
 
-
     // ArrayLists para almacenar los valores asociados a las partidas:
     private var arrayPartidas:ArrayList<String> = ArrayList()
     private var arrayFechas:ArrayList<String> = ArrayList()
     private var arrayNumerosSerie:ArrayList<String> = ArrayList()
-
 
     private lateinit var adapter:ArrayAdapter<Any>
 
@@ -73,12 +73,11 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     private fun comprobarBundleDescripcion() {
 
-
             val bundle = intent.extras
             val codigoBarras = bundle?.getString("codigoBarras")
             val idArticulo = bundle?.getString("idArticulo")
 
-            // Si el valor no es nulo ni vacío, lo asignamos al EditText
+
             if (!codigoBarras.isNullOrEmpty()) {
                 binding.etCodigo.setText(codigoBarras)
                 binding.tvIdArticulo2.text = idArticulo
@@ -501,17 +500,8 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             }
 
             R.id.idSalir -> {
-                dbInventario.close()
 
-
-                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
-                lifecycleScope.launch(Dispatchers.IO){
-
-                    // Se llama a la función async y al método await para que no se ejecute el
-                    // siguiente código hasta que finalice la tarea anterior:
-                    async{ SaveJsonFile.saveJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
-                }
+                showAlertDialog(this)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -555,15 +545,14 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun insertarItemInventario() {
 
         try{
-            val codigoBarras = binding.etCodigo.text.toString()
-            val descripcion = binding.tvDescripcion2.text.toString()
-            val idArticulo = binding.tvIdArticulo2.text.toString()
-            val idCombinacion = binding.tvIdCombinacion2.text.toString()
-            val fechaCaducidad = binding.tvFecha2.text.toString()
-            val numeroSerie = binding.tvNumero2.text.toString()
+            val codigoBarras = binding.etCodigo.text?.toString() ?: ""
+            val descripcion = binding.tvDescripcion2.text?.toString() ?: ""
+            val idArticulo = binding.tvIdArticulo2.text?.toString() ?: " "
+            val idCombinacion = binding.tvIdCombinacion2.text?.toString() ?: " "
+            val fechaCaducidad = binding.tvFecha2.text?.toString() ?: ""
+            val numeroSerie = binding.tvNumero2.text?.toString() ?: " "
             val unidadesContadas: Double = binding.etUnidades.text.toString().toDouble()
-
-            val partida = binding.spinnerPartida.selectedItem?.toString() ?: ""
+            val partida = binding.spinnerPartida.selectedItem?.toString() ?: " "
 
             if(descripcion.isEmpty() && idArticulo.isEmpty()){
 
@@ -582,83 +571,30 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
+    private fun showAlertDialog(context: Context){
 
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Confirmar salida")
+            .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
+                    "inventario y salir de la app?")
 
-    /* private fun saveJsonInventario(context: Context) {
+            .setPositiveButton("Sí") { dialog, which ->
 
-        try {
-            // Se crea el cursor para obtener todos los ítems de la tabla inventario:
-            val todosItemsCursor: Cursor = dbInventario.obtenerTodosItemInventario()
+                dbInventario.close()
 
-            // Crear un array JSON que contendrá todas los ítems del inventario:
-            val itemsInventarioJsonArray = JSONArray()
+                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
+                lifecycleScope.launch(Dispatchers.IO){
 
-            if (todosItemsCursor.moveToFirst()) {
-                // Indices de las columnas del cursor
-                val codigoBarrasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
-                val descripcionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                val idArticuloIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-                val idCombinacionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
-                val partidaIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
-                val fechaCaducidadIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
-                val numeroSerieIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
-                val unidadesContadasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_UNIDADES_CONTADAS)
-
-                // Iterar sobre cada fila del cursor
-                do {
-                    // Crear un nuevo JSONObject en cada iteración
-                    val itemJson = JSONObject()
-
-                    val codigoBarras = todosItemsCursor.getString(codigoBarrasIndex)
-                    val descripcion = todosItemsCursor.getString(descripcionIndex)
-                    val idArticulo = todosItemsCursor.getString(idArticuloIndex)
-                    val idCombinacion = todosItemsCursor.getString(idCombinacionIndex)
-                    val partida = todosItemsCursor.getString(partidaIndex)
-                    val fechaCaducidad = todosItemsCursor.getString(fechaCaducidadIndex)
-                    val numeroSerie = todosItemsCursor.getString(numeroSerieIndex)
-                    val unidadesContadas = todosItemsCursor.getDouble(unidadesContadasIndex)
-
-                    itemJson.put("codigoBarras", codigoBarras)
-                    itemJson.put("descripcion", descripcion)
-                    itemJson.put("idArticulo", idArticulo)
-                    itemJson.put("idCombinacion", idCombinacion)
-                    itemJson.put("partida", partida)
-                    itemJson.put("fechaCaducidad", fechaCaducidad)
-                    itemJson.put("numeroSerie", numeroSerie)
-                    itemJson.put("unidadesContadas", unidadesContadas)
-
-                    // Añadir el objeto JSON al array
-                    itemsInventarioJsonArray.put(itemJson)
-
-                } while (todosItemsCursor.moveToNext())
-            } else {
-                Log.i("Json Inventario", "No se encontró ningún elemento de inventario")
-            }
-
-            // Se cierra la conexión a la DB:
-            dbInventario.close()
-
-            val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.items.json"
-
-            // Guardar el archivo JSON en el almacenamiento externo
-            val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            if (externalStorageDir != null) {
-                val file = File(externalStorageDir, fileName)
-                try {
-                    val outputStream = FileOutputStream(file)
-                    outputStream.write(itemsInventarioJsonArray.toString().toByteArray())
-                    outputStream.close()
-                    Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
-                } catch (e: IOException) {
-                    Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                    async{ SaveJsonFile.saveJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario)}.await()
+                    finishAffinity() // Finaliza la app.
                 }
-            } else {
-                Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
+
+            }.setNegativeButton("No") { dialog, which ->
+
+                dialog.dismiss()
             }
-        } catch (e: Exception) {
-            Log.e("TAG", "Error al cargar los artículos: ${e.message}")
-        }
-    } */
+        builder.show()
+    }
 }
 
 

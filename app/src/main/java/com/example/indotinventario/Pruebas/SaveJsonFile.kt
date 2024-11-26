@@ -19,6 +19,7 @@ class SaveJsonFile {
 
         suspend fun saveJsonInventario(context: Context, dbInventario:DBInventario) {
 
+
           try {
               // Se crea el cursor para obtener todos los ítems de la tabla inventario:
               val todosItemsCursor: Cursor = dbInventario.obtenerTodosItemInventario()
@@ -28,7 +29,7 @@ class SaveJsonFile {
 
               if (todosItemsCursor.moveToFirst()) {
                   // Indices de las columnas del cursor
-                  val codigoBarrasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
+                  // val codigoBarrasIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS) // No se necesita código barras para el fichero Json
                   val descripcionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
                   val idArticuloIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
                   val idCombinacionIndex = todosItemsCursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
@@ -42,7 +43,7 @@ class SaveJsonFile {
                       // Crear un nuevo JSONObject en cada iteración
                       val itemJson = JSONObject()
 
-                      val codigoBarras = todosItemsCursor.getString(codigoBarrasIndex)
+                      //val codigoBarras = todosItemsCursor.getString(codigoBarrasIndex) // No se necesita código barras para el fichero Json
                       val descripcion = todosItemsCursor.getString(descripcionIndex)
                       val idArticulo = todosItemsCursor.getString(idArticuloIndex)
                       val idCombinacion = todosItemsCursor.getString(idCombinacionIndex)
@@ -51,7 +52,7 @@ class SaveJsonFile {
                       val numeroSerie = todosItemsCursor.getString(numeroSerieIndex)
                       val unidadesContadas = todosItemsCursor.getDouble(unidadesContadasIndex)
 
-                      itemJson.put("codigoBarras", codigoBarras)
+                      //itemJson.put("codigoBarras", codigoBarras) // No se necesita código barras para el fichero Json
                       itemJson.put("descripcion", descripcion)
                       itemJson.put("idArticulo", idArticulo)
                       itemJson.put("idCombinacion", idCombinacion)
@@ -88,6 +89,8 @@ class SaveJsonFile {
               } else {
                   Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
               }
+
+
           } catch (e: Exception) {
               Log.e("TAG", "Error al cargar los artículos: ${e.message}")
           }

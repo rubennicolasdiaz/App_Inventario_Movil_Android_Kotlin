@@ -1,5 +1,7 @@
 package com.example.indotinventario
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -69,17 +71,8 @@ class HistorialActivity : AppCompatActivity() {
             }
 
             R.id.idSalir -> {
-                dbInventario.close()
 
-
-                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
-                lifecycleScope.launch(Dispatchers.IO){
-
-                    // Se llama a la función async y al método await para que no se ejecute el
-                    // siguiente código hasta que finalice la tarea anterior:
-                    async{ SaveJsonFile.saveJsonInventario(this@HistorialActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
-                }
+                showAlertDialog(this)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -121,18 +114,43 @@ class HistorialActivity : AppCompatActivity() {
                 }while(cursorInventario.moveToNext())
             }else{
 
-                Toast.makeText(this, "No hay ningún inventario registrado", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "No hay ningún inventario registrado", Toast.LENGTH_SHORT).show()
             }
             // Se cierra el cursor de la base de datos
             cursorInventario.close()
 
 
         }catch(e:Exception){
-            Toast.makeText(this, "No hay ningún inventario registrado", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "No hay ningún inventario registrado", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun onItemSelected(inventarioItem: InventarioItem) {
 
+    }
+
+    private fun showAlertDialog(context: Context){
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Confirmar salida")
+            .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
+                    "inventario y salir de la app?")
+
+            .setPositiveButton("Sí") { dialog, which ->
+
+                dbInventario.close()
+
+                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
+                lifecycleScope.launch(Dispatchers.IO){
+
+                    async{ SaveJsonFile.saveJsonInventario(this@HistorialActivity, dbInventario)}.await()
+                    finishAffinity() // Finaliza la app.
+                }
+
+            }.setNegativeButton("No") { dialog, which ->
+
+                dialog.dismiss()
+            }
+        builder.show()
     }
 }

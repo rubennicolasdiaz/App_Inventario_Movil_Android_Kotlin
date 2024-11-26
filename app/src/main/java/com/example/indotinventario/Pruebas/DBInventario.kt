@@ -93,7 +93,7 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         $COLUMN_NUMERO_SERIE TEXT,
         $COLUMN_UNIDADES_CONTADAS DOUBLE NOT NULL,
         
-        PRIMARY KEY($COLUMN_ID_ARTICULO, $COLUMN_ID_COMBINACION, $COLUMN_PARTIDA));
+        PRIMARY KEY($COLUMN_ID_ARTICULO, $COLUMN_ID_COMBINACION, $COLUMN_PARTIDA, $COLUMN_NUMERO_SERIE));
 """.trimIndent()
 
 

@@ -1,5 +1,7 @@
 package com.example.indotinventario
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,7 +25,6 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private lateinit var dbInventario: DBInventario
     private lateinit var binding: ActivityBuscarDescripcionBinding
 
-    private lateinit var listaArticulos: ArrayList<Articulo>
     private lateinit var articuloMutableList: MutableList<Articulo>
 
 
@@ -38,14 +39,13 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         inicializarDB()
-
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
 
         adapter = ArticuloAdapter(
-            listaArticulos,
+            articuloMutableList,
             onClickListener = { articulo -> onItemSelected(articulo) }
 
         )
@@ -66,8 +66,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         try{
             dbInventario= DBInventario.getInstance(this)
             val cursorArticulos = dbInventario.obtenerTodosArticulos()
-            listaArticulos = ArrayList()
-            articuloMutableList = listaArticulos.toMutableList()
+            articuloMutableList = ArrayList()
 
             if(cursorArticulos.moveToNext()){
 
@@ -80,8 +79,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                     val idCombinacion = cursorArticulos.getString(idCombinacionIndex)
                     val descripcion = cursorArticulos.getString(descripcionIndex)
 
-                    listaArticulos.add(Articulo(idArticulo, idCombinacion, descripcion))
-                    articuloMutableList = listaArticulos
+                    articuloMutableList.add(Articulo(idArticulo, idCombinacion, descripcion))
 
                 }while(cursorArticulos.moveToNext())
             }
@@ -94,7 +92,6 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     }
 
     private fun onItemSelected(articulo: Articulo) {
-        //Toast.makeText(this, articulo.idArticulo, Toast.LENGTH_SHORT).show()
         buscarArticuloDescripcion(articulo)
     }
 
@@ -140,17 +137,8 @@ class BuscarDescripcionActivity : AppCompatActivity() {
             }
 
             R.id.idSalir -> {
-                dbInventario.close()
 
-
-                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
-                lifecycleScope.launch(Dispatchers.IO){
-
-                    // Se llama a la función async y al método await para que no se ejecute el
-                    // siguiente código hasta que finalice la tarea anterior:
-                    async{ SaveJsonFile.saveJsonInventario(this@BuscarDescripcionActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
-                }
+                showAlertDialog(this)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -172,5 +160,30 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         startActivity(intent)
         dbInventario.close()
         finish()
+    }
+
+    private fun showAlertDialog(context: Context){
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Confirmar salida")
+            .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
+                    "inventario y salir de la app?")
+
+            .setPositiveButton("Sí") { dialog, which ->
+
+                dbInventario.close()
+
+                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
+                lifecycleScope.launch(Dispatchers.IO){
+
+                    async{ SaveJsonFile.saveJsonInventario(this@BuscarDescripcionActivity, dbInventario)}.await()
+                    finishAffinity() // Finaliza la app.
+                }
+
+            }.setNegativeButton("No") { dialog, which ->
+
+                dialog.dismiss()
+            }
+        builder.show()
     }
 }
