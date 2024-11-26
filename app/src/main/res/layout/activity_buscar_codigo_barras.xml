@@ -250,21 +250,21 @@
         app:layout_constraintVertical_bias="0.7"
         app:layout_constraintHorizontal_bias="0.08" />
 
-    <TextView
-        android:id="@+id/tvNumero2"
+    <Spinner
+        android:id="@+id/spinnerNumeroSerie"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:textColor="@color/azul_marino"
-        android:textSize="22sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7"
         app:layout_constraintHorizontal_bias="0.7" />
 
-    <TextView
+   <TextView
         android:id="@+id/tvUnidades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

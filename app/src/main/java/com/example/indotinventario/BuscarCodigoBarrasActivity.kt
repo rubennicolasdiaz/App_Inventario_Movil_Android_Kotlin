@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -42,7 +43,8 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private var arrayFechas:ArrayList<String> = ArrayList()
     private var arrayNumerosSerie:ArrayList<String> = ArrayList()
 
-    private lateinit var adapter:ArrayAdapter<Any>
+    private lateinit var adapterPartidas:ArrayAdapter<Any>
+    private lateinit var adapterNumerosSerie:ArrayAdapter<Any>
 
     // Constantes y variables para permisos de cámara:
 
@@ -55,42 +57,44 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
-    super.onCreate(savedInstanceState)
-    // Implementación de View Binding:
-    binding = ActivityBuscarCodigoBarrasBinding.inflate(layoutInflater)
-    setContentView(binding.root)
+        super.onCreate(savedInstanceState)
+        // Implementación de View Binding:
+        binding = ActivityBuscarCodigoBarrasBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         cargarVista()
         inicializarDB()
         verificarYPedirPermisosDeCamara()
 
         // Se rellena el Array de Artículos al inicio de la Activity
-        rellenarArrayArticulos()
+        //rellenarArrayArticulos()   // Probar a ver si funciona sin eso
 
         //Comprobar el Bundle de la activity de Buscar por Descripción
         comprobarBundleDescripcion()
     }
 
+
     private fun comprobarBundleDescripcion() {
 
-            val bundle = intent.extras
-            val codigoBarras = bundle?.getString("codigoBarras")
-            val idArticulo = bundle?.getString("idArticulo")
+        val bundle = intent.extras
+        val codigoBarras = bundle?.getString("codigoBarras")
+        val idArticulo = bundle?.getString("idArticulo")
+        val idCombinacion = bundle?.getString("idCombinacion")
 
-
-            if (!codigoBarras.isNullOrEmpty()) {
+        if (bundle != null) {
+            if(bundle.isEmpty ){
+                Log.i("Bundle", "Bundle vacío")
+            }else{
                 binding.etCodigo.setText(codigoBarras)
                 binding.tvIdArticulo2.text = idArticulo
+                binding.tvIdCombinacion2.text = idCombinacion
 
-                buscarArticuloPorCodigoBarras(codigoBarras)
-            }else{
-
-                if(!idArticulo.isNullOrEmpty()) {
-                    binding.tvIdArticulo2.text = idArticulo
-                    buscarArticuloPorIdArticulo(idArticulo)
-                    buscarPartidaPorIdArticulo(idArticulo)
-                }
+                buscarArticuloPorIdArticulo(idArticulo)
+                buscarPartidaPorIdArticulo(idArticulo)
             }
+        }else{
+            Log.i("Bundle", "Bundle nulo")
+        }
     }
 
     private fun cargarVista() {
@@ -136,7 +140,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun buscarporCodigoBarras() {
 
         val codigoArticulo = binding.etCodigo.text.toString()
-        buscarArticuloPorCodigoBarras(codigoArticulo)
+        val idArticulo = buscarArticuloPorCodigoBarras(codigoArticulo)
+        buscarArticuloPorIdArticulo(idArticulo)
+        buscarPartidaPorIdArticulo(idArticulo)
+
     }
 
     private fun disminuirUnidades() {
@@ -232,11 +239,11 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         try{
 
             val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo!!)
+            var partidaInicial = ""
 
-            if(partidaCursor.moveToFirst() || partidaCursor.moveToNext()) {
+            if(partidaCursor.moveToFirst()) {
 
                 do{
-
                     val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
                     val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
                     val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
@@ -253,19 +260,61 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                 }while(partidaCursor.moveToNext())
 
-                // Cerramos el cursor
+                partidaInicial = arrayPartidas.last()
                 partidaCursor.close()
 
 
+            }else{
+
+            }
+
+            if(partidaInicial == "null"){
+
+                arrayPartidas.clear()
+                arrayFechas.clear()
+
+
+
+                val items = listOf(*arrayNumerosSerie.toTypedArray())
+
+                adapterNumerosSerie = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+
+                adapterNumerosSerie.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+                binding.spinnerNumeroSerie.adapter = adapterNumerosSerie
+
+                binding.spinnerNumeroSerie.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
+
+                        binding.etUnidades.setText("1")
+                        binding.etUnidades.isFocusable = false
+                        binding.etUnidades.isClickable = false
+
+                        binding.buttonIncrementar.isFocusable = false
+                        binding.buttonIncrementar.isClickable = false
+
+                        binding.buttonDisminuir.isFocusable = false
+                        binding.buttonDisminuir.isClickable = false
+                    }
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                    }
+                }
+
+            }else{
+
+                arrayNumerosSerie.clear()
+
+
                 val items = listOf(*arrayPartidas.toTypedArray())
-                adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
 
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+                adapterPartidas = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
 
-                binding.spinnerPartida.adapter = adapter
+                adapterPartidas.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+                binding.spinnerPartida.adapter = adapterPartidas
 
                 binding.spinnerPartida.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-
 
                     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
 
@@ -273,32 +322,24 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                             binding.tvFecha2.setText(arrayFechas[position])
 
-                            if(arrayNumerosSerie[position].equals("null")){
-
-                                binding.tvNumero2.setText("")
-                            }else{
-                                binding.tvNumero2.setText(arrayNumerosSerie[position])
-                            }
                         }else {
                             Toast.makeText(this@BuscarCodigoBarrasActivity, "No hay ningún elemento disponible",
                                 Toast.LENGTH_SHORT).show()
                         }
-
                     }
                     override fun onNothingSelected(p0: AdapterView<*>?) {
-
                     }
                 }
-            }
 
+            }
         }catch(e:Exception){
             Toast.makeText(this, e.message,Toast.LENGTH_SHORT).show()
         }
-
     }
 
-    private fun buscarArticuloPorCodigoBarras(codigoBarras: String) {
+    private fun buscarArticuloPorCodigoBarras(codigoBarras: String):String {
 
+        var idArticulo = ""
         try{
             // Obtener el cursor con los datos del código de barras
             val cursor: Cursor = dbInventario.obtenerCodigoBarras(codigoBarras)
@@ -307,102 +348,15 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             if (cursor.moveToFirst() || cursor.moveToNext()) {
                 // Obtener los valores del cursor para el código de barras
                 val idArticuloIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-                val idCombinacionIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
 
+                idArticulo = cursor.getString(idArticuloIndex)
 
-                val idArticulo = cursor.getString(idArticuloIndex)
-                val idCombinacion = cursor.getString(idCombinacionIndex)
+                binding.tvIdArticulo2.text = idArticulo
+
 
                 // Cerramos el cursor de código de barras
                 cursor.close()
 
-                binding.tvIdArticulo2.setText(idArticulo) // ID del artículo
-                binding.tvIdCombinacion2.setText(idCombinacion) // Combinación (suele venir vacío)
-
-
-                // Ahora obtenemos los detalles del artículo usando el idArticulo
-                val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo)
-
-                if(articuloCursor.moveToFirst() || articuloCursor.moveToNext()){
-
-                    // Verificamos si se encuentra el artículo
-
-                    val descripcionIndex = articuloCursor.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-
-                    // Obtener los detalles del artículo
-                    val descripcion = articuloCursor.getString(descripcionIndex)
-
-                    // Cerramos el cursor de artículo
-                    articuloCursor.close()
-
-                    // Asignamos los valores a los EditText en la interfaz de usuario
-                    binding.tvDescripcion2.setText(descripcion) // Descripción del artículo
-
-                    // Ahora obtenemos los detalles de la partida usando el idArticulo
-                    val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
-
-
-                    // Recorremos todas las filas de partida asociadas al idArticulo
-                    if(partidaCursor.moveToFirst() || partidaCursor.moveToNext()) {
-
-                        do{
-
-                            val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
-                            val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
-                            val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
-
-                            // Obtener los detalles de la partida:
-
-                            val partida = partidaCursor.getString(partidaIndex)
-                            val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
-                            val numeroSerie = partidaCursor.getString(numeroSerieIndex)
-
-                            arrayPartidas.add(partida)
-                            arrayFechas.add(fechaCaducidad)
-                            arrayNumerosSerie.add(numeroSerie)
-
-                        }while(partidaCursor.moveToNext())
-
-                        // Cerramos el cursor
-                        partidaCursor.close()
-
-
-                        val items = listOf(*arrayPartidas.toTypedArray())
-                        adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-
-
-
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-
-                        binding.spinnerPartida.adapter = adapter
-
-                        binding.spinnerPartida.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-
-
-                            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
-
-                                if (position >= 0 && position < arrayPartidas.size){
-
-                                    binding.tvFecha2.setText(arrayFechas[position])
-
-                                    if(arrayNumerosSerie[position].equals("null")){
-
-                                        binding.tvNumero2.setText("")
-                                    }else{
-                                        binding.tvNumero2.setText(arrayNumerosSerie[position])
-                                    }
-                                }else {
-                                    Toast.makeText(this@BuscarCodigoBarrasActivity, "No hay ningún elemento disponible",
-                                        Toast.LENGTH_SHORT).show()
-                                }
-
-                            }
-                            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-                            }
-                        }
-                    }
-                }
             } else {
                 // Si no se encuentra el código de barras, mostramos un mensaje
                 Toast.makeText(this, "Código de barras no encontrado", Toast.LENGTH_LONG).show()
@@ -411,6 +365,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             Toast.makeText(this, e.message,
                 Toast.LENGTH_LONG).show()
         }
+        return idArticulo
     }
 
     // Inicializar la base de datos
@@ -432,16 +387,34 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             emptyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             emptyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             binding.spinnerPartida.adapter = emptyAdapter
+            binding.spinnerNumeroSerie.adapter = emptyAdapter
+
+            // Se desbloquean el EditText de Unidades y los Floating Button:
+
+            binding.etUnidades.isFocusable = true
+            binding.etUnidades.isClickable = true
+            binding.etUnidades.setText("")
+            binding.etUnidades.clearFocus() // Quitar el foco también puede ayudar
+            binding.etUnidades.requestLayout() // Solicitar una actualización del layout
+
+            binding.buttonIncrementar.isFocusable = true
+            binding.buttonIncrementar.isClickable = true
+            binding.buttonIncrementar.clearFocus() // Quitar el foco también puede ayudar
+            binding.buttonIncrementar.requestLayout() // Solicitar una actualización del layout
+
+            binding.buttonDisminuir.isFocusable = true
+            binding.buttonDisminuir.isClickable = true
+            binding.buttonDisminuir.clearFocus() // Quitar el foco también puede ayudar
+            binding.buttonDisminuir.requestLayout() // Solicitar una actualización del layout
+
 
             //Se setean los campos de la vista con cadenas vacías
 
-            binding.tvFecha2.setText("")
-            binding.tvNumero2.setText("")
             binding.etCodigo.setText("")
             binding.tvDescripcion2.setText("")
             binding.tvIdArticulo2.setText("")
             binding.tvIdCombinacion2.setText("")
-            binding.etUnidades.setText("")
+            binding.tvFecha2.setText("")
 
         }catch(e:Exception){
             Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -520,7 +493,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     val idArticuloIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
                     val idCombinacionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
                     val descripcionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                                        // Obtener los valores del artículo
+                    // Obtener los valores del artículo
                     val idArticulo = cursorArticulos.getString(idArticuloIndex)
                     val idCombinacion = cursorArticulos.getString(idCombinacionIndex)
                     val descripcion = cursorArticulos.getString(descripcionIndex)
@@ -550,9 +523,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             val idArticulo = binding.tvIdArticulo2.text?.toString() ?: " "
             val idCombinacion = binding.tvIdCombinacion2.text?.toString() ?: " "
             val fechaCaducidad = binding.tvFecha2.text?.toString() ?: ""
-            val numeroSerie = binding.tvNumero2.text?.toString() ?: " "
+
             val unidadesContadas: Double = binding.etUnidades.text.toString().toDouble()
             val partida = binding.spinnerPartida.selectedItem?.toString() ?: " "
+            val numeroSerie = binding.spinnerNumeroSerie.selectedItem?.toString() ?: " "
 
             if(descripcion.isEmpty() && idArticulo.isEmpty()){
 
@@ -596,5 +570,3 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         builder.show()
     }
 }
-
-

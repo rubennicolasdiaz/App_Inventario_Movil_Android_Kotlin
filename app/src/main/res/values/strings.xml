@@ -8,7 +8,7 @@
     <string name="id_combinacion">"Id Combinación:"</string>
     <string name="partida">"Partida:"</string>
     <string name="fecha_caducidad">"Fecha Caducidad:"</string>
-    <string name="numero_serie">"Número de Serie:"</string>
+    <string name="numero_serie">"S/N:"</string>
     <string name="unidades">"Unidades:"</string>
     <string name="guardar">"Guardar Artículo"</string>
     <string name="escanear">"Escanear Código Barras"</string>
@@ -31,4 +31,6 @@
     <string name="seleccionar_item">Seleccionar Item Inventario</string>
     <string name="salir_guardar">SALIR Y GUARDAR CAMBIOS</string>
     <string name="opciones">Opciones</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

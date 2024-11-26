@@ -100,6 +100,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         try{
             var codigoBarras: String = ""
             var idArticulo = articulo.idArticulo
+            var idCombinacion = articulo.idCombinacion
 
 
             val cursorCodigosBarras = dbInventario.obtenerCodigoBarrasPorArticulo(articulo.idArticulo)
@@ -113,7 +114,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                 }while(cursorCodigosBarras.moveToNext())
             }
             cursorCodigosBarras.close()
-            buscarPorCodigoBarras(codigoBarras, idArticulo)
+            buscarPorCodigoBarras(codigoBarras, idArticulo, idCombinacion)
         }catch(e:Exception){
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -145,12 +146,13 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         }
     }
 
-    private fun buscarPorCodigoBarras(codigoBarras:String, idArticulo:String){
+    private fun buscarPorCodigoBarras(codigoBarras:String, idArticulo:String, idCombinacion:String){
 
         // Crear el Bundle y agregar el valor de codigoBarras
         val bundle = Bundle()
         bundle.putString("codigoBarras", codigoBarras)
         bundle.putString("idArticulo", idArticulo)
+        bundle.putString("idCombinacion", idCombinacion)
 
         // Crear el Intent para pasar a la siguiente actividad
         val intent = Intent(this, BuscarCodigoBarrasActivity::class.java)
