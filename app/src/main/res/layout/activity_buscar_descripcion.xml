@@ -8,6 +8,7 @@
 
     <EditText
         android:id="@+id/etFilter"
+        android:inputType="text"
         android:singleLine="true"
         android:maxLines="1"
         android:imeOptions="actionDone"

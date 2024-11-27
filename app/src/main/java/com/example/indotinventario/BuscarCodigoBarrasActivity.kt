@@ -107,8 +107,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 verificarYPedirPermisosDeCamara()
                 return@setOnClickListener
             }
-            // Limpiar campos antes de escanear para que se borre el Spinner de Partidas
-            limpiarCampos()
             escanear()
         }
 
@@ -191,7 +189,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 // Aquí manejas el código de barras como antes
                 val codigoArticulo: String = codigoBarras
                 binding.etCodigo.setText(codigoArticulo)
-                buscarArticuloPorCodigoBarras(codigoArticulo)
+                buscarporCodigoBarras()
             }
         }
     }
@@ -243,6 +241,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
             if(partidaCursor.moveToFirst()) {
 
+                arrayPartidas.clear()
+                arrayFechas.clear()
+                arrayNumerosSerie.clear()
+
                 do{
                     val partidaIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_PARTIDA)
                     val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
@@ -265,7 +267,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
 
             }else{
-
+                Log.i("TAG Partida", "Elemento no encontrado")
             }
 
             if(partidaInicial == "null"){
@@ -377,47 +379,15 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun limpiarCampos() {
 
         try{
-            //Vaciamos los arrays para volver a dejarlos a 0 para la siguiente búsqueda
-            arrayPartidas.clear()
-            arrayFechas.clear()
-            arrayNumerosSerie.clear()
-
-            //Se establece un adaptador vacío para limpiar las filas del spinner
-            val emptyAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listOf(""))
-            emptyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-            emptyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-            binding.spinnerPartida.adapter = emptyAdapter
-            binding.spinnerNumeroSerie.adapter = emptyAdapter
-
-            // Se desbloquean el EditText de Unidades y los Floating Button:
-
-            binding.etUnidades.isFocusable = true
-            binding.etUnidades.isClickable = true
-            binding.etUnidades.setText("")
-            binding.etUnidades.clearFocus() // Quitar el foco también puede ayudar
-            binding.etUnidades.requestLayout() // Solicitar una actualización del layout
-
-            binding.buttonIncrementar.isFocusable = true
-            binding.buttonIncrementar.isClickable = true
-            binding.buttonIncrementar.clearFocus() // Quitar el foco también puede ayudar
-            binding.buttonIncrementar.requestLayout() // Solicitar una actualización del layout
-
-            binding.buttonDisminuir.isFocusable = true
-            binding.buttonDisminuir.isClickable = true
-            binding.buttonDisminuir.clearFocus() // Quitar el foco también puede ayudar
-            binding.buttonDisminuir.requestLayout() // Solicitar una actualización del layout
 
 
-            //Se setean los campos de la vista con cadenas vacías
 
-            binding.etCodigo.setText("")
-            binding.tvDescripcion2.setText("")
-            binding.tvIdArticulo2.setText("")
-            binding.tvIdCombinacion2.setText("")
-            binding.tvFecha2.setText("")
-
+            val intent = Intent(this@BuscarCodigoBarrasActivity, this@BuscarCodigoBarrasActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            startActivity(intent)
+            finish()
         }catch(e:Exception){
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            Log.e("Error Activity", "Error al reiniciar los campos")
         }
     }
 
@@ -478,40 +448,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun rellenarArrayArticulos() {
-        try {
-            val cursorArticulos: Cursor = dbInventario.obtenerTodosArticulos()
-
-            // Verificar si el cursor tiene registros
-            if (cursorArticulos.moveToFirst()) {
-
-                do {
-                    // Obtener los índices de las columnas
-                    val idArticuloIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-                    val idCombinacionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_ID_COMBINACION)
-                    val descripcionIndex = cursorArticulos.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
-                    // Obtener los valores del artículo
-                    val idArticulo = cursorArticulos.getString(idArticuloIndex)
-                    val idCombinacion = cursorArticulos.getString(idCombinacionIndex)
-                    val descripcion = cursorArticulos.getString(descripcionIndex)
-
-                    // Crear la instancia de la clase Articulo
-                    val articulo = Articulo(idArticulo, idCombinacion, descripcion)
-
-                    // Agregar la instancia de Articulo a la lista
-                    arrayArticulos.add(articulo)
-
-                } while (cursorArticulos.moveToNext()) // Avanzar al siguiente registro
-
-            } else {
-                Toast.makeText(this, "No hay artículos en la base de datos", Toast.LENGTH_SHORT).show()
-            }
-
-        } catch (e: Exception) {
-            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
     }
 

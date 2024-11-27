@@ -23,7 +23,7 @@ class HistorialActivity : AppCompatActivity() {
     private lateinit var dbInventario: DBInventario
     private lateinit var binding: ActivityHistorialBinding
 
-    private var articuloMutableList: MutableList<InventarioItem> = mutableListOf()
+    private var inventarioMutableList: MutableList<InventarioItem> = mutableListOf()
 
     private lateinit var adapter: ItemAdapter
     private val llmanager = LinearLayoutManager(this)
@@ -45,9 +45,9 @@ class HistorialActivity : AppCompatActivity() {
     private fun initRecyclerView() {
 
         adapter = ItemAdapter(
-            articuloMutableList,
-            onClickListener = { inventarioItem -> onItemSelected(inventarioItem) }
-
+            inventarioMutableList,
+            onClickListener = { inventarioItem -> onItemSelected(inventarioItem) },
+            onClickDelete = { position -> showConfirmDeleteItem(this, position) }
         )
         binding.recyclerArticulo.layoutManager = llmanager
         binding.recyclerArticulo.adapter = adapter
@@ -108,7 +108,7 @@ class HistorialActivity : AppCompatActivity() {
                     val unidadesContadas = cursorInventario.getString(unidadesContadasIndex)
 
 
-                    articuloMutableList.add(InventarioItem(codigoBarras, descripcion, idArticulo, idCombinacion, partida,
+                    inventarioMutableList.add(InventarioItem(codigoBarras, descripcion, idArticulo, idCombinacion, partida,
                         fechaCaducidad, numeroSerie, unidadesContadas))
 
                 }while(cursorInventario.moveToNext())
@@ -127,6 +127,48 @@ class HistorialActivity : AppCompatActivity() {
 
     private fun onItemSelected(inventarioItem: InventarioItem) {
 
+     }
+
+    private fun onDeletedItem(position: Int) {
+
+        val itemToDelete:InventarioItem = inventarioMutableList[position]
+
+        val idArticulo = itemToDelete.idArticulo
+        val idCombinacion = itemToDelete.idCombinacion
+        val partida = itemToDelete.partida
+        val numeroSerie = itemToDelete.numeroSerie
+
+        try{
+
+           dbInventario.deleteItemInventario(idArticulo, idCombinacion,
+               partida, numeroSerie)
+
+            inventarioMutableList.removeAt(position)
+            adapter.notifyItemRemoved(position)
+
+            Toast.makeText(this, "Elemento eliminado correctamente", Toast.LENGTH_SHORT).show()
+        }catch(e:Exception){
+
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showConfirmDeleteItem(context: Context, position:Int){
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Confirmar eliminación")
+            .setMessage("¿Estás seguro de que quieres eliminar el " +
+                    "elemento de inventario de la búsqueda?")
+
+            .setPositiveButton("Sí") { dialog, which ->
+
+                onDeletedItem(position)
+
+            }.setNegativeButton("No") { dialog, which ->
+
+                dialog.dismiss()
+            }
+        builder.show()
     }
 
     private fun showAlertDialog(context: Context){

@@ -243,4 +243,21 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM $TABLE_INVENTARIO", null)
     }
+
+    fun deleteItemInventario(idArticulo: String, idCombinacion: String, partida: String, numeroSerie: String){
+
+        val db = this.readableDatabase
+
+        val whereClause = """
+        $COLUMN_ID_ARTICULO = ? AND 
+        $COLUMN_ID_COMBINACION = ? AND 
+        $COLUMN_PARTIDA = ? AND 
+        $COLUMN_NUMERO_SERIE = ?
+        """.trimIndent()
+
+        val whereArgs = arrayOf(idArticulo, idCombinacion, partida, numeroSerie)
+
+        // Ejecutar la consulta de eliminación
+        db.delete(TABLE_INVENTARIO, whereClause, whereArgs)
+    }
 }

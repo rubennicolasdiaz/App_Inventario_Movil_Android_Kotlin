@@ -11,18 +11,20 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(
         inventarioItemModel: InventarioItem,
-        onClickListener: (InventarioItem) -> Unit
+        onClickListener: (InventarioItem) -> Unit,
+        onClickDelete: (Int) -> Unit,
     ) {
 
-        binding.tvCodigoBarras.text = inventarioItemModel.codigoBarras
-        binding.tvDescripcion.text = inventarioItemModel.descripcion
-        binding.tvIdArticulo.text = inventarioItemModel.idArticulo
-        binding.tvIdCombinacion.text = inventarioItemModel.idCombinacion
-        binding.tvPartida.text = inventarioItemModel.partida
-        binding.tvFechaCaducidad.text = inventarioItemModel.fechaCaducidad
-        binding.tvNumeroSerie.text = inventarioItemModel.numeroSerie
-        binding.tvUnidades.text = inventarioItemModel.unidadesContadas
+        binding.tvArticulo2.text = inventarioItemModel.idArticulo
+        binding.tvIdCombinacion2.text = inventarioItemModel.idCombinacion
+        binding.tvDescripcion2.text = inventarioItemModel.descripcion
+        binding.tvPartida2.text = inventarioItemModel.partida
+        binding.tvFecha2.text = inventarioItemModel.fechaCaducidad
+        binding.tvNumero2.text = inventarioItemModel.numeroSerie
+        binding.tvUnidades2.text = inventarioItemModel.unidadesContadas
 
-        //binding.btnSelect.setOnClickListener { onClickListener(inventarioItemModel) }
+        //Lógica del botón de eliminar
+        binding.buttonDelete.setOnClickListener { onClickListener(inventarioItemModel) }
+        binding.buttonDelete.setOnClickListener { onClickDelete(adapterPosition) }
     }
 }
