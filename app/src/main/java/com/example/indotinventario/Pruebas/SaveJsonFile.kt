@@ -72,25 +72,30 @@ class SaveJsonFile {
               // Se cierra la conexión a la DB:
               dbInventario.close()
 
-              val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.items.json"
+              if(itemsInventarioJsonArray.length() > 0){
 
-              // Guardar el archivo JSON en el almacenamiento externo
-              val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-              if (externalStorageDir != null) {
-                  val file = File(externalStorageDir, fileName)
-                  try {
-                      val outputStream = FileOutputStream(file)
-                      outputStream.write(itemsInventarioJsonArray.toString().toByteArray())
-                      outputStream.close()
-                      Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
-                  } catch (e: IOException) {
-                      Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                  val fileName = "Inventario_${obtenerFechaActual()}_${obtenerHoraActual()}.items.json"
+
+                  // Guardar el archivo JSON en el almacenamiento externo
+
+                  val externalStorageDir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+                  if (externalStorageDir != null) {
+                      val file = File(externalStorageDir, fileName)
+                      try {
+                          val outputStream = FileOutputStream(file)
+                          outputStream.write(itemsInventarioJsonArray.toString().toByteArray())
+                          outputStream.close()
+                          Log.d("TAG", "Archivo JSON guardado en almacenamiento externo: ${file.absolutePath}")
+                      } catch (e: IOException) {
+                          Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
+                      }
+                  } else {
+                      Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
                   }
-              } else {
-                  Log.e("TAG", "No se pudo acceder al directorio de almacenamiento externo.")
+              }else{
+
+                  println("El JSONArray está vacío, no se guarda ningún fichero")
               }
-
-
           } catch (e: Exception) {
               Log.e("TAG", "Error al cargar los artículos: ${e.message}")
           }

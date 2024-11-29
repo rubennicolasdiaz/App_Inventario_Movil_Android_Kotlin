@@ -10,6 +10,7 @@
     <color name="azul">#2196F3</color>
     <color name="verde">#118E13</color>
     <color name="rojo">#CA0707</color>
-    <color name="grey">#C7C0C0</color>
+    <color name="grey">#F2F0F0</color>
     <color name="azul_marino">#050F21</color>
+    <color name="marfil">#F0DFCC</color>
 </resources>

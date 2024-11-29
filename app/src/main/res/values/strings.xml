@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Indot Inventario</string>
+    <string name="app_name">Indot Inventario Móvil</string>
     <string name="agregar_articulo">"Añadir un artículo"</string>
     <string name="limpiar">"Limpiar Campos"</string>
     <string name="codigo">"Código Barras:"</string>
@@ -32,6 +32,5 @@
     <string name="salir_guardar">SALIR Y GUARDAR CAMBIOS</string>
     <string name="opciones">Opciones</string>
     <string name="eliminar_busqueda">ELIMINAR DE LA BÚSQUEDA</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="escriba_codigo_descripcion">Escriba código barras o descripción del artículo</string>
 </resources>

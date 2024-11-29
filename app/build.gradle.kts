@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+
+
 android {
     namespace = "com.example.indotinventario"
     compileSdk = 34
@@ -38,7 +40,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 }
+
+
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -46,6 +52,19 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+
+    // Motion Toast: En el otro fichero build.gradle incluir: allprojects {
+    //    repositories {
+    //        google()
+    //        mavenCentral()
+    //        maven { url = uri("https://jitpack.io") }
+    //    }
+    //}
+    implementation("com.github.Spikeysanju:MotionToast:1.3.3.4")
+
+
+
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 

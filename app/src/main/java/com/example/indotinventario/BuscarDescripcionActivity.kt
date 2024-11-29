@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +17,7 @@ import com.example.indotinventario.databinding.ActivityBuscarDescripcionBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import www.sanju.motiontoast.MotionToast
 
 class BuscarDescripcionActivity : AppCompatActivity() {
 
@@ -87,7 +87,13 @@ class BuscarDescripcionActivity : AppCompatActivity() {
             cursorArticulos.close()
 
         }catch(e:Exception){
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+
+            MotionToast.createToast(this,"ERROR AL BUSCAR",
+            "No se obtuvo ningún resultado",
+            MotionToast.TOAST_WARNING,
+            MotionToast.GRAVITY_BOTTOM,
+            MotionToast.SHORT_DURATION,
+            null)
         }
     }
 
@@ -116,7 +122,13 @@ class BuscarDescripcionActivity : AppCompatActivity() {
             cursorCodigosBarras.close()
             buscarPorCodigoBarras(codigoBarras, idArticulo, idCombinacion)
         }catch(e:Exception){
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+
+            MotionToast.createToast(this,"ERROR AL BUSCAR",
+                e.message.toString(),
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.SHORT_DURATION,
+                null)
         }
     }
 

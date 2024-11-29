@@ -46,7 +46,6 @@
         android:hint="@string/usuario"
         android:inputType="text"
         android:selectAllOnFocus="true"
-
         android:textAlignment="center"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,26 +55,33 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="69dp"
         android:layout_gravity="start"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="@color/colorFoco"
         android:enabled="true"
+        android:fontFamily="@font/poppins_normal"
         android:text="@string/login"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonSalir"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="69dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="@color/NaranjaRuano"
+        android:fontFamily="@font/poppins_normal"
         android:text="@string/salir"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

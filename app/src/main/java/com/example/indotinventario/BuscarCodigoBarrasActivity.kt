@@ -8,13 +8,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
+import www.sanju.motiontoast.MotionToast
 
 class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
@@ -99,10 +100,20 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     private fun cargarVista() {
 
+        binding.etCodigo.filters = arrayOf(InputFilter.AllCaps())
+
         binding.buttonEscanear.setOnClickListener {
 
             if (!permisoCamaraConcedido) {
-                Toast.makeText(this, "Permiso de cámara no concedido", Toast.LENGTH_SHORT).show()
+
+                MotionToast.createToast(this,
+                    "ERROR CÁMARA",
+                    "Permiso de cámara no concedido",
+                    MotionToast.TOAST_ERROR,
+                    MotionToast.GRAVITY_CENTER,
+                    MotionToast.SHORT_DURATION,
+                    null)
+
                 permisoSolicitadoDesdeBoton = true
                 verificarYPedirPermisosDeCamara()
                 return@setOnClickListener
@@ -223,12 +234,12 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
             }else{
 
-                Toast.makeText(this, "No se obtuvo ningún resultado", Toast.LENGTH_SHORT).show()
+                Log.e("ERROR", "No se obtuvo ningún resultado")
             }
 
         }catch(e:Exception){
 
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            Log.e("ERROR", "No se obtuvo ningún resultado")
         }
     }
 
@@ -274,8 +285,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                 arrayPartidas.clear()
                 arrayFechas.clear()
-
-
 
                 val items = listOf(*arrayNumerosSerie.toTypedArray())
 
@@ -325,8 +334,14 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                             binding.tvFecha2.setText(arrayFechas[position])
 
                         }else {
-                            Toast.makeText(this@BuscarCodigoBarrasActivity, "No hay ningún elemento disponible",
-                                Toast.LENGTH_SHORT).show()
+
+                            MotionToast.createToast(this@BuscarCodigoBarrasActivity,
+                                "ATENCIÓN",
+                                "No hay ningún elemento disponible",
+                                MotionToast.TOAST_WARNING,
+                                MotionToast.GRAVITY_CENTER,
+                                MotionToast.SHORT_DURATION,
+                                null)
                         }
                     }
                     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -335,7 +350,13 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
             }
         }catch(e:Exception){
-            Toast.makeText(this, e.message,Toast.LENGTH_SHORT).show()
+            MotionToast.createToast(this@BuscarCodigoBarrasActivity,
+                "ATENCIÓN",
+                "No hay ningún elemento disponible",
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_CENTER,
+                MotionToast.SHORT_DURATION,
+                null)
         }
     }
 
@@ -355,17 +376,20 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                 binding.tvIdArticulo2.text = idArticulo
 
-
-                // Cerramos el cursor de código de barras
                 cursor.close()
 
             } else {
-                // Si no se encuentra el código de barras, mostramos un mensaje
-                Toast.makeText(this, "Código de barras no encontrado", Toast.LENGTH_LONG).show()
+                MotionToast.createToast(this,
+                    "ERROR",
+                    "Código de barras no encontrado",
+                    MotionToast.TOAST_WARNING,
+                    MotionToast.GRAVITY_CENTER,
+                    MotionToast.SHORT_DURATION,
+                    null)
+
             }
         }catch(e:Exception){
-            Toast.makeText(this, e.message,
-                Toast.LENGTH_LONG).show()
+            Log.e("Error", "Código de barras no encontrado")
         }
         return idArticulo
     }
@@ -379,9 +403,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun limpiarCampos() {
 
         try{
-
-
-
             val intent = Intent(this@BuscarCodigoBarrasActivity, this@BuscarCodigoBarrasActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
             startActivity(intent)
@@ -412,17 +433,23 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
         val estadoDePermiso = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
-            // If permission granted, set the flag to true
+
             permisoCamaraConcedido = true
         } else {
-            // Request permissions
+
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CODIGO_PERMISOS_CAMARA)
         }
     }
 
     private fun permisoDeCamaraDenegado() {
 
-        Toast.makeText(this, "Permiso de la cámara denegado", Toast.LENGTH_SHORT).show()
+        MotionToast.createToast(this,
+            "ERROR CÁMARA",
+            "Permiso de la cámara denegado",
+            MotionToast.TOAST_WARNING,
+            MotionToast.GRAVITY_CENTER,
+            MotionToast.SHORT_DURATION,
+            null)
     }
 
     // Menú:
@@ -466,10 +493,24 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
             if(descripcion.isEmpty() && idArticulo.isEmpty()){
 
-                Toast.makeText(this, "Algunos de los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
+                MotionToast.createToast(this,
+                    "INFORMACIÓN INCOMPLETA",
+                    "Algunos de los campos no pueden estar vacíos",
+                    MotionToast.TOAST_WARNING,
+                    MotionToast.GRAVITY_CENTER,
+                    MotionToast.SHORT_DURATION,
+                    null)
+
             }else if(unidadesContadas < 0){
 
-                Toast.makeText(this, "Algunos de los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
+                MotionToast.createToast(this,
+                    "INFORMACIÓN INCOMPLETA",
+                    "Algunos de los campos no pueden estar vacíos",
+                    MotionToast.TOAST_WARNING,
+                    MotionToast.GRAVITY_CENTER,
+                    MotionToast.SHORT_DURATION,
+                    null)
+
             }else{
 
                 dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
@@ -477,7 +518,14 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     numeroSerie, unidadesContadas)
             }
         }catch(e:Exception){
-            Toast.makeText(this, "Algunos de los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
+            MotionToast.createToast(this,
+                "INFORMACIÓN INCOMPLETA",
+                "Algunos de los campos no pueden estar vacíos",
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_CENTER,
+                MotionToast.SHORT_DURATION,
+                null)
+
         }
     }
 

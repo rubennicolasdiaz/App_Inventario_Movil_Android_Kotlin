@@ -3,5 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/idVolver"
-        android:title="@string/volver" />
+        android:title="@string/volver"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_normal"/>
 </menu>

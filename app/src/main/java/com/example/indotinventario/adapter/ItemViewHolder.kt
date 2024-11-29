@@ -15,8 +15,8 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         onClickDelete: (Int) -> Unit,
     ) {
 
-        binding.tvArticulo2.text = inventarioItemModel.idArticulo
-        binding.tvIdCombinacion2.text = inventarioItemModel.idCombinacion
+        //binding.tvArticulo2.text = inventarioItemModel.idArticulo
+        //binding.tvIdCombinacion2.text = inventarioItemModel.idCombinacion
         binding.tvDescripcion2.text = inventarioItemModel.descripcion
         binding.tvPartida2.text = inventarioItemModel.partida
         binding.tvFecha2.text = inventarioItemModel.fechaCaducidad

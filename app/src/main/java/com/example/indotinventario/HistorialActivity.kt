@@ -5,8 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.indotinventario.Pruebas.InventarioItem
@@ -16,6 +16,7 @@ import com.example.indotinventario.databinding.ActivityHistorialBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import www.sanju.motiontoast.MotionToast
 
 class HistorialActivity : AppCompatActivity() {
 
@@ -35,11 +36,11 @@ class HistorialActivity : AppCompatActivity() {
         binding = ActivityHistorialBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Se cargan los componentes gráficos de la vista:
-        initRecyclerView()
-
         // Se inicializa la DB:
         inicializarDB()
+
+        // Se cargan los componentes gráficos de la vista:
+        initRecyclerView()
     }
 
     private fun initRecyclerView() {
@@ -49,33 +50,32 @@ class HistorialActivity : AppCompatActivity() {
             onClickListener = { inventarioItem -> onItemSelected(inventarioItem) },
             onClickDelete = { position -> showConfirmDeleteItem(this, position) }
         )
-        binding.recyclerArticulo.layoutManager = llmanager
-        binding.recyclerArticulo.adapter = adapter
-    }
+        binding.recyclerHistorial.layoutManager = llmanager
+        binding.recyclerHistorial.adapter = adapter
 
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+////////////////// CÓDIGO NUEVO PARA FILTRAR
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        binding.etFilter.addTextChangedListener { userFilter ->
 
-            R.id.idInicio -> {
+            // Convertir el filtro a minúsculas para no ser sensible a mayúsculas y minúsculas
+            val filterText = userFilter.toString().lowercase()
 
-                dbInventario.close()
-                finish()
-                true
+            // Filtrar los artículos basados en el tipo de filtro
+            val articulosFiltered = if (filterText.any { it.isDigit() }) {
+                // Si el filtro contiene algún número, filtrar por código de barras
+                inventarioMutableList.filter { inventarioItem ->
+                    inventarioItem.codigoBarras.lowercase().contains(filterText)
+                }
+            } else {
+                // Si el filtro contiene solo letras, filtrar por descripción
+                inventarioMutableList.filter { inventarioItem ->
+                    inventarioItem.descripcion.lowercase().contains(filterText)
+                }
             }
 
-            R.id.idSalir -> {
-
-                showAlertDialog(this)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+            // Actualizar el adaptador con la lista filtrada
+            adapter.updateArticulos(articulosFiltered)
         }
     }
 
@@ -83,11 +83,9 @@ class HistorialActivity : AppCompatActivity() {
 
         try{
             dbInventario= DBInventario.getInstance(this)
-
             val cursorInventario = dbInventario.obtenerTodosItemInventario()
 
             if(cursorInventario.moveToNext()){
-
                 do{
                     val codigoBarrasIndex = cursorInventario.getColumnIndex(DBInventario.COLUMN_CODIGO_BARRAS)
                     val descripcionIndex = cursorInventario.getColumnIndex(DBInventario.COLUMN_DESCRIPCION)
@@ -107,21 +105,30 @@ class HistorialActivity : AppCompatActivity() {
                     val numeroSerie = cursorInventario.getString(numeroSerieIndex)
                     val unidadesContadas = cursorInventario.getString(unidadesContadasIndex)
 
-
                     inventarioMutableList.add(InventarioItem(codigoBarras, descripcion, idArticulo, idCombinacion, partida,
                         fechaCaducidad, numeroSerie, unidadesContadas))
 
                 }while(cursorInventario.moveToNext())
             }else{
 
-                Toast.makeText(this, "No hay ningún inventario registrado", Toast.LENGTH_SHORT).show()
+                MotionToast.createToast(this,"INVENTARIO",
+                    "No hay ningún inventario registrado",
+                    MotionToast.TOAST_INFO,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.SHORT_DURATION,
+                    null)
             }
             // Se cierra el cursor de la base de datos
             cursorInventario.close()
 
-
         }catch(e:Exception){
-            Toast.makeText(this, "No hay ningún inventario registrado", Toast.LENGTH_SHORT).show()
+
+            MotionToast.createToast(this,"INVENTARIO",
+                "No hay ningún inventario registrado",
+                MotionToast.TOAST_INFO,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.SHORT_DURATION,
+                null)
         }
     }
 
@@ -146,10 +153,21 @@ class HistorialActivity : AppCompatActivity() {
             inventarioMutableList.removeAt(position)
             adapter.notifyItemRemoved(position)
 
-            Toast.makeText(this, "Elemento eliminado correctamente", Toast.LENGTH_SHORT).show()
+
+            MotionToast.createToast(this,"INVENTARIO",
+                "Elemento eliminado correctamente",
+                MotionToast.TOAST_DELETE,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.SHORT_DURATION,
+                null)
         }catch(e:Exception){
 
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            MotionToast.createToast(this,"ERROR INVENTARIO",
+                e.message.toString(),
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.SHORT_DURATION,
+                null)
         }
     }
 
@@ -194,5 +212,31 @@ class HistorialActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         builder.show()
+    }
+
+    // Menú:
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+
+            R.id.idInicio -> {
+
+                dbInventario.close()
+                finish()
+                true
+            }
+
+            R.id.idSalir -> {
+
+                showAlertDialog(this)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
