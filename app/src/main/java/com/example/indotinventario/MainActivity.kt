@@ -2,6 +2,7 @@ package com.example.indotinventario
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import com.example.indotinventario.databinding.ActivityMainBinding
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
+import java.io.File
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
 
@@ -117,32 +119,43 @@ class MainActivity : AppCompatActivity() {
     private suspend fun loadJsonArticulos() {
 
         try {
-            // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241119_1.articulos.json")
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
+            // Definir la ruta al archivo en getExternalFilesDir
+            val ficheroOrigen = File(this@MainActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "articulos.json")
 
-            // Convertir el byte array a String
-            val json = String(buffer, StandardCharsets.UTF_8)
 
-            // Parsear el JSON
-            val jsonArray = JSONArray(json)
-            val max = jsonArray.length()
+            // Comprobar si el archivo existe
+            if (ficheroOrigen.exists()) {
+                // Abrir un InputStream desde el archivo en getExternalFilesDir
+                val inputStream: InputStream = ficheroOrigen.inputStream()
 
-            // Iterar sobre cada objeto del array JSON
-            for (i in 0 until max) {
-                val jsonObject = jsonArray.getJSONObject(i)
 
-                // Extraer los valores de cada objeto JSON
-                val idArticulo = jsonObject.getString("IdArticulo")
-                val idCombinacion = jsonObject.getString("IdCombinacion")
-                val descripcion = jsonObject.getString("Descripcion")
+                val size = inputStream.available()
+                val buffer = ByteArray(size)
+                inputStream.read(buffer)
+                inputStream.close()
 
-                dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion)
+                // Convertir el byte array a String
+                val json = String(buffer, StandardCharsets.UTF_8)
 
-                Log.i("Insertado artículo a DB", "Artículo ${i+1}")
+                // Parsear el JSON
+                val jsonArray = JSONArray(json)
+                val max = jsonArray.length()
+
+                // Iterar sobre cada objeto del array JSON
+                for (i in 0 until max) {
+                    val jsonObject = jsonArray.getJSONObject(i)
+
+                    // Extraer los valores de cada objeto JSON
+                    val idArticulo = jsonObject.getString("IdArticulo")
+                    val idCombinacion = jsonObject.getString("IdCombinacion")
+                    val descripcion = jsonObject.getString("Descripcion")
+
+                    dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion)
+
+                    Log.i("Insertado artículo a DB", "Artículo ${i + 1}")
+                }
+            }else{
+                Log.i("Fichero Origen", "Fichero no encontrado")
             }
 
         } catch (e: Exception) {
@@ -153,8 +166,15 @@ class MainActivity : AppCompatActivity() {
     private suspend fun loadJsonCodigosBarras() {
 
         try {
-            // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241119_1.cbarras.json")
+            // Definir la ruta al archivo en getExternalFilesDir
+            val ficheroOrigen = File(this@MainActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "cbarras.json")
+
+
+            // Comprobar si el archivo existe
+            if (ficheroOrigen.exists()) {
+                // Abrir un InputStream desde el archivo en getExternalFilesDir
+                val inputStream: InputStream = ficheroOrigen.inputStream()
+
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -186,6 +206,9 @@ class MainActivity : AppCompatActivity() {
                 // Imprimir los valores por log
                 //Log.i("Lectura de códigos de barras", "Código ${i+1}: códigoBarras: $codigoBarras  idArticulo  $idArticulo  IdCombinacion  $idCombinacion")
             }
+            }else{
+                Log.i("Fichero Origen", "Fichero no encontrado")
+            }
 
         } catch (e: Exception) {
             Log.e("TAG", "loadJson: error ${e.message}")
@@ -195,8 +218,14 @@ class MainActivity : AppCompatActivity() {
     private suspend fun loadJsonPartidas() {
 
         try {
-            // Obtener el InputStream del archivo de artículos en assets
-            val inputStream: InputStream = assets.open("Inventario_20241119_1.partidasnserie.json")
+            // Definir la ruta al archivo en getExternalFilesDir
+            val ficheroOrigen = File(this@MainActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "partidas.json")
+
+
+            // Comprobar si el archivo existe
+            if (ficheroOrigen.exists()) {
+                // Abrir un InputStream desde el archivo en getExternalFilesDir
+                val inputStream: InputStream = ficheroOrigen.inputStream()
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -222,6 +251,9 @@ class MainActivity : AppCompatActivity() {
                 dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
 
                 Log.i("Insertada partida a DB", "Partida ${i+1}")
+            }
+            }else{
+                Log.i("Fichero Origen", "Fichero no encontrado")
             }
 
         } catch (e: Exception) {
