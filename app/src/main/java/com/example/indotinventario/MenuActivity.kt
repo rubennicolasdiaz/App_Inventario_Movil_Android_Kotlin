@@ -56,6 +56,11 @@ class MenuActivity : AppCompatActivity() {
 
             showAlertDialog(this)
         }
+
+        binding.buttonLeerFicheros.setOnClickListener {
+
+            pasarALeerFicherosActivity()
+        }
     }
 
     private fun pasarABuscarCodigoBarrasActivity() {
@@ -70,6 +75,11 @@ class MenuActivity : AppCompatActivity() {
     private fun pasarAHistorialActivity() {
         moveTaskToBack(true)
         startActivity(Intent(this, HistorialActivity::class.java))
+    }
+
+    private fun pasarALeerFicherosActivity() {
+        moveTaskToBack(true)
+        startActivity(Intent(this, LeerFicherosActivity::class.java))
     }
 
     // Menú:

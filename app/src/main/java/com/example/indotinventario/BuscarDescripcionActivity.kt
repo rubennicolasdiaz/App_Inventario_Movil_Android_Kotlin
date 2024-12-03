@@ -82,6 +82,13 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                     articuloMutableList.add(Articulo(idArticulo, idCombinacion, descripcion))
 
                 }while(cursorArticulos.moveToNext())
+            }else{
+                MotionToast.createToast(this,"INVENTARIO",
+                    "No hay ningún artículo registrado en la aplicación",
+                    MotionToast.TOAST_INFO,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.SHORT_DURATION,
+                    null)
             }
             // Se cierra el cursor de la base de datos
             cursorArticulos.close()
