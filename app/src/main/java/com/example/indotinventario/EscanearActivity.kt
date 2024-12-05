@@ -48,7 +48,6 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         finish()
     }
 
-
     // Menú:
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_volver, menu)

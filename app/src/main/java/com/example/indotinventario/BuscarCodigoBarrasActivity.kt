@@ -67,10 +67,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         inicializarDB()
         verificarYPedirPermisosDeCamara()
 
-        // Se rellena el Array de Artículos al inicio de la Activity
-        //rellenarArrayArticulos()   // Probar a ver si funciona sin eso
-
-        //Comprobar el Bundle de la activity de Buscar por Descripción
         comprobarBundleDescripcion()
     }
 
@@ -122,7 +118,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
 
         binding.buttonLimpiar.setOnClickListener{
-
             limpiarCampos()
         }
 
@@ -133,8 +128,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         binding.buttonDisminuir.setOnClickListener {
             disminuirUnidades()
         }
-
-
 
         binding.buttonBuscar.setOnClickListener {
             buscarporCodigoBarras()
@@ -152,7 +145,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         val idArticulo = buscarArticuloPorCodigoBarras(codigoArticulo)
         buscarArticuloPorIdArticulo(idArticulo)
         buscarPartidaPorIdArticulo(idArticulo)
-
     }
 
     private fun disminuirUnidades() {
@@ -189,7 +181,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         // Actualizar el EditText con el nuevo valor
         binding.etUnidades.setText(newValue.toString())
     }
-
 
     //ESCÁNER:
     // Declara el launcher para iniciar la actividad y manejar el resultado
@@ -311,7 +302,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     override fun onNothingSelected(p0: AdapterView<*>?) {
                     }
                 }
-
             }else{
 
                 arrayNumerosSerie.clear()
@@ -525,7 +515,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 MotionToast.GRAVITY_CENTER,
                 MotionToast.SHORT_DURATION,
                 null)
-
         }
     }
 

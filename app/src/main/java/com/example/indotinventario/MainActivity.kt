@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Login:
-
     private fun comprobarLogin() {
 
         pasarAMenuActivity()
@@ -151,8 +149,6 @@ class MainActivity : AppCompatActivity() {
                     val descripcion = jsonObject.getString("Descripcion")
 
                     dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion)
-
-                    Log.i("Insertado artículo a DB", "Artículo ${i + 1}")
                 }
             }else{
                 Log.i("Fichero Origen", "Fichero no encontrado")
@@ -187,8 +183,6 @@ class MainActivity : AppCompatActivity() {
             val jsonArray = JSONArray(json)
             val max = jsonArray.length()
 
-
-
             // Iterar sobre cada objeto del array JSON
             for (i in 0 until max) {
                 val jsonObject = jsonArray.getJSONObject(i)
@@ -199,12 +193,6 @@ class MainActivity : AppCompatActivity() {
                 val idCombinacion = jsonObject.getString("IdCombinacion")
 
                 dbInventario.insertarCodigoBarras(codigoBarras, idArticulo, idCombinacion)
-
-
-                Log.i("Insertado código barras a DB", "Código Barras ${i+1}")
-
-                // Imprimir los valores por log
-                //Log.i("Lectura de códigos de barras", "Código ${i+1}: códigoBarras: $codigoBarras  idArticulo  $idArticulo  IdCombinacion  $idCombinacion")
             }
             }else{
                 Log.i("Fichero Origen", "Fichero no encontrado")
@@ -249,8 +237,6 @@ class MainActivity : AppCompatActivity() {
                 val numeroSerie = jsonObject.getString("NSerie")
 
                 dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
-
-                Log.i("Insertada partida a DB", "Partida ${i+1}")
             }
             }else{
                 Log.i("Fichero Origen", "Fichero no encontrado")

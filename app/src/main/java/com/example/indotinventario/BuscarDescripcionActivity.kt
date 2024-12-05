@@ -26,8 +26,6 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBuscarDescripcionBinding
 
     private lateinit var articuloMutableList: MutableList<Articulo>
-
-
     private lateinit var adapter: ArticuloAdapter
     private val llmanager = LinearLayoutManager(this)
 
@@ -155,7 +153,6 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                 finish()
                 true
             }
-
             R.id.idSalir -> {
 
                 showAlertDialog(this)

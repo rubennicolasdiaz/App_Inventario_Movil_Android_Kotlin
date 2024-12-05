@@ -64,6 +64,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun pasarABuscarCodigoBarrasActivity() {
+        moveTaskToBack(true)
         startActivity(Intent(this, BuscarCodigoBarrasActivity::class.java))
     }
 
@@ -78,6 +79,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun pasarALeerFicherosActivity() {
+
         moveTaskToBack(true)
         startActivity(Intent(this, LeerFicherosActivity::class.java))
     }

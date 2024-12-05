@@ -1,8 +1,9 @@
 package com.example.indotinventario
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.indotinventario.databinding.ActivityLeerFicherosBinding
 import android.content.Intent
 import android.net.Uri
 import android.os.Environment
@@ -14,85 +15,97 @@ import java.io.IOException
 
 class LeerFicherosActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLeerFicherosBinding
+    private val PICK_JSON_FILE = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Implementación de View Binding:
-        binding = ActivityLeerFicherosBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        cargarVista()
+        val uri = Uri.parse(Environment.DIRECTORY_DCIM)
+        openFile(uri)
     }
 
-    private fun cargarVista() {
-        binding.buttonLeerArchivos.setOnClickListener {
+    fun openFile(pickerInitialUri: Uri){
 
-            val uri = Uri.parse(Environment.DIRECTORY_DCIM)
-            openFile(uri)
+        try{
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "*/*" // Para todos los tipos de archivo
+                putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+                putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) // Permitir selección múltiple
+            }
+
+             startActivityForResult(intent, PICK_JSON_FILE)
+        }catch(e:Exception){
+            Log.e("Error", e.message.toString())
         }
     }
 
-    // Request code for selecting a file.
-    val PICK_JSON_FILE = 2
-
-    fun openFile(pickerInitialUri: Uri) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*" // Para todos los tipos de fichero
-            putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
-        }
-
-        startActivityForResult(intent, PICK_JSON_FILE)
-    }
-
-    // Este método manejará el resultado del archivo seleccionado
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        var targetFile: File? = null
-        if (requestCode == PICK_JSON_FILE && resultCode == RESULT_OK) {
-            val uri = data?.data ?: return
+        try{
 
-            if(uri.toString().contains("partidas", ignoreCase = true)){
+            if (requestCode == PICK_JSON_FILE && resultCode == RESULT_OK) {
+                // Verificar si hay más de un archivo seleccionado
+                val uris = mutableListOf<Uri>()
 
-                // Definir el archivo de destino
-                targetFile = File((this@LeerFicherosActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)), "partidas.json")
-
-                // Verificar si el archivo ya existe
-                if (targetFile.exists()) {
-                    // Si el archivo existe, eliminarlo para sobrescribirlo
-                    targetFile.delete()
-                    Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
-                }
-                copyFile(uri, targetFile)
-            }else if(uri.toString().contains("articulos", ignoreCase = true)){
-
-                // Definir el archivo de destino
-                targetFile = File((this@LeerFicherosActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)), "articulos.json")
-
-                // Verificar si el archivo ya existe
-                if (targetFile.exists()) {
-                    // Si el archivo existe, eliminarlo para sobrescribirlo
-                    targetFile.delete()
-                    Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
+                if (data?.clipData != null) {
+                    // Hay múltiples archivos
+                    val clipData = data.clipData
+                    if (clipData != null) {
+                        for (i in 0 until clipData.itemCount ) {
+                            val uri = clipData?.getItemAt(i)?.uri
+                            if (uri != null) {
+                                uris.add(uri)
+                            }
+                        }
+                    }
+                } else {
+                    // Un solo archivo
+                    val uri = data?.data
+                    if (uri != null) {
+                        uris.add(uri)
+                    }
                 }
 
-                copyFile(uri, targetFile)
-            }else if(uri.toString().contains("cbarras", ignoreCase = true)){
+                // Procesar cada archivo seleccionado
+                for (uri in uris) {
+                    var targetFile: File? = null
 
-                // Definir el archivo de destino
-                targetFile = File((this@LeerFicherosActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)), "cbarras.json")
+                    if (uri.toString().contains("partidas", ignoreCase = true)) {
+                        targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "partidas.json")
+                    }
 
-                // Verificar si el archivo ya existe
-                if (targetFile.exists()) {
-                    // Si el archivo existe, eliminarlo para sobrescribirlo
-                    targetFile.delete()
-                    Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
+                    if (uri.toString().contains("articulos", ignoreCase = true)) {
+                        targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "articulos.json")
+                    }
+
+                    if (uri.toString().contains("cbarras", ignoreCase = true)) {
+                        targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "cbarras.json")
+                    }
+
+                    if (targetFile != null) {
+                        // Verificar si el archivo ya existe
+                        if (targetFile.exists()) {
+                            targetFile.delete()
+                            Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
+                        }
+
+                        copyFile(uri, targetFile)
+                    }
                 }
-                copyFile(uri, targetFile)
+
+                showAlertDialog(this@LeerFicherosActivity)
+
+                //finish()
+            }else{
+                Log.e("Error:", "Error al")
+                finish()
             }
+        }catch (e:Exception){
+
+            Log.e("Error:", e.message.toString())
+            finish()
         }
     }
 
@@ -113,5 +126,42 @@ class LeerFicherosActivity : AppCompatActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    override fun onBackPressed() {
+
+        finish()
+
+        super.onBackPressed()
+    }
+
+    private fun reiniciarApp() {
+
+       val intent = Intent(applicationContext, MainActivity::class.java)
+
+
+        startActivity(intent)
+
+
+        System.exit(0)  // Finaliza el proceso de la aplicación
+    }
+
+    private fun showAlertDialog(context: Context){
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Reiniciar aplicación")
+            .setMessage("¿Quieres reiniciar la aplicación para guardar los " +
+                    "datos en la base de datos?")
+
+            .setPositiveButton("Sí") { dialog, which ->
+
+                reiniciarApp()
+
+            }.setNegativeButton("No") { dialog, which ->
+
+                dialog.dismiss()
+                finish()
+            }
+        builder.show()
     }
 }
