@@ -2,7 +2,7 @@ package com.example.indotinventario.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.indotinventario.Pruebas.InventarioItem
+import com.example.indotinventario.logica.InventarioItem
 import com.example.indotinventario.databinding.ItemInventarioBinding
 
 class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -14,6 +14,8 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         onClickListener: (InventarioItem) -> Unit,
         onClickDelete: (Int) -> Unit,
     ) {
+
+        // Dependiendo de lo que queramos mostrar en la vista de historial de búsquedas:
 
         //binding.tvArticulo2.text = inventarioItemModel.idArticulo
         //binding.tvIdCombinacion2.text = inventarioItemModel.idCombinacion

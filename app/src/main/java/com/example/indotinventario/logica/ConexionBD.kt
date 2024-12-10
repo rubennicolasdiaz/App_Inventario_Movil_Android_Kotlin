@@ -1,4 +1,4 @@
-package com.example.indotinventario.Pruebas
+package com.example.indotinventario.logica
 
 import android.os.StrictMode
 import android.widget.EditText
@@ -8,6 +8,8 @@ import java.sql.ResultSet
 import java.sql.SQLException
 
 class ConexionBD {
+
+    // Esta clase venía en la versión de Java que se abandonó en 2021, no se usa para nada.
 
     private val connectionUrl = "jdbc:jtds:sqlserver://192.168.1.41:1433;databaseName=PruebaDB;integratedSecurity=true;user=sa;password=1234;"
 

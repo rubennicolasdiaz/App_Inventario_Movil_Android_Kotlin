@@ -20,9 +20,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.indotinventario.Pruebas.Articulo
-import com.example.indotinventario.Pruebas.SaveJsonFile
+import com.example.indotinventario.logica.Articulo
+import com.example.indotinventario.logica.SaveJsonFile
 import com.example.indotinventario.databinding.ActivityBuscarCodigoBarrasBinding
+import com.example.indotinventario.logica.DBInventario
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

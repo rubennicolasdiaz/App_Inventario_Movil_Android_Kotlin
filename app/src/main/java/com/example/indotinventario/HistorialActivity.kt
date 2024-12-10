@@ -9,10 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.indotinventario.Pruebas.InventarioItem
-import com.example.indotinventario.Pruebas.SaveJsonFile
+import com.example.indotinventario.logica.InventarioItem
+import com.example.indotinventario.logica.SaveJsonFile
 import com.example.indotinventario.adapter.ItemAdapter
 import com.example.indotinventario.databinding.ActivityHistorialBinding
+import com.example.indotinventario.logica.DBInventario
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

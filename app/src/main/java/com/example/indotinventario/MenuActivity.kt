@@ -8,8 +8,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.indotinventario.Pruebas.SaveJsonFile
+import com.example.indotinventario.logica.SaveJsonFile
 import com.example.indotinventario.databinding.ActivityMenuBinding
+import com.example.indotinventario.logica.DBInventario
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -94,15 +95,7 @@ class MenuActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
 
-            R.id.idInicio -> {
-
-                dbInventario.close()
-                finish()
-                true
-            }
-
             R.id.idSalir -> {
-
                 showAlertDialog(this)
                 true
             }
@@ -125,7 +118,7 @@ class MenuActivity : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.IO){
 
                     async{ SaveJsonFile.saveJsonInventario(this@MenuActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
+                    finishAffinity()
                 }
 
             }.setNegativeButton("No") { dialog, which ->

@@ -2,23 +2,24 @@ package com.example.indotinventario
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.indotinventario.databinding.ActivityMainBinding
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import com.example.indotinventario.logica.LoadJsonFile
+import com.example.indotinventario.databinding.WaitScreenMainBinding
+import com.example.indotinventario.logica.DBInventario
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import java.io.File
-import java.io.InputStream
-import java.nio.charset.StandardCharsets
+import kotlinx.coroutines.withContext
+import www.sanju.motiontoast.MotionToast
 
 class MainActivity : AppCompatActivity() {
 
-    // Instancia de la clase DBInventario
     private lateinit var dbInventario: DBInventario
     private lateinit var binding:ActivityMainBinding
+    private lateinit var waitBinding:WaitScreenMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,34 +28,37 @@ class MainActivity : AppCompatActivity() {
         Thread.sleep(2000)
         setTheme(R.style.AppTheme)
 
-
         super.onCreate(savedInstanceState)
 
         // Implementación de View Binding:
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Se cargan los componentes gráficos de la vista:
-        cargarVista()
+        waitBinding = WaitScreenMainBinding.inflate(layoutInflater)
+        setContentView(waitBinding.root)
 
         // Se inicializa la DB:
         inicializarDB()
 
+        //Corrutina para volcar datos de los ficheros Json a la SQLite:
         lifecycleScope.launch(Dispatchers.IO){
-            // Se cargan los ficheros Json de la carpeta Assets y se pasan a la DB:
-            loadJsonArticulos()
 
-            loadJsonCodigosBarras()
+            withContext(Dispatchers.Main) {
+                waitBinding.progressBar.visibility = View.VISIBLE
+            }
 
-            loadJsonPartidas()
+            //Se ejecuta asíncronamente la lectura de ficheros Json y el volcado a SQLite
+            async { loadJsonFiles() }.await()
+
+            withContext(Dispatchers.Main) {
+                // Implementación de View Binding:
+                binding = ActivityMainBinding.inflate(layoutInflater)
+                setContentView(binding.root)
+
+                // Se cargan los componentes gráficos de la vista:
+                cargarVista()
+            }
         }
     }
 
-    // Se inicializan los elementos de la vista:
     private fun cargarVista() {
-
-        binding.etUsuario
-        binding.etPassword
 
         binding.buttonLogin.setOnClickListener {
             comprobarLogin()
@@ -67,21 +71,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun comprobarLogin() {
 
-        pasarAMenuActivity()
+        // El login debería realizarse contra una base de datos o un fichero interno de credenciales.
 
-        // De momento para las pruebas dejamos el login sin funcionalidad
+        val usuario = binding.etUsuario.text.toString()
+        val password = binding.etPassword.text.toString()
 
-        /*
-        val con = ConsultaWS(etUsuario.text.toString().trim(), etContraseña.text.toString().trim())
+        if(usuario.isBlank() || password.isEmpty()){
 
-        if (con.verCosas(etUsuario, etContraseña)) {
+            MotionToast.createToast(this,
+                "ERROR LOGIN",
+                "Ninguno de los campos puede estar vacío",
+                MotionToast.TOAST_ERROR,
+                MotionToast.GRAVITY_CENTER,
+                MotionToast.SHORT_DURATION,
+                null)
+
+        }else{
 
             pasarAMenuActivity()
-
-        } else {
-            Toast.makeText(this, R.string.error_login, Toast.LENGTH_SHORT).show()
         }
-        */
     }
 
     private fun inicializarDB() {
@@ -112,138 +120,10 @@ class MainActivity : AppCompatActivity() {
         finishAffinity()
     }
 
-    // Cargar fichero Json del directorio de Assets:
+    private suspend fun loadJsonFiles(){
 
-    private suspend fun loadJsonArticulos() {
-
-        try {
-            // Definir la ruta al archivo en getExternalFilesDir
-            val ficheroOrigen = File(this@MainActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "articulos.json")
-
-
-            // Comprobar si el archivo existe
-            if (ficheroOrigen.exists()) {
-                // Abrir un InputStream desde el archivo en getExternalFilesDir
-                val inputStream: InputStream = ficheroOrigen.inputStream()
-
-
-                val size = inputStream.available()
-                val buffer = ByteArray(size)
-                inputStream.read(buffer)
-                inputStream.close()
-
-                // Convertir el byte array a String
-                val json = String(buffer, StandardCharsets.UTF_8)
-
-                // Parsear el JSON
-                val jsonArray = JSONArray(json)
-                val max = jsonArray.length()
-
-                // Iterar sobre cada objeto del array JSON
-                for (i in 0 until max) {
-                    val jsonObject = jsonArray.getJSONObject(i)
-
-                    // Extraer los valores de cada objeto JSON
-                    val idArticulo = jsonObject.getString("IdArticulo")
-                    val idCombinacion = jsonObject.getString("IdCombinacion")
-                    val descripcion = jsonObject.getString("Descripcion")
-
-                    dbInventario.insertarArticulo(idArticulo, idCombinacion, descripcion)
-                }
-            }else{
-                Log.i("Fichero Origen", "Fichero no encontrado")
-            }
-
-        } catch (e: Exception) {
-            Log.e("TAG", "loadJson: error ${e.message}")
-        }
-    }
-
-    private suspend fun loadJsonCodigosBarras() {
-
-        try {
-            // Definir la ruta al archivo en getExternalFilesDir
-            val ficheroOrigen = File(this@MainActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "cbarras.json")
-
-
-            // Comprobar si el archivo existe
-            if (ficheroOrigen.exists()) {
-                // Abrir un InputStream desde el archivo en getExternalFilesDir
-                val inputStream: InputStream = ficheroOrigen.inputStream()
-
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-
-            // Convertir el byte array a String
-            val json = String(buffer, StandardCharsets.UTF_8)
-
-            // Parsear el JSON
-            val jsonArray = JSONArray(json)
-            val max = jsonArray.length()
-
-            // Iterar sobre cada objeto del array JSON
-            for (i in 0 until max) {
-                val jsonObject = jsonArray.getJSONObject(i)
-
-                // Extraer los valores de cada objeto JSON
-                val codigoBarras = jsonObject.getString("CodigoBarras")
-                val idArticulo = jsonObject.getString("IdArticulo")
-                val idCombinacion = jsonObject.getString("IdCombinacion")
-
-                dbInventario.insertarCodigoBarras(codigoBarras, idArticulo, idCombinacion)
-            }
-            }else{
-                Log.i("Fichero Origen", "Fichero no encontrado")
-            }
-
-        } catch (e: Exception) {
-            Log.e("TAG", "loadJson: error ${e.message}")
-        }
-    }
-
-    private suspend fun loadJsonPartidas() {
-
-        try {
-            // Definir la ruta al archivo en getExternalFilesDir
-            val ficheroOrigen = File(this@MainActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "partidas.json")
-
-
-            // Comprobar si el archivo existe
-            if (ficheroOrigen.exists()) {
-                // Abrir un InputStream desde el archivo en getExternalFilesDir
-                val inputStream: InputStream = ficheroOrigen.inputStream()
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-
-            // Convertir el byte array a String
-            val json = String(buffer, StandardCharsets.UTF_8)
-
-            // Parsear el JSON
-            val jsonArray = JSONArray(json)
-            val max = jsonArray.length()
-
-            // Iterar sobre cada objeto del array JSON
-            for (i in 0 until max) {
-                val jsonObject = jsonArray.getJSONObject(i)
-
-                // Extraer los valores de cada objeto JSON
-                val idArticulo = jsonObject.getString("IdArticulo")
-                val partida = jsonObject.getString("Partida")
-                val fechaCaducidad = jsonObject.getString("FCaducidad")
-                val numeroSerie = jsonObject.getString("NSerie")
-
-                dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
-            }
-            }else{
-                Log.i("Fichero Origen", "Fichero no encontrado")
-            }
-
-        } catch (e: Exception) {
-            Log.e("TAG", "loadJson: error ${e.message}")
-        }
+            LoadJsonFile.loadJsonArticulos(dbInventario, this@MainActivity)
+            LoadJsonFile.loadJsonCodigosBarras(dbInventario, this@MainActivity)
+            LoadJsonFile.loadJsonPartidas(dbInventario, this@MainActivity)
     }
 }

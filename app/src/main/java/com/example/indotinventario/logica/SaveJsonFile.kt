@@ -1,10 +1,9 @@
-package com.example.indotinventario.Pruebas
+package com.example.indotinventario.logica
 
 import android.content.Context
 import android.database.Cursor
 import android.os.Environment
 import android.util.Log
-import com.example.indotinventario.DBInventario
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -15,12 +14,12 @@ import java.util.Date
 import java.util.Locale
 
 class SaveJsonFile {
+
     companion object{
 
         suspend fun saveJsonInventario(context: Context, dbInventario:DBInventario) {
 
-
-          try {
+        try {
               // Se crea el cursor para obtener todos los ítems de la tabla inventario:
               val todosItemsCursor: Cursor = dbInventario.obtenerTodosItemInventario()
 

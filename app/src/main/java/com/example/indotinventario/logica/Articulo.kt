@@ -1,4 +1,4 @@
-package com.example.indotinventario.Pruebas
+package com.example.indotinventario.logica
 
 data class Articulo(
     val idArticulo:String,

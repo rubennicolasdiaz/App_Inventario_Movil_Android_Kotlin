@@ -44,8 +44,6 @@ android {
 
 }
 
-
-
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -53,39 +51,22 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    implementation(libs.motionToast)
+    implementation(libs.mssqlJdbc)
+    implementation(libs.coreSplashscreen )
 
-    // Motion Toast: En el otro fichero build.gradle incluir: allprojects {
-    //    repositories {
-    //        google()
-    //        mavenCentral()
-    //        maven { url = uri("https://jitpack.io") }
-    //    }
-    //}
-    implementation("com.github.Spikeysanju:MotionToast:1.3.3.4")
+    implementation(libs.zxingAndroidEmbedded)
+    implementation(libs.gson )
 
-
-
-
-    implementation("androidx.core:core-splashscreen:1.0.1")
-
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation("com.google.code.gson:gson:2.8.6")
     // Corrutinas:
-    implementation("androidx.activity:activity-ktx:1.7.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation(libs.activityKtx)
+    implementation(libs.lifecycleViewModelKtx)
 
-    // Navegación para bottom bar:
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
-
-    // Solo añade estas líneas si tienes los JAR correctos en libs
-    implementation(files("libs/jtds-1.3.1.jar"))
-
-
-    implementation("me.dm7.barcodescanner:zxing:1.9.8")
+    implementation(libs.zxing) //Lector código barras
     implementation(libs.filament.android)
-    implementation(libs.firebase.firestore.ktx)
+    //implementation(libs.firebase.firestore.ktx) // Implementar en caso de Firebase
 
+    implementation(files("libs/jtds-1.3.1.jar"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

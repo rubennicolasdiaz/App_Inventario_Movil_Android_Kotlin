@@ -3,7 +3,7 @@ package com.example.indotinventario.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.indotinventario.Pruebas.InventarioItem
+import com.example.indotinventario.logica.InventarioItem
 import com.example.indotinventario.R
 
 class ItemAdapter(

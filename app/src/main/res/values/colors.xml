@@ -13,4 +13,6 @@
     <color name="grey">#F2F0F0</color>
     <color name="azul_marino">#050F21</color>
     <color name="marfil">#F0DFCC</color>
+    <color name="wait">#BDB8B8</color>
+
 </resources>

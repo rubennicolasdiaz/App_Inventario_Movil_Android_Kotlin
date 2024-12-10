@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.logica
 
 import android.content.ContentValues
 import android.content.Context

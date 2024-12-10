@@ -96,9 +96,7 @@ class LeerFicherosActivity : AppCompatActivity() {
                 }
 
                 showAlertDialog(this@LeerFicherosActivity)
-
-                //finish()
-            }else{
+        }else{
                 Log.e("Error:", "Error al")
                 finish()
             }
@@ -131,19 +129,15 @@ class LeerFicherosActivity : AppCompatActivity() {
     override fun onBackPressed() {
 
         finish()
-
         super.onBackPressed()
     }
 
     private fun reiniciarApp() {
 
        val intent = Intent(applicationContext, MainActivity::class.java)
-
-
         startActivity(intent)
 
-
-        System.exit(0)  // Finaliza el proceso de la aplicación
+        System.exit(0)
     }
 
     private fun showAlertDialog(context: Context){
