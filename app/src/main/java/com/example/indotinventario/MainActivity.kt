@@ -13,6 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONException
+import www.sanju.motiontoast.MotionToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,8 +45,22 @@ class MainActivity : AppCompatActivity() {
                 waitBinding.progressBar.visibility = View.VISIBLE
             }
 
-            //Se ejecuta asíncronamente la lectura de ficheros Json y el volcado a SQLite
-            async { loadJsonFiles() }.await()
+            try{
+                //Se ejecuta asíncronamente la lectura de ficheros Json y el volcado a SQLite
+                async { loadJsonFiles() }.await()
+            }catch(e: JSONException){
+                withContext(Dispatchers.Main) {
+                    MotionToast.createToast(
+                        this@MainActivity, "Error de lectura de fichero",
+                        e.message.toString(),
+                        MotionToast.TOAST_ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.SHORT_DURATION,
+                        null
+                    )
+                }
+            }
+
 
             withContext(Dispatchers.Main) {
                 // Implementación de View Binding:

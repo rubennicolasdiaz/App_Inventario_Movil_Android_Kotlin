@@ -135,7 +135,7 @@ class HistorialActivity : AppCompatActivity() {
 
     private fun onItemSelected(inventarioItem: InventarioItem) {
 
-     }
+    }
 
     private fun onDeletedItem(position: Int) {
 
@@ -148,8 +148,8 @@ class HistorialActivity : AppCompatActivity() {
 
         try{
 
-           dbInventario.deleteItemInventario(idArticulo, idCombinacion,
-               partida, numeroSerie)
+            dbInventario.deleteItemInventario(idArticulo, idCombinacion,
+                partida, numeroSerie)
 
             inventarioMutableList.removeAt(position)
             adapter.notifyItemRemoved(position)
