@@ -13,74 +13,47 @@
         android:layout_width="352dp"
         android:layout_height="288dp"
         android:layout_marginStart="69dp"
-        android:layout_marginTop="99dp"
         android:layout_marginEnd="69dp"
-        android:layout_marginBottom="69dp"
-        app:layout_constraintBottom_toTopOf="@+id/etUsuario"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.5"
         app:srcCompat="@drawable/icono_indot1" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:selectAllOnFocus="true"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUsuario" />
-
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="268dp"
-        android:hint="@string/usuario"
-        android:inputType="text"
-        android:selectAllOnFocus="true"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etPassword" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="169dp"
         android:layout_height="69dp"
         android:layout_gravity="start"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/colorFoco"
         android:enabled="true"
         android:fontFamily="@font/poppins_normal"
         android:text="@string/login"
-        android:textStyle="bold"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.70"
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <Button
         android:id="@+id/buttonSalir"
         android:layout_width="169dp"
         android:layout_height="69dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/NaranjaRuano"
         android:fontFamily="@font/poppins_normal"
         android:text="@string/salir"
-        android:textStyle="bold"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import www.sanju.motiontoast.MotionToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,25 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun comprobarLogin() {
 
-        // El login debería realizarse contra una base de datos o un fichero interno de credenciales.
-
-        val usuario = binding.etUsuario.text.toString()
-        val password = binding.etPassword.text.toString()
-
-        if(usuario.isBlank() || password.isEmpty()){
-
-            MotionToast.createToast(this,
-                "ERROR LOGIN",
-                "Ninguno de los campos puede estar vacío",
-                MotionToast.TOAST_ERROR,
-                MotionToast.GRAVITY_CENTER,
-                MotionToast.SHORT_DURATION,
-                null)
-
-        }else{
-
-            pasarAMenuActivity()
-        }
+        pasarAMenuActivity()
     }
 
     private fun inicializarDB() {

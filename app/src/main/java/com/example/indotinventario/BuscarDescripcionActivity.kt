@@ -54,7 +54,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         binding.etFilter.addTextChangedListener { userFilter ->
             val articulosFiltered =
                 articuloMutableList.filter { articulo ->
-                    articulo.descripcion.lowercase().contains(userFilter.toString().lowercase())
+                    articulo.Descripcion.lowercase().contains(userFilter.toString().lowercase())
                 }
             adapter.updateArticulos(articulosFiltered)
         }
@@ -78,7 +78,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                     val idCombinacion = cursorArticulos.getString(idCombinacionIndex)
                     val descripcion = cursorArticulos.getString(descripcionIndex)
 
-                    articuloMutableList.add(Articulo(idArticulo, idCombinacion, descripcion))
+                    articuloMutableList.add(Articulo(idArticulo, idCombinacion, descripcion, 0.0))
 
                 }while(cursorArticulos.moveToNext())
             }else{
@@ -111,11 +111,11 @@ class BuscarDescripcionActivity : AppCompatActivity() {
 
         try{
             var codigoBarras: String = ""
-            var idArticulo = articulo.idArticulo
-            var idCombinacion = articulo.idCombinacion
+            var idArticulo = articulo.IdArticulo
+            var idCombinacion = articulo.IdCombinacion
 
 
-            val cursorCodigosBarras = dbInventario.obtenerCodigoBarrasPorArticulo(articulo.idArticulo)
+            val cursorCodigosBarras = dbInventario.obtenerCodigoBarrasPorArticulo(articulo.IdArticulo)
 
             if(cursorCodigosBarras.moveToFirst()){
 

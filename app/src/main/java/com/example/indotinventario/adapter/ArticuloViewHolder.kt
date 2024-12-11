@@ -13,9 +13,9 @@ class ArticuloViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         articuloModel: Articulo,
         onClickListener: (Articulo) -> Unit
     ) {
-        binding.tvArticulo.text = articuloModel.idArticulo
-        binding.tvIdCombinacion.text = articuloModel.idCombinacion
-        binding.tvDescripcion.text = articuloModel.descripcion
+        binding.tvArticulo.text = articuloModel.IdArticulo
+        binding.tvIdCombinacion.text = articuloModel.IdCombinacion
+        binding.tvDescripcion.text = articuloModel.Descripcion
         binding.btnSelect.setOnClickListener { onClickListener(articuloModel) }
     }
 }

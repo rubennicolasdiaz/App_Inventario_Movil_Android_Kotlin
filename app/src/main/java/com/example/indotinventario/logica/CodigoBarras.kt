@@ -2,9 +2,8 @@ package com.example.indotinventario.logica
 
 import java.io.Serializable
 
-data class Articulo(
+data class CodigoBarras(
+    val CodigoBarras:String,
     val IdArticulo:String,
     val IdCombinacion:String,
-    val Descripcion:String,
-    val StockReal: Double
 ) : Serializable

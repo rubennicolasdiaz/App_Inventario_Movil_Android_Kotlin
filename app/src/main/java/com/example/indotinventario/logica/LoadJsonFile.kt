@@ -3,8 +3,10 @@ package com.example.indotinventario.logica
 import android.content.Context
 import android.os.Environment
 import android.util.Log
+import com.google.gson.JsonParseException
 import org.json.JSONArray
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
 
@@ -23,7 +25,6 @@ class LoadJsonFile {
                 if (ficheroOrigen.exists()) {
                     // Abrir un InputStream desde el archivo en getExternalFilesDir
                     val inputStream: InputStream = ficheroOrigen.inputStream()
-
 
                     val size = inputStream.available()
                     val buffer = ByteArray(size)
@@ -51,9 +52,12 @@ class LoadJsonFile {
                 }else{
                     Log.i("Fichero Origen", "Fichero no encontrado")
                 }
-
-            } catch (e: Exception) {
-                Log.e("TAG", "loadJson: error ${e.message}")
+            } catch (e: JsonParseException) {
+                Log.e("Ficheros", "Error en el formato JSON: ${e.message}")
+            } catch (e: IOException) {
+                Log.e("Ficheros", "Error de entrada/salida: ${e.message}")
+            } catch (e: SecurityException) {
+                Log.e("Ficheros", "Acceso no autorizado: ${e.message}")
             }
         }
 
@@ -95,9 +99,12 @@ class LoadJsonFile {
                 }else{
                     Log.i("Fichero Origen", "Fichero no encontrado")
                 }
-
-            } catch (e: Exception) {
-                Log.e("TAG", "loadJson: error ${e.message}")
+            } catch (e: JsonParseException) {
+                Log.e("Ficheros", "Error en el formato JSON: ${e.message}")
+            } catch (e: IOException) {
+                Log.e("Ficheros", "Error de entrada/salida: ${e.message}")
+            } catch (e: SecurityException) {
+                Log.e("Ficheros", "Acceso no autorizado: ${e.message}")
             }
         }
 
@@ -106,7 +113,6 @@ class LoadJsonFile {
             try {
                 // Definir la ruta al archivo en getExternalFilesDir
                 val ficheroOrigen = File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "partidas.json")
-
 
                 // Comprobar si el archivo existe
                 if (ficheroOrigen.exists()) {
@@ -139,9 +145,12 @@ class LoadJsonFile {
                 }else{
                     Log.i("Fichero Origen", "Fichero no encontrado")
                 }
-
-            } catch (e: Exception) {
-                Log.e("TAG", "loadJson: error ${e.message}")
+            } catch (e: JsonParseException) {
+                Log.e("Ficheros", "Error en el formato JSON: ${e.message}")
+            } catch (e: IOException) {
+                Log.e("Ficheros", "Error de entrada/salida: ${e.message}")
+            } catch (e: SecurityException) {
+                Log.e("Ficheros", "Acceso no autorizado: ${e.message}")
             }
         }
     }
