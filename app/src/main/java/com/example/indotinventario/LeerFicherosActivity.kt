@@ -14,12 +14,9 @@ import com.example.indotinventario.logica.CodigoBarras
 import com.example.indotinventario.logica.Partida
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import com.google.gson.JsonParser
-import com.google.gson.JsonSyntaxException
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.reflect.Type
 import kotlin.system.exitProcess
 
 class LeerFicherosActivity : AppCompatActivity() {
@@ -43,7 +40,7 @@ class LeerFicherosActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) // Permitir selección múltiple
             }
 
-            startActivityForResult(intent, PICK_JSON_FILE)
+             startActivityForResult(intent, PICK_JSON_FILE)
         }catch(e:Exception){
             Log.e("Error", e.message.toString())
         }
@@ -53,8 +50,8 @@ class LeerFicherosActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         try{
-            val damagedUris = ArrayList<Uri>()
-            val uris = ArrayList<Uri>()
+            val damagedUris = mutableListOf<Uri>()
+            val uris = mutableListOf<Uri>()
 
             if (requestCode == PICK_JSON_FILE && resultCode == RESULT_OK) {
                 // Verificar si hay más de un archivo seleccionado
@@ -65,14 +62,11 @@ class LeerFicherosActivity : AppCompatActivity() {
                     val clipData = data.clipData
 
                     if (clipData != null) {
-                        for (i in 0 until clipData.itemCount) {
+                        for (i in 0 until clipData.itemCount ) {
                             val uri = clipData.getItemAt(i)?.uri
 
                             if (uri != null) {
-                                if(isValidJson(uri) is Articulo ||
-                                    isValidJson(uri) is Partida ||
-                                    isValidJson(uri) is CodigoBarras){
-
+                                if(isValidJson(uri)){
                                     uris.add(uri)
                                 }else{
                                     damagedUris.add(uri)
@@ -84,12 +78,9 @@ class LeerFicherosActivity : AppCompatActivity() {
 
                     val uri = data?.data
                     if (uri != null) {
-                        if(isValidJson(uri) is Articulo ||
-                            isValidJson(uri) is Partida ||
-                            isValidJson(uri) is CodigoBarras){
-
-                            uris.add(uri)}
-                        else{
+                        if(isValidJson(uri)){
+                            uris.add(uri)
+                        }else{
                             damagedUris.add(uri)
                         }
                     }
@@ -101,41 +92,46 @@ class LeerFicherosActivity : AppCompatActivity() {
 
             }else{
 
-                var targetFile: File? = null
+                Log.i("ValidJson", "1")
+                var targetFile:File? = null
+                Log.i("ValidJson", "2")
 
                 for (uri in uris) {
-                    val validJson = isValidJson(uri)
 
-                    if (validJson is Partida) {
-                        Log.i("ValidJson", validJson.toString())
-                        Log.i("ValidJson", "Entra en el if del bucle for")
+                    Log.i("ValidJson", "3")
+
+                    Log.i("ValidJson", uri.path.toString())
+                    if (uri.toString().contains("partidas", ignoreCase = true)) {
                         targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "partidas.json")
-                        if (targetFile.exists()) {
-                            targetFile.delete()
-                        }
-                        copyFile(uri, targetFile)
                     }
 
-                    if (validJson is Articulo) {
-                        Log.i("ValidJson", validJson.toString())
-                        Log.i("ValidJson", "Entra en el if del bucle for")
+                    if (uri.toString().contains("articulos", ignoreCase = true)) {
                         targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "articulos.json")
-                        if (targetFile.exists()) {
-                            targetFile.delete()
-                        }
-                        copyFile(uri, targetFile)
                     }
 
-                    if (validJson is CodigoBarras) {
-                        Log.i("ValidJson", validJson.toString())
-                        Log.i("ValidJson", "Entra en el if del bucle for")
+                    if (uri.toString().contains("cbarras", ignoreCase = true)) {
                         targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "cbarras.json")
+                    }
+
+                    if (targetFile != null) {
+                        Log.i("ValidJson", "Primer paso")
+                        // Verificar si el archivo ya existe
                         if (targetFile.exists()) {
                             targetFile.delete()
+                            Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
                         }
+                        Log.i("ValidJson", "Paso siguiente")
                         copyFile(uri, targetFile)
+                        Log.i("ValidJson", "Fichero copiado con éxito")
                     }
+
+
+
+
+
                 }
+
+                Log.i("ValidJson", "Tamaño de array de Uris: ${uris.size}")
                 showAlertDialog(this@LeerFicherosActivity)
             }
         }catch (e: Exception) {
@@ -178,9 +174,10 @@ class LeerFicherosActivity : AppCompatActivity() {
 
     private fun reiniciarApp() {
 
-        val intent = Intent(applicationContext, MainActivity::class.java)
+       val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
 
+        //System.exit(0)
         exitProcess(0)
     }
 
@@ -219,76 +216,61 @@ class LeerFicherosActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun isValidJson(uri: Uri): Any? {
+    private fun isValidJson(uri: Uri): Boolean {
         try {
-
-            val articulo = Articulo(
-                IdArticulo = "",
-                IdCombinacion = "",
-                Descripcion = "",
-                StockReal = 0.0
-            )
-
-            val cbarras = CodigoBarras(
-                CodigoBarras = "",
-                IdArticulo = "",
-                IdCombinacion = ""
-            )
-
-            val partida = Partida(
-                IdArticulo = "",
-                Partida = "",
-                FCaducidad = "",
-                NSerie = "",
-            )
-
             // Abrir el archivo de entrada
             val inputStream = contentResolver.openInputStream(uri)
             val jsonContent = inputStream?.bufferedReader().use { it?.readText() }
 
+
+
             // Verificar si el archivo está vacío
             if (jsonContent.isNullOrBlank()) {
                 Log.i("ValidJson", "El archivo está vacío.")
+                return false // El archivo está vacío
             }
 
             // Intentar deserializar el contenido del JSON como un array
-            try {
+            val articuloList = try {
                 Gson().fromJson(jsonContent, Array<Articulo>::class.java).toList()
-                return articulo
             } catch (e: JsonParseException) {
                 Log.i("ValidJson", "Error al deserializar Articulo: ${e.message}")
-
+                null // Si no es un array válido de Articulo, devuelve null
             }
 
-            try {
+            val codigoBarrasList = try {
                 Gson().fromJson(jsonContent, Array<CodigoBarras>::class.java).toList()
-                return cbarras
             } catch (e: JsonParseException) {
                 Log.i("ValidJson", "Error al deserializar CodigoBarras: ${e.message}")
-
+                null // Si no es un array válido de CodigoBarras, devuelve null
             }
 
-            try {
+            val partidaList = try {
                 Gson().fromJson(jsonContent, Array<Partida>::class.java).toList()
-                return partida
             } catch (e: JsonParseException) {
                 Log.i("ValidJson", "Error al deserializar Partida: ${e.message}")
-
+                null // Si no es un array válido de Partida, devuelve null
             }
+
+            // Si al menos uno de los arrays no es null, el JSON es válido
+            if (articuloList != null || codigoBarrasList != null || partidaList != null) {
+                Log.i("ValidJson", "JSON válido.")
+                return true
+            } else {
+                Log.i("ValidJson", "El JSON no coincide con ninguna de las clases esperadas.")
+                return false
+            }
+
         } catch (e: IOException) {
-
             Log.i("ValidJson", "Error al leer el archivo: ${e.message}")
-
+            return false
         } catch (e: SecurityException) {
-
             Log.i("ValidJson", "Error de permisos: ${e.message}")
-
+            return false
         } catch (e: Exception) {
-
             Log.i("ValidJson", "Error inesperado: ${e.message}")
-
+            return false
         }
-        return null
     }
-}
 
+}
