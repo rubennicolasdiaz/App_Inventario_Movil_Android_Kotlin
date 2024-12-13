@@ -27,7 +27,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icono_indot3"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -35,7 +35,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LeerFicherosActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HistorialActivity"
             android:exported="false"
@@ -59,6 +60,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
+
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@color/white" />
+    <item android:drawable="@android:color/white"/>
     <item>
         <bitmap
-            android:id="@+id/logoImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
             android:src="@drawable/logo_ruano"
-            android:scaleType="centerCrop"
-            android:layout_margin="16dp"/>
+            android:gravity="center|fill" />
     </item>
 </layer-list>
 

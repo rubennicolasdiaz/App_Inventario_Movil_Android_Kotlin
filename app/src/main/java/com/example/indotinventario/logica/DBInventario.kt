@@ -69,7 +69,6 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
     );
 """.trimIndent()
 
-
         val createPartidasTable = """
     CREATE TABLE $TABLE_PARTIDAS (
         $COLUMN_ID_PARTIDA INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -96,7 +95,6 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         PRIMARY KEY($COLUMN_ID_ARTICULO, $COLUMN_ID_COMBINACION, $COLUMN_PARTIDA, $COLUMN_NUMERO_SERIE));
 """.trimIndent()
 
-
         db.execSQL(createArticulosTable)
         db.execSQL(createCodigosBarrasTable)
         db.execSQL(createPartidasTable)
@@ -111,9 +109,8 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         db.execSQL("DROP TABLE IF EXISTS $TABLE_INVENTARIO")
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // CRUD para Artículos
-    fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String) {
+    ////////ARTÍCULOS/////////////////////////////////////////////////////////////////////////
+        fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_ID_ARTICULO, idArticulo)
@@ -138,8 +135,7 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         return db.rawQuery("SELECT * FROM $TABLE_ARTICULOS", null)
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // CRUD para Partidas
+    ////////PARTIDAS/////////////////////////////////////////////////////////////////////////
 
    fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie:String?) {
         val db = this.writableDatabase
@@ -160,8 +156,6 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         return db.rawQuery("SELECT * FROM $TABLE_PARTIDAS", null)
     }
 
-
-
     fun obtenerPartidaPorIdArticulo(idArticulo: String): Cursor {
 
         val db = this.readableDatabase
@@ -171,8 +165,7 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         )
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // CRUD para Códigos de Barras
+    ////////CÓDIGOS BARRAS/////////////////////////////////////////////////////////////////////////
     fun insertarCodigoBarras(codigoBarras: String, idArticulo: String, idCombinacion: String?) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -206,8 +199,7 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         )
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // CRUD para Inventario
+    ////////INVENTARIO/////////////////////////////////////////////////////////////////////////
     fun insertarItemInventario(codigoBarras:String, descripcion:String, idArticulo:String,
                                idCombinacion:String, partida:String, fechaCaducidad:String,
                                numeroSerie:String, unidadesContadas:Double) {

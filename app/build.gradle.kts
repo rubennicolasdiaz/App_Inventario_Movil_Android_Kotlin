@@ -51,6 +51,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    //Splash API
+    implementation(libs.coreSplashscreen)
+
     implementation(libs.motionToast)
     implementation(libs.mssqlJdbc)
     implementation(libs.coreSplashscreen )

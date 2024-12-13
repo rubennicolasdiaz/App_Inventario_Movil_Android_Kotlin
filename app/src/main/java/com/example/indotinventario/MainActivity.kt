@@ -1,9 +1,12 @@
 package com.example.indotinventario
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.indotinventario.databinding.ActivityMainBinding
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.logica.LoadJsonFile
@@ -24,10 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // Dormimos el hilo principal 2 segundos para que se vea el screen y se ejecute la corrutina
-        // para leer los Json y pasar los datos a SQLite:
-        Thread.sleep(2000)
-        setTheme(R.style.AppTheme)
+        installSplashScreen()
+
+        Thread.sleep(3000)  // Tiempo de splash screen manual
+        setTheme(R.style.AppTheme)  // Aplicar el tema correcto después del splash
 
         super.onCreate(savedInstanceState)
 
@@ -60,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-
 
             withContext(Dispatchers.Main) {
                 // Implementación de View Binding:

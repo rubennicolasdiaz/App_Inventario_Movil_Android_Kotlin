@@ -14,6 +14,7 @@ import com.example.indotinventario.logica.CodigoBarras
 import com.example.indotinventario.logica.Partida
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
+import org.json.JSONArray
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -30,7 +31,7 @@ class LeerFicherosActivity : AppCompatActivity() {
         openFile(uri)
     }
 
-    fun openFile(pickerInitialUri: Uri){
+    private fun openFile(pickerInitialUri: Uri){
 
         try{
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -50,6 +51,7 @@ class LeerFicherosActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         try{
+            var isCopied = false
             val damagedUris = mutableListOf<Uri>()
             val uris = mutableListOf<Uri>()
 
@@ -114,24 +116,19 @@ class LeerFicherosActivity : AppCompatActivity() {
                     }
 
                     if (targetFile != null) {
-                        Log.i("ValidJson", "Primer paso")
-                        // Verificar si el archivo ya existe
+
                         if (targetFile.exists()) {
                             targetFile.delete()
                             Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
                         }
                         Log.i("ValidJson", "Paso siguiente")
-                        copyFile(uri, targetFile)
+                        isCopied = copyFile(uri, targetFile)
                         Log.i("ValidJson", "Fichero copiado con éxito")
                     }
-
-
-
-
-
                 }
+            }
 
-                Log.i("ValidJson", "Tamaño de array de Uris: ${uris.size}")
+            if(isCopied){
                 showAlertDialog(this@LeerFicherosActivity)
             }
         }catch (e: Exception) {
@@ -147,7 +144,7 @@ class LeerFicherosActivity : AppCompatActivity() {
     }
 
     // Función para copiar el archivo desde el URI al directorio de archivos internos
-    private fun copyFile(uri: Uri, destinationFile: File) {
+    private fun copyFile(uri: Uri, destinationFile: File):Boolean {
         try {
             contentResolver.openInputStream(uri)?.use { inputStream ->
                 FileOutputStream(destinationFile).use { outputStream ->
@@ -158,26 +155,19 @@ class LeerFicherosActivity : AppCompatActivity() {
                     }
                 }
             }
-            // Confirmación de que el archivo fue copiado
             Log.d("FileCopy", "Archivo copiado a: ${destinationFile.absolutePath}")
+            return true
         } catch (e: IOException) {
             e.printStackTrace()
+            return false
         }
-    }
-
-
-    override fun onBackPressed() {
-
-        finish()
-        super.onBackPressed()
     }
 
     private fun reiniciarApp() {
 
-       val intent = Intent(applicationContext, MainActivity::class.java)
+        val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
 
-        //System.exit(0)
         exitProcess(0)
     }
 
@@ -192,10 +182,9 @@ class LeerFicherosActivity : AppCompatActivity() {
 
                 reiniciarApp()
 
-            }.setNegativeButton("No") { dialog, _ ->
+            }.setNegativeButton("No") { _, _ ->
 
-                dialog.dismiss()
-                finish()
+                reiniciarBusqueda()
             }
         builder.show()
     }
@@ -209,9 +198,7 @@ class LeerFicherosActivity : AppCompatActivity() {
 
             .setPositiveButton("Aceptar") { _, _ ->
 
-
-                finish()
-
+                reiniciarBusqueda()
             }
         builder.show()
     }
@@ -228,6 +215,12 @@ class LeerFicherosActivity : AppCompatActivity() {
             if (jsonContent.isNullOrBlank()) {
                 Log.i("ValidJson", "El archivo está vacío.")
                 return false // El archivo está vacío
+            }
+
+            val jsonArray = JSONArray(jsonContent.trim()) // Intentar parsear el contenido como un array
+            if (jsonArray.length() == 0) {
+                Log.i("ValidJson", "El archivo contiene un array vacío.")
+                return false // El archivo contiene un array vacío
             }
 
             // Intentar deserializar el contenido del JSON como un array
@@ -273,4 +266,11 @@ class LeerFicherosActivity : AppCompatActivity() {
         }
     }
 
+    private fun reiniciarBusqueda(){
+
+        val intent = Intent(this@LeerFicherosActivity, this@LeerFicherosActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+        startActivity(intent)
+        finish()
+    }
 }

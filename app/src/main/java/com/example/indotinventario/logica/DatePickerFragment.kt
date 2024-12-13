@@ -8,6 +8,7 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+// Sirve para implementar un calendario para establecer la fecha si se abre esta pantalla
 class DatePickerFragment(val listener:(day:Int, month:Int, year:Int) -> Unit): DialogFragment(),
 DatePickerDialog.OnDateSetListener{
 
