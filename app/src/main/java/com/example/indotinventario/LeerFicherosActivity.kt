@@ -94,15 +94,10 @@ class LeerFicherosActivity : AppCompatActivity() {
 
             }else{
 
-                Log.i("ValidJson", "1")
                 var targetFile:File? = null
-                Log.i("ValidJson", "2")
 
                 for (uri in uris) {
 
-                    Log.i("ValidJson", "3")
-
-                    Log.i("ValidJson", uri.path.toString())
                     if (uri.toString().contains("partidas", ignoreCase = true)) {
                         targetFile = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "partidas.json")
                     }
@@ -121,7 +116,6 @@ class LeerFicherosActivity : AppCompatActivity() {
                             targetFile.delete()
                             Log.d("FileCheck", "El archivo ${targetFile.name} ya existía, se ha eliminado para sobrescribirlo.")
                         }
-                        Log.i("ValidJson", "Paso siguiente")
                         isCopied = copyFile(uri, targetFile)
                         Log.i("ValidJson", "Fichero copiado con éxito")
                     }
