@@ -3,6 +3,7 @@ package com.example.indotinventario.logica
 import android.content.Context
 import android.os.Environment
 import android.util.Log
+import com.example.indotinventario.utilidades.Constantes
 import com.google.gson.JsonParseException
 import org.json.JSONArray
 import java.io.File
@@ -10,7 +11,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
 
-class LoadJsonFile {
+class ReadJsonFiles {
 
     companion object{
 
@@ -135,12 +136,12 @@ class LoadJsonFile {
                         val jsonObject = jsonArray.getJSONObject(i)
 
                         // Extraer los valores de cada objeto JSON
-                        val idArticulo = jsonObject.getString("IdArticulo")
-                        val partida = jsonObject.getString("Partida")
-                        val fechaCaducidad = jsonObject.getString("FCaducidad")
-                        val numeroSerie = jsonObject.getString("NSerie")
+                        val idArticulo = jsonObject.getString("IdArticulo") ?: Constantes.NULL
+                        val partida = jsonObject.getString("Partida") ?: Constantes.NULL
+                        val fechaCaducidad = jsonObject.getString("FCaducidad") ?: Constantes.NULL
+                        val numeroSerie = jsonObject.getString("NSerie") ?: Constantes.NULL
 
-                        dbInventario.insertarPartida(partida, idArticulo, fechaCaducidad, numeroSerie)
+                        dbInventario.insertarPartida(idArticulo, partida, fechaCaducidad, numeroSerie)
                     }
                 }else{
                     Log.i("Fichero Origen", "Fichero no encontrado")

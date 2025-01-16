@@ -72,8 +72,8 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         val createPartidasTable = """
     CREATE TABLE $TABLE_PARTIDAS (
         $COLUMN_ID_PARTIDA INTEGER PRIMARY KEY AUTOINCREMENT,
-        $COLUMN_PARTIDA TEXT,
         $COLUMN_ID_ARTICULO TEXT,
+        $COLUMN_PARTIDA TEXT,
         $COLUMN_FECHA_CADUCIDAD TEXT,
         $COLUMN_NUMERO_SERIE TEXT,
         
@@ -110,7 +110,7 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
     }
 
     ////////ARTÍCULOS/////////////////////////////////////////////////////////////////////////
-        fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String) {
+    fun insertarArticulo(idArticulo: String, idCombinacion: String?, descripcion: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_ID_ARTICULO, idArticulo)
@@ -137,12 +137,12 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
 
     ////////PARTIDAS/////////////////////////////////////////////////////////////////////////
 
-   fun insertarPartida(partida: String, idArticulo: String, fechaCaducidad: String?, numeroSerie:String?) {
+    fun insertarPartida(idArticulo: String?, partida: String?, fechaCaducidad: String?, numeroSerie:String?) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
 
-            put(COLUMN_PARTIDA, partida)
             put(COLUMN_ID_ARTICULO, idArticulo)
+            put(COLUMN_PARTIDA, partida)
             put(COLUMN_FECHA_CADUCIDAD, fechaCaducidad)
             put(COLUMN_NUMERO_SERIE, numeroSerie)
         }

@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.ui
 
 import android.Manifest
 import android.app.Activity
@@ -20,10 +20,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.indotinventario.logica.Articulo
-import com.example.indotinventario.logica.SaveJsonFile
+import com.example.indotinventario.utilidades.Constantes
+import com.example.indotinventario.R
+import com.example.indotinventario.logica.UploadJsonFile
 import com.example.indotinventario.databinding.ActivityBuscarCodigoBarrasBinding
 import com.example.indotinventario.logica.DBInventario
+import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -34,16 +36,17 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
     // Se crea el binding para la vista:
     private lateinit var binding:ActivityBuscarCodigoBarrasBinding
-    // Variable para acceder a la DB:
+    // Variable para acceder a la DB de Inventario:
     private lateinit var dbInventario: DBInventario
 
-    // ArrayList para poder buscar por descripción de artículo:
-    private var arrayArticulos: ArrayList<Articulo> = ArrayList()
+    // Variable para acceder a la DB de Usuarios:
+    private lateinit var dbUsuarios: DBUsuarios
+
 
     // ArrayLists para almacenar los valores asociados a las partidas:
-    private var arrayPartidas:ArrayList<String> = ArrayList()
-    private var arrayFechas:ArrayList<String> = ArrayList()
-    private var arrayNumerosSerie:ArrayList<String> = ArrayList()
+    private var arrayPartidas:ArrayList<String?> = ArrayList()
+    private var arrayFechas:ArrayList<String?> = ArrayList()
+    private var arrayNumerosSerie:ArrayList<String?> = ArrayList()
 
     private lateinit var adapterPartidas:ArrayAdapter<Any>
     private lateinit var adapterNumerosSerie:ArrayAdapter<Any>
@@ -88,7 +91,9 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 binding.tvIdCombinacion2.text = idCombinacion
 
                 buscarArticuloPorIdArticulo(idArticulo)
-                buscarPartidaPorIdArticulo(idArticulo)
+                if (idArticulo != null) {
+                    buscarPartidaPorIdArticulo(idArticulo)
+                }
             }
         }else{
             Log.i("Bundle", "Bundle nulo")
@@ -235,11 +240,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
-    private fun buscarPartidaPorIdArticulo(idArticulo: String?) {
+    private fun buscarPartidaPorIdArticulo(idArticulo: String) {
 
         try{
-
-            val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo!!)
+            val partidaCursor: Cursor = dbInventario.obtenerPartidaPorIdArticulo(idArticulo)
             var partidaInicial = ""
 
             if(partidaCursor.moveToFirst()) {
@@ -259,13 +263,15 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
                     val numeroSerie = partidaCursor.getString(numeroSerieIndex)
 
+                    partidaInicial = partida
+
                     arrayPartidas.add(partida)
                     arrayFechas.add(fechaCaducidad)
                     arrayNumerosSerie.add(numeroSerie)
 
                 }while(partidaCursor.moveToNext())
 
-                partidaInicial = arrayPartidas.last()
+
                 partidaCursor.close()
 
 
@@ -273,7 +279,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 Log.i("TAG Partida", "Elemento no encontrado")
             }
 
-            if(partidaInicial == "null"){
+            if(partidaInicial == Constantes.NULL){
 
                 arrayPartidas.clear()
                 arrayFechas.clear()
@@ -385,10 +391,11 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         return idArticulo
     }
 
-    // Inicializar la base de datos
+    // Inicializar las bases de datos
     private fun inicializarDB(){
 
         dbInventario = DBInventario.getInstance(this)
+        dbUsuarios = DBUsuarios.getInstance(this)
     }
 
     private fun limpiarCampos() {
@@ -533,9 +540,9 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ SaveJsonFile.saveJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
+                    async{ UploadJsonFile.saveJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario, dbUsuarios)}.await()
                 }
+                finishAffinity() // Finaliza la app.
 
             }.setNegativeButton("No") { dialog, which ->
 

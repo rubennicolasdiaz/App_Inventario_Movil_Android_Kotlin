@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.indotinventario.R
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import com.google.zxing.Result
 

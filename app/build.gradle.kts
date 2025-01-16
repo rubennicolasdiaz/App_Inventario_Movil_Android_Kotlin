@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.serialization)
 }
 
 
@@ -54,12 +55,21 @@ dependencies {
     //Splash API
     implementation(libs.coreSplashscreen)
 
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.logging.interceptor)
+
+    //MotionToast
     implementation(libs.motionToast)
+
+
     implementation(libs.mssqlJdbc)
     implementation(libs.coreSplashscreen )
 
     implementation(libs.zxingAndroidEmbedded)
-    implementation(libs.gson )
+    implementation(libs.gson)
 
     // Corrutinas:
     implementation(libs.activityKtx)
@@ -73,6 +83,14 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Supabase:
+    implementation(libs.supabase)
+    implementation(libs.ktorclient)
+
+    //Serialización Kotlinx:
+    implementation(libs.serialization.json)
+
 }
 
 

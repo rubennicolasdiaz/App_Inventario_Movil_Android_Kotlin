@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.ui
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,9 +8,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.indotinventario.logica.SaveJsonFile
+import com.example.indotinventario.R
+import com.example.indotinventario.logica.UploadJsonFile
 import com.example.indotinventario.databinding.ActivityMenuBinding
 import com.example.indotinventario.logica.DBInventario
+import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -21,6 +23,9 @@ class MenuActivity : AppCompatActivity() {
 
     // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
+
+    // Variable para acceder a la DB de Usuarios:
+    private lateinit var dbUsuarios: DBUsuarios
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,7 @@ class MenuActivity : AppCompatActivity() {
     private fun inicializarDB(){
 
         dbInventario = DBInventario.getInstance(this)
+        dbUsuarios = DBUsuarios.getInstance(this)
     }
 
     private fun cargarVista() {
@@ -53,14 +59,14 @@ class MenuActivity : AppCompatActivity() {
             pasarAHistorialActivity()
         }
 
-        binding.buttonGuardar.setOnClickListener {
-
-            showAlertDialog(this)
-        }
-
         binding.buttonLeerFicheros.setOnClickListener {
 
             pasarALeerFicherosActivity()
+        }
+
+        binding.buttonGuardar.setOnClickListener {
+
+            showAlertDialog(this)
         }
     }
 
@@ -114,12 +120,12 @@ class MenuActivity : AppCompatActivity() {
 
                 dbInventario.close()
 
-                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
+                // Se llama a corrutina para llamar a la API y subir el fichero
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ SaveJsonFile.saveJsonInventario(this@MenuActivity, dbInventario)}.await()
-                    finishAffinity()
+                    async{ UploadJsonFile.saveJsonInventario(this@MenuActivity, dbInventario, dbUsuarios)}.await()
                 }
+                finishAffinity()
 
             }.setNegativeButton("No") { dialog, which ->
 

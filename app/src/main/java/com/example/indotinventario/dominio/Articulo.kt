@@ -1,4 +1,4 @@
-package com.example.indotinventario.logica
+package com.example.indotinventario.dominio
 
 import java.io.Serializable
 

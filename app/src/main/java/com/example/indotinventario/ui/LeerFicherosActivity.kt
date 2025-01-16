@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.ui
 
 import android.app.AlertDialog
 import android.content.Context
@@ -9,9 +9,9 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.util.Log
-import com.example.indotinventario.logica.Articulo
-import com.example.indotinventario.logica.CodigoBarras
-import com.example.indotinventario.logica.Partida
+import com.example.indotinventario.dominio.Articulo
+import com.example.indotinventario.dominio.CodigoBarras
+import com.example.indotinventario.dominio.Partida
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import org.json.JSONArray

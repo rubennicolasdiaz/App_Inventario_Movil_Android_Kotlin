@@ -2,7 +2,7 @@ package com.example.indotinventario.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.indotinventario.logica.InventarioItem
+import com.example.indotinventario.dominio.InventarioItem
 import com.example.indotinventario.databinding.ItemInventarioBinding
 
 class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {

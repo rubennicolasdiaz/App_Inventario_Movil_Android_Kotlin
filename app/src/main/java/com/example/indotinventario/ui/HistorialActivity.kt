@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.ui
 
 import android.app.AlertDialog
 import android.content.Context
@@ -9,11 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.indotinventario.logica.InventarioItem
-import com.example.indotinventario.logica.SaveJsonFile
+import com.example.indotinventario.R
+import com.example.indotinventario.dominio.InventarioItem
+import com.example.indotinventario.logica.UploadJsonFile
 import com.example.indotinventario.adapter.ItemAdapter
 import com.example.indotinventario.databinding.ActivityHistorialBinding
 import com.example.indotinventario.logica.DBInventario
+import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -25,6 +27,8 @@ class HistorialActivity : AppCompatActivity() {
     private lateinit var dbInventario: DBInventario
     private lateinit var binding: ActivityHistorialBinding
 
+    // Variable para acceder a la DB de Usuarios:
+    private lateinit var dbUsuarios: DBUsuarios
     private var inventarioMutableList: MutableList<InventarioItem> = mutableListOf()
 
     private lateinit var adapter: ItemAdapter
@@ -84,6 +88,7 @@ class HistorialActivity : AppCompatActivity() {
 
         try{
             dbInventario= DBInventario.getInstance(this)
+            dbUsuarios = DBUsuarios.getInstance(this)
             val cursorInventario = dbInventario.obtenerTodosItemInventario()
 
             if(cursorInventario.moveToNext()){
@@ -106,8 +111,10 @@ class HistorialActivity : AppCompatActivity() {
                     val numeroSerie = cursorInventario.getString(numeroSerieIndex)
                     val unidadesContadas = cursorInventario.getString(unidadesContadasIndex)
 
-                    inventarioMutableList.add(InventarioItem(codigoBarras, descripcion, idArticulo, idCombinacion, partida,
-                        fechaCaducidad, numeroSerie, unidadesContadas))
+                    inventarioMutableList.add(
+                        InventarioItem(codigoBarras, descripcion, idArticulo, idCombinacion, partida,
+                        fechaCaducidad, numeroSerie, unidadesContadas)
+                    )
 
                 }while(cursorInventario.moveToNext())
             }else{
@@ -139,7 +146,7 @@ class HistorialActivity : AppCompatActivity() {
 
     private fun onDeletedItem(position: Int) {
 
-        val itemToDelete:InventarioItem = inventarioMutableList[position]
+        val itemToDelete: InventarioItem = inventarioMutableList[position]
 
         val idArticulo = itemToDelete.idArticulo
         val idCombinacion = itemToDelete.idCombinacion
@@ -204,10 +211,9 @@ class HistorialActivity : AppCompatActivity() {
                 // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ SaveJsonFile.saveJsonInventario(this@HistorialActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
+                    async{ UploadJsonFile.saveJsonInventario(this@HistorialActivity, dbInventario,dbUsuarios)}.await()
                 }
-
+                finishAffinity() // Finaliza la app.
             }.setNegativeButton("No") { dialog, which ->
 
                 dialog.dismiss()

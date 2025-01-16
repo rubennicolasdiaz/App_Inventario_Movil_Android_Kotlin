@@ -6,7 +6,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,6 +22,34 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:srcCompat="@drawable/icono_indot1" />
 
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="352dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="Introduzca email de usuario"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Introduzca su contraseña"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.5" />
+
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="169dp"
@@ -34,11 +62,11 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSalir"
+        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.70"
-        app:layout_constraintHorizontal_bias="0.5" />
+        app:layout_constraintVertical_bias="0.86" />
 
     <Button
         android:id="@+id/buttonSalir"
@@ -51,9 +79,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toEndOf="@+id/buttonLogin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.86" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

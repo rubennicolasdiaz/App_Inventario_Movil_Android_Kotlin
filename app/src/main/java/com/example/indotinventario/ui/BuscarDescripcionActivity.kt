@@ -1,4 +1,4 @@
-package com.example.indotinventario
+package com.example.indotinventario.ui
 
 import android.app.AlertDialog
 import android.content.Context
@@ -10,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.indotinventario.logica.Articulo
-import com.example.indotinventario.logica.SaveJsonFile
+import com.example.indotinventario.R
+import com.example.indotinventario.dominio.Articulo
+import com.example.indotinventario.logica.UploadJsonFile
 import com.example.indotinventario.adapter.ArticuloAdapter
 import com.example.indotinventario.databinding.ActivityBuscarDescripcionBinding
 import com.example.indotinventario.logica.DBInventario
+import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -25,6 +27,9 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     // Instancia de la clase DB Inventario
     private lateinit var dbInventario: DBInventario
     private lateinit var binding: ActivityBuscarDescripcionBinding
+
+    // Variable para acceder a la DB de Usuarios:
+    private lateinit var dbUsuarios: DBUsuarios
 
     private lateinit var articuloMutableList: MutableList<Articulo>
     private lateinit var adapter: ArticuloAdapter
@@ -63,7 +68,12 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private fun inicializarDB(){
 
         try{
+
             dbInventario= DBInventario.getInstance(this)
+            dbUsuarios = DBUsuarios.getInstance(this)
+
+
+
             val cursorArticulos = dbInventario.obtenerTodosArticulos()
             articuloMutableList = ArrayList()
 
@@ -95,11 +105,11 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         }catch(e:Exception){
 
             MotionToast.createToast(this,"ERROR AL BUSCAR",
-            "No se obtuvo ningún resultado",
-            MotionToast.TOAST_WARNING,
-            MotionToast.GRAVITY_BOTTOM,
-            MotionToast.SHORT_DURATION,
-            null)
+                "No se obtuvo ningún resultado",
+                MotionToast.TOAST_WARNING,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.SHORT_DURATION,
+                null)
         }
     }
 
@@ -107,7 +117,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         buscarArticuloDescripcion(articulo)
     }
 
-    private fun buscarArticuloDescripcion(articulo:Articulo) {
+    private fun buscarArticuloDescripcion(articulo: Articulo) {
 
         try{
             var codigoBarras: String = ""
@@ -195,9 +205,9 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                 // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ SaveJsonFile.saveJsonInventario(this@BuscarDescripcionActivity, dbInventario)}.await()
-                    finishAffinity() // Finaliza la app.
+                    async{ UploadJsonFile.saveJsonInventario(this@BuscarDescripcionActivity, dbInventario, dbUsuarios)}.await()
                 }
+                finishAffinity() // Finaliza la app.
 
             }.setNegativeButton("No") { dialog, which ->
 
