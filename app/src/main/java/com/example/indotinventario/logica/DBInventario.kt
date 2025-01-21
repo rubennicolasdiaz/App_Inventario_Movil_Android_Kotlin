@@ -135,6 +135,18 @@ class DBInventario private constructor(context: Context) : SQLiteOpenHelper(cont
         return db.rawQuery("SELECT * FROM $TABLE_ARTICULOS", null)
     }
 
+    fun eliminarArticulo(idArticulo: String) {
+
+        val db = this.writableDatabase
+
+        db.delete(TABLE_CODIGOS_BARRAS, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
+        db.delete(TABLE_PARTIDAS, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
+        db.delete(TABLE_ARTICULOS, "$COLUMN_ID_ARTICULO = ?", arrayOf(idArticulo))
+
+        db.close()
+    }
+
+
     ////////PARTIDAS/////////////////////////////////////////////////////////////////////////
 
     fun insertarPartida(idArticulo: String?, partida: String?, fechaCaducidad: String?, numeroSerie:String?) {

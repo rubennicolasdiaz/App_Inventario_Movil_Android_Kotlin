@@ -1,7 +1,9 @@
 package com.example.indotinventario.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,15 +26,11 @@ import www.sanju.motiontoast.MotionToast
 
 class MainActivity : AppCompatActivity() {
 
-
-    private lateinit var supabase: SupabaseClient
+    private lateinit var supabase: SupabaseClient //Cliente Supabase para login en tabla de "usuarios"
     private lateinit var dbInventario: DBInventario
     private lateinit var dbUsuarios: DBUsuarios
 
-    //Código de Empresa:
     private var codEmpresa:String = ""
-
-    //Login Api:
     private var loginApi: LoginApi = LoginApi("", "")
 
     private lateinit var binding:ActivityMainBinding
@@ -45,18 +43,15 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        // Implementación de View Binding:
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater) // Implementación de View Binding:
         waitBinding = WaitScreenMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         cargarBotones()
 
-        //INICIALIZAR BASES DATOS USUARIOS E INVENTARIO
         inicializarDBUsuarios()
         inicializarDBInventario()
 
-        //INICIALIZAR SUPABASE
         inicializarSupabase()
     }
 
@@ -90,21 +85,17 @@ class MainActivity : AppCompatActivity() {
 
             lifecycleScope.launch(Dispatchers.IO) {
 
+                withContext(Dispatchers.Main){
+                    cargarVistaEspera()
+                }
+
                 if (comprobarUsuarioSupabase(email, password)) {
 
-                    withContext(Dispatchers.Main){
-                        cargarVistaEspera()
-                    }
-
                     descargarFicherosApi()
-
-                    withContext(Dispatchers.Main){
-                        pasarAMenuActivity()
-                    }
-
                 } else {
                     withContext(Dispatchers.Main) {
 
+                        cargarVistaNormal()
                         MotionToast.createToast(
                             this@MainActivity, "ERROR DE LOGIN",
                             "El usuario o la contraseña introducidos son incorrectos",
@@ -122,32 +113,25 @@ class MainActivity : AppCompatActivity() {
     private fun inicializarDBInventario() {
 
         dbInventario = DBInventario.getInstance(this@MainActivity)
-
-        // Obtener la base de datos en modo escritura
         val db = dbInventario.writableDatabase
 
-        // Eliminar las tablas existentes
-        db.execSQL("DROP TABLE IF EXISTS Articulos")
+        db.execSQL("DROP TABLE IF EXISTS Articulos") //Eliminar las tablas existentes
         db.execSQL("DROP TABLE IF EXISTS CodigosBarras")
         db.execSQL("DROP TABLE IF EXISTS Partidas")
         db.execSQL("DROP TABLE IF EXISTS Inventario")
 
-        // Volver a crear las tablas
-        dbInventario.onCreate(db)
+        dbInventario.onCreate(db) //Volver a crear las tablas
     }
 
     private fun inicializarDBUsuarios() {
 
         dbUsuarios = DBUsuarios.getInstance(this@MainActivity)
 
-        // Obtener la base de datos en modo escritura
         val db = dbUsuarios.writableDatabase
 
-        // Eliminar las tablas existentes
-        db.execSQL("DROP TABLE IF EXISTS Usuarios")
+        db.execSQL("DROP TABLE IF EXISTS Usuarios") //Eliminar las tablas existentes
 
-        // Volver a crear las tablas
-        dbUsuarios.onCreate(db)
+        dbUsuarios.onCreate(db) // Volver a crear las tablas
     }
 
     private fun inicializarSupabase(){
@@ -161,10 +145,9 @@ class MainActivity : AppCompatActivity() {
         dbInventario.close()
         dbUsuarios.close()
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) { //Se llama a corrutina, el login en supabase es suspend fun
             supabase.close()
         }
-
         finish()
     }
 
@@ -174,13 +157,31 @@ class MainActivity : AppCompatActivity() {
         val ficheroCBarras = codEmpresa + "_Inventario_20241119_1.cbarras.json"
         val ficheroPartidasNserie = codEmpresa + "_Inventario_20241119_1.partidasnserie.json"
 
-        val arrayListArticulos = ConexionAPI.downloadFileArticulos(ficheroArticulos)
-        val arrayListCBarras = ConexionAPI.downloadFileCBarras(ficheroCBarras)
-        val arrayListPartidasNSerie = ConexionAPI.downloadFilePartidasNSerie(ficheroPartidasNserie)
+        if(ConexionAPI.comprobarLlamadasApi()){
 
-        DownloadJsonFiles.loadJsonArticulos(dbInventario, arrayListArticulos)
-        DownloadJsonFiles.loadJsonCodigosBarras(dbInventario, arrayListCBarras)
-        DownloadJsonFiles.loadJsonPartidas(dbInventario, arrayListPartidasNSerie)
+            withContext(Dispatchers.Main) {
+                showAlertDialog(this@MainActivity)
+            }
+        }else{
+            val arrayListArticulos = ConexionAPI.downloadFileArticulos(ficheroArticulos)
+            val arrayListCBarras = ConexionAPI.downloadFileCBarras(ficheroCBarras)
+            val arrayListPartidasNSerie = ConexionAPI.downloadFilePartidasNSerie(ficheroPartidasNserie)
+
+            DownloadJsonFiles.downloadJsonArticulos(dbInventario, arrayListArticulos)
+            DownloadJsonFiles.downloadJsonCodigosBarras(dbInventario, arrayListCBarras)
+            DownloadJsonFiles.downloadJsonPartidas(dbInventario, arrayListPartidasNSerie)
+
+            if(DownloadJsonFiles.isDownloadOK()){
+
+                withContext(Dispatchers.Main){
+                    pasarAMenuActivity()
+                }
+            }else{
+                withContext(Dispatchers.Main) {
+                    showAlertDialog(this@MainActivity)
+                }
+            }
+        }
     }
 
     private fun cerrarAplicacion() {
@@ -206,12 +207,9 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-
-    //LLAMAR A LA API Y OBTENER TOKEN
-    private suspend fun obtenerTokenApi(loginApi: LoginApi, context:Context):String{
+    private suspend fun obtenerTokenApi(loginApi: LoginApi, context:Context):String{//LLAMAR A LA API Y OBTENER TOKEN
 
         val token = ConexionAPI.loginApi(loginApi, context)
-
         return token
     }
 
@@ -223,9 +221,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(waitBinding.root)
     }
 
+    private fun cargarVistaNormal(){
+
+        waitBinding.progressBar.visibility = View.GONE
+        setContentView(binding.root)
+    }
+
     private fun insertarUsuario(dbUsuarios: DBUsuarios, usuario: Usuario){
 
         dbUsuarios.insertarUsuario(usuario.id, usuario.nombre, usuario.email, usuario.password,
             usuario.empresa, usuario.codEmpresa, usuario.token)
+    }
+
+    private fun showAlertDialog(context: Context){
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("ERROR DE DESCARGA DE FICHEROS")
+            .setMessage("No se han podido descargar ficheros desde la Api. Por favor, " +
+                    "revisar conexión a Internet o consultar con el administrador de la Api" +
+                    " Indot Inventario Móvil. Pruebe también a cerrar e iniciar de nuevo la app.")
+
+            .setPositiveButton("ACEPTAR") { dialog, which ->
+
+
+                cargarVistaNormal()
+            }
+        val dialog = builder.create()
+        dialog.show()
+
+        val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        positiveButton.setTextColor(Color.BLUE)
     }
 }

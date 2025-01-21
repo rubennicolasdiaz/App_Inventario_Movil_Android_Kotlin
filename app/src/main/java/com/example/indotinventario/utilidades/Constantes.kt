@@ -2,5 +2,5 @@ package com.example.indotinventario.utilidades
 
 object Constantes {
 
-    const val NULL = "NULO"
+    const val CADENA_VACIA = " "
 }

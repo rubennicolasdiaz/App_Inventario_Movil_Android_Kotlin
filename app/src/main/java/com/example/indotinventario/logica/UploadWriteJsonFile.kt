@@ -13,13 +13,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class UploadJsonFile {
+class UploadWriteJsonFile {
 
     companion object{
 
+        private var uploadOK:Boolean = false
         private lateinit var COD_EMPRESA:String
 
-        suspend fun saveJsonInventario(context: Context, dbInventario:DBInventario, dbUsuarios: DBUsuarios) {
+        suspend fun uploadJsonInventario(context: Context, dbInventario:DBInventario, dbUsuarios: DBUsuarios){
 
             try {
                 // Cursor para obtener el usuario de la sesión y el código de su empresa para guardar el fichero:
@@ -75,12 +76,13 @@ class UploadJsonFile {
 
                     } while (todosItemsCursor.moveToNext())
                 } else {
+
                     Log.i("Json Inventario", "No se encontró ningún elemento de inventario")
                 }
                 // Se cierra la conexión a la DB:
                 dbInventario.close()
 
-                if (todosUsuariosCursor.moveToFirst() && itemsInventarioJsonArray.length() > 0) {
+                if (todosUsuariosCursor.moveToFirst()) {
 
                     val codEmpresaIndex = todosUsuariosCursor.getColumnIndex(DBUsuarios.COLUMN_COD_EMPRESA)
                     COD_EMPRESA = todosUsuariosCursor.getString(codEmpresaIndex)
@@ -96,11 +98,14 @@ class UploadJsonFile {
                     val outputStream = FileOutputStream(fichero)
                     outputStream.write(itemsInventarioJsonArray.toString().toByteArray())
                     outputStream.close()
-                    ConexionAPI.uploadFile(fichero)
+
+                    uploadOK = ConexionAPI.uploadFile(fichero)
                 } else {
+
+
                     Log.i("Cod_Empresa", "No se encontró ningún código de empresa")
                 }
-                }catch(e:Exception){
+            }catch(e:Exception){
                 Log.e("TAG", "Error al guardar el archivo JSON: ${e.message}")
             }
         }
@@ -108,15 +113,20 @@ class UploadJsonFile {
         fun obtenerFechaActual(): String {
 
             val formatoFecha = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            val fechaActual = Date() // Obtener la fecha y hora actual
-            return formatoFecha.format(fechaActual) // Formatear la fecha en el formato deseado y devolverla como String
+            val fechaActual = Date()
+            return formatoFecha.format(fechaActual)
         }
 
         fun obtenerHoraActual(): String {
-            // Definir el formato para la hora
+
             val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
-            val horaActual = Date() // Obtener la fecha y hora actual
-            return formatoHora.format(horaActual) // Formatear la hora y devolverla como String
+            val horaActual = Date()
+            return formatoHora.format(horaActual)
+        }
+
+        fun isUploadOK():Boolean{
+
+            return uploadOK
         }
     }
 }

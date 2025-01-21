@@ -12,8 +12,6 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Query
-import retrofit2.http.Url
-import java.io.File
 
 interface ApiService {
 
@@ -37,21 +35,4 @@ interface ApiService {
     //DESCARGAR FICHERO PARTIDAS Y NÚMEROS SERIE
     @POST("download")
     suspend fun downloadFilePartidas(@Query("nombreFichero") nombreFichero: String): Response<DownloadFileResponsePartidasNSerie>
-
-
-
-
-
-    //////////////DE MOMENTO NO SE HAN PROBADO//////////////////////////////
-
-    //SUBIR VARIOS FICHEROS:
-    @Multipart
-    @POST("uploadfiles")
-    suspend fun uploadMultipleFiles(@Part filesList: List<File>): Response<ResponseBody>
-
-
-
-    //DESCARGAR VARIOS FICHEROS
-    @POST("downloadfiles")
-    suspend fun downloadFiles(@Url filesUrls: List<File>): Response<ResponseBody>
 }

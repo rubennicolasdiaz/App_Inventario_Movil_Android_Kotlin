@@ -33,4 +33,7 @@
     <string name="opciones">Opciones</string>
     <string name="eliminar_busqueda">ELIMINAR DE LA BÚSQUEDA</string>
     <string name="escriba_codigo_descripcion">Escriba código barras o descripción del artículo</string>
+    <string name="informacion">Los artículos que tengan número de serie no tienen partida ni fecha de caducidad, y
+    el número de unidades sólo puede ser 1.\n\nLos artículos que tengan partida no tienen número de serie, aunque pueden
+    tener fecha de caducidad. El número de unidades será el que cuente el usuario.</string>
 </resources>

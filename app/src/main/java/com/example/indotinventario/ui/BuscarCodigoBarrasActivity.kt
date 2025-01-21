@@ -22,13 +22,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.utilidades.Constantes
 import com.example.indotinventario.R
-import com.example.indotinventario.logica.UploadJsonFile
+import com.example.indotinventario.logica.UploadWriteJsonFile
 import com.example.indotinventario.databinding.ActivityBuscarCodigoBarrasBinding
 import com.example.indotinventario.logica.DBInventario
 import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.collections.ArrayList
 import www.sanju.motiontoast.MotionToast
 
@@ -42,7 +43,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     // Variable para acceder a la DB de Usuarios:
     private lateinit var dbUsuarios: DBUsuarios
 
-
     // ArrayLists para almacenar los valores asociados a las partidas:
     private var arrayPartidas:ArrayList<String?> = ArrayList()
     private var arrayFechas:ArrayList<String?> = ArrayList()
@@ -52,15 +52,12 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private lateinit var adapterNumerosSerie:ArrayAdapter<Any>
 
     // Constantes y variables para permisos de cámara:
-
     private val CODIGO_PERMISOS_CAMARA = 1
-
 
     private var permisoCamaraConcedido = false
     private var permisoSolicitadoDesdeBoton = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
         super.onCreate(savedInstanceState)
         // Implementación de View Binding:
@@ -73,7 +70,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
         comprobarBundleDescripcion()
     }
-
 
     private fun comprobarBundleDescripcion() {
 
@@ -103,7 +99,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun cargarVista() {
 
         binding.etCodigo.filters = arrayOf(InputFilter.AllCaps())
-
         binding.buttonEscanear.setOnClickListener {
 
             if (!permisoCamaraConcedido) {
@@ -143,6 +138,10 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             insertarItemInventario()
             limpiarCampos()
         }
+
+        binding.buttonInfo.setOnClickListener{
+            mostrarDialogInformacion()
+        }
     }
 
     private fun buscarporCodigoBarras() {
@@ -156,35 +155,25 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun disminuirUnidades() {
 
         val currentValue = binding.etUnidades.text.toString()
-
-        // Verificar si el texto es un número válido
         val unidades = if (currentValue.isNotEmpty()) {
-            currentValue.toIntOrNull() ?: 0 // Si no es un número válido, usar 0
+            currentValue.toIntOrNull() ?: 0
         } else {
             0
         }
 
-        // Disminuir la cantidad, asegurándonos de que no sea menor que 0
         val newValue = if (unidades > 0) unidades - 1 else 0
-
-        // Actualizar el EditText con el nuevo valor
         binding.etUnidades.setText(newValue.toString())
     }
 
     private fun incrementarUnidades() {
         val currentValue = binding.etUnidades.text.toString()
-
-        // Verificar si el texto es un número válido
         val unidades = if (currentValue.isNotEmpty()) {
             currentValue.toIntOrNull() ?: 0 // Si no es un número válido, usar 0
         } else {
             0
         }
 
-        // Incrementar la cantidad
         val newValue = unidades + 1
-
-        // Actualizar el EditText con el nuevo valor
         binding.etUnidades.setText(newValue.toString())
     }
 
@@ -194,7 +183,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         // Verifica si el resultado fue exitoso y que el requestCode coincide
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getStringExtra("codigo")?.let { codigoBarras ->
-                // Aquí manejas el código de barras como antes
+                // Aquí se maneja el código de barras como antes
                 val codigoArticulo: String = codigoBarras
                 binding.etCodigo.setText(codigoArticulo)
                 buscarporCodigoBarras()
@@ -202,7 +191,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         }
     }
 
-    // Método para iniciar la actividad de escaneo
     private fun escanear() {
         val intent = Intent(this, EscanearActivity::class.java)
         escanearLauncher.launch(intent)
@@ -211,8 +199,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun buscarArticuloPorIdArticulo(idArticulo: String?) {
 
         try {
-            // Ahora obtenemos los detalles del artículo usando el idArticulo
-
             val articuloCursor: Cursor = dbInventario.obtenerArticulo(idArticulo!!)
 
             if (articuloCursor.moveToFirst() || articuloCursor.moveToNext()) {
@@ -223,8 +209,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 val idCombinacion = articuloCursor.getString(idCombinacionIndex)
                 val descripcion = articuloCursor.getString(descripcionIndex)
 
-                // Cerramos el cursor de artículo
-                articuloCursor.close()
+                articuloCursor.close() //Se cierra el cursor
 
                 binding.tvIdCombinacion2.setText(idCombinacion)
                 binding.tvDescripcion2.setText(descripcion)
@@ -233,7 +218,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                 Log.e("ERROR", "No se obtuvo ningún resultado")
             }
-
         }catch(e:Exception){
 
             Log.e("ERROR", "No se obtuvo ningún resultado")
@@ -257,8 +241,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     val fechaCaducidadIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_FECHA_CADUCIDAD)
                     val numeroSerieIndex = partidaCursor.getColumnIndex(DBInventario.COLUMN_NUMERO_SERIE)
 
-                    // Obtener los detalles de la partida:
-
                     val partida = partidaCursor.getString(partidaIndex)
                     val fechaCaducidad = partidaCursor.getString(fechaCaducidadIndex)
                     val numeroSerie = partidaCursor.getString(numeroSerieIndex)
@@ -271,15 +253,13 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
                 }while(partidaCursor.moveToNext())
 
-
-                partidaCursor.close()
-
-
+                partidaCursor.close() //Se cierra el cursor
             }else{
                 Log.i("TAG Partida", "Elemento no encontrado")
             }
 
-            if(partidaInicial == Constantes.NULL){
+            //Si la partida está vacía (se transforma desde el nulo del fichero descargado), es un número de serie
+            if(partidaInicial == Constantes.CADENA_VACIA){
 
                 arrayPartidas.clear()
                 arrayFechas.clear()
@@ -309,19 +289,16 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     override fun onNothingSelected(p0: AdapterView<*>?) {
                     }
                 }
+                //Si el número de serie está vacío(se transforma desde el nulo del fichero descargado), es una partida,
+                // que puede tener fecha de caducidad
             }else{
-
                 arrayNumerosSerie.clear()
-
 
                 val items = listOf(*arrayPartidas.toTypedArray())
 
                 adapterPartidas = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-
                 adapterPartidas.setDropDownViewResource(android.R.layout.simple_spinner_item)
-
                 binding.spinnerPartida.adapter = adapterPartidas
-
                 binding.spinnerPartida.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
                     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
@@ -344,7 +321,6 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                     override fun onNothingSelected(p0: AdapterView<*>?) {
                     }
                 }
-
             }
         }catch(e:Exception){
             MotionToast.createToast(this@BuscarCodigoBarrasActivity,
@@ -361,19 +337,15 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
 
         var idArticulo = ""
         try{
-            // Obtener el cursor con los datos del código de barras
             val cursor: Cursor = dbInventario.obtenerCodigoBarras(codigoBarras)
 
-            // Verificamos si el cursor tiene resultados
             if (cursor.moveToFirst() || cursor.moveToNext()) {
-                // Obtener los valores del cursor para el código de barras
+
                 val idArticuloIndex = cursor.getColumnIndex(DBInventario.COLUMN_ID_ARTICULO)
-
                 idArticulo = cursor.getString(idArticuloIndex)
-
                 binding.tvIdArticulo2.text = idArticulo
 
-                cursor.close()
+                cursor.close() //Se cierra el cursor
 
             } else {
                 MotionToast.createToast(this,
@@ -398,7 +370,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         dbUsuarios = DBUsuarios.getInstance(this)
     }
 
-    private fun limpiarCampos() {
+    private fun limpiarCampos() { //Se reinicia la activity para poder limpiar todos los campos de la vista
 
         try{
             val intent = Intent(this@BuscarCodigoBarrasActivity, this@BuscarCodigoBarrasActivity::class.java)
@@ -415,7 +387,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         when (requestCode) {
             CODIGO_PERMISOS_CAMARA -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Scan directly if requested from the button
+
                     if (permisoSolicitadoDesdeBoton) {
                         escanear()
                     }
@@ -450,14 +422,13 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
             null)
     }
 
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //Se sobreescribe el menú de los 3 puntitos
 
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { //Se asignan métodos al menú
         return when (item.itemId) {
 
             R.id.idInicio -> {
@@ -479,15 +450,15 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
     private fun insertarItemInventario() {
 
         try{
-            val codigoBarras = binding.etCodigo.text?.toString() ?: ""
-            val descripcion = binding.tvDescripcion2.text?.toString() ?: ""
-            val idArticulo = binding.tvIdArticulo2.text?.toString() ?: " "
-            val idCombinacion = binding.tvIdCombinacion2.text?.toString() ?: " "
-            val fechaCaducidad = binding.tvFecha2.text?.toString() ?: ""
+            val codigoBarras = binding.etCodigo.text?.toString() ?: Constantes.CADENA_VACIA
+            val descripcion = binding.tvDescripcion2.text?.toString() ?: Constantes.CADENA_VACIA
+            val idArticulo = binding.tvIdArticulo2.text?.toString() ?: Constantes.CADENA_VACIA
+            val idCombinacion = binding.tvIdCombinacion2.text?.toString() ?: Constantes.CADENA_VACIA
+            val fechaCaducidad = binding.tvFecha2.text?.toString() ?: Constantes.CADENA_VACIA
 
             val unidadesContadas: Double = binding.etUnidades.text.toString().toDouble()
-            val partida = binding.spinnerPartida.selectedItem?.toString() ?: " "
-            val numeroSerie = binding.spinnerNumeroSerie.selectedItem?.toString() ?: " "
+            val partida = binding.spinnerPartida.selectedItem?.toString() ?: Constantes.CADENA_VACIA
+            val numeroSerie = binding.spinnerNumeroSerie.selectedItem?.toString() ?: Constantes.CADENA_VACIA
 
             if(descripcion.isEmpty() && idArticulo.isEmpty()){
 
@@ -514,6 +485,8 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 dbInventario.insertarItemInventario(codigoBarras, descripcion, idArticulo,
                     idCombinacion, partida, fechaCaducidad,
                     numeroSerie, unidadesContadas)
+
+                dbInventario.eliminarArticulo(idArticulo) //Se elimina el artículo buscado una vez contadas las unidades
             }
         }catch(e:Exception){
             MotionToast.createToast(this,
@@ -531,7 +504,7 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Confirmar salida")
             .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
-                    "inventario y salir de la app?")
+                    "inventario en la nube y salir de la app?")
 
             .setPositiveButton("Sí") { dialog, which ->
 
@@ -540,14 +513,54 @@ class BuscarCodigoBarrasActivity : AppCompatActivity() {
                 // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ UploadJsonFile.saveJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario, dbUsuarios)}.await()
-                }
-                finishAffinity() // Finaliza la app.
+                    if(dbInventario.obtenerTodosItemInventario().count <= 0){
 
+                        withContext(Dispatchers.Main){
+                            MotionToast.createToast(this@BuscarCodigoBarrasActivity,
+                                "SIN UNIDADES GUARDADAS",
+                                "No se han guardado unidades de ningún artículo",
+                                MotionToast.TOAST_WARNING,
+                                MotionToast.GRAVITY_CENTER,
+                                MotionToast.SHORT_DURATION,
+                                null)
+                        }
+                    }else{
+
+                        async{UploadWriteJsonFile.uploadJsonInventario(this@BuscarCodigoBarrasActivity, dbInventario, dbUsuarios)}.await()
+
+                        if(UploadWriteJsonFile.isUploadOK()){
+
+                            finishAffinity() // Finaliza la app.
+                        }else {
+                            withContext(Dispatchers.Main) {
+                                MotionToast.createToast(
+                                    this@BuscarCodigoBarrasActivity,
+                                    "ERROR DE SUBIDA DE FICHERO",
+                                    "Revisar conexión a Internet o consultar con el administrador de la Api",
+                                    MotionToast.TOAST_ERROR,
+                                    MotionToast.GRAVITY_CENTER,
+                                    MotionToast.SHORT_DURATION,
+                                    null
+                                )
+                            }
+                        }
+                    }
+                }
             }.setNegativeButton("No") { dialog, which ->
 
                 dialog.dismiss()
             }
         builder.show()
+    }
+
+    private fun mostrarDialogInformacion() {
+
+        val dialogView = layoutInflater.inflate(R.layout.popup_information, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+        dialog.show()
     }
 }

@@ -17,9 +17,13 @@ import java.io.File
 
 object ConexionAPI {
 
-    private const val URL_NGROK = "https://7141-2-139-239-88.ngrok-free.app"
+    private const val URL_NGROK = "https://dfc2-2-139-239-88.ngrok-free.app" //
     private const val API_BASE_URL: String = "/apiindot/"
     var TOKEN_KEY = "JWT_TOKEN"
+
+    private var llamadaArticulos:Boolean = false
+    private var llamadaCBarras:Boolean = false
+    private var llamadaPartidas:Boolean = false
 
     private fun getRetrofit(): Retrofit {
         val retrofit = Retrofit.Builder()
@@ -51,9 +55,9 @@ object ConexionAPI {
                     }
                 }
             } else {
-                withContext(Dispatchers.Main) {
+
                     Log.e("API Error", "Error en la llamada a la API")
-                }
+
             }
 
         } catch (e: Exception) {
@@ -61,7 +65,7 @@ object ConexionAPI {
                 MotionToast.createToast(
                     context as Activity,
                     "Error en la solicitud",
-                    e.localizedMessage,
+                    "Ha habido un problema durante el login a la API",
                     MotionToast.TOAST_ERROR,
                     MotionToast.GRAVITY_CENTER,
                     MotionToast.SHORT_DURATION,
@@ -73,7 +77,7 @@ object ConexionAPI {
     }
 
     //SUBIR FICHERO:
-    suspend fun uploadFile(file: File) {
+    suspend fun uploadFile(file: File):Boolean {
 
         val multipart = UtilidadesFile.createMultipartFile(file)
         val service: ApiService = getRetrofit().create(ApiService::class.java)
@@ -81,20 +85,14 @@ object ConexionAPI {
 
         if (response.isSuccessful) {
 
-            withContext(Dispatchers.Main) {
-                Log.i("upload", "fichero subido correctamente")
-            }
+           Log.i("upload", "fichero subido correctamente")
 
+            return true
         } else {
 
-
             Log.i("upload", "Error en la llamada a la Api")
-            Log.i("upload", response.body().toString())
-            Log.i("upload", response.errorBody().toString())
-            Log.i("upload", response.message())
-            Log.i("upload", response.raw().toString())
-
         }
+        return false
     }
 
     //DESCARGAR FICHERO ARTICULOS:
@@ -106,7 +104,7 @@ object ConexionAPI {
         val response = service.downloadFileArticulos(nombreFichero)
 
         if (response.isSuccessful) {
-
+            llamadaArticulos = true
             Log.i("download", "Fichero desgargado con éxito")
             listArticulos = response.body()
         } else {
@@ -125,7 +123,7 @@ object ConexionAPI {
         val response = service.downloadFileCBarras(nombreFichero)
 
         if (response.isSuccessful) {
-
+            llamadaCBarras = true
             Log.i("download", "Fichero desgargado con éxito")
             listCBarras = response.body()
         } else {
@@ -145,6 +143,7 @@ object ConexionAPI {
         val response = service.downloadFilePartidas(nombreFichero)
 
         if (response.isSuccessful) {
+            llamadaPartidas = true
 
             Log.i("download", "Fichero desgargado con éxito")
 
@@ -154,6 +153,15 @@ object ConexionAPI {
             Log.i("download","Error al descargar el archivo")
         }
         return listPartidas
+    }
+
+    fun comprobarLlamadasApi():Boolean{
+
+        if(llamadaArticulos && llamadaCBarras && llamadaPartidas){
+            return true
+        }else{
+            return false
+        }
     }
 }
 

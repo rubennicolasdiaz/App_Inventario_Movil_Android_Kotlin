@@ -9,36 +9,33 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.indotinventario.R
-import com.example.indotinventario.logica.UploadJsonFile
+import com.example.indotinventario.logica.UploadWriteJsonFile
 import com.example.indotinventario.databinding.ActivityMenuBinding
 import com.example.indotinventario.logica.DBInventario
 import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import www.sanju.motiontoast.MotionToast
 
 class MenuActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMenuBinding
-
-    // Variable para acceder a la DB:
     private lateinit var dbInventario: DBInventario
-
-    // Variable para acceder a la DB de Usuarios:
     private lateinit var dbUsuarios: DBUsuarios
+
+    private lateinit var binding: ActivityMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Implementación de View Binding:
-        binding = ActivityMenuBinding.inflate(layoutInflater)
+        binding = ActivityMenuBinding.inflate(layoutInflater) //Implementación de View Binding:
         setContentView(binding.root)
 
         cargarVista()
         inicializarDB()
     }
 
-    // Inicializar la base de datos
     private fun inicializarDB(){
 
         dbInventario = DBInventario.getInstance(this)
@@ -57,11 +54,6 @@ class MenuActivity : AppCompatActivity() {
 
         binding.buttonHistorial.setOnClickListener {
             pasarAHistorialActivity()
-        }
-
-        binding.buttonLeerFicheros.setOnClickListener {
-
-            pasarALeerFicherosActivity()
         }
 
         binding.buttonGuardar.setOnClickListener {
@@ -85,14 +77,7 @@ class MenuActivity : AppCompatActivity() {
         startActivity(Intent(this, HistorialActivity::class.java))
     }
 
-    private fun pasarALeerFicherosActivity() {
-
-        moveTaskToBack(true)
-        startActivity(Intent(this, LeerFicherosActivity::class.java))
-    }
-
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //Se sobreescribe el menú de los 3 puntitos
 
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -114,19 +99,48 @@ class MenuActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Confirmar salida")
             .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
-                    "inventario y salir de la app?")
+                    "inventario en la nube y salir de la app?")
 
             .setPositiveButton("Sí") { dialog, which ->
 
                 dbInventario.close()
 
-                // Se llama a corrutina para llamar a la API y subir el fichero
+                // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ UploadJsonFile.saveJsonInventario(this@MenuActivity, dbInventario, dbUsuarios)}.await()
-                }
-                finishAffinity()
+                    if(dbInventario.obtenerTodosItemInventario().count <= 0){
 
+                        withContext(Dispatchers.Main){
+                            MotionToast.createToast(this@MenuActivity,
+                                "SIN UNIDADES GUARDADAS",
+                                "No se han guardado unidades de ningún artículo",
+                                MotionToast.TOAST_WARNING,
+                                MotionToast.GRAVITY_CENTER,
+                                MotionToast.SHORT_DURATION,
+                                null)
+                        }
+                    }else{
+
+                        async{UploadWriteJsonFile.uploadJsonInventario(this@MenuActivity, dbInventario, dbUsuarios)}.await()
+
+                        if(UploadWriteJsonFile.isUploadOK()){
+
+                            finishAffinity() // Finaliza la app.
+                        }else {
+                            withContext(Dispatchers.Main) {
+                                MotionToast.createToast(
+                                    this@MenuActivity,
+                                    "ERROR DE SUBIDA DE FICHERO",
+                                    "Revisar conexión a Internet o consultar con el administrador de la Api",
+                                    MotionToast.TOAST_ERROR,
+                                    MotionToast.GRAVITY_CENTER,
+                                    MotionToast.SHORT_DURATION,
+                                    null
+                                )
+                            }
+                        }
+                    }
+                }
             }.setNegativeButton("No") { dialog, which ->
 
                 dialog.dismiss()

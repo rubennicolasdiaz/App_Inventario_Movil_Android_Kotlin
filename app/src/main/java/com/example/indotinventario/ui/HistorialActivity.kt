@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.indotinventario.R
 import com.example.indotinventario.dominio.InventarioItem
-import com.example.indotinventario.logica.UploadJsonFile
+import com.example.indotinventario.logica.UploadWriteJsonFile
 import com.example.indotinventario.adapter.ItemAdapter
 import com.example.indotinventario.databinding.ActivityHistorialBinding
 import com.example.indotinventario.logica.DBInventario
@@ -19,36 +19,30 @@ import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import www.sanju.motiontoast.MotionToast
 
 class HistorialActivity : AppCompatActivity() {
 
-    // Instancia de la clase DBInventario
     private lateinit var dbInventario: DBInventario
-    private lateinit var binding: ActivityHistorialBinding
-
-    // Variable para acceder a la DB de Usuarios:
     private lateinit var dbUsuarios: DBUsuarios
     private var inventarioMutableList: MutableList<InventarioItem> = mutableListOf()
 
+    private lateinit var binding: ActivityHistorialBinding
     private lateinit var adapter: ItemAdapter
     private val llmanager = LinearLayoutManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Implementación de View Binding:
-        binding = ActivityHistorialBinding.inflate(layoutInflater)
+        binding = ActivityHistorialBinding.inflate(layoutInflater) // Implementación de View Binding:
         setContentView(binding.root)
 
-        // Se inicializa la DB:
         inicializarDB()
-
-        // Se cargan los componentes gráficos de la vista:
-        initRecyclerView()
+        inicializarRecyclerView()
     }
 
-    private fun initRecyclerView() {
+    private fun inicializarRecyclerView() {
 
         adapter = ItemAdapter(
             inventarioMutableList,
@@ -58,29 +52,14 @@ class HistorialActivity : AppCompatActivity() {
         binding.recyclerHistorial.layoutManager = llmanager
         binding.recyclerHistorial.adapter = adapter
 
+        binding.etFilter.addTextChangedListener { userFilter -> //FILTRAR
 
-////////////////// CÓDIGO NUEVO PARA FILTRAR
+            val filterText = userFilter.toString().lowercase() //Convertir el filtro a minúsculas para no ser sensible a mayúsculas y minúsculas
 
-        binding.etFilter.addTextChangedListener { userFilter ->
-
-            // Convertir el filtro a minúsculas para no ser sensible a mayúsculas y minúsculas
-            val filterText = userFilter.toString().lowercase()
-
-            // Filtrar los artículos basados en el tipo de filtro
-            val articulosFiltered = if (filterText.any { it.isDigit() }) {
-                // Si el filtro contiene algún número, filtrar por código de barras
-                inventarioMutableList.filter { inventarioItem ->
-                    inventarioItem.codigoBarras.lowercase().contains(filterText)
-                }
-            } else {
-                // Si el filtro contiene solo letras, filtrar por descripción
-                inventarioMutableList.filter { inventarioItem ->
-                    inventarioItem.descripcion.lowercase().contains(filterText)
-                }
+            val articulosFiltered = inventarioMutableList.filter { inventarioItem ->
+                inventarioItem.descripcion.lowercase().contains(filterText)
             }
-
-            // Actualizar el adaptador con la lista filtrada
-            adapter.updateArticulos(articulosFiltered)
+            adapter.updateArticulos(articulosFiltered) //Actualizar el adaptador con la lista filtrada
         }
     }
 
@@ -113,9 +92,8 @@ class HistorialActivity : AppCompatActivity() {
 
                     inventarioMutableList.add(
                         InventarioItem(codigoBarras, descripcion, idArticulo, idCombinacion, partida,
-                        fechaCaducidad, numeroSerie, unidadesContadas)
+                            fechaCaducidad, numeroSerie, unidadesContadas)
                     )
-
                 }while(cursorInventario.moveToNext())
             }else{
 
@@ -126,8 +104,7 @@ class HistorialActivity : AppCompatActivity() {
                     MotionToast.SHORT_DURATION,
                     null)
             }
-            // Se cierra el cursor de la base de datos
-            cursorInventario.close()
+            cursorInventario.close() //Se cierra el cursor de la base de datos
 
         }catch(e:Exception){
 
@@ -141,7 +118,7 @@ class HistorialActivity : AppCompatActivity() {
     }
 
     private fun onItemSelected(inventarioItem: InventarioItem) {
-
+        //Es obligatorio implementarla, pero no se usa. Se deja vacía
     }
 
     private fun onDeletedItem(position: Int) {
@@ -202,7 +179,7 @@ class HistorialActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Confirmar salida")
             .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
-                    "inventario y salir de la app?")
+                    "inventario en la nube y salir de la app?")
 
             .setPositiveButton("Sí") { dialog, which ->
 
@@ -211,9 +188,39 @@ class HistorialActivity : AppCompatActivity() {
                 // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ UploadJsonFile.saveJsonInventario(this@HistorialActivity, dbInventario,dbUsuarios)}.await()
+                    if(dbInventario.obtenerTodosItemInventario().count <= 0){
+
+                        withContext(Dispatchers.Main){
+                            MotionToast.createToast(this@HistorialActivity,
+                                "SIN UNIDADES GUARDADAS",
+                                "No se han guardado unidades de ningún artículo",
+                                MotionToast.TOAST_WARNING,
+                                MotionToast.GRAVITY_CENTER,
+                                MotionToast.SHORT_DURATION,
+                                null)
+                        }
+                    }else{
+
+                        async{UploadWriteJsonFile.uploadJsonInventario(this@HistorialActivity, dbInventario, dbUsuarios)}.await()
+
+                        if(UploadWriteJsonFile.isUploadOK()){
+
+                            finishAffinity() //Finaliza la app.
+                        }else {
+                            withContext(Dispatchers.Main) {
+                                MotionToast.createToast(
+                                    this@HistorialActivity,
+                                    "ERROR DE SUBIDA DE FICHERO",
+                                    "Revisar conexión a Internet o consultar con el administrador de la Api",
+                                    MotionToast.TOAST_ERROR,
+                                    MotionToast.GRAVITY_CENTER,
+                                    MotionToast.SHORT_DURATION,
+                                    null
+                                )
+                            }
+                        }
+                    }
                 }
-                finishAffinity() // Finaliza la app.
             }.setNegativeButton("No") { dialog, which ->
 
                 dialog.dismiss()
@@ -221,8 +228,7 @@ class HistorialActivity : AppCompatActivity() {
         builder.show()
     }
 
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //Se sobreescribe el menú de los 3 puntitos
 
         menuInflater.inflate(R.menu.menu_main, menu)
         return true

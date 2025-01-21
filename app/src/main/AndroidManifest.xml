@@ -36,10 +36,6 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.LeerFicherosActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.HistorialActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

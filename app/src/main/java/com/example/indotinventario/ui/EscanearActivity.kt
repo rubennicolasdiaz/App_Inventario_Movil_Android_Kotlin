@@ -14,43 +14,38 @@ class EscanearActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     private lateinit var escanerZXing: ZXingScannerView
 
-    override fun onCreate(state: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-        super.onCreate(state)
+        super.onCreate(savedInstanceState)
         escanerZXing = ZXingScannerView(this)
-
-        // Hacer que el contenido de la actividad sea el escáner
-        setContentView(escanerZXing)
+        setContentView(escanerZXing) //Hacer que el contenido de la activity sea el escáner
     }
 
     override fun onResume() {
         super.onResume()
-        // Establecer el manejador del resultado
-        escanerZXing.setResultHandler(this)
-        escanerZXing.startCamera() // Comenzar la cámara
+
+        escanerZXing.setResultHandler(this)  //Establecer el manejador del resultado
+        escanerZXing.startCamera() //Comenzar la cámara
     }
 
     override fun onPause() {
         super.onPause()
-        escanerZXing.stopCamera() // Detener la cámara
+        escanerZXing.stopCamera() //Detener la cámara
     }
 
-    // Manejar el resultado del escáner
-    override fun handleResult(resultado: Result) {
-        // Obtener el código/texto leído
-        val codigo = resultado.text
 
-        // Preparar un Intent para regresar datos a la actividad que nos llamó
-        val intentRegreso = Intent()
+    override fun handleResult(resultado: Result) { //Manejar el resultado del escáner
+
+        val codigo = resultado.text // Obtener el código/texto leído
+
+        val intentRegreso = Intent() //Preparar un Intent para regresar datos a la actividad que nos llamó
         intentRegreso.putExtra("codigo", codigo)
         setResult(Activity.RESULT_OK, intentRegreso)
 
-        // Cerrar la actividad
-        finish()
+        finish() //Cerrar la actividad
     }
 
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //Se sobreescribe el menú de los 3 puntitos
         menuInflater.inflate(R.menu.menu_volver, menu)
         return true
     }

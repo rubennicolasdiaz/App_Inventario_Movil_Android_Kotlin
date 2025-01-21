@@ -12,7 +12,7 @@
         android:singleLine="true"
         android:maxLines="1"
         android:imeOptions="actionDone"
-        android:hint="@string/escriba_codigo_descripcion"
+        android:hint="@string/escriba"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

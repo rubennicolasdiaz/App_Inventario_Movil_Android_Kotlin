@@ -9,13 +9,6 @@
         android:icon="@drawable/icon_inicio" />
 
     <item
-        android:id="@+id/idOpciones"
-        android:title="@string/opciones"
-        android:textStyle="bold"
-        android:fontFamily="@font/poppins_normal"
-        android:icon="@drawable/icon_opciones"/>
-
-    <item
         android:id="@+id/idSalir"
         android:title="@string/menu_salir"
         android:textStyle="bold"

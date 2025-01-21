@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.indotinventario"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -77,7 +77,6 @@ dependencies {
 
     implementation(libs.zxing) //Lector código barras
     implementation(libs.filament.android)
-    //implementation(libs.firebase.firestore.ktx) // Implementar en caso de Firebase
 
     implementation(files("libs/jtds-1.3.1.jar"))
     testImplementation(libs.junit)
@@ -90,7 +89,6 @@ dependencies {
 
     //Serialización Kotlinx:
     implementation(libs.serialization.json)
-
 }
 
 

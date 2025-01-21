@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.indotinventario.R
 import com.example.indotinventario.dominio.Articulo
-import com.example.indotinventario.logica.UploadJsonFile
+import com.example.indotinventario.logica.UploadWriteJsonFile
 import com.example.indotinventario.adapter.ArticuloAdapter
 import com.example.indotinventario.databinding.ActivityBuscarDescripcionBinding
 import com.example.indotinventario.logica.DBInventario
@@ -20,26 +20,23 @@ import com.example.indotinventario.logica.DBUsuarios
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import www.sanju.motiontoast.MotionToast
 
 class BuscarDescripcionActivity : AppCompatActivity() {
 
-    // Instancia de la clase DB Inventario
     private lateinit var dbInventario: DBInventario
-    private lateinit var binding: ActivityBuscarDescripcionBinding
-
-    // Variable para acceder a la DB de Usuarios:
     private lateinit var dbUsuarios: DBUsuarios
-
     private lateinit var articuloMutableList: MutableList<Articulo>
+
+    private lateinit var binding: ActivityBuscarDescripcionBinding
     private lateinit var adapter: ArticuloAdapter
     private val llmanager = LinearLayoutManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Implementación de View Binding:
-        binding = ActivityBuscarDescripcionBinding.inflate(layoutInflater)
+        binding = ActivityBuscarDescripcionBinding.inflate(layoutInflater) // Implementación de View Binding:
         setContentView(binding.root)
 
         inicializarDB()
@@ -59,7 +56,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         binding.etFilter.addTextChangedListener { userFilter ->
             val articulosFiltered =
                 articuloMutableList.filter { articulo ->
-                    articulo.Descripcion.lowercase().contains(userFilter.toString().lowercase())
+                    articulo.Descripcion!!.lowercase().contains(userFilter.toString().lowercase())
                 }
             adapter.updateArticulos(articulosFiltered)
         }
@@ -68,11 +65,8 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private fun inicializarDB(){
 
         try{
-
             dbInventario= DBInventario.getInstance(this)
             dbUsuarios = DBUsuarios.getInstance(this)
-
-
 
             val cursorArticulos = dbInventario.obtenerTodosArticulos()
             articuloMutableList = ArrayList()
@@ -99,8 +93,8 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                     MotionToast.SHORT_DURATION,
                     null)
             }
-            // Se cierra el cursor de la base de datos
-            cursorArticulos.close()
+
+            cursorArticulos.close() //Se cierra el cursor de la base de datos
 
         }catch(e:Exception){
 
@@ -120,12 +114,11 @@ class BuscarDescripcionActivity : AppCompatActivity() {
     private fun buscarArticuloDescripcion(articulo: Articulo) {
 
         try{
-            var codigoBarras: String = ""
-            var idArticulo = articulo.IdArticulo
-            var idCombinacion = articulo.IdCombinacion
+            var codigoBarras = ""
+            val idArticulo = articulo.IdArticulo
+            val idCombinacion = articulo.IdCombinacion
 
-
-            val cursorCodigosBarras = dbInventario.obtenerCodigoBarrasPorArticulo(articulo.IdArticulo)
+            val cursorCodigosBarras = dbInventario.obtenerCodigoBarrasPorArticulo(articulo.IdArticulo!!)
 
             if(cursorCodigosBarras.moveToFirst()){
 
@@ -136,7 +129,9 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                 }while(cursorCodigosBarras.moveToNext())
             }
             cursorCodigosBarras.close()
-            buscarPorCodigoBarras(codigoBarras, idArticulo, idCombinacion)
+            if (idArticulo != null && idCombinacion != null) {
+                buscarPorCodigoBarras(codigoBarras, idArticulo, idCombinacion)
+            }
         }catch(e:Exception){
 
             MotionToast.createToast(this,"ERROR AL BUSCAR",
@@ -148,8 +143,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         }
     }
 
-    // Menú:
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean { //Se sobreescribe el menú de los 3 puntitos
 
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -196,7 +190,7 @@ class BuscarDescripcionActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Confirmar salida")
             .setMessage("¿Estás seguro de que quieres guardar los cambios del " +
-                    "inventario y salir de la app?")
+                    "inventario en la nube y salir de la app?")
 
             .setPositiveButton("Sí") { dialog, which ->
 
@@ -205,10 +199,39 @@ class BuscarDescripcionActivity : AppCompatActivity() {
                 // Se llama a corrutina para salvar el inventario de la DB a un fichero Json en almacenamiento externo:
                 lifecycleScope.launch(Dispatchers.IO){
 
-                    async{ UploadJsonFile.saveJsonInventario(this@BuscarDescripcionActivity, dbInventario, dbUsuarios)}.await()
-                }
-                finishAffinity() // Finaliza la app.
+                    if(dbInventario.obtenerTodosItemInventario().count <= 0){
 
+                        withContext(Dispatchers.Main){
+                            MotionToast.createToast(this@BuscarDescripcionActivity,
+                                "SIN UNIDADES GUARDADAS",
+                                "No se han guardado unidades de ningún artículo",
+                                MotionToast.TOAST_WARNING,
+                                MotionToast.GRAVITY_CENTER,
+                                MotionToast.SHORT_DURATION,
+                                null)
+                        }
+                    }else{
+
+                        async{UploadWriteJsonFile.uploadJsonInventario(this@BuscarDescripcionActivity, dbInventario, dbUsuarios)}.await()
+
+                        if(UploadWriteJsonFile.isUploadOK()){
+
+                            finishAffinity() // Finaliza la app.
+                        }else {
+                            withContext(Dispatchers.Main) {
+                                MotionToast.createToast(
+                                    this@BuscarDescripcionActivity,
+                                    "ERROR DE SUBIDA DE FICHERO",
+                                    "Revisar conexión a Internet o consultar con el administrador de la Api",
+                                    MotionToast.TOAST_ERROR,
+                                    MotionToast.GRAVITY_CENTER,
+                                    MotionToast.SHORT_DURATION,
+                                    null
+                                )
+                            }
+                        }
+                    }
+                }
             }.setNegativeButton("No") { dialog, which ->
 
                 dialog.dismiss()
