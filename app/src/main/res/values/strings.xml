@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Indot Inventario Móvil</string>
+    <string name="agregar_articulo">"Añadir un artículo"</string>
+    <string name="limpiar">"Limpiar Campos"</string>
+    <string name="codigo">"Código Barras:"</string>
+    <string name="descripcion">"Descripción:"</string>
+    <string name="id_articulo">"Id Artículo:"</string>
+    <string name="id_combinacion">"Id Combinación:"</string>
+    <string name="partida">"Partida:"</string>
+    <string name="fecha_caducidad">"Fecha Caducidad:"</string>
+    <string name="numero_serie">"S/N:"</string>
+    <string name="unidades">"Unidades:"</string>
+    <string name="guardar">"Guardar Artículo"</string>
+    <string name="escanear">"Escanear Código Barras"</string>
+    <string name="password">"Contraseña"</string>
+    <string name="usuario">"Usuario"</string>
+    <string name="login">"CONECTARSE"</string>
+    <string name="salir">"SALIR"</string>
+    <string name="menu_inicio">"Inicio"</string>
+    <string name="menu_salir">"Salir y guardar cambios"</string>
+    <string name="menu_consultar_inventario">BUSCAR ARTÍCULO POR CÓDIGO BARRAS</string>
+    <string name="volver">Volver</string>
+    <string name="configuracion">CONFIGURACIÓN</string>
+    <string name="buscar">BUSCAR CÓDIGO BARRAS</string>
+    <string name="buscar_codigo">Buscar por código de barras</string>
+    <string name="buscar_descripcion">BUSCAR ARTÍCULO POR DESCRIPCIÓN</string>
+    <string name="historial">HISTORIAL DE BÚSQUEDAS</string>
+    <string name="selecionar">Seleccionar Artículo</string>
+    <string name="escriba">Escriba la descripción del artículo</string>
+    <string name="introduzca">Introduzca código de barras</string>
+    <string name="seleccionar_item">Seleccionar Item Inventario</string>
+    <string name="salir_guardar">SALIR Y GUARDAR CAMBIOS</string>
+    <string name="opciones">Opciones</string>
+    <string name="eliminar_busqueda">ELIMINAR DE LA BÚSQUEDA</string>
+    <string name="escriba_codigo_descripcion">Escriba código barras o descripción del artículo</string>
+    <string name="informacion">Los artículos que tengan número de serie no tienen partida ni fecha de caducidad, y
+    el número de unidades sólo puede ser 1.\n\nLos artículos que tengan partida no tienen número de serie, aunque pueden
+    tener fecha de caducidad. El número de unidades será el que cuente el usuario.</string>
+</resources>

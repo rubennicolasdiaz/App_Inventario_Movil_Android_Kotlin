@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/idInicio"
+        android:title="@string/menu_inicio"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_normal"
+        android:icon="@drawable/icon_inicio" />
+
+    <item
+        android:id="@+id/idSalir"
+        android:title="@string/menu_salir"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_normal"
+        android:icon="@drawable/icon_salir"/>
+</menu>

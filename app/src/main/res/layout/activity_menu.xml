@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".ui.MenuActivity">
+
+    <Button
+        android:id="@+id/buttonBuscarCodigo"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:background="@drawable/corner_radius_purple"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/menu_consultar_inventario"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_normal"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBuscarDescripcion"/>
+
+    <Button
+        android:id="@+id/buttonBuscarDescripcion"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:background="@drawable/corner_radius_orange"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/buscar_descripcion"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_normal"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/buttonHistorial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarCodigo" />
+
+    <Button
+        android:id="@+id/buttonHistorial"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:background="@drawable/corner_radius_purple"
+        android:fontFamily="@font/poppins_normal"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/historial"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarDescripcion"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"/>
+
+    <Button
+        android:id="@+id/buttonGuardar"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:background="@drawable/corner_radius_orange"
+        android:fontFamily="@font/poppins_normal"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/salir_guardar"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHistorial"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
